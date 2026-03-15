@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Observatory — Kanaputz Research Station</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Special+Elite&family=VT323&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ROOM SCENE -->
+  <div id="room" class="room">
+    <!-- Background image -->
+    <img src="assets/room-bg.jpg" alt="Observatory desk" class="room-bg">
+
+    <!-- Clickable hotspot zones (transparent overlays on the image) -->
+
+    <!-- Left CRT monitor → DOS sighting terminal -->
+    <div class="hotspot zone" data-target="terminal-detail" id="zone-terminal" title="Sighting Feed">
+      <div class="hotspot-hint">Sighting Feed</div>
+    </div>
+
+    <!-- Right CRT monitor → Profile database -->
+    <div class="hotspot zone" data-target="profiles-detail" id="zone-profiles" title="Subject Profiles">
+      <div class="hotspot-hint">Subject Database</div>
+    </div>
+
+    <!-- Cork pin board on the wall -->
+    <div class="hotspot zone" data-target="pinboard-detail" id="zone-pinboard" title="Investigation Board">
+      <div class="hotspot-hint">Investigation Board</div>
+    </div>
+
+    <!-- Wall sketches / papers on far right -->
+    <div class="hotspot zone" data-target="sketches-detail" id="zone-sketches" title="Field Sketches">
+      <div class="hotspot-hint">Field Sketches</div>
+    </div>
+
+    <!-- Notepad (bottom right) -->
+    <div class="hotspot zone" data-target="notepad-detail" id="zone-notepad" title="Research Journal">
+      <div class="hotspot-hint">Research Journal</div>
+    </div>
+
+    <!-- Ambient light overlay -->
+    <div class="room-light"></div>
+  </div>
+
+  <!-- ===== DETAIL OVERLAYS ===== -->
+  <div id="detail-overlay" class="detail-overlay hidden">
+    <button class="detail-close" id="detail-close">&times;</button>
+
+    <!-- Terminal Detail -->
+    <div class="detail-content" id="terminal-detail">
+      <div class="terminal-full">
+        <div class="terminal-header">
+          <span>KANAPUTZ OBSERVATORY — LIVE SIGHTING FEED</span>
+          <span class="terminal-status">SIGNAL: ACTIVE</span>
+        </div>
+        <div class="terminal-body" id="terminal-feed"></div>
+      </div>
+    </div>
+
+    <!-- Profiles Detail -->
+    <div class="detail-content" id="profiles-detail">
+      <div class="profiles-full">
+        <div class="profiles-header">SUBJECT DATABASE — CLASSIFIED LEVEL 3</div>
+        <div class="profiles-grid" id="profiles-grid"></div>
+      </div>
+    </div>
+
+    <!-- Pin Board Detail -->
+    <div class="detail-content" id="pinboard-detail">
+      <div class="pinboard-full">
+        <div class="pinboard-header">ACTIVE INVESTIGATION BOARD</div>
+        <div class="pinboard-surface" id="pinboard-surface"></div>
+      </div>
+    </div>
+
+    <!-- Notepad Detail -->
+    <div class="detail-content" id="notepad-detail">
+      <div class="notepad-full">
+        <div class="notepad-full-header">FIELD RESEARCH JOURNAL — Dr. L. Vasquez</div>
+        <div class="notepad-entries" id="notepad-entries"></div>
+      </div>
+    </div>
+
+    <!-- Sketches Detail -->
+    <div class="detail-content" id="sketches-detail">
+      <div class="sketches-full">
+        <div class="sketches-header">FIELD OBSERVATION SKETCHES</div>
+        <div class="sketches-grid" id="sketches-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
