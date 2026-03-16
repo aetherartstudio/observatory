@@ -229,24 +229,6 @@
       surface.appendChild(photo);
     });
 
-    // Add strings
-    const strings = [
-      { top: '15%', left: '12%', width: '55%', angle: 5 },
-      { top: '40%', left: '15%', width: '50%', angle: -8 },
-      { top: '62%', left: '10%', width: '58%', angle: 3 },
-      { top: '30%', left: '35%', width: '35%', angle: 15 },
-    ];
-
-    strings.forEach(s => {
-      const line = document.createElement('div');
-      line.className = 'pinboard-string';
-      line.style.top = s.top;
-      line.style.left = s.left;
-      line.style.width = s.width;
-      line.style.transform = `rotate(${s.angle}deg)`;
-      surface.appendChild(line);
-    });
-
     // Reveal post-its only after the background image is loaded
     const bgImg = new Image();
     bgImg.onload = () => surface.classList.add('bg-loaded');
