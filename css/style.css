@@ -338,6 +338,14 @@ body {
   max-width: 1200px;
 }
 
+/* Terminal: match image aspect ratio so it fills without stretching */
+#terminal-detail {
+  width: auto;
+  height: 92vh;
+  aspect-ratio: 1456 / 816;
+  max-width: 96vw;
+}
+
 /* Pinboard: wider view to show wall context around the board */
 #pinboard-detail {
   width: 96vw;
@@ -362,7 +370,7 @@ body {
 
 /* --- Image-backed CRT (terminal) --- */
 .crt-green {
-  background: url('../assets/terminal-bg.png') center / contain no-repeat;
+  background: url('../assets/terminal-bg.png') center / 100% 100% no-repeat;
 }
 .crt-green .crt-bezel {
   background: transparent;
