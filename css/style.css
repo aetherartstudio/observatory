@@ -75,29 +75,39 @@ body {
 .zone {
   position: absolute;
   z-index: 5;
-  /* Very round corners so the glow never looks boxy */
-  border-radius: 35%;
+  /* No border-radius, no border, no outline — completely invisible box */
+  background: none;
+  border: none;
+  outline: none;
   /* Magnifying glass cursor */
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23ffd88a' stroke-width='2.5'/%3E%3Cline x1='19' y1='19' x2='28' y2='28' stroke='%23ffd88a' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") 12 12, pointer;
 }
 
 /* ---- IDLE: Breathing sparkle dot at the center of each zone ---- */
-/* Doesn't reveal the box shape — just a glowing point of light */
 .zone::before {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 230, 170, 1) 0%, rgba(255, 210, 120, 0.6) 30%, rgba(255, 200, 100, 0.2) 60%, transparent 80%);
-  box-shadow: 0 0 18px 8px rgba(255, 200, 100, 0.5), 0 0 40px 15px rgba(255, 200, 100, 0.15);
+  background: radial-gradient(circle,
+    rgba(255, 240, 200, 1) 0%,
+    rgba(255, 220, 150, 0.7) 25%,
+    rgba(255, 200, 100, 0.3) 50%,
+    transparent 75%
+  );
+  box-shadow: 0 0 20px 10px rgba(255, 200, 100, 0.5),
+              0 0 50px 20px rgba(255, 200, 100, 0.15);
   animation: sparkle 2s ease-in-out infinite;
   pointer-events: none;
   z-index: 3;
 }
+
+/* Move pinboard sparkle to the right — center is under the bright lamp */
+#zone-pinboard::before { left: 75%; top: 60%; }
 
 /* Stagger the sparkle so they breathe at different times */
 #zone-terminal::before  { animation-delay: 0s; }
@@ -107,87 +117,99 @@ body {
 #zone-notepad::before   { animation-delay: 1.6s; }
 
 @keyframes sparkle {
-  0%, 100% { opacity: 0.15; transform: translate(-50%, -50%) scale(0.5); }
-  50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.3); }
+  0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(0.4); }
+  50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.4); }
 }
 
-/* ---- HOVER (desktop): Intense center, very soft fade to edges ---- */
-/* border-radius: 35% on .zone + radial gradient = no visible box corners */
+/* ---- HOVER (desktop): Pulsing radial glow — NO box-shadow, NO border ---- */
+/* Only a radial gradient background that fades to transparent well before the zone edge */
+/* This means you NEVER see any box/border shape */
 .zone:hover {
   animation: hoverPulse 1.8s ease-in-out infinite;
   z-index: 20;
 }
 
 .zone:hover::before {
-  /* Hide the sparkle dot when hovering — the glow replaces it */
   opacity: 0 !important;
   animation: none !important;
 }
 
 @keyframes hoverPulse {
   0%, 100% {
-    box-shadow: 0 0 30px 8px rgba(255, 200, 100, 0.1);
     background: radial-gradient(ellipse at center,
-      rgba(255, 220, 150, 0.22) 0%,
-      rgba(255, 210, 130, 0.12) 20%,
-      rgba(255, 200, 100, 0.04) 45%,
-      rgba(255, 200, 100, 0.01) 65%,
-      transparent 85%
+      rgba(255, 220, 150, 0.25) 0%,
+      rgba(255, 210, 130, 0.14) 15%,
+      rgba(255, 200, 100, 0.06) 30%,
+      rgba(255, 200, 100, 0.02) 45%,
+      transparent 60%
     );
   }
   50% {
-    box-shadow: 0 0 50px 15px rgba(255, 200, 100, 0.2);
     background: radial-gradient(ellipse at center,
-      rgba(255, 220, 150, 0.35) 0%,
-      rgba(255, 210, 130, 0.2) 20%,
-      rgba(255, 200, 100, 0.08) 45%,
-      rgba(255, 200, 100, 0.02) 65%,
-      transparent 85%
+      rgba(255, 220, 150, 0.4) 0%,
+      rgba(255, 210, 130, 0.22) 15%,
+      rgba(255, 200, 100, 0.1) 30%,
+      rgba(255, 200, 100, 0.03) 45%,
+      transparent 60%
     );
   }
 }
 
 /* ---- REVEAL: Tap empty area (mobile) or hold Space (desktop) ---- */
-/* Shows all sparkle dots at full brightness */
 .reveal .zone::before {
   opacity: 1 !important;
   animation: none !important;
-  transform: translate(-50%, -50%) scale(1.5);
-  box-shadow: 0 0 20px 8px rgba(255, 200, 100, 0.5);
+  transform: translate(-50%, -50%) scale(1.8);
+  box-shadow: 0 0 25px 12px rgba(255, 200, 100, 0.6);
   transition: all 0.3s ease;
 }
 
-/* ---- HINT BUTTON (mobile) ---- */
+/* ---- HINT BUTTON — hidden, not needed ---- */
 .hint-btn {
+  display: none;
+}
+
+/* ---- LANDSCAPE PROMPT (portrait mobile) ---- */
+.landscape-prompt {
+  display: none;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 50;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 220, 150, 0.4);
-  background: rgba(0, 0, 0, 0.6);
-  color: rgba(255, 220, 150, 0.8);
-  font-size: 22px;
-  cursor: pointer;
-  display: none; /* Hidden on desktop, shown on touch devices via JS */
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 8, 5, 0.97);
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(4px);
-  transition: all 0.3s;
+  color: rgba(255, 220, 150, 0.8);
+  font-family: var(--font-typewriter);
+  text-align: center;
+  padding: 30px;
 }
-.hint-btn:active {
-  background: rgba(255, 200, 100, 0.2);
-  border-color: rgba(255, 220, 150, 0.8);
+.landscape-prompt svg {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+  animation: rotatePhone 2s ease-in-out infinite;
+}
+.landscape-prompt p {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 280px;
+}
+@keyframes rotatePhone {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(90deg); }
+}
+
+/* Show landscape prompt only on portrait mobile */
+@media (max-width: 768px) and (orientation: portrait) {
+  .landscape-prompt { display: flex; }
 }
 
 /* ---- DEBUG MODE ---- */
 .debug .zone {
-  outline: 2px dashed rgba(255, 50, 50, 0.7);
+  outline: 2px dashed rgba(255, 50, 50, 0.7) !important;
   outline-offset: -1px;
   background: rgba(255, 50, 50, 0.1) !important;
-  border-radius: 6px;
 }
 .debug .zone::after {
   content: attr(id);
@@ -519,7 +541,9 @@ body {
   flex: 1;
   position: relative;
   padding: 20px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
 }
 
 .full-postit {
@@ -729,5 +753,10 @@ body {
 }
 
 @media (max-width: 768px) {
-  .sketches-grid { grid-template-columns: 1fr; }
+  .sketches-grid { grid-template-columns: 1fr; gap: 15px; padding: 15px; }
+  .sketch-full-card { border-radius: 0; }
+  .detail-content { width: 96vw; height: 92vh; }
+  .profiles-grid { padding: 10px; gap: 10px; }
+  .profile-card { padding: 12px; }
+  .pinboard-surface { overflow-y: auto; -webkit-overflow-scrolling: touch; }
 }
