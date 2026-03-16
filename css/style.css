@@ -120,43 +120,43 @@ body {
 
 /* Left CRT monitor — DOS terminal */
 #zone-terminal {
-  left: 8%;
+  left: 26%;
   top: 27%;
-  width: 23%;
+  width: 10%;
   height: 16%;
   z-index: 6;
 }
 
 /* Right CRT monitor — Profile database */
 #zone-profiles {
-  left: 35%;
+  left: 40%;
   top: 30%;
-  width: 19%;
-  height: 19%;
+  width: 11%;
+  height: 21%;
   z-index: 6;
 }
 
 /* Cork pin board on wall (behind monitors) */
 #zone-pinboard {
-  left: 21%;
+  left: 31%;
   top: 0%;
-  width: 50%;
+  width: 37%;
   height: 25%;
   z-index: 4;
 }
 
 /* Wall papers / sketches (far right) */
 #zone-sketches {
-  left: 80%;
+  left: 72%;
   top: 0%;
-  width: 20%;
-  height: 45%;
+  width: 28%;
+  height: 49%;
 }
 
 /* Notebook (bottom right of desk) */
 #zone-notepad {
-  left: 86%;
-  top: 69%;
+  left: 75%;
+  top: 72%;
   width: 18%;
   height: 20%;
 }
