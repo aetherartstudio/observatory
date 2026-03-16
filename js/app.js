@@ -195,7 +195,11 @@
       { top: '66%', left: '57%' },
     ];
 
-    const POSTIT_IMAGES = ['postit-1.png', 'postit-5.png', 'postit-7.png', 'postit-10.png'];
+    const POSTIT_IMAGES = [
+      'postit-1.png', 'postit-2.png', 'postit-3.png', 'postit-4.png',
+      'postit-5.png', 'postit-6.png', 'postit-7.png', 'postit-8.png',
+      'postit-9.png', 'postit-10.png', 'postit-11.png'
+    ];
 
     POSTIT_NOTES.forEach((note, i) => {
       const pos = postitPositions[i] || { top: `${5 + (i * 8) % 80}%`, left: `${2 + (i * 15) % 55}%` };
