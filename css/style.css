@@ -129,9 +129,9 @@ body {
 
 /* Right CRT monitor — Profile database */
 #zone-profiles {
-  left: 43%;
+  left: 41%;
   top: 30%;
-  width: 9%;
+  width: 11%;
   height: 23%;
   z-index: 6;
 }
@@ -150,15 +150,15 @@ body {
   left: 72%;
   top: 0%;
   width: 28%;
-  height: 49%;
+  height: 54%;
 }
 
 /* Notebook (bottom right of desk) */
 #zone-notepad {
   left: 71%;
-  top: 72%;
+  top: 69%;
   width: 18%;
-  height: 20%;
+  height: 22%;
 }
 
 
