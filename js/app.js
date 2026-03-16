@@ -179,20 +179,20 @@
     const surface = document.getElementById('pinboard-surface');
     if (!surface) return;
 
-    // Place post-its
+    // Place post-its — constrained within the cork area of the background image
     const postitPositions = [
-      { top: '5%', left: '2%' },
-      { top: '8%', left: '25%' },
-      { top: '5%', left: '50%' },
-      { top: '30%', left: '3%' },
-      { top: '35%', left: '30%' },
-      { top: '55%', left: '5%' },
-      { top: '58%', left: '28%' },
-      { top: '75%', left: '2%' },
-      { top: '78%', left: '25%' },
-      { top: '32%', left: '55%' },
-      { top: '60%', left: '50%' },
-      { top: '80%', left: '52%' },
+      { top: '2%', left: '3%' },
+      { top: '5%', left: '22%' },
+      { top: '2%', left: '42%' },
+      { top: '25%', left: '5%' },
+      { top: '28%', left: '25%' },
+      { top: '48%', left: '3%' },
+      { top: '50%', left: '24%' },
+      { top: '68%', left: '5%' },
+      { top: '70%', left: '22%' },
+      { top: '26%', left: '45%' },
+      { top: '52%', left: '42%' },
+      { top: '70%', left: '44%' },
     ];
 
     POSTIT_NOTES.forEach((note, i) => {
@@ -209,10 +209,10 @@
 
     // Place photos
     const photoPositions = [
-      { top: '8%', left: '72%', rotation: -3 },
-      { top: '30%', left: '78%', rotation: 4 },
-      { top: '52%', left: '70%', rotation: -2 },
-      { top: '72%', left: '76%', rotation: 5 },
+      { top: '3%', left: '62%', rotation: -3 },
+      { top: '26%', left: '65%', rotation: 4 },
+      { top: '48%', left: '60%', rotation: -2 },
+      { top: '68%', left: '63%', rotation: 5 },
     ];
 
     PROFILES.forEach((profile, i) => {
@@ -231,10 +231,10 @@
 
     // Add strings
     const strings = [
-      { top: '18%', left: '15%', width: '60%', angle: 5 },
-      { top: '45%', left: '20%', width: '55%', angle: -8 },
-      { top: '68%', left: '10%', width: '70%', angle: 3 },
-      { top: '35%', left: '40%', width: '40%', angle: 15 },
+      { top: '15%', left: '12%', width: '55%', angle: 5 },
+      { top: '40%', left: '15%', width: '50%', angle: -8 },
+      { top: '62%', left: '10%', width: '58%', angle: 3 },
+      { top: '30%', left: '35%', width: '35%', angle: 15 },
     ];
 
     strings.forEach(s => {
