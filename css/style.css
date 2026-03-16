@@ -353,6 +353,29 @@ body {
 }
 .crt-amber { filter: drop-shadow(0 0 60px rgba(255, 180, 50, 0.08)); }
 
+/* --- Image-backed CRT (terminal) --- */
+.crt-green {
+  background: url('../assets/terminal-bg.png') center / contain no-repeat;
+}
+.crt-green .crt-bezel {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  /* Padding maps content onto the screen area of the image */
+  padding: 7% 16% 19% 11%;
+}
+.crt-green .crt-screen-well {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 10px;
+}
+.crt-green .crt-controls { display: none; }
+
+/* --- CSS-only CRT (profiles — no image yet) --- */
+.crt-amber .crt-bezel {
+  background: linear-gradient(145deg, #3a3a38 0%, #2a2a28 30%, #1e1e1c 70%, #151514 100%);
+}
+
 .crt-bezel {
   width: 100%;
   height: 100%;
@@ -668,31 +691,29 @@ body {
 .pinboard-full {
   width: 100%;
   height: 100%;
-  background:
-    repeating-conic-gradient(rgba(0,0,0,0.03) 0% 25%, transparent 0% 50%) 0 0 / 12px 12px,
-    linear-gradient(135deg, #c4a06e 0%, #b8956a 30%, #a88555 60%, #c09a6a 100%);
-  border: 8px solid #5a4530;
-  border-image: linear-gradient(145deg, #7a6548, #4a3520, #6a5538, #3a2510) 1;
-  box-shadow: 0 0 40px rgba(0,0,0,0.5), inset 0 0 30px rgba(0,0,0,0.1);
+  background: url('../assets/cork-bg.png') center / cover no-repeat;
+  border: none;
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
 .pinboard-header {
-  background: rgba(0,0,0,0.2);
-  padding: 10px 15px;
+  background: transparent;
+  padding: 14% 15px 8px;
   font-family: var(--font-typewriter);
   font-size: 14px;
   color: rgba(60,40,20,0.8);
   text-align: center;
   letter-spacing: 3px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .pinboard-surface {
   flex: 1;
   position: relative;
-  padding: 20px;
+  padding: 10px 10% 12% 10%;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
