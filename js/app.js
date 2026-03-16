@@ -111,10 +111,12 @@
     populateSketches();
   }
 
-  // --- Profiles ---
+  // --- Profiles (single-view with navigation) ---
+  let currentProfileIndex = 0;
+
   function populateProfiles() {
-    const grid = document.getElementById('profiles-grid');
-    if (!grid) return;
+    const viewport = document.getElementById('profiles-viewport');
+    if (!viewport) return;
 
     const svgShapes = {
       'Groovix': `<svg viewBox="0 0 100 120"><path d="M50,20 Q55,10 60,15 Q65,5 58,3 Q50,0 45,8 Q40,3 38,12 Q32,8 35,18 L30,28 Q25,35 22,50 Q18,65 22,80 L20,90 Q18,98 22,102 L28,98 Q30,94 32,90 L38,86 Q42,84 48,86 L52,90 Q54,94 56,98 L62,102 Q66,100 64,94 L62,86 Q66,76 64,60 Q63,45 58,35 Z" fill="none" stroke="#5588cc" stroke-width="1.5"/><circle cx="52" cy="12" r="3" fill="none" stroke="#5588cc" stroke-width="1"/></svg>`,
@@ -123,40 +125,52 @@
       'Muncha': `<svg viewBox="0 0 100 110"><circle cx="50" cy="45" r="32" fill="none" stroke="#5588cc" stroke-width="1.5"/><circle cx="45" cy="38" r="5" fill="none" stroke="#5588cc" stroke-width="1"/><circle cx="2" cy="2" r="1.5" fill="#5588cc" transform="translate(43,36)"/><path d="M35,58 Q42,68 58,62" fill="none" stroke="#5588cc" stroke-width="1.5"/><rect x="38" y="58" width="5" height="6" rx="1" fill="none" stroke="#5588cc" stroke-width="1"/><rect x="45" y="60" width="5" height="5" rx="1" fill="none" stroke="#5588cc" stroke-width="1"/><rect x="52" y="59" width="4" height="5" rx="1" fill="none" stroke="#5588cc" stroke-width="1"/><path d="M38,15 L35,5" stroke="#5588cc" stroke-width="1.5"/><path d="M62,15 L65,5" stroke="#5588cc" stroke-width="1.5"/><line x1="40" y1="77" x2="35" y2="100" stroke="#5588cc" stroke-width="1.5"/><line x1="60" y1="77" x2="65" y2="100" stroke="#5588cc" stroke-width="1.5"/></svg>`,
     };
 
-    PROFILES.forEach(profile => {
-      const card = document.createElement('div');
-      card.className = 'profile-card';
-      card.innerHTML = `
-        <div class="profile-card-header">
-          <div class="profile-avatar">${svgShapes[profile.name] || ''}</div>
-          <div>
-            <div class="profile-name">${profile.name.toUpperCase()}</div>
-            <div class="profile-class">${profile.classification}</div>
+    function renderProfile(index) {
+      const profile = PROFILES[index];
+      viewport.innerHTML = `
+        <div class="profile-card">
+          <div class="profile-card-header">
+            <div class="profile-avatar">${svgShapes[profile.name] || ''}</div>
+            <div>
+              <div class="profile-name">${profile.name.toUpperCase()}</div>
+              <div class="profile-class">${profile.classification}</div>
+            </div>
           </div>
+          <div class="profile-field">
+            <div class="profile-field-label">First Sighting</div>
+            <div class="profile-field-value">${profile.firstSighting}</div>
+          </div>
+          <div class="profile-field">
+            <div class="profile-field-label">Estimated Height</div>
+            <div class="profile-field-value">${profile.height}</div>
+          </div>
+          <div class="profile-field">
+            <div class="profile-field-label">Distinguishing Features</div>
+            <div class="profile-field-value">${profile.distinguishing}</div>
+          </div>
+          <div class="profile-field">
+            <div class="profile-field-label">Observed Behavior</div>
+            <div class="profile-field-value">${profile.behavior}</div>
+          </div>
+          <div class="profile-field">
+            <div class="profile-field-label">Threat Assessment</div>
+            <div class="profile-field-value">${profile.dangerLevel}</div>
+          </div>
+          <div class="profile-notes">"${profile.notes}"</div>
         </div>
-        <div class="profile-field">
-          <div class="profile-field-label">First Sighting</div>
-          <div class="profile-field-value">${profile.firstSighting}</div>
-        </div>
-        <div class="profile-field">
-          <div class="profile-field-label">Estimated Height</div>
-          <div class="profile-field-value">${profile.height}</div>
-        </div>
-        <div class="profile-field">
-          <div class="profile-field-label">Distinguishing Features</div>
-          <div class="profile-field-value">${profile.distinguishing}</div>
-        </div>
-        <div class="profile-field">
-          <div class="profile-field-label">Observed Behavior</div>
-          <div class="profile-field-value">${profile.behavior}</div>
-        </div>
-        <div class="profile-field">
-          <div class="profile-field-label">Threat Assessment</div>
-          <div class="profile-field-value">${profile.dangerLevel}</div>
-        </div>
-        <div class="profile-notes">"${profile.notes}"</div>
       `;
-      grid.appendChild(card);
+      document.getElementById('profile-count').textContent = `${index + 1} / ${PROFILES.length}`;
+    }
+
+    renderProfile(0);
+
+    document.getElementById('profile-prev').addEventListener('click', () => {
+      currentProfileIndex = (currentProfileIndex - 1 + PROFILES.length) % PROFILES.length;
+      renderProfile(currentProfileIndex);
+    });
+    document.getElementById('profile-next').addEventListener('click', () => {
+      currentProfileIndex = (currentProfileIndex + 1) % PROFILES.length;
+      renderProfile(currentProfileIndex);
     });
   }
 
@@ -250,14 +264,13 @@
     });
   }
 
-  // --- Sketches ---
+  // --- Sketches (wall-pinned layout) ---
   function populateSketches() {
-    const grid = document.getElementById('sketches-grid');
-    if (!grid) return;
+    const wall = document.getElementById('sketches-grid');
+    if (!wall) return;
 
     const sketchSVGs = [
-      // Groovix - elongated, dynamic pose
-      `<svg viewBox="0 0 200 250" class="sketch-full-svg">
+      `<svg viewBox="0 0 200 250" class="sketch-wall-svg">
         <path d="M100,50 Q110,30 120,40 Q130,20 118,15 Q105,8 95,22 Q85,12 82,28 Q72,20 78,35 L68,55 Q58,70 50,95 Q42,120 50,150 L46,170 Q40,190 50,200 L60,192 Q65,185 70,175 L80,165 Q88,160 98,165 L108,175 Q112,185 118,192 L128,200 Q135,196 130,185 L126,170 Q135,145 130,115 Q128,90 118,70 Z" fill="none" stroke="#4a3520" stroke-width="2" opacity="0.8"/>
         <circle cx="112" cy="30" r="6" fill="none" stroke="#4a3520" stroke-width="1.5"/>
         <circle cx="113" cy="29" r="2" fill="#4a3520" opacity="0.5"/>
@@ -267,8 +280,7 @@
         <path d="M130,115 Q140,112 145,118 Q150,125 145,130" fill="none" stroke="#4a3520" stroke-width="1" stroke-dasharray="3,3"/>
         <text x="155" y="125" font-family="Caveat" font-size="10" fill="#8a6a4a">spines?</text>
       </svg>`,
-      // Fugu - spiky, wide
-      `<svg viewBox="0 0 200 220" class="sketch-full-svg">
+      `<svg viewBox="0 0 200 220" class="sketch-wall-svg">
         <path d="M100,50 Q140,25 150,50 Q160,30 155,55 Q170,50 160,70 Q172,80 158,88 Q168,100 155,105 Q162,118 148,120 Q155,135 140,135 Q145,150 130,152 Q120,165 100,160 Q80,165 70,152 Q55,150 60,135 Q48,135 52,120 Q38,118 45,105 Q32,100 42,88 Q28,80 40,70 Q30,50 45,55 Q40,30 50,50 Q60,25 100,50 Z" fill="none" stroke="#4a3520" stroke-width="2" opacity="0.8"/>
         <circle cx="80" cy="75" r="8" fill="none" stroke="#4a3520" stroke-width="1.5"/>
         <circle cx="81" cy="74" r="3" fill="#4a3520" opacity="0.4"/>
@@ -283,13 +295,12 @@
         <text x="100" y="200" text-anchor="middle" font-family="Caveat" font-size="14" fill="#6a5a4a">Spines extend when excited</text>
         <text x="160" y="90" font-family="Caveat" font-size="10" fill="#cc5533">LOUD</text>
       </svg>`,
-      // Mr. Q - round, observant
-      `<svg viewBox="0 0 200 240" class="sketch-full-svg">
+      `<svg viewBox="0 0 200 240" class="sketch-wall-svg">
         <ellipse cx="100" cy="110" rx="55" ry="65" fill="none" stroke="#4a3520" stroke-width="2" opacity="0.8"/>
         <circle cx="82" cy="90" r="8" fill="none" stroke="#4a3520" stroke-width="1.5"/>
         <circle cx="83" cy="89" r="3" fill="#4a3520" opacity="0.4"/>
         <path d="M78,125 Q95,145 115,125" fill="none" stroke="#4a3520" stroke-width="2"/>
-        <path d="M88,130 L85,140 Q90,142 95,138" fill="none" stroke="#4a3520" stroke-width="1" fill="#f4eed8"/>
+        <path d="M88,130 L85,140 Q90,142 95,138" fill="none" stroke="#4a3520" stroke-width="1"/>
         <line x1="82" y1="42" x2="75" y2="18" stroke="#4a3520" stroke-width="2"/>
         <circle cx="73" cy="14" r="5" fill="none" stroke="#4a3520" stroke-width="1.5"/>
         <line x1="110" y1="46" x2="118" y2="22" stroke="#4a3520" stroke-width="2"/>
@@ -300,8 +311,7 @@
         <path d="M140,85 L165,80" stroke="#4a3520" stroke-width="0.5" stroke-dasharray="2,2"/>
         <text x="168" y="82" font-family="Caveat" font-size="10" fill="#8a6a4a">aware?</text>
       </svg>`,
-      // Muncha - spherical, toothy
-      `<svg viewBox="0 0 200 230" class="sketch-full-svg">
+      `<svg viewBox="0 0 200 230" class="sketch-wall-svg">
         <circle cx="100" cy="85" r="58" fill="none" stroke="#4a3520" stroke-width="2" opacity="0.8"/>
         <circle cx="88" cy="68" r="10" fill="none" stroke="#4a3520" stroke-width="1.5"/>
         <circle cx="90" cy="66" r="4" fill="#4a3520" opacity="0.4"/>
@@ -310,7 +320,6 @@
         <rect x="86" y="114" width="8" height="10" rx="2" fill="none" stroke="#4a3520" stroke-width="1"/>
         <rect x="98" y="112" width="7" height="11" rx="2" fill="none" stroke="#4a3520" stroke-width="1"/>
         <rect x="108" y="110" width="6" height="10" rx="2" fill="none" stroke="#4a3520" stroke-width="1"/>
-        <path d="M72" y1="28" x2="68" y2="8" stroke="#4a3520" stroke-width="2"/>
         <path d="M72,28 L65,8" fill="none" stroke="#4a3520" stroke-width="2"/>
         <path d="M128,28 L135,8" fill="none" stroke="#4a3520" stroke-width="2"/>
         <line x1="78" y1="143" x2="65" y2="195" stroke="#4a3520" stroke-width="2"/>
@@ -321,15 +330,58 @@
       </svg>`,
     ];
 
+    // Wall positions — scattered, pinned at different angles
+    const positions = [
+      { left: '5%',  top: '8%',  width: '28%', rotation: -3, attach: 'tape-tl' },
+      { left: '55%', top: '5%',  width: '32%', rotation: 2,  attach: 'tack' },
+      { left: '8%',  top: '52%', width: '30%', rotation: 1,  attach: 'tack' },
+      { left: '52%', top: '48%', width: '28%', rotation: -2, attach: 'tape-center' },
+    ];
+
+    // Wall annotations (scrawled on wall between sketches)
+    const annotations = [
+      { text: 'same species??', left: '38%', top: '20%', rotation: -5 },
+      { text: '→ compare with Berlin photo', left: '40%', top: '75%', rotation: 2 },
+      { text: 'SOURCE connection?', left: '85%', top: '40%', rotation: -90 },
+    ];
+
     WALL_SKETCHES.forEach((sketch, i) => {
-      const card = document.createElement('div');
-      card.className = 'sketch-full-card';
-      card.innerHTML = `
-        ${sketchSVGs[i] || ''}
-        <div class="sketch-full-name">${sketch.name}</div>
-        <div class="sketch-full-desc">${sketch.description}</div>
+      const pos = positions[i];
+      const item = document.createElement('div');
+      item.className = 'sketch-wall-item';
+      item.style.left = pos.left;
+      item.style.top = pos.top;
+      item.style.width = pos.width;
+      item.style.transform = `rotate(${pos.rotation}deg)`;
+
+      let attachHTML = '';
+      if (pos.attach === 'tape-tl') {
+        attachHTML = '<div class="sketch-wall-tape sketch-wall-tape-tl"></div><div class="sketch-wall-tape sketch-wall-tape-tr"></div>';
+      } else if (pos.attach === 'tack') {
+        attachHTML = '<div class="sketch-wall-tack"></div>';
+      } else if (pos.attach === 'tape-center') {
+        attachHTML = '<div class="sketch-wall-tape sketch-wall-tape-center"></div>';
+      }
+
+      item.innerHTML = `
+        <div class="sketch-wall-paper">
+          ${attachHTML}
+          ${sketchSVGs[i] || ''}
+          <div class="sketch-wall-label">${sketch.name}<br><em>${sketch.description}</em></div>
+        </div>
       `;
-      grid.appendChild(card);
+      wall.appendChild(item);
+    });
+
+    // Add wall annotations
+    annotations.forEach(ann => {
+      const el = document.createElement('div');
+      el.className = 'sketch-wall-annotation';
+      el.style.left = ann.left;
+      el.style.top = ann.top;
+      el.style.transform = `rotate(${ann.rotation}deg)`;
+      el.textContent = ann.text;
+      wall.appendChild(el);
     });
   }
 

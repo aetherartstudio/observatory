@@ -52,22 +52,59 @@
   <div id="detail-overlay" class="detail-overlay hidden">
     <button class="detail-close" id="detail-close">&times;</button>
 
-    <!-- Terminal Detail -->
+    <!-- Terminal Detail — CRT Monitor -->
     <div class="detail-content" id="terminal-detail">
-      <div class="terminal-full">
-        <div class="terminal-header">
-          <span>KANAPUTZ OBSERVATORY — LIVE SIGHTING FEED</span>
-          <span class="terminal-status">SIGNAL: ACTIVE</span>
+      <div class="crt-monitor crt-green">
+        <div class="crt-bezel">
+          <div class="crt-screen-well">
+            <div class="crt-screen">
+              <div class="crt-scanlines"></div>
+              <div class="crt-curvature"></div>
+              <div class="terminal-header">
+                <span>KANAPUTZ OBSERVATORY — LIVE SIGHTING FEED</span>
+                <span class="terminal-status">SIGNAL: ACTIVE</span>
+              </div>
+              <div class="terminal-body" id="terminal-feed"></div>
+            </div>
+          </div>
+          <div class="crt-controls">
+            <div class="crt-led crt-led-on"></div>
+            <div class="crt-brand">KANAPUTZ OBS. NETWORK</div>
+            <div class="crt-knobs">
+              <div class="crt-knob"></div>
+              <div class="crt-knob"></div>
+            </div>
+          </div>
         </div>
-        <div class="terminal-body" id="terminal-feed"></div>
       </div>
     </div>
 
-    <!-- Profiles Detail -->
+    <!-- Profiles Detail — CRT Monitor (amber) -->
     <div class="detail-content" id="profiles-detail">
-      <div class="profiles-full">
-        <div class="profiles-header">SUBJECT DATABASE — CLASSIFIED LEVEL 3</div>
-        <div class="profiles-grid" id="profiles-grid"></div>
+      <div class="crt-monitor crt-amber">
+        <div class="crt-bezel">
+          <div class="crt-screen-well">
+            <div class="crt-screen">
+              <div class="crt-scanlines"></div>
+              <div class="crt-curvature"></div>
+              <div class="profiles-header">SUBJECT DATABASE — CLASSIFIED LEVEL 3</div>
+              <div class="profiles-viewport" id="profiles-viewport"></div>
+              <div class="profiles-nav">
+                <button class="profiles-nav-btn" id="profile-prev">&lt; PREV</button>
+                <span class="profiles-nav-count" id="profile-count">1 / 4</span>
+                <button class="profiles-nav-btn" id="profile-next">NEXT &gt;</button>
+              </div>
+            </div>
+          </div>
+          <div class="crt-controls">
+            <div class="crt-led crt-led-on crt-led-amber"></div>
+            <div class="crt-brand">CLASSIFIED TERMINAL B</div>
+            <div class="crt-knobs">
+              <div class="crt-knob"></div>
+              <div class="crt-knob"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -79,19 +116,30 @@
       </div>
     </div>
 
-    <!-- Notepad Detail -->
+    <!-- Notepad Detail — Leather Journal -->
     <div class="detail-content" id="notepad-detail">
-      <div class="notepad-full">
-        <div class="notepad-full-header">FIELD RESEARCH JOURNAL — Dr. L. Vasquez</div>
-        <div class="notepad-entries" id="notepad-entries"></div>
+      <div class="journal-outer">
+        <div class="journal-bookmark"></div>
+        <div class="journal-cover">
+          <div class="journal-spine"></div>
+          <div class="journal-inner">
+            <div class="journal-header">
+              <div class="journal-title">Field Research Journal</div>
+              <div class="journal-subtitle">Dr. L. Vasquez — Kanaputz Observatory</div>
+              <div class="journal-classified">CONFIDENTIAL</div>
+            </div>
+            <div class="journal-pages" id="notepad-entries"></div>
+            <div class="journal-coffee-stain"></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Sketches Detail -->
+    <!-- Sketches Detail — Dark Wall -->
     <div class="detail-content" id="sketches-detail">
-      <div class="sketches-full">
-        <div class="sketches-header">FIELD OBSERVATION SKETCHES</div>
-        <div class="sketches-grid" id="sketches-grid"></div>
+      <div class="wall-surface">
+        <div class="wall-light"></div>
+        <div class="sketches-wall" id="sketches-grid"></div>
       </div>
     </div>
   </div>
