@@ -732,17 +732,16 @@ body {
   flex: 1;
   position: relative;
   padding: 10px 5% 4% 15%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
+  container-type: size;
 }
 
 .full-postit {
   position: absolute;
-  width: clamp(140px, 14vw, 200px);
-  padding: 15px;
+  width: 14cqw;
+  padding: 1.2cqw;
   font-family: var(--font-handwriting);
-  font-size: clamp(14px, 1.4vw, 18px);
+  font-size: 1.3cqw;
   color: #333;
   line-height: 1.4;
   box-shadow: 2px 3px 8px rgba(0,0,0,0.25);
@@ -758,19 +757,19 @@ body {
 .full-postit::before {
   content: '';
   position: absolute;
-  top: -4px;
+  top: -0.5cqh;
   left: 50%;
   transform: translateX(-50%);
-  width: 20px;
-  height: 8px;
+  width: 2cqw;
+  height: 0.8cqh;
   background: rgba(200,50,50,0.6);
   border-radius: 2px;
 }
 
 .pinboard-photo {
   position: absolute;
-  width: clamp(100px, 10vw, 140px);
-  height: clamp(120px, 12vw, 160px);
+  width: 10cqw;
+  height: 14cqh;
   background: #eee;
   border: 3px solid #fff;
   box-shadow: 3px 4px 10px rgba(0,0,0,0.3);
@@ -782,7 +781,7 @@ body {
 }
 .pinboard-photo-label {
   font-family: var(--font-handwriting);
-  font-size: 14px;
+  font-size: 1.2cqw;
   color: #666;
   margin-top: 5px;
 }
@@ -794,7 +793,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: 2.5cqw;
   color: #999;
 }
 
