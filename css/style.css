@@ -338,12 +338,13 @@ body {
   max-width: 1200px;
 }
 
-/* Terminal: match image aspect ratio so it fills without stretching */
+/* Terminal: locked aspect ratio — scales proportionally on any window size */
 #terminal-detail {
   width: auto;
-  height: 92vh;
-  aspect-ratio: 1456 / 816;
+  height: auto;
+  max-height: 92vh;
   max-width: 96vw;
+  aspect-ratio: 1456 / 816;
 }
 
 /* Pinboard: wider view to show wall context around the board */
@@ -450,7 +451,7 @@ body {
 
 /* Green screen glow */
 .crt-green .crt-screen {
-  background: #050a05;
+  background: transparent;
   box-shadow: inset 0 0 40px rgba(50, 255, 50, 0.03);
 }
 
