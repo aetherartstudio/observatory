@@ -377,7 +377,7 @@ body {
   box-shadow: none;
   border-radius: 0;
   /* Padding maps content onto the screen area of the monitor image. */
-  padding: 12% 30% 17% 25%;
+  padding: 11% 30% 14% 25%;
 }
 .crt-green .crt-screen-well {
   background: transparent;
@@ -508,7 +508,7 @@ body {
 
 /* ===== TERMINAL CONTENT (inside CRT) ===== */
 .terminal-header {
-  padding: 8px 12px;
+  padding: 8px 12px 8px 2em;
   font-family: var(--font-terminal);
   font-size: 14px;
   color: var(--dos-green);
