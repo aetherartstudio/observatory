@@ -122,17 +122,17 @@ body {
 #zone-terminal {
   left: 26%;
   top: 27%;
-  width: 10%;
+  width: 14%;
   height: 16%;
   z-index: 6;
 }
 
 /* Right CRT monitor — Profile database */
 #zone-profiles {
-  left: 40%;
+  left: 43%;
   top: 30%;
-  width: 11%;
-  height: 21%;
+  width: 9%;
+  height: 23%;
   z-index: 6;
 }
 
@@ -140,7 +140,7 @@ body {
 #zone-pinboard {
   left: 31%;
   top: 0%;
-  width: 37%;
+  width: 40%;
   height: 25%;
   z-index: 4;
 }
@@ -155,7 +155,7 @@ body {
 
 /* Notebook (bottom right of desk) */
 #zone-notepad {
-  left: 75%;
+  left: 71%;
   top: 72%;
   width: 18%;
   height: 20%;
