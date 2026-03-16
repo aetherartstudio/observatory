@@ -121,46 +121,47 @@ body {
   50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.4); }
 }
 
-/* ---- HOVER (desktop): Smooth pulsing radial glow via opacity on ::after ---- */
-/* Uses a pseudo-element with static gradient + animated opacity for smooth transitions */
-.zone::after {
-  content: '';
-  position: absolute;
-  /* Overflow the zone box so the glow extends beyond — avoids revealing box edges */
-  top: -30%;
-  left: -30%;
-  width: 160%;
-  height: 160%;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center,
-    rgba(255, 220, 150, 0.55) 0%,
-    rgba(255, 210, 130, 0.3) 15%,
-    rgba(255, 200, 100, 0.15) 30%,
-    rgba(255, 200, 100, 0.05) 50%,
-    transparent 70%
-  );
-  opacity: 0;
-  pointer-events: none;
-  z-index: 2;
-  transition: opacity 0.4s ease;
-}
+/* ---- HOVER (desktop only): Smooth pulsing radial glow via opacity on ::after ---- */
+/* Only applies on devices with a real mouse pointer (hover: hover) */
+@media (hover: hover) {
+  .zone::after {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -30%;
+    width: 160%;
+    height: 160%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center,
+      rgba(255, 220, 150, 0.55) 0%,
+      rgba(255, 210, 130, 0.3) 15%,
+      rgba(255, 200, 100, 0.15) 30%,
+      rgba(255, 200, 100, 0.05) 50%,
+      transparent 70%
+    );
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.4s ease;
+  }
 
-.zone:hover {
-  z-index: 20;
-}
+  .zone:hover {
+    z-index: 20;
+  }
 
-.zone:hover::after {
-  animation: hoverGlowPulse 2s ease-in-out infinite;
-}
+  .zone:hover::after {
+    animation: hoverGlowPulse 2s ease-in-out infinite;
+  }
 
-.zone:hover::before {
-  opacity: 0 !important;
-  animation: none !important;
-}
+  .zone:hover::before {
+    opacity: 0 !important;
+    animation: none !important;
+  }
 
-@keyframes hoverGlowPulse {
-  0%, 100% { opacity: 0.4; }
-  50%      { opacity: 1; }
+  @keyframes hoverGlowPulse {
+    0%, 100% { opacity: 0.4; }
+    50%      { opacity: 1; }
+  }
 }
 
 /* ---- REVEAL: Tap empty area (mobile) or hold Space (desktop) ---- */
@@ -772,11 +773,13 @@ body {
   .profile-card { padding: 12px; }
   .pinboard-surface { overflow-y: auto; -webkit-overflow-scrolling: touch; }
 
-  /* Reduce sparkle dot to 60% on mobile */
+}
+
+/* ---- Touch devices: smaller sparkle dots, no hover glow ---- */
+@media (hover: none) {
   .zone::before {
     width: 14px;
     height: 14px;
-    box-shadow: 0 0 12px 6px rgba(255, 200, 100, 0.4),
-                0 0 30px 12px rgba(255, 200, 100, 0.1);
+    box-shadow: none;
   }
 }
