@@ -181,18 +181,18 @@
 
     // Place post-its — constrained within the cork area of the background image
     const postitPositions = [
-      { top: '2%', left: '3%' },
-      { top: '5%', left: '22%' },
-      { top: '2%', left: '42%' },
-      { top: '25%', left: '5%' },
-      { top: '28%', left: '25%' },
-      { top: '48%', left: '3%' },
-      { top: '50%', left: '24%' },
-      { top: '68%', left: '5%' },
-      { top: '70%', left: '22%' },
-      { top: '26%', left: '45%' },
-      { top: '52%', left: '42%' },
-      { top: '70%', left: '44%' },
+      { top: '2%', left: '12%' },
+      { top: '5%', left: '31%' },
+      { top: '2%', left: '51%' },
+      { top: '25%', left: '14%' },
+      { top: '28%', left: '34%' },
+      { top: '48%', left: '12%' },
+      { top: '50%', left: '33%' },
+      { top: '64%', left: '14%' },
+      { top: '66%', left: '31%' },
+      { top: '26%', left: '54%' },
+      { top: '52%', left: '51%' },
+      { top: '66%', left: '53%' },
     ];
 
     POSTIT_NOTES.forEach((note, i) => {
