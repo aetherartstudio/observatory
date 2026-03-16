@@ -106,28 +106,28 @@ body {
 
 /* Left CRT monitor — DOS terminal */
 #zone-terminal {
-  left: 19%;
-  top: 15%;
-  width: 14%;
-  height: 42%;
+  left: 10%;
+  top: 30%;
+  width: 27%;
+  height: 28%;
   z-index: 6;
 }
 
 /* Right CRT monitor — Profile database */
 #zone-profiles {
-  left: 35%;
-  top: 10%;
+  left: 26%;
+  top: 30%;
   width: 17%;
-  height: 55%;
+  height: 38%;
   z-index: 6;
 }
 
 /* Cork pin board on wall (behind monitors) */
 #zone-pinboard {
-  left: 42%;
+  left: 25%;
   top: 0%;
-  width: 36%;
-  height: 45%;
+  width: 50%;
+  height: 32%;
   z-index: 4;
 }
 
@@ -141,10 +141,10 @@ body {
 
 /* Notebook (bottom right of desk) */
 #zone-notepad {
-  left: 68%;
-  top: 66%;
+  left: 78%;
+  top: 69%;
   width: 18%;
-  height: 30%;
+  height: 20%;
 }
 
 
