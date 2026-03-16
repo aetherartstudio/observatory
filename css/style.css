@@ -737,10 +737,19 @@ body {
   overflow: hidden;
   container-type: size;
 }
+/* Hide pinboard children until background image is loaded */
+.pinboard-surface > * {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.pinboard-surface.bg-loaded > * {
+  opacity: 1;
+}
 
 .full-postit {
   position: absolute;
   width: 14cqw;
+  min-height: 14cqw;
   padding: 1.2cqw;
   font-family: var(--font-handwriting);
   font-size: 1.3cqw;
@@ -749,6 +758,7 @@ body {
   box-shadow: 2px 3px 8px rgba(0,0,0,0.25);
   cursor: default;
   transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
 }
 .full-postit:hover {
   transform: scale(1.05);

@@ -246,6 +246,13 @@
       line.style.transform = `rotate(${s.angle}deg)`;
       surface.appendChild(line);
     });
+
+    // Reveal post-its only after the background image is loaded
+    const bgImg = new Image();
+    bgImg.onload = () => surface.classList.add('bg-loaded');
+    bgImg.src = 'assets/cork-bg.png';
+    // Fallback in case image is already cached
+    if (bgImg.complete) surface.classList.add('bg-loaded');
   }
 
   // --- Notepad ---
