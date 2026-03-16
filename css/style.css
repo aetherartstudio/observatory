@@ -121,12 +121,36 @@ body {
   50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.4); }
 }
 
-/* ---- HOVER (desktop): Pulsing radial glow — NO box-shadow, NO border ---- */
-/* Only a radial gradient background that fades to transparent well before the zone edge */
-/* This means you NEVER see any box/border shape */
+/* ---- HOVER (desktop): Smooth pulsing radial glow via opacity on ::after ---- */
+/* Uses a pseudo-element with static gradient + animated opacity for smooth transitions */
+.zone::after {
+  content: '';
+  position: absolute;
+  /* Overflow the zone box so the glow extends beyond — avoids revealing box edges */
+  top: -30%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center,
+    rgba(255, 220, 150, 0.55) 0%,
+    rgba(255, 210, 130, 0.3) 15%,
+    rgba(255, 200, 100, 0.15) 30%,
+    rgba(255, 200, 100, 0.05) 50%,
+    transparent 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.4s ease;
+}
+
 .zone:hover {
-  animation: hoverPulse 1.8s ease-in-out infinite;
   z-index: 20;
+}
+
+.zone:hover::after {
+  animation: hoverGlowPulse 2s ease-in-out infinite;
 }
 
 .zone:hover::before {
@@ -134,25 +158,9 @@ body {
   animation: none !important;
 }
 
-@keyframes hoverPulse {
-  0%, 100% {
-    background: radial-gradient(ellipse at center,
-      rgba(255, 220, 150, 0.25) 0%,
-      rgba(255, 210, 130, 0.14) 15%,
-      rgba(255, 200, 100, 0.06) 30%,
-      rgba(255, 200, 100, 0.02) 45%,
-      transparent 60%
-    );
-  }
-  50% {
-    background: radial-gradient(ellipse at center,
-      rgba(255, 220, 150, 0.4) 0%,
-      rgba(255, 210, 130, 0.22) 15%,
-      rgba(255, 200, 100, 0.1) 30%,
-      rgba(255, 200, 100, 0.03) 45%,
-      transparent 60%
-    );
-  }
+@keyframes hoverGlowPulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
 }
 
 /* ---- REVEAL: Tap empty area (mobile) or hold Space (desktop) ---- */
@@ -212,19 +220,23 @@ body {
   background: rgba(255, 50, 50, 0.1) !important;
 }
 .debug .zone::after {
-  content: attr(id);
-  position: absolute;
-  top: 2px;
-  left: 4px;
-  font-family: monospace;
-  font-size: 10px;
-  color: #ff5555;
-  background: rgba(0,0,0,0.8);
-  padding: 2px 5px;
-  border-radius: 2px;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 30;
+  content: attr(id) !important;
+  position: absolute !important;
+  top: 2px !important;
+  left: 4px !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 2px !important;
+  background: rgba(0,0,0,0.8) !important;
+  font-family: monospace !important;
+  font-size: 10px !important;
+  color: #ff5555 !important;
+  padding: 2px 5px !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  animation: none !important;
+  z-index: 30 !important;
 }
 
 /* Position each hotspot zone over the corresponding area of the background image.
@@ -759,4 +771,12 @@ body {
   .profiles-grid { padding: 10px; gap: 10px; }
   .profile-card { padding: 12px; }
   .pinboard-surface { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Reduce sparkle dot to 60% on mobile */
+  .zone::before {
+    width: 14px;
+    height: 14px;
+    box-shadow: 0 0 12px 6px rgba(255, 200, 100, 0.4),
+                0 0 30px 12px rgba(255, 200, 100, 0.1);
+  }
 }
