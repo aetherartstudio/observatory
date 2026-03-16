@@ -340,11 +340,10 @@ body {
 
 /* Terminal: locked aspect ratio — scales proportionally on any window size */
 #terminal-detail {
-  width: auto;
-  height: auto;
-  max-height: 92vh;
-  max-width: 96vw;
-  aspect-ratio: 1456 / 816;
+  /* Fill available space while keeping the monitor's native ratio */
+  width: min(96vw, 92vh * 1456 / 816);
+  height: min(92vh, 96vw * 816 / 1456);
+  max-width: none;
 }
 
 /* Pinboard: wider view to show wall context around the board */
@@ -384,6 +383,7 @@ body {
   background: transparent;
   box-shadow: none;
   border-radius: 6px;
+  padding: 0;
 }
 .crt-green .crt-controls { display: none; }
 
@@ -516,7 +516,7 @@ body {
   justify-content: space-between;
   border-bottom: 1px solid rgba(50,255,50,0.15);
   z-index: 5;
-  background: rgba(0,0,0,0.3);
+  background: transparent;
 }
 
 .terminal-status {
@@ -705,9 +705,10 @@ body {
 
 /* ===== PINBOARD DETAIL ===== */
 .pinboard-full {
-  width: 100%;
-  height: 100%;
-  background: url('../assets/cork-bg.png') center / contain no-repeat;
+  /* Lock to image ratio so stickers scale proportionally */
+  width: min(96vw, 92vh * 1456 / 816);
+  height: min(92vh, 96vw * 816 / 1456);
+  background: url('../assets/cork-bg.png') center / 100% 100% no-repeat;
   background-color: #1a1510;
   border: none;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
