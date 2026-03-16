@@ -377,7 +377,7 @@ body {
   box-shadow: none;
   border-radius: 0;
   /* Padding maps content onto the screen area of the monitor image. */
-  padding: 11% 30% 14% 25%;
+  padding: 11% 30% 16% 25%;
 }
 .crt-green .crt-screen-well {
   background: transparent;
@@ -452,8 +452,10 @@ body {
 /* Green screen glow */
 .crt-green .crt-screen {
   background: transparent;
-  box-shadow: inset 0 0 40px rgba(50, 255, 50, 0.03);
+  box-shadow: none;
 }
+.crt-green .crt-scanlines { background: none; }
+.crt-green .crt-curvature { box-shadow: none; }
 
 /* Amber screen glow */
 .crt-amber .crt-screen {
