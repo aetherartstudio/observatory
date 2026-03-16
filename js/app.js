@@ -80,6 +80,16 @@
       if ((e.key === 'd' || e.key === 'D') && !isDetailOpen) {
         document.getElementById('room').classList.toggle('debug');
       }
+      // Hold Spacebar to reveal all hotspots (like Telltale adventure games)
+      if (e.key === ' ' && !isDetailOpen) {
+        e.preventDefault();
+        document.getElementById('room').classList.add('reveal');
+      }
+    });
+    document.addEventListener('keyup', (e) => {
+      if (e.key === ' ') {
+        document.getElementById('room').classList.remove('reveal');
+      }
     });
   }
 
