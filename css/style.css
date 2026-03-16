@@ -749,70 +749,22 @@ body {
 .full-postit {
   position: absolute;
   width: 14cqw;
-  padding: 1.8cqw 1.4cqw 1.4cqw;
+  aspect-ratio: 1;
+  padding: 12% 10% 10%;
   font-family: var(--font-handwriting);
   font-size: 1.3cqw;
   color: #2a2a2a;
   line-height: 1.4;
   cursor: default;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
   overflow: hidden;
-  /* Realistic post-it shadow: slight lift on bottom-right */
-  box-shadow:
-    1px 1px 3px rgba(0,0,0,0.12),
-    3px 5px 8px rgba(0,0,0,0.18),
-    0 0 1px rgba(0,0,0,0.1);
-  /* Paper texture — subtle noise via gradient */
-  background-image:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,0.06) 0%,
-      transparent 4%,
-      transparent 100%
-    );
-  background-blend-mode: multiply;
-  /* Slightly imperfect shape */
-  clip-path: polygon(
-    0% 0%, 100% 0.3%, 99.7% 99.5%, 0.5% 100%
-  );
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: transparent;
 }
 .full-postit:hover {
-  transform: scale(1.08) rotate(-1deg);
-  box-shadow:
-    2px 3px 6px rgba(0,0,0,0.15),
-    6px 10px 20px rgba(0,0,0,0.22);
+  transform: scale(1.08);
   z-index: 5;
-}
-/* Sticky glue strip at top */
-.full-postit::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 12%;
-  background: linear-gradient(
-    180deg,
-    rgba(0,0,0,0.05) 0%,
-    transparent 100%
-  );
-  pointer-events: none;
-}
-/* Curled bottom-right corner */
-.full-postit::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 20%;
-  height: 20%;
-  background: linear-gradient(
-    225deg,
-    rgba(0,0,0,0.08) 0%,
-    rgba(0,0,0,0.03) 30%,
-    transparent 60%
-  );
-  pointer-events: none;
 }
 
 .pinboard-photo {

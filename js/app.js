@@ -195,11 +195,14 @@
       { top: '66%', left: '57%' },
     ];
 
+    const POSTIT_IMAGES = ['postit-1.png', 'postit-5.png', 'postit-7.png', 'postit-10.png'];
+
     POSTIT_NOTES.forEach((note, i) => {
       const pos = postitPositions[i] || { top: `${5 + (i * 8) % 80}%`, left: `${2 + (i * 15) % 55}%` };
+      const img = POSTIT_IMAGES[i % POSTIT_IMAGES.length];
       const div = document.createElement('div');
       div.className = 'full-postit';
-      div.style.background = note.color;
+      div.style.backgroundImage = `url('assets/${img}')`;
       div.style.transform = `rotate(${note.rotation}deg)`;
       div.style.top = pos.top;
       div.style.left = pos.left;
