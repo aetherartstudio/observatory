@@ -76,6 +76,10 @@
   function setupKeyboard() {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isDetailOpen) closeDetail();
+      // Press D to toggle debug mode (shows hotspot borders)
+      if ((e.key === 'd' || e.key === 'D') && !isDetailOpen) {
+        document.getElementById('room').classList.toggle('debug');
+      }
     });
   }
 

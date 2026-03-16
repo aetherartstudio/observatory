@@ -73,6 +73,34 @@ body {
   z-index: 20;
 }
 
+/* Debug mode — toggle with D key */
+.debug .zone {
+  border: 2px dashed rgba(255, 50, 50, 0.7);
+  background: rgba(255, 50, 50, 0.1);
+}
+.debug .zone::after {
+  content: attr(id) ' | L:' attr(style);
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-family: monospace;
+  font-size: 10px;
+  color: #ff5555;
+  background: rgba(0,0,0,0.8);
+  padding: 2px 5px;
+  border-radius: 2px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 30;
+}
+.debug .zone .hotspot-hint {
+  opacity: 1;
+  bottom: 4px;
+  font-size: 10px;
+  color: #ff8888;
+  background: rgba(0,0,0,0.9);
+}
+
 /* Position each hotspot zone over the corresponding area of the background image.
    These values are approximate and may need tweaking per image. */
 
