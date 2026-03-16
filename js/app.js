@@ -181,18 +181,18 @@
 
     // Place post-its — constrained within the cork area of the background image
     const postitPositions = [
-      { top: '2%', left: '12%' },
-      { top: '5%', left: '31%' },
-      { top: '2%', left: '51%' },
-      { top: '25%', left: '14%' },
-      { top: '28%', left: '34%' },
-      { top: '48%', left: '12%' },
-      { top: '50%', left: '33%' },
-      { top: '64%', left: '14%' },
-      { top: '66%', left: '31%' },
-      { top: '26%', left: '54%' },
-      { top: '52%', left: '51%' },
-      { top: '66%', left: '53%' },
+      { top: '-1%', left: '21%' },
+      { top: '2%', left: '40%' },
+      { top: '-1%', left: '60%' },
+      { top: '22%', left: '23%' },
+      { top: '25%', left: '43%' },
+      { top: '45%', left: '21%' },
+      { top: '47%', left: '42%' },
+      { top: '64%', left: '23%' },
+      { top: '66%', left: '40%' },
+      { top: '23%', left: '63%' },
+      { top: '49%', left: '60%' },
+      { top: '66%', left: '62%' },
     ];
 
     POSTIT_NOTES.forEach((note, i) => {
@@ -209,10 +209,10 @@
 
     // Place photos
     const photoPositions = [
-      { top: '3%', left: '62%', rotation: -3 },
-      { top: '26%', left: '65%', rotation: 4 },
-      { top: '48%', left: '60%', rotation: -2 },
-      { top: '68%', left: '63%', rotation: 5 },
+      { top: '0%', left: '71%', rotation: -3 },
+      { top: '23%', left: '74%', rotation: 4 },
+      { top: '45%', left: '69%', rotation: -2 },
+      { top: '65%', left: '72%', rotation: 5 },
     ];
 
     PROFILES.forEach((profile, i) => {
