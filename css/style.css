@@ -35,6 +35,20 @@ body {
   height: 100vh;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Scene wrapper: maintains image aspect ratio and scales to cover viewport.
+   Hotspots are children of this div so their % positions track the image. */
+.room-scene {
+  position: relative;
+  /* Cover the viewport while keeping aspect ratio (like object-fit:cover but as a div) */
+  min-width: 100%;
+  min-height: 100%;
+  /* Image native ratio: 1456/816 ≈ 1.7843 */
+  aspect-ratio: 1456 / 816;
 }
 
 .room-bg {
@@ -42,8 +56,7 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  object-fit: fill; /* fills the scene container exactly — no cropping */
   z-index: 1;
 }
 
@@ -74,6 +87,7 @@ body {
 }
 
 /* Debug mode — toggle with D key */
+.debug .room-scene .zone,
 .debug .zone {
   border: 2px dashed rgba(255, 50, 50, 0.7);
   background: rgba(255, 50, 50, 0.1);
