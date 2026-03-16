@@ -749,7 +749,6 @@ body {
 .full-postit {
   position: absolute;
   width: 14cqw;
-  min-height: 14cqw;
   padding: 1.2cqw;
   font-family: var(--font-handwriting);
   font-size: 1.3cqw;
