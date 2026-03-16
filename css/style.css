@@ -377,7 +377,7 @@ body {
   box-shadow: none;
   border-radius: 0;
   /* Padding maps content onto the screen area of the monitor image. */
-  padding: 15% 30% 25% 25%;
+  padding: 10% 30% 15% 25%;
 }
 .crt-green .crt-screen-well {
   background: transparent;
