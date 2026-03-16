@@ -183,16 +183,16 @@
     const postitPositions = [
       { top: '-1%', left: '21%' },
       { top: '2%', left: '40%' },
-      { top: '-1%', left: '60%' },
+      { top: '-1%', left: '55%' },
       { top: '22%', left: '23%' },
       { top: '25%', left: '43%' },
       { top: '45%', left: '21%' },
       { top: '47%', left: '42%' },
       { top: '64%', left: '23%' },
       { top: '66%', left: '40%' },
-      { top: '23%', left: '63%' },
-      { top: '49%', left: '60%' },
-      { top: '66%', left: '62%' },
+      { top: '23%', left: '58%' },
+      { top: '49%', left: '55%' },
+      { top: '66%', left: '57%' },
     ];
 
     POSTIT_NOTES.forEach((note, i) => {
@@ -209,10 +209,10 @@
 
     // Place photos
     const photoPositions = [
-      { top: '0%', left: '71%', rotation: -3 },
-      { top: '23%', left: '74%', rotation: 4 },
-      { top: '45%', left: '69%', rotation: -2 },
-      { top: '65%', left: '72%', rotation: 5 },
+      { top: '0%', left: '66%', rotation: -3 },
+      { top: '23%', left: '69%', rotation: 4 },
+      { top: '45%', left: '64%', rotation: -2 },
+      { top: '65%', left: '67%', rotation: 5 },
     ];
 
     PROFILES.forEach((profile, i) => {
