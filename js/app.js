@@ -91,6 +91,32 @@
         document.getElementById('room').classList.remove('reveal');
       }
     });
+
+    // --- Mobile/Touch support ---
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const hintBtn = document.getElementById('hint-btn');
+
+    if (isTouchDevice && hintBtn) {
+      // Show the hint button on touch devices
+      hintBtn.style.display = 'flex';
+
+      // Tap hint button: briefly reveal all hotspots
+      hintBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const room = document.getElementById('room');
+        room.classList.add('reveal');
+        setTimeout(() => room.classList.remove('reveal'), 1500);
+      });
+
+      // Tap on empty room area (not a zone): briefly reveal all hotspots
+      document.getElementById('room').addEventListener('click', (e) => {
+        if (!e.target.closest('.zone') && !e.target.closest('.hint-btn') && !isDetailOpen) {
+          const room = document.getElementById('room');
+          room.classList.add('reveal');
+          setTimeout(() => room.classList.remove('reveal'), 1500);
+        }
+      });
+    }
   }
 
   // ===== POPULATE DETAIL VIEWS =====
