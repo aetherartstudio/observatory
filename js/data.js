@@ -5,7 +5,7 @@
 // ============================================================
 
 const SIGHTINGS = [
-  { date: "2024-11-03", time: "02:17", location: "Taipei Night Market, Taiwan", description: "Entity observed hovering near steam vent. Appeared attracted to dumpling stand glow." },
+  { date: "2024-11-03", time: "02:17", location: "Chatuchak Market, Bangkok", description: "Entity observed hovering near steam vent. Appeared attracted to street food stall glow." },
   { date: "2024-11-18", time: "23:45", location: "Berlin U-Bahn, Station Alexanderplatz", description: "Small creature spotted pressed against vending machine glass. Seemed mesmerized by LED display." },
   { date: "2024-12-01", time: "04:33", location: "Shibuya Crossing, Tokyo", description: "Multiple entities (3) seen weaving between pedestrians. No one appeared to notice." },
   { date: "2025-01-14", time: "01:02", location: "Montmartre, Paris", description: "Single specimen found sitting on cafe chair, mimicking posture of nearby sculpture." },
