@@ -848,6 +848,7 @@ body {
   padding: 5% 5% 4% 5%;
   position: relative;
   overflow: hidden;
+  container-type: size;
 }
 
 .journal-spread {
@@ -881,17 +882,17 @@ body {
 
 .journal-page {
   flex: 1;
-  padding: 15px 20px 30px 30px;
+  padding: 2.5cqh 2cqw 5cqh 3cqw;
   position: relative;
   overflow: hidden;
 }
 
 .journal-page.left {
-  padding-left: 20px;
-  padding-right: 45px;
+  padding-left: 2cqw;
+  padding-right: 4.5cqw;
 }
 .journal-page.right {
-  padding-left: 55px;
+  padding-left: 5.5cqw;
 }
 
 .journal-page-content {
@@ -902,9 +903,9 @@ body {
 
 .journal-page-number {
   position: absolute;
-  bottom: 12px;
+  bottom: 2cqh;
   font-family: var(--font-handwriting);
-  font-size: 14px;
+  font-size: 1.4cqw;
   color: rgba(139, 74, 74, 0.4);
 }
 .journal-page.left .journal-page-number { left: 50px; }
@@ -951,18 +952,18 @@ body {
 /* --- Journal Entry Styles --- */
 .notebook-date {
   font-family: var(--font-handwriting);
-  font-size: 23px;
+  font-size: 2.3cqw;
   font-weight: 700;
   color: #8b4a4a;
-  margin-bottom: 8px;
-  line-height: 36px;
+  margin-bottom: 1cqh;
+  line-height: 1.5;
 }
 
 .notebook-text {
   font-family: var(--font-handwriting);
-  font-size: 26px;
+  font-size: 2.6cqw;
   color: #2c3e6b;
-  line-height: 36px;
+  line-height: 1.5;
 }
 
 /* ===== SKETCHES DETAIL — DARK WALL ===== */
