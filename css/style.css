@@ -1004,9 +1004,8 @@ body {
   width: 100%;
   height: 100%;
   position: relative;
-  background:
-    repeating-conic-gradient(rgba(0,0,0,0.02) 0% 25%, transparent 0% 50%) 0 0 / 20px 20px,
-    linear-gradient(170deg, #3a3228 0%, #2e2820 40%, #252018 70%, #2a241c 100%);
+  background: url('../assets/wall-bg.png') center / cover no-repeat;
+  background-color: #2a241c;
   border-radius: 4px;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
   overflow: hidden;
@@ -1071,9 +1070,54 @@ body {
   z-index: 3;
 }
 
-.sketch-wall-svg {
+.sketch-wall-img {
   width: 100%;
   height: auto;
+  display: block;
+}
+
+/* Sketch zoom overlay */
+.sketch-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 998;
+}
+.sketch-overlay.active { display: block; }
+
+.sketch-zoomed {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  text-align: center;
+  cursor: pointer;
+  max-width: 80vw;
+  max-height: 85vh;
+}
+.sketch-zoomed.active { display: block; }
+
+.sketch-zoomed-img {
+  max-width: 80vw;
+  max-height: 70vh;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 40px rgba(0,0,0,0.6));
+  border-radius: 4px;
+}
+.sketch-zoomed-label {
+  font-family: var(--font-handwriting);
+  font-size: 24px;
+  color: #f0e8d0;
+  margin-top: 12px;
+}
+.sketch-zoomed-desc {
+  font-family: var(--font-handwriting);
+  font-size: 16px;
+  color: rgba(240, 232, 208, 0.7);
+  margin-top: 4px;
 }
 
 .sketch-wall-label {

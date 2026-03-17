@@ -123,8 +123,9 @@ const POSTIT_NOTES = [
 ];
 
 const WALL_SKETCHES = [
-  { name: "Groovix", description: "Sketch #001 — Observed dancing near steam vent. Note elongated neck, spiky crest.", svgId: "sketch-groovix" },
-  { name: "Fugu", description: "Sketch #002 — Captured during inflation event. Spines fully extended.", svgId: "sketch-fugu" },
-  { name: "Mr. Q", description: "Sketch #003 — Stationary observation pose. Subject was watching ME.", svgId: "sketch-mrq" },
-  { name: "Muncha", description: "Sketch #004 — Mid-chew. Subject consumed 3 pencils during sketch session.", svgId: "sketch-muncha" },
+  { name: "Groovix", description: "Sketch #001 — Observed dancing near steam vent. Note elongated neck, spiky crest.", image: "assets/groovix-sketch-1.png" },
+  { name: "Fugu", description: "Sketch #002 — Captured during inflation event. Spines fully extended.", image: "assets/fugu-sketch-1.png" },
+  { name: "Mr. Q", description: "Sketch #003 — Stationary observation pose. Subject was watching ME.", image: "assets/MrQ-sketch-1.png" },
+  { name: "Muncha", description: "Sketch #004 — Mid-chew. Subject consumed 3 pencils during sketch session.", image: "assets/muncha-sketch-1.png" },
+  { name: "Source Crystal", description: "Sketch #005 — Fragment found at gallery storage. Composition unknown. Entities behave reverently near it.", image: "assets/source crystal-1.png" },
 ];

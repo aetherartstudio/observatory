@@ -391,85 +391,25 @@
     }, 620);
   }
 
-  // --- Sketches (wall-pinned layout) ---
+  // --- Sketches (wall-pinned layout with image assets) ---
   function populateSketches() {
     const wall = document.getElementById('sketches-grid');
     if (!wall) return;
 
-    const sketchSVGs = [
-      `<svg viewBox="0 0 200 250" class="sketch-wall-svg">
-        <path d="M100,50 Q110,30 120,40 Q130,20 118,15 Q105,8 95,22 Q85,12 82,28 Q72,20 78,35 L68,55 Q58,70 50,95 Q42,120 50,150 L46,170 Q40,190 50,200 L60,192 Q65,185 70,175 L80,165 Q88,160 98,165 L108,175 Q112,185 118,192 L128,200 Q135,196 130,185 L126,170 Q135,145 130,115 Q128,90 118,70 Z" fill="none" stroke="#4a3520" stroke-width="2" opacity="0.8"/>
-        <circle cx="112" cy="30" r="6" fill="none" stroke="#4a3520" stroke-width="1.5"/>
-        <circle cx="113" cy="29" r="2" fill="#4a3520" opacity="0.5"/>
-        <path d="M95,58 Q88,55 85,50 Q82,46 78,48" fill="none" stroke="#4a3520" stroke-width="1"/>
-        <path d="M70,150 L55,145 Q50,142 48,138" fill="none" stroke="#4a3520" stroke-width="1.5"/>
-        <text x="100" y="240" text-anchor="middle" font-family="Caveat" font-size="14" fill="#6a5a4a">Tail curves when agitated</text>
-        <path d="M130,115 Q140,112 145,118 Q150,125 145,130" fill="none" stroke="#4a3520" stroke-width="1" stroke-dasharray="3,3"/>
-        <text x="155" y="125" font-family="Caveat" font-size="10" fill="#8a6a4a">spines?</text>
-      </svg>`,
-      `<svg viewBox="0 0 200 220" class="sketch-wall-svg">
-        <path d="M100,50 Q140,25 150,50 Q160,30 155,55 Q170,50 160,70 Q172,80 158,88 Q168,100 155,105 Q162,118 148,120 Q155,135 140,135 Q145,150 130,152 Q120,165 100,160 Q80,165 70,152 Q55,150 60,135 Q48,135 52,120 Q38,118 45,105 Q32,100 42,88 Q28,80 40,70 Q30,50 45,55 Q40,30 50,50 Q60,25 100,50 Z" fill="none" stroke="#4a3520" stroke-width="2" opacity="0.8"/>
-        <circle cx="80" cy="75" r="8" fill="none" stroke="#4a3520" stroke-width="1.5"/>
-        <circle cx="81" cy="74" r="3" fill="#4a3520" opacity="0.4"/>
-        <circle cx="120" cy="70" r="6" fill="none" stroke="#4a3520" stroke-width="1.5"/>
-        <circle cx="121" cy="69" r="2" fill="#4a3520" opacity="0.4"/>
-        <path d="M75,100 Q90,115 125,98" fill="none" stroke="#4a3520" stroke-width="1.5"/>
-        <line x1="80" y1="100" x2="78" y2="108" stroke="#4a3520" stroke-width="1"/>
-        <line x1="88" y1="104" x2="87" y2="112" stroke="#4a3520" stroke-width="1"/>
-        <line x1="96" y1="106" x2="96" y2="114" stroke="#4a3520" stroke-width="1"/>
-        <line x1="104" y1="105" x2="105" y2="113" stroke="#4a3520" stroke-width="1"/>
-        <line x1="112" y1="102" x2="114" y2="110" stroke="#4a3520" stroke-width="1"/>
-        <text x="100" y="200" text-anchor="middle" font-family="Caveat" font-size="14" fill="#6a5a4a">Spines extend when excited</text>
-        <text x="160" y="90" font-family="Caveat" font-size="10" fill="#cc5533">LOUD</text>
-      </svg>`,
-      `<svg viewBox="0 0 200 240" class="sketch-wall-svg">
-        <ellipse cx="100" cy="110" rx="55" ry="65" fill="none" stroke="#4a3520" stroke-width="2" opacity="0.8"/>
-        <circle cx="82" cy="90" r="8" fill="none" stroke="#4a3520" stroke-width="1.5"/>
-        <circle cx="83" cy="89" r="3" fill="#4a3520" opacity="0.4"/>
-        <path d="M78,125 Q95,145 115,125" fill="none" stroke="#4a3520" stroke-width="2"/>
-        <path d="M88,130 L85,140 Q90,142 95,138" fill="none" stroke="#4a3520" stroke-width="1"/>
-        <line x1="82" y1="42" x2="75" y2="18" stroke="#4a3520" stroke-width="2"/>
-        <circle cx="73" cy="14" r="5" fill="none" stroke="#4a3520" stroke-width="1.5"/>
-        <line x1="110" y1="46" x2="118" y2="22" stroke="#4a3520" stroke-width="2"/>
-        <circle cx="120" cy="18" r="4" fill="none" stroke="#4a3520" stroke-width="1.5"/>
-        <line x1="80" y1="175" x2="65" y2="215" stroke="#4a3520" stroke-width="2"/>
-        <line x1="120" y1="175" x2="135" y2="215" stroke="#4a3520" stroke-width="2"/>
-        <text x="100" y="235" text-anchor="middle" font-family="Caveat" font-size="14" fill="#6a5a4a">Watches for hours. Unblinking.</text>
-        <path d="M140,85 L165,80" stroke="#4a3520" stroke-width="0.5" stroke-dasharray="2,2"/>
-        <text x="168" y="82" font-family="Caveat" font-size="10" fill="#8a6a4a">aware?</text>
-      </svg>`,
-      `<svg viewBox="0 0 200 230" class="sketch-wall-svg">
-        <circle cx="100" cy="85" r="58" fill="none" stroke="#4a3520" stroke-width="2" opacity="0.8"/>
-        <circle cx="88" cy="68" r="10" fill="none" stroke="#4a3520" stroke-width="1.5"/>
-        <circle cx="90" cy="66" r="4" fill="#4a3520" opacity="0.4"/>
-        <path d="M68,110 Q82,130 118,118" fill="none" stroke="#4a3520" stroke-width="2"/>
-        <rect x="74" y="110" width="8" height="12" rx="2" fill="none" stroke="#4a3520" stroke-width="1"/>
-        <rect x="86" y="114" width="8" height="10" rx="2" fill="none" stroke="#4a3520" stroke-width="1"/>
-        <rect x="98" y="112" width="7" height="11" rx="2" fill="none" stroke="#4a3520" stroke-width="1"/>
-        <rect x="108" y="110" width="6" height="10" rx="2" fill="none" stroke="#4a3520" stroke-width="1"/>
-        <path d="M72,28 L65,8" fill="none" stroke="#4a3520" stroke-width="2"/>
-        <path d="M128,28 L135,8" fill="none" stroke="#4a3520" stroke-width="2"/>
-        <line x1="78" y1="143" x2="65" y2="195" stroke="#4a3520" stroke-width="2"/>
-        <line x1="122" y1="143" x2="135" y2="195" stroke="#4a3520" stroke-width="2"/>
-        <text x="100" y="218" text-anchor="middle" font-family="Caveat" font-size="14" fill="#6a5a4a">Chews EVERYTHING. 3 pencils lost.</text>
-        <path d="M140,75 L160,70" stroke="#cc3333" stroke-width="1"/>
-        <text x="162" y="72" font-family="Caveat" font-size="11" fill="#cc3333">bite marks on desk!</text>
-      </svg>`,
-    ];
-
-    // Wall positions — scattered, pinned at different angles
+    // Wall positions — 5 sketches scattered randomly
     const positions = [
-      { left: '5%',  top: '8%',  width: '28%', rotation: -3, attach: 'tape-tl' },
-      { left: '55%', top: '5%',  width: '32%', rotation: 2,  attach: 'tack' },
-      { left: '8%',  top: '52%', width: '30%', rotation: 1,  attach: 'tack' },
-      { left: '52%', top: '48%', width: '28%', rotation: -2, attach: 'tape-center' },
+      { left: '4%',  top: '6%',  width: '24%', rotation: -3, attach: 'tape-tl' },
+      { left: '32%', top: '3%',  width: '26%', rotation: 2,  attach: 'tack' },
+      { left: '64%', top: '8%',  width: '22%', rotation: -1, attach: 'tape-center' },
+      { left: '8%',  top: '50%', width: '25%', rotation: 1,  attach: 'tack' },
+      { left: '45%', top: '48%', width: '28%', rotation: -2, attach: 'tape-tl' },
     ];
 
     // Wall annotations (scrawled on wall between sketches)
     const annotations = [
-      { text: 'same species??', left: '38%', top: '20%', rotation: -5 },
-      { text: '→ compare with Berlin photo', left: '40%', top: '75%', rotation: 2 },
-      { text: 'SOURCE connection?', left: '85%', top: '40%', rotation: -90 },
+      { text: 'same species??', left: '60%', top: '55%', rotation: -5 },
+      { text: '→ compare with Berlin photo', left: '78%', top: '75%', rotation: 2 },
+      { text: 'SOURCE connection?', left: '80%', top: '40%', rotation: -90 },
     ];
 
     WALL_SKETCHES.forEach((sketch, i) => {
@@ -493,12 +433,44 @@
       item.innerHTML = `
         <div class="sketch-wall-paper">
           ${attachHTML}
-          ${sketchSVGs[i] || ''}
-          <div class="sketch-wall-label">${sketch.name}<br><em>${sketch.description}</em></div>
+          <img src="${sketch.image}" alt="${sketch.name}" class="sketch-wall-img"/>
+          <div class="sketch-wall-label">${sketch.name}</div>
         </div>
       `;
+
+      // Click to zoom
+      item.addEventListener('click', () => {
+        const overlay = document.querySelector('.sketch-overlay');
+        const zoomed = document.querySelector('.sketch-zoomed');
+        zoomed.innerHTML = `
+          <img src="${sketch.image}" alt="${sketch.name}" class="sketch-zoomed-img"/>
+          <div class="sketch-zoomed-label">${sketch.name}</div>
+          <div class="sketch-zoomed-desc">${sketch.description}</div>
+        `;
+        overlay.classList.add('active');
+        zoomed.classList.add('active');
+      });
+
       wall.appendChild(item);
     });
+
+    // Zoom overlay
+    let overlay = document.querySelector('.sketch-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'sketch-overlay';
+      const zoomed = document.createElement('div');
+      zoomed.className = 'sketch-zoomed';
+      document.getElementById('sketches-detail').appendChild(overlay);
+      document.getElementById('sketches-detail').appendChild(zoomed);
+
+      const closeZoom = () => {
+        overlay.classList.remove('active');
+        zoomed.classList.remove('active');
+      };
+      overlay.addEventListener('click', closeZoom);
+      zoomed.addEventListener('click', closeZoom);
+    }
 
     // Add wall annotations
     annotations.forEach(ann => {
