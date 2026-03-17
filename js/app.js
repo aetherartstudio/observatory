@@ -231,7 +231,7 @@
     if (!overlay) {
       overlay = document.createElement('div');
       overlay.className = 'postit-overlay';
-      document.querySelector('#pinboard').appendChild(overlay);
+      document.querySelector('#pinboard-detail').appendChild(overlay);
     }
     overlay.addEventListener('click', () => {
       document.querySelectorAll('.full-postit.zoomed').forEach(p => p.classList.remove('zoomed'));
