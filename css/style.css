@@ -346,6 +346,13 @@ body {
   max-width: none;
 }
 
+/* Map monitor: larger window to show more of the monitor */
+#profiles-detail {
+  width: 98vw;
+  height: 96vh;
+  max-width: none;
+}
+
 /* Pinboard: wider view to show wall context around the board */
 #pinboard-detail {
   width: 96vw;
@@ -514,9 +521,9 @@ body {
 .map-monitor {
   /* Lock to monitor image aspect ratio */
   aspect-ratio: 1456 / 816;
-  width: min(96vw, 92vh * 1456 / 816);
-  max-height: 92vh;
-  background: url('../assets/terminal2-bg.png') center / 160% 160% no-repeat;
+  width: min(98vw, 96vh * 1456 / 816);
+  max-height: 96vh;
+  background: url('../assets/terminal2-bg.png') center / 100% 100% no-repeat;
   background-color: #0a0805;
   position: relative;
   border-radius: 6px;
