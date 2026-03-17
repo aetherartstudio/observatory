@@ -396,13 +396,13 @@
     const wall = document.getElementById('sketches-grid');
     if (!wall) return;
 
-    // Wall positions — 5 sketches scattered randomly
+    // Wall positions — 5 sketches scattered randomly (smaller to leave room for more)
     const positions = [
-      { left: '4%',  top: '6%',  width: '24%', rotation: -3, attach: 'tape-tl' },
-      { left: '32%', top: '3%',  width: '26%', rotation: 2,  attach: 'tack' },
-      { left: '64%', top: '8%',  width: '22%', rotation: -1, attach: 'tape-center' },
-      { left: '8%',  top: '50%', width: '25%', rotation: 1,  attach: 'tack' },
-      { left: '45%', top: '48%', width: '28%', rotation: -2, attach: 'tape-tl' },
+      { left: '4%',  top: '6%',  width: '16%', rotation: -3 },
+      { left: '32%', top: '3%',  width: '17%', rotation: 2 },
+      { left: '64%', top: '8%',  width: '15%', rotation: -1 },
+      { left: '8%',  top: '50%', width: '16%', rotation: 1 },
+      { left: '45%', top: '48%', width: '18%', rotation: -2 },
     ];
 
     // Wall annotations (scrawled on wall between sketches)
@@ -421,22 +421,7 @@
       item.style.width = pos.width;
       item.style.transform = `rotate(${pos.rotation}deg)`;
 
-      let attachHTML = '';
-      if (pos.attach === 'tape-tl') {
-        attachHTML = '<div class="sketch-wall-tape sketch-wall-tape-tl"></div><div class="sketch-wall-tape sketch-wall-tape-tr"></div>';
-      } else if (pos.attach === 'tack') {
-        attachHTML = '<div class="sketch-wall-tack"></div>';
-      } else if (pos.attach === 'tape-center') {
-        attachHTML = '<div class="sketch-wall-tape sketch-wall-tape-center"></div>';
-      }
-
-      item.innerHTML = `
-        <div class="sketch-wall-paper">
-          ${attachHTML}
-          <img src="${sketch.image}" alt="${sketch.name}" class="sketch-wall-img"/>
-          <div class="sketch-wall-label">${sketch.name}</div>
-        </div>
-      `;
+      item.innerHTML = `<img src="${sketch.image}" alt="${sketch.name}" class="sketch-wall-img"/>`;
 
       // Click to zoom
       item.addEventListener('click', () => {
@@ -444,8 +429,6 @@
         const zoomed = document.querySelector('.sketch-zoomed');
         zoomed.innerHTML = `
           <img src="${sketch.image}" alt="${sketch.name}" class="sketch-zoomed-img"/>
-          <div class="sketch-zoomed-label">${sketch.name}</div>
-          <div class="sketch-zoomed-desc">${sketch.description}</div>
         `;
         overlay.classList.add('active');
         zoomed.classList.add('active');
