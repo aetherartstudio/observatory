@@ -845,7 +845,7 @@ body {
 .notebook-content {
   flex: 1;
   /* Padding maps text onto the two page areas of the notebook image */
-  padding: 8% 8% 4% 8%;
+  padding: 5% 5% 4% 5%;
   position: relative;
   overflow: hidden;
 }
@@ -888,10 +888,10 @@ body {
 
 .journal-page.left {
   padding-left: 20px;
-  padding-right: 24px;
+  padding-right: 45px;
 }
 .journal-page.right {
-  padding-left: 34px;
+  padding-left: 55px;
 }
 
 .journal-page-content {
