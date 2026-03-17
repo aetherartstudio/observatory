@@ -7,6 +7,8 @@
 
   let terminal = null;
   let isDetailOpen = false;
+  let journalSpreadIndex = 0;
+  let pagesPerSpread = 2;
 
   // ===== INIT =====
   document.addEventListener('DOMContentLoaded', () => {
@@ -76,6 +78,18 @@
   function setupKeyboard() {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isDetailOpen) closeDetail();
+      if (e.key === 'ArrowLeft' && isDetailOpen) {
+        const prevBtn = document.getElementById('journal-prev');
+        if (prevBtn && prevBtn.offsetParent !== null) prevBtn.click();
+        const profPrev = document.getElementById('profile-prev');
+        if (profPrev && profPrev.offsetParent !== null) profPrev.click();
+      }
+      if (e.key === 'ArrowRight' && isDetailOpen) {
+        const nextBtn = document.getElementById('journal-next');
+        if (nextBtn && nextBtn.offsetParent !== null) nextBtn.click();
+        const profNext = document.getElementById('profile-next');
+        if (profNext && profNext.offsetParent !== null) profNext.click();
+      }
       // Press D to toggle debug mode (shows hotspot borders)
       if ((e.key === 'd' || e.key === 'D') && !isDetailOpen) {
         document.getElementById('room').classList.toggle('debug');
@@ -268,20 +282,106 @@
     if (bgImg.complete) surface.classList.add('bg-loaded');
   }
 
-  // --- Notepad ---
+  // --- Notepad (page-flip journal) ---
   function populateNotepad() {
-    const container = document.getElementById('notepad-entries');
-    if (!container) return;
+    const book = document.getElementById('journal-book');
+    if (!book) return;
 
-    NOTEBOOK_ENTRIES.forEach(entry => {
-      const div = document.createElement('div');
-      div.className = 'notebook-entry';
-      div.innerHTML = `
-        <div class="notebook-date">${entry.date}</div>
-        <div class="notebook-text">${entry.text}</div>
-      `;
-      container.appendChild(div);
+    const mql = window.matchMedia('(max-width: 768px)');
+    pagesPerSpread = mql.matches ? 1 : 2;
+    mql.addEventListener('change', (e) => {
+      pagesPerSpread = e.matches ? 1 : 2;
+      journalSpreadIndex = 0;
+      renderSpread();
     });
+
+    renderSpread();
+
+    document.getElementById('journal-prev').addEventListener('click', () => {
+      if (journalSpreadIndex > 0) {
+        flipPage('right', () => { journalSpreadIndex--; renderSpread(); });
+      }
+    });
+    document.getElementById('journal-next').addEventListener('click', () => {
+      const totalSpreads = Math.ceil(NOTEBOOK_ENTRIES.length / pagesPerSpread);
+      if (journalSpreadIndex < totalSpreads - 1) {
+        flipPage('left', () => { journalSpreadIndex++; renderSpread(); });
+      }
+    });
+
+    // Swipe support for mobile
+    let startX = 0, startY = 0;
+    book.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    book.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) document.getElementById('journal-next').click();
+        else document.getElementById('journal-prev').click();
+      }
+    }, { passive: true });
+  }
+
+  function renderSpread() {
+    const book = document.getElementById('journal-book');
+    const totalSpreads = Math.ceil(NOTEBOOK_ENTRIES.length / pagesPerSpread);
+    const startIndex = journalSpreadIndex * pagesPerSpread;
+
+    let html = '<div class="journal-spread">';
+    for (let i = 0; i < pagesPerSpread; i++) {
+      const entryIndex = startIndex + i;
+      const pageNum = entryIndex + 1;
+      const side = (pagesPerSpread === 2) ? (i === 0 ? 'left' : 'right') : '';
+
+      if (entryIndex < NOTEBOOK_ENTRIES.length) {
+        const entry = NOTEBOOK_ENTRIES[entryIndex];
+        html += `
+          <div class="journal-page ${side}">
+            <div class="journal-page-content">
+              <div class="notebook-date">${entry.date}</div>
+              <div class="notebook-text">${entry.text}</div>
+            </div>
+            <div class="journal-page-number">${pageNum}</div>
+          </div>`;
+      } else {
+        html += `<div class="journal-page ${side}"><div class="journal-page-content"></div></div>`;
+      }
+    }
+    html += '</div>';
+    book.innerHTML = html;
+
+    // Update counter
+    const countEl = document.getElementById('journal-count');
+    if (pagesPerSpread === 2) {
+      const left = startIndex + 1;
+      const right = Math.min(startIndex + 2, NOTEBOOK_ENTRIES.length);
+      countEl.textContent = `${left}–${right} / ${NOTEBOOK_ENTRIES.length}`;
+    } else {
+      countEl.textContent = `${startIndex + 1} / ${NOTEBOOK_ENTRIES.length}`;
+    }
+
+    document.getElementById('journal-prev').disabled = (journalSpreadIndex === 0);
+    document.getElementById('journal-next').disabled = (journalSpreadIndex >= totalSpreads - 1);
+
+    // Check overflow
+    book.querySelectorAll('.journal-page-content').forEach(el => {
+      if (el.scrollHeight > el.clientHeight) el.classList.add('overflows');
+    });
+  }
+
+  function flipPage(direction, onMidpoint) {
+    const spread = document.querySelector('.journal-spread');
+    if (!spread) return;
+    const animClass = direction === 'left' ? 'flip-left' : 'flip-right';
+    spread.classList.add(animClass);
+    setTimeout(() => { if (onMidpoint) onMidpoint(); }, 300);
+    setTimeout(() => {
+      const s = document.querySelector('.journal-spread');
+      if (s) s.classList.remove(animClass);
+    }, 620);
   }
 
   // --- Sketches (wall-pinned layout) ---
