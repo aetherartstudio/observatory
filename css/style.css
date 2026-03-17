@@ -848,7 +848,8 @@ body {
   width: 96vw;
   height: 88vh;
   max-height: none;
-  background: none;
+  background: url('../assets/notebook.png') right top / 200% 100% no-repeat;
+  background-attachment: local;
   background-color: #f5f0e0;
   border-radius: 4px;
   overflow-y: auto;
@@ -864,12 +865,11 @@ body {
   container-type: size;
 }
 
-/* Single-page: bg on content so it scrolls with text */
+/* Single-page: text padding within the zoomed page area */
 .single-page .notebook-content {
   padding: 80px 12% 20px 8%;
   overflow: visible;
   container-type: inline-size;
-  background: url('../assets/notebook.png') right top / 200% 100% no-repeat;
   min-height: 100%;
 }
 
