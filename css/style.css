@@ -842,12 +842,16 @@ body {
   overflow: hidden;
 }
 
-/* Single-page mode: zoom into the right page of the notebook */
+/* Single-page mode: fill screen, scrollable, paper background */
 .notebook-outer.single-page {
-  aspect-ratio: 728 / 816;
-  width: min(92vw, 92vh * 728 / 816);
-  background-size: 200% 100%;
-  background-position: right center;
+  aspect-ratio: auto;
+  width: 96vw;
+  height: auto;
+  max-height: none;
+  background: #f5f0e0;
+  background-image:
+    repeating-linear-gradient(transparent, transparent 27px, rgba(180, 200, 220, 0.3) 27px, rgba(180, 200, 220, 0.3) 28px);
+  border-radius: 4px;
 }
 
 .notebook-content {
@@ -859,17 +863,23 @@ body {
   container-type: size;
 }
 
-/* Single-page: adjust padding to fit the zoomed right page */
+/* Single-page: scrollable content, no overflow hidden */
 .single-page .notebook-content {
-  padding: 5% 8% 4% 12%;
+  padding: 20px 24px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  container-type: inline-size;
 }
 
 /* Bigger text in single-page mode */
 .single-page .notebook-date {
-  font-size: 4cqw;
+  font-size: 18px;
+  margin-bottom: 6px;
+  line-height: 1.4;
 }
 .single-page .notebook-text {
-  font-size: 4.5cqw;
+  font-size: 20px;
+  line-height: 1.5;
 }
 
 .journal-spread {
