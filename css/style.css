@@ -828,8 +828,10 @@ body {
 
 /* ===== NOTEBOOK DETAIL (image-backed) ===== */
 .notebook-outer {
+  /* Lock to image's native aspect ratio so it never stretches */
+  aspect-ratio: 1456 / 816;
   width: min(96vw, 92vh * 1456 / 816);
-  height: min(92vh, 96vw * 816 / 1456);
+  max-height: 92vh;
   max-width: none;
   background: url('../assets/notebook.png') center / 100% 100% no-repeat;
   background-color: #1a1510;
@@ -948,18 +950,18 @@ body {
 /* --- Journal Entry Styles --- */
 .notebook-date {
   font-family: var(--font-handwriting);
-  font-size: 18px;
+  font-size: 23px;
   font-weight: 700;
   color: #8b4a4a;
   margin-bottom: 8px;
-  line-height: 28px;
+  line-height: 36px;
 }
 
 .notebook-text {
   font-family: var(--font-handwriting);
-  font-size: 20px;
+  font-size: 26px;
   color: #2c3e6b;
-  line-height: 28px;
+  line-height: 36px;
 }
 
 /* ===== SKETCHES DETAIL — DARK WALL ===== */
