@@ -848,8 +848,7 @@ body {
   width: 96vw;
   height: 88vh;
   max-height: none;
-  /* Zoom into the right page: 200% width shows half the image */
-  background: url('../assets/notebook.png') right top / 200% auto no-repeat;
+  background: none;
   background-color: #f5f0e0;
   border-radius: 4px;
   overflow-y: auto;
@@ -865,11 +864,13 @@ body {
   container-type: size;
 }
 
-/* Single-page: text padding within the zoomed page area */
+/* Single-page: bg on content so it scrolls with text */
 .single-page .notebook-content {
   padding: 80px 12% 20px 8%;
   overflow: visible;
   container-type: inline-size;
+  background: url('../assets/notebook.png') right top / 200% auto no-repeat;
+  min-height: 100%;
 }
 
 /* Bigger text in single-page mode */
