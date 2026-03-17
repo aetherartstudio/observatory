@@ -6,7 +6,7 @@
   <title>The Observatory — Kanaputz Research Station</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Special+Elite&family=VT323&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=14">
+  <link rel="stylesheet" href="css/style.css?v=15">
   <link rel="preload" href="assets/cork-bg.png" as="image">
   <link rel="preload" href="assets/terminal-bg.png" as="image">
 </head>
@@ -81,32 +81,21 @@
       </div>
     </div>
 
-    <!-- Profiles Detail — CRT Monitor (amber) -->
+    <!-- Sightings Map — CRT Monitor with world map -->
     <div class="detail-content" id="profiles-detail">
-      <div class="crt-monitor crt-amber">
-        <div class="crt-bezel">
-          <div class="crt-screen-well">
-            <div class="crt-screen">
-              <div class="crt-scanlines"></div>
-              <div class="crt-curvature"></div>
-              <div class="profiles-header">SUBJECT DATABASE — CLASSIFIED LEVEL 3</div>
-              <div class="profiles-viewport" id="profiles-viewport"></div>
-              <div class="profiles-nav">
-                <button class="profiles-nav-btn" id="profile-prev">&lt; PREV</button>
-                <span class="profiles-nav-count" id="profile-count">1 / 4</span>
-                <button class="profiles-nav-btn" id="profile-next">NEXT &gt;</button>
-              </div>
-            </div>
-          </div>
-          <div class="crt-controls">
-            <div class="crt-led crt-led-on crt-led-amber"></div>
-            <div class="crt-brand">CLASSIFIED TERMINAL B</div>
-            <div class="crt-knobs">
-              <div class="crt-knob"></div>
-              <div class="crt-knob"></div>
-            </div>
-          </div>
+      <div class="map-monitor">
+        <div class="map-screen" id="map-screen">
+          <!-- Blinking sighting dots — adjust left/top % to match map locations -->
+          <div class="map-dot" data-sighting="0" style="left:72%;top:42%"></div>
+          <div class="map-dot" data-sighting="1" style="left:47%;top:38%"></div>
+          <div class="map-dot" data-sighting="2" style="left:80%;top:40%"></div>
+          <div class="map-dot" data-sighting="3" style="left:48%;top:43%"></div>
+          <div class="map-dot" data-sighting="4" style="left:38%;top:45%"></div>
+          <div class="map-dot" data-sighting="5" style="left:72%;top:48%"></div>
+          <div class="map-dot" data-sighting="6" style="left:55%;top:55%"></div>
         </div>
+        <!-- Info panel shown when clicking a dot -->
+        <div class="map-info" id="map-info"></div>
       </div>
     </div>
 
@@ -141,8 +130,8 @@
     </div>
   </div>
 
-  <script src="js/data.js?v=14"></script>
-  <script src="js/terminal.js?v=14"></script>
-  <script src="js/app.js?v=14"></script>
+  <script src="js/data.js?v=15"></script>
+  <script src="js/terminal.js?v=15"></script>
+  <script src="js/app.js?v=15"></script>
 </body>
 </html>

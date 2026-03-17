@@ -123,6 +123,7 @@
     populatePinboard();
     populateNotepad();
     populateSketches();
+    populateMap();
   }
 
   // --- Profiles (single-view with navigation) ---
@@ -389,6 +390,34 @@
       const s = document.querySelector('.journal-spread');
       if (s) s.classList.remove(animClass);
     }, 620);
+  }
+
+  // --- Sightings Map (click dots to show info) ---
+  function populateMap() {
+    const mapScreen = document.getElementById('map-screen');
+    const mapInfo = document.getElementById('map-info');
+    if (!mapScreen || !mapInfo) return;
+
+    mapScreen.querySelectorAll('.map-dot').forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt(dot.getAttribute('data-sighting'));
+        const sighting = SIGHTINGS[idx];
+        if (!sighting) return;
+
+        mapInfo.innerHTML = `
+          <div class="map-info-date">${sighting.date} — ${sighting.time}</div>
+          <div class="map-info-location">${sighting.location}</div>
+          <div class="map-info-desc">${sighting.description}</div>
+        `;
+        mapInfo.classList.add('active');
+      });
+    });
+
+    // Click on monitor (not a dot) closes the info panel
+    document.querySelector('.map-monitor').addEventListener('click', () => {
+      mapInfo.classList.remove('active');
+    });
   }
 
   // --- Sketches (wall-pinned layout with image assets) ---
