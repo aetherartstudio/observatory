@@ -867,7 +867,7 @@ body {
 
 /* Single-page: text padding within the zoomed page area */
 .single-page .notebook-content {
-  padding: 20px 12% 20px 8%;
+  padding: 80px 12% 20px 8%;
   overflow: visible;
   container-type: inline-size;
 }
