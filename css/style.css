@@ -1085,18 +1085,18 @@ body {
 /* --- Journal Entry Styles --- */
 .notebook-date {
   font-family: var(--font-handwriting);
-  font-size: 2.3cqw;
+  font-size: 1.84cqw;
   font-weight: 700;
   color: #8b4a4a;
-  margin-bottom: 1cqh;
-  line-height: 1.5;
+  margin-bottom: 0.7cqh;
+  line-height: 1.05;
 }
 
 .notebook-text {
   font-family: var(--font-handwriting);
-  font-size: 2.6cqw;
+  font-size: 2.08cqw;
   color: #2c3e6b;
-  line-height: 1.5;
+  line-height: 1.05;
 }
 
 /* ===== SKETCHES DETAIL — DARK WALL ===== */
