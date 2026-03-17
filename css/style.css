@@ -842,6 +842,14 @@ body {
   overflow: hidden;
 }
 
+/* Single-page mode: zoom into the right page of the notebook */
+.notebook-outer.single-page {
+  aspect-ratio: 728 / 816;
+  width: min(92vw, 92vh * 728 / 816);
+  background-size: 200% 100%;
+  background-position: right center;
+}
+
 .notebook-content {
   flex: 1;
   /* Padding maps text onto the two page areas of the notebook image */
@@ -849,6 +857,19 @@ body {
   position: relative;
   overflow: hidden;
   container-type: size;
+}
+
+/* Single-page: adjust padding to fit the zoomed right page */
+.single-page .notebook-content {
+  padding: 5% 8% 4% 12%;
+}
+
+/* Bigger text in single-page mode */
+.single-page .notebook-date {
+  font-size: 4cqw;
+}
+.single-page .notebook-text {
+  font-size: 4.5cqw;
 }
 
 .journal-spread {

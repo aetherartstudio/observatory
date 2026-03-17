@@ -289,9 +289,15 @@
 
     const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     const isNarrow = window.matchMedia('(max-width: 768px)');
-    pagesPerSpread = (isTouchDevice || isNarrow.matches) ? 1 : 2;
+    const notebookOuter = document.querySelector('.notebook-outer');
+    function updatePageMode() {
+      const singlePage = isTouchDevice || isNarrow.matches;
+      pagesPerSpread = singlePage ? 1 : 2;
+      if (notebookOuter) notebookOuter.classList.toggle('single-page', singlePage);
+    }
+    updatePageMode();
     isNarrow.addEventListener('change', () => {
-      pagesPerSpread = (isTouchDevice || isNarrow.matches) ? 1 : 2;
+      updatePageMode();
       journalSpreadIndex = 0;
       renderSpread();
     });
