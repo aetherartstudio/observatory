@@ -869,7 +869,7 @@ body {
   padding: 80px 12% 20px 8%;
   overflow: visible;
   container-type: inline-size;
-  background: url('../assets/notebook.png') right top / 200% auto no-repeat;
+  background: url('../assets/notebook.png') right top / 200% 100% no-repeat;
   min-height: 100%;
 }
 
