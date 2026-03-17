@@ -527,10 +527,10 @@ body {
 .map-screen {
   position: absolute;
   /* Padding to position within the screen area — adjust to match your image */
-  top: 15%;
-  left: 25%;
-  right: 30%;
-  bottom: 25%;
+  top: 6%;
+  left: 16%;
+  right: 21%;
+  bottom: 16%;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
