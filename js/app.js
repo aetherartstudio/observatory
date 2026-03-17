@@ -287,16 +287,14 @@
     const book = document.getElementById('journal-book');
     if (!book) return;
 
-    const isTouch = window.matchMedia('(hover: none)');
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     const isNarrow = window.matchMedia('(max-width: 768px)');
-    pagesPerSpread = (isTouch.matches || isNarrow.matches) ? 1 : 2;
-    const updatePages = () => {
-      pagesPerSpread = (isTouch.matches || isNarrow.matches) ? 1 : 2;
+    pagesPerSpread = (isTouchDevice || isNarrow.matches) ? 1 : 2;
+    isNarrow.addEventListener('change', () => {
+      pagesPerSpread = (isTouchDevice || isNarrow.matches) ? 1 : 2;
       journalSpreadIndex = 0;
       renderSpread();
-    };
-    isTouch.addEventListener('change', updatePages);
-    isNarrow.addEventListener('change', updatePages);
+    });
 
     renderSpread();
 
