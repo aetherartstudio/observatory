@@ -353,7 +353,9 @@ body {
   max-width: none;
 }
 .detail-content.active {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ===== CRT MONITOR FRAME (shared by terminal + profiles) ===== */
@@ -748,9 +750,13 @@ body {
 
 .full-postit {
   position: absolute;
+  width: 12%;
+  padding: 1.8% 1.4%;
+  font-family: var(--font-handwriting);
+  font-size: 1vw;
+  /* Modern browsers with container query support */
   width: 10cqw;
   padding: 1.5cqw 1.2cqw;
-  font-family: var(--font-handwriting);
   font-size: 0.85cqw;
   color: #2a2a2a;
   line-height: 1.4;
@@ -763,9 +769,9 @@ body {
 }
 .full-postit.zoomed {
   position: fixed;
-  width: 280px;
-  padding: 30px 24px;
-  font-size: 16px;
+  width: 364px;
+  padding: 39px 31px;
+  font-size: 21px;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) rotate(0deg) !important;
