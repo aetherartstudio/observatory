@@ -211,7 +211,31 @@
       div.style.top = pos.top;
       div.style.left = pos.left;
       div.textContent = note.text;
+      div.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const overlay = document.querySelector('.postit-overlay');
+        if (div.classList.contains('zoomed')) {
+          div.classList.remove('zoomed');
+          overlay.classList.remove('active');
+        } else {
+          document.querySelectorAll('.full-postit.zoomed').forEach(p => p.classList.remove('zoomed'));
+          div.classList.add('zoomed');
+          overlay.classList.add('active');
+        }
+      });
       surface.appendChild(div);
+    });
+
+    // Overlay to close zoomed post-it
+    let overlay = document.querySelector('.postit-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'postit-overlay';
+      document.querySelector('#pinboard').appendChild(overlay);
+    }
+    overlay.addEventListener('click', () => {
+      document.querySelectorAll('.full-postit.zoomed').forEach(p => p.classList.remove('zoomed'));
+      overlay.classList.remove('active');
     });
 
     // Place photos

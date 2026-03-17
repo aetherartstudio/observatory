@@ -754,12 +754,33 @@ body {
   font-size: 0.85cqw;
   color: #2a2a2a;
   line-height: 1.4;
-  cursor: default;
-  transition: transform 0.3s ease;
+  cursor: pointer;
+  transition: transform 0.4s ease, z-index 0s;
   overflow: hidden;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-color: transparent;
+}
+.full-postit.zoomed {
+  position: fixed;
+  width: 280px;
+  padding: 30px 24px;
+  font-size: 16px;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(0deg) !important;
+  z-index: 1000;
+  filter: drop-shadow(0 10px 40px rgba(0,0,0,0.5));
+}
+.postit-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+.postit-overlay.active {
+  display: block;
 }
 .full-postit:hover {
   transform: scale(1.08);
