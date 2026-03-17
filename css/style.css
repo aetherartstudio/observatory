@@ -379,7 +379,7 @@ body {
 
 /* --- Image-backed CRT (terminal) --- */
 .crt-green {
-  background: url('../assets/terminal-bg.png') center / 100% 100% no-repeat;
+  background: url('../assets/terminal-bg.jpg') center / 100% 100% no-repeat;
 }
 .crt-green .crt-bezel {
   background: transparent;
@@ -523,7 +523,7 @@ body {
   aspect-ratio: 1456 / 816;
   width: min(98vw, 96vh * 1456 / 816);
   max-height: 96vh;
-  background: url('../assets/terminal2-bg.png') center / 100% 100% no-repeat;
+  background: url('../assets/terminal2-bg.jpg') center / 100% 100% no-repeat;
   background-color: #0a0805;
   position: relative;
   border-radius: 6px;
@@ -812,7 +812,7 @@ body {
   /* Lock to image ratio so stickers scale proportionally */
   width: min(96vw, 92vh * 1456 / 816);
   height: min(92vh, 96vw * 816 / 1456);
-  background: url('../assets/cork-bg.png') center / 100% 100% no-repeat;
+  background: url('../assets/cork-bg.jpg') center / 100% 100% no-repeat;
   background-color: #1a1510;
   border: none;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
@@ -933,7 +933,7 @@ body {
   width: min(96vw, 92vh * 1456 / 816);
   max-height: 92vh;
   max-width: none;
-  background: url('../assets/notebook.png') center / 100% 100% no-repeat;
+  background: url('../assets/notebook.jpg') center / 100% 100% no-repeat;
   background-color: #1a1510;
   display: flex;
   flex-direction: column;
@@ -948,7 +948,7 @@ body {
   width: 96vw;
   height: 88vh;
   max-height: none;
-  background: url('../assets/notebook.png') right top / 200% 100% no-repeat;
+  background: url('../assets/notebook.jpg') right top / 200% 100% no-repeat;
   background-attachment: local;
   background-color: #f5f0e0;
   border-radius: 4px;
@@ -1104,7 +1104,7 @@ body {
   width: 100%;
   height: 100%;
   position: relative;
-  background: url('../assets/wall-bg.png') center / cover no-repeat;
+  background: url('../assets/wall-bg.jpg') center / cover no-repeat;
   background-color: #2a241c;
   border-radius: 4px;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
