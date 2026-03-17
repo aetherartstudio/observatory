@@ -71,7 +71,7 @@ const PROFILES = [
 const NOTEBOOK_ENTRIES = [
   {
     date: "November 15, 2024",
-    text: "First confirmed sighting. I don't know what I saw tonight. Something small, fast, and absolutely not in any field guide I've ever read. It was near the night market, pressed against a steam vent, and it was... smiling? I need sleep. But I also need to go back tomorrow."
+    text: "First confirmed sighting. I don't know what I saw tonight. Something small, fast, and absolutely not in any field guide I've ever read. It was near the night market, pressed against a steam vent, and it was... smiling? I need sleep. But I also need to go back tomorrow. I set up a motion-triggered camera near the same vent before leaving. If this thing comes back, I want proof — something more than my shaking hands and a sketch on a napkin. The night market vendor next door said she's seen 'the little shadow' before, always around closing time, always near the warmest spots."
   },
   {
     date: "December 20, 2024",
