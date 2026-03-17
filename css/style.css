@@ -523,6 +523,7 @@ body {
   overflow: hidden;
 }
 
+/* Hide dots until monitor image is loaded */
 .map-screen {
   position: absolute;
   /* Padding to position within the screen area — adjust to match your image */
@@ -530,6 +531,11 @@ body {
   left: 25%;
   right: 30%;
   bottom: 25%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.map-screen.bg-loaded {
+  opacity: 1;
 }
 
 .map-dot {

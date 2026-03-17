@@ -418,6 +418,12 @@
     document.querySelector('.map-monitor').addEventListener('click', () => {
       mapInfo.classList.remove('active');
     });
+
+    // Show dots only after monitor image loads
+    const bgImg = new Image();
+    bgImg.onload = () => mapScreen.classList.add('bg-loaded');
+    bgImg.src = 'assets/terminal2-bg.png';
+    if (bgImg.complete) mapScreen.classList.add('bg-loaded');
   }
 
   // --- Sketches (wall-pinned layout with image assets) ---

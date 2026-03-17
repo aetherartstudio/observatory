@@ -11,7 +11,7 @@ const SIGHTINGS = [
   { date: "2025-01-14", time: "01:02", location: "Montmartre, Paris", description: "Single specimen found sitting on cafe chair, mimicking posture of nearby sculpture." },
   { date: "2025-02-07", time: "22:19", location: "Subway Tunnel B-7, New York", description: "Faint chittering heard. Maintenance crew reported 'weird shadow'. No visual confirmation." },
   { date: "2025-03-22", time: "03:58", location: "Jiufen Old Street, Taiwan", description: "Two entities photographed near red lanterns. Image degraded. Shapes consistent with prior sightings." },
-  { date: "2025-04-11", time: "00:41", location: "Camden Market, London", description: "Street vendor reported merchandise rearranged overnight. Teeth marks on wooden stall beam." },
+  { date: "2025-04-11", time: "00:41", location: "V&A Waterfront, Cape Town", description: "Night security footage shows small figure perched on harbour bollard. Appeared fascinated by lighthouse beam sweeping across the bay." },
   { date: "2025-05-30", time: "05:12", location: "Tamsui Fisherman's Wharf, Taiwan", description: "Entity seen perched on dock post at dawn. Appeared to be watching the sunrise." },
   { date: "2025-06-19", time: "21:07", location: "Flea Market, Istanbul", description: "Carpet dealer reported 'small laughing thing' hiding under kilim stack. Gone upon investigation." },
   { date: "2025-07-08", time: "02:54", location: "Charging Station, Seoul", description: "Entity found sitting cross-legged in front of EV charging port. Green indicator light pulsing in sync with its breathing." },
