@@ -287,13 +287,16 @@
     const book = document.getElementById('journal-book');
     if (!book) return;
 
-    const mql = window.matchMedia('(max-width: 768px)');
-    pagesPerSpread = mql.matches ? 1 : 2;
-    mql.addEventListener('change', (e) => {
-      pagesPerSpread = e.matches ? 1 : 2;
+    const isTouch = window.matchMedia('(hover: none)');
+    const isNarrow = window.matchMedia('(max-width: 768px)');
+    pagesPerSpread = (isTouch.matches || isNarrow.matches) ? 1 : 2;
+    const updatePages = () => {
+      pagesPerSpread = (isTouch.matches || isNarrow.matches) ? 1 : 2;
       journalSpreadIndex = 0;
       renderSpread();
-    });
+    };
+    isTouch.addEventListener('change', updatePages);
+    isNarrow.addEventListener('change', updatePages);
 
     renderSpread();
 
