@@ -842,16 +842,18 @@ body {
   overflow: hidden;
 }
 
-/* Single-page mode: fill screen, scrollable, paper background */
+/* Single-page mode: zoom into right page, scrollable */
 .notebook-outer.single-page {
   aspect-ratio: auto;
   width: 96vw;
-  height: auto;
+  height: 88vh;
   max-height: none;
-  background: #f5f0e0;
-  background-image:
-    repeating-linear-gradient(transparent, transparent 27px, rgba(180, 200, 220, 0.3) 27px, rgba(180, 200, 220, 0.3) 28px);
+  /* Zoom into the right page: 200% width shows half the image */
+  background: url('../assets/notebook.png') right top / 200% auto no-repeat;
+  background-color: #f5f0e0;
   border-radius: 4px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .notebook-content {
@@ -863,11 +865,10 @@ body {
   container-type: size;
 }
 
-/* Single-page: scrollable content, no overflow hidden */
+/* Single-page: text padding within the zoomed page area */
 .single-page .notebook-content {
-  padding: 20px 24px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  padding: 20px 12% 20px 8%;
+  overflow: visible;
   container-type: inline-size;
 }
 
