@@ -748,11 +748,10 @@ body {
 
 .full-postit {
   position: absolute;
-  width: 7.7cqw;
-  aspect-ratio: 1;
-  padding: 0.6cqw;
+  width: 10cqw;
+  padding: 1.5cqw 1.2cqw;
   font-family: var(--font-handwriting);
-  font-size: 0.7cqw;
+  font-size: 0.85cqw;
   color: #2a2a2a;
   line-height: 1.4;
   cursor: default;
