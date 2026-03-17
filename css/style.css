@@ -887,10 +887,11 @@ body {
 }
 
 .journal-page.left {
-  padding-left: 25px;
+  padding-left: 20px;
+  padding-right: 24px;
 }
 .journal-page.right {
-  padding-right: 25px;
+  padding-left: 34px;
 }
 
 .journal-page-content {
