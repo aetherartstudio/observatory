@@ -274,8 +274,8 @@ body {
 
 /* Cassette player (right of desk) */
 #zone-cassette {
-  left: 60%;
-  top: 62%;
+  left: 66%;
+  top: 56%;
   width: 12%;
   height: 18%;
 }
@@ -290,8 +290,8 @@ body {
 
 /* Source Monitor C (empty stand — Wave 4+) */
 #zone-source {
-  left: 72%;
-  top: 20%;
+  left: 56%;
+  top: 28%;
   width: 14%;
   height: 20%;
 }
@@ -944,10 +944,22 @@ body {
 /* Red strings removed — looked like random lines without endpoint pins */
 
 /* ===== NOTEBOOK DETAIL (image-backed) ===== */
-.notebook-outer {
-  /* Lock to image ratio — explicit width+height avoids aspect-ratio bugs */
+#notepad-detail {
+  display: none;
   width: min(96vw, calc(92vh * 1456 / 816));
   height: min(92vh, calc(96vw * 816 / 1456));
+  max-width: none;
+}
+#notepad-detail.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notebook-outer {
+  /* Fill the detail container */
+  width: 100%;
+  height: 100%;
   background: url('../assets/notebook.png') center / 100% 100% no-repeat;
   background-color: #1a1510;
   display: flex;
