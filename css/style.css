@@ -336,7 +336,6 @@ body {
   width: 90vw;
   height: 85vh;
   max-width: 1200px;
-  background: transparent;
 }
 
 /* Terminal: locked aspect ratio — scales proportionally on any window size */
@@ -352,14 +351,6 @@ body {
   width: 98vw;
   height: 96vh;
   max-width: none;
-}
-
-/* Notepad: no container box, notebook-outer handles its own size */
-#notepad-detail {
-  width: auto;
-  height: auto;
-  max-width: none;
-  background: none;
 }
 
 /* Pinboard: wider view to show wall context around the board */
@@ -942,15 +933,12 @@ body {
   width: min(96vw, 92vh * 1456 / 816);
   max-height: 92vh;
   max-width: none;
-  background: url('../assets/notebook.jpg') center / 102% 104% no-repeat;
-  background-color: transparent;
+  background: url('../assets/notebook.jpg') center / 100% 100% no-repeat;
+  background-color: #1a1510;
   display: flex;
   flex-direction: column;
   position: relative;
-  border-radius: 0;
-  border: none;
-  outline: none;
-  box-shadow: none;
+  border-radius: 6px;
   overflow: hidden;
 }
 
@@ -962,7 +950,7 @@ body {
   max-height: none;
   background: url('../assets/notebook.jpg') right top / 200% 100% no-repeat;
   background-attachment: local;
-  background-color: #0a0805;
+  background-color: #f5f0e0;
   border-radius: 4px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
