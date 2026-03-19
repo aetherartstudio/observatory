@@ -360,9 +360,7 @@ body {
   max-width: none;
 }
 .detail-content.active {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
 }
 
 /* ===== CRT MONITOR FRAME (shared by terminal + profiles) ===== */
@@ -819,6 +817,7 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  margin: auto;
 }
 
 .pinboard-header {
@@ -940,8 +939,7 @@ body {
   position: relative;
   border-radius: 6px;
   overflow: hidden;
-  flex-shrink: 0;
-  align-self: center;
+  margin: auto;
 }
 
 /* Single-page mode: zoom into right page, scrollable */
