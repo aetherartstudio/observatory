@@ -288,11 +288,11 @@
     const book = document.getElementById('journal-book');
     if (!book) return;
 
-    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const isMobileTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
     const isNarrow = window.matchMedia('(max-width: 768px)');
     const notebookOuter = document.querySelector('.notebook-outer');
     function updatePageMode() {
-      const singlePage = isTouchDevice || isNarrow.matches;
+      const singlePage = isMobileTouch || isNarrow.matches;
       pagesPerSpread = singlePage ? 1 : 2;
       if (notebookOuter) notebookOuter.classList.toggle('single-page', singlePage);
     }

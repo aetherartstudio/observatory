@@ -1259,7 +1259,7 @@ body {
 }
 
 /* ---- Touch devices: smaller sparkle dots, no hover glow ---- */
-@media (hover: none) {
+@media (hover: none) and (pointer: coarse) {
   .zone::before {
     width: 17px;
     height: 17px;
