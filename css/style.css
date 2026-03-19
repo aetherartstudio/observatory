@@ -336,6 +336,7 @@ body {
   width: 90vw;
   height: 85vh;
   max-width: 1200px;
+  background: transparent;
 }
 
 /* Terminal: locked aspect ratio — scales proportionally on any window size */
