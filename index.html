@@ -6,7 +6,7 @@
   <title>The Observatory — Kanaputz Research Station</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Special+Elite&family=VT323&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=25">
+  <link rel="stylesheet" href="css/style.css?v=30">
   <link rel="preload" href="assets/cork-bg.png" as="image">
   <link rel="preload" href="assets/terminal-bg.png" as="image">
   <link rel="preload" href="assets/terminal2-bg.png" as="image">
@@ -30,11 +30,17 @@
       <!-- Cork pin board on the wall -->
       <div class="hotspot zone" data-target="pinboard-detail" id="zone-pinboard"></div>
 
-      <!-- Wall sketches / papers on far right -->
-      <div class="hotspot zone" data-target="sketches-detail" id="zone-sketches"></div>
-
       <!-- Notepad (bottom right) -->
       <div class="hotspot zone" data-target="notepad-detail" id="zone-notepad"></div>
+
+      <!-- Cassette player (right of desk) -->
+      <div class="hotspot zone" data-target="cassette-detail" id="zone-cassette"></div>
+
+      <!-- Safe (lower desk area) — visible from Wave 2 -->
+      <div class="hotspot zone" data-target="safe-detail" id="zone-safe"></div>
+
+      <!-- Source Monitor C (empty stand) — visible from Wave 4 -->
+      <div class="hotspot zone" data-target="source-detail" id="zone-source"></div>
     </div>
 
     <!-- Ambient light overlay -->
@@ -86,14 +92,7 @@
     <div class="detail-content" id="profiles-detail">
       <div class="map-monitor">
         <div class="map-screen" id="map-screen">
-          <!-- Blinking sighting dots — adjust left/top % to match map locations -->
-          <div class="map-dot" data-sighting="0" style="left:72%;top:48%"></div>
-          <div class="map-dot" data-sighting="1" style="left:50%;top:34%"></div>
-          <div class="map-dot" data-sighting="2" style="left:80%;top:40%"></div>
-          <div class="map-dot" data-sighting="3" style="left:48%;top:34%"></div>
-          <div class="map-dot" data-sighting="4" style="left:29%;top:35%"></div>
-          <div class="map-dot" data-sighting="5" style="left:77%;top:42%"></div>
-          <div class="map-dot" data-sighting="6" style="left:52%;top:63%"></div>
+          <!-- Dots generated dynamically from MAP_SIGHTINGS by app.js -->
         </div>
         <!-- Info panel shown when clicking a dot -->
         <div class="map-info" id="map-info"></div>
@@ -122,17 +121,60 @@
       </div>
     </div>
 
-    <!-- Sketches Detail — Dark Wall -->
-    <div class="detail-content" id="sketches-detail">
-      <div class="wall-surface">
-        <div class="wall-light"></div>
-        <div class="sketches-wall" id="sketches-grid"></div>
+    <!-- Cassette Player Detail -->
+    <div class="detail-content" id="cassette-detail">
+      <div class="cassette-player">
+        <div class="cassette-deck">
+          <div class="cassette-window">
+            <div class="cassette-reel left-reel"></div>
+            <div class="cassette-reel right-reel"></div>
+            <div class="cassette-tape-label" id="cassette-label">NO TAPE LOADED</div>
+          </div>
+          <div class="cassette-waveform" id="cassette-waveform"></div>
+        </div>
+        <div class="cassette-controls">
+          <button class="cassette-btn" id="cassette-play" title="Play">▶</button>
+          <button class="cassette-btn" id="cassette-stop" title="Stop">■</button>
+          <button class="cassette-btn" id="cassette-rewind" title="Rewind">◀◀</button>
+        </div>
+        <div class="cassette-tape-list" id="cassette-tape-list"></div>
+        <div class="cassette-description" id="cassette-description"></div>
+      </div>
+    </div>
+
+    <!-- Safe Detail -->
+    <div class="detail-content" id="safe-detail">
+      <div class="safe-container" id="safe-container">
+        <div class="safe-door" id="safe-door">
+          <div class="safe-dial-area" id="safe-dial-area">
+            <div class="safe-dial" id="safe-dial">
+              <div class="safe-dial-marker"></div>
+            </div>
+            <div class="safe-display" id="safe-display">LOCKED</div>
+          </div>
+          <div class="safe-handle" id="safe-handle"></div>
+        </div>
+        <!-- Dossier content (shown after safe opens) -->
+        <div class="safe-dossier hidden" id="safe-dossier"></div>
+      </div>
+    </div>
+
+    <!-- Source Monitor C Detail -->
+    <div class="detail-content" id="source-detail">
+      <div class="source-monitor">
+        <div class="source-screen" id="source-screen">
+          <div class="source-header">SOURCE MONITORING SYSTEM</div>
+          <div class="source-coherence" id="source-coherence"></div>
+          <div class="source-feed" id="source-feed"></div>
+          <div class="source-readings" id="source-readings"></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <script src="js/data.js?v=25"></script>
-  <script src="js/terminal.js?v=25"></script>
-  <script src="js/app.js?v=25"></script>
+  <script src="js/waves.js?v=30"></script>
+  <script src="js/data.js?v=30"></script>
+  <script src="js/terminal.js?v=30"></script>
+  <script src="js/app.js?v=30"></script>
 </body>
 </html>

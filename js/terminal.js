@@ -3,9 +3,9 @@
 // ============================================================
 
 class SightingTerminal {
-  constructor(containerEl) {
+  constructor(containerEl, entries) {
     this.container = containerEl;
-    this.entries = [...SIGHTINGS];
+    this.entries = entries || [...SIGHTINGS];
     this.currentIndex = 0;
     this.typeSpeed = 25;
     this.entryDelay = 2000;
@@ -58,6 +58,7 @@ class SightingTerminal {
     const entry = this.entries[this.currentIndex];
     const div = document.createElement('div');
     div.className = 'feed-entry';
+    if (entry.isAnomaly) div.classList.add('feed-anomaly');
     div.style.animationDelay = '0s';
 
     const dateLine = document.createElement('div');

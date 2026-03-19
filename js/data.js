@@ -1,131 +1,156 @@
 // ============================================================
-// KANAPUTZ OBSERVATORY — Content Data
-// Edit this file to add new content to the room.
-// No code changes needed — just add entries to the arrays.
+// KANAPUTZ OBSERVATORY — Content Data (Wave-Tagged)
 // ============================================================
+// Every item has a `wave` property (1-5).
+// WaveSystem.getVisibleContent(array) filters by current wave.
 
+// ===== TERMINAL SIGHTINGS (50+ entries) =====
 const SIGHTINGS = [
-  { date: "2024-11-03", time: "02:17", location: "Chatuchak Market, Bangkok", description: "Entity observed hovering near steam vent. Appeared attracted to street food stall glow." },
-  { date: "2024-11-18", time: "23:45", location: "Berlin U-Bahn, Station Alexanderplatz", description: "Small creature spotted pressed against vending machine glass. Seemed mesmerized by LED display." },
-  { date: "2024-12-01", time: "04:33", location: "Shibuya Crossing, Tokyo", description: "Multiple entities (3) seen weaving between pedestrians. No one appeared to notice." },
-  { date: "2025-01-14", time: "01:02", location: "Montmartre, Paris", description: "Single specimen found sitting on cafe chair, mimicking posture of nearby sculpture." },
-  { date: "2025-02-07", time: "22:19", location: "Subway Tunnel B-7, New York", description: "Faint chittering heard. Maintenance crew reported 'weird shadow'. No visual confirmation." },
-  { date: "2025-03-22", time: "03:58", location: "Jiufen Old Street, Taiwan", description: "Two entities photographed near red lanterns. Image degraded. Shapes consistent with prior sightings." },
-  { date: "2025-04-11", time: "00:41", location: "V&A Waterfront, Cape Town", description: "Night security footage shows small figure perched on harbour bollard. Appeared fascinated by lighthouse beam sweeping across the bay." },
-  { date: "2025-05-30", time: "05:12", location: "Tamsui Fisherman's Wharf, Taiwan", description: "Entity seen perched on dock post at dawn. Appeared to be watching the sunrise." },
-  { date: "2025-06-19", time: "21:07", location: "Flea Market, Istanbul", description: "Carpet dealer reported 'small laughing thing' hiding under kilim stack. Gone upon investigation." },
-  { date: "2025-07-08", time: "02:54", location: "Charging Station, Seoul", description: "Entity found sitting cross-legged in front of EV charging port. Green indicator light pulsing in sync with its breathing." },
-  { date: "2025-08-25", time: "04:20", location: "Abandoned Warehouse, Taipei", description: "Cluster of 5+ entities detected. Arranged in circle around flickering fluorescent tube. Possible Source-seeking behavior." },
-  { date: "2025-09-14", time: "23:33", location: "Rooftop Garden, Singapore", description: "Single entity observed touching plants. Leaves appeared to brighten momentarily. Coincidence not ruled out." },
-  { date: "2025-10-02", time: "01:15", location: "Underground Passage, Prague", description: "Tourist photo shows blurred figure with oversized head. Matches Muncha profile." },
-  { date: "2025-11-20", time: "03:07", location: "Night Bus #42, Taipei", description: "Driver reported passenger seat vibrating. Security camera shows small shape pressed against window, watching city lights." },
-  { date: "2025-12-31", time: "23:59", location: "Multiple Locations Worldwide", description: "SURGE EVENT: 47 simultaneous sightings reported across 12 countries. Duration: 90 seconds. Correlation with midnight fireworks unknown." },
-  { date: "2026-01-18", time: "02:22", location: "Server Room, Hsinchu Science Park", description: "Entity discovered sleeping between blade servers. Core temperature dropped 2.1C in surrounding rack." },
-  { date: "2026-02-04", time: "04:48", location: "Art Gallery Storage, Taipei", description: "Sculpture wrapping disturbed. Small footprints in dust. Crystal fragment found nearby - composition unknown." },
-  { date: "2026-03-01", time: "00:30", location: "Observatory Field Station Alpha", description: "Source detector fluctuation +340%. Brief. No visual. Something is building." },
+  // ----- WAVE 1: First observations, basic Type 1-4 sightings -----
+  { wave: 1, date: '2024-09-03', time: '22:14:33', location: 'SHI-07 / TAIPEI-TW', observer: 'R-01', type: 'Type 1', description: 'First confirmed visual. Small specimen moved at impossible speed across Shilin Night Market entrance. Stopped abruptly at flower stall. Remained motionless 47 sec observing potted orchid. Then vanished.' },
+  { wave: 1, date: '2024-09-05', time: '03:41:22', location: 'SHI-14 / TAIPEI-TW', observer: 'R-07', type: 'Type 1', description: 'Specimen in aerodynamic sprint mode. Crossed 40m in under 3 sec. Stopped abruptly. Appeared to observe something at ground level — a crack in the pavement with a small weed growing through it. Remained still 58 sec.' },
+  { wave: 1, date: '2024-09-12', time: '01:23:08', location: 'SHI-03 / TAIPEI-TW', observer: 'R-01', type: 'Type 4', description: 'Large-mouthed specimen detected near arguing couple at noodle stand. Opened mouth wide — appeared to inhale surrounding atmosphere. Couple stopped arguing within 12 sec. Specimen visibly inflated to approx 1.5x resting volume. Waddled away.' },
+  { wave: 1, date: '2024-09-18', time: '23:55:17', location: 'SHI-11 / TAIPEI-TW', observer: 'R-07', type: 'Type 2', description: 'Specimen raised arms dramatically, extended tongue, performed aggressive hip display toward two arguing pedestrians. Neither pedestrian alarmed. Both laughing within 4 sec. Specimen continued display for 20 sec after conflict resolved.' },
+  { wave: 1, date: '2024-09-25', time: '02:07:44', location: 'SHI-22 / TAIPEI-TW', observer: 'R-07', type: 'Type 3', description: 'Rhythmic movement detected. Tall specimen swaying near market music speaker. Tail displacement knocked over three market stalls. Specimen appeared unaware of damage. Vendors laughing.' },
+  { wave: 1, date: '2024-10-02', time: '04:18:55', location: 'SHI-09 / TAIPEI-TW', observer: 'R-01', type: 'Type 1', description: 'Specimen performed perimeter patrol of children\'s playground. Zigzag pattern, stopping every 3-4m. One child approached — specimen froze, body softened visibly. Tiny smile observed. Child giggled. Specimen resumed patrol.' },
+  { wave: 1, date: '2024-10-11', time: '00:33:41', location: 'SHI-16 / TAIPEI-TW', observer: 'R-14', type: 'Type 4', description: 'Specimen positioned itself between stressed office worker and vending machine. Antennae vibrating. Absorbed what appeared to be ambient frustration. Inflated 2x. Worker visibly relaxed. Specimen deflated over 30 sec, releasing small squeaking sounds.' },
+  { wave: 1, date: '2024-10-18', time: '23:12:09', location: 'SHI-05 / TAIPEI-TW', observer: 'R-07', type: 'Type 2', description: 'Specimen attempted to intimidate a street cat. Arms raised, tongue extended, hips shaking. Cat unimpressed. Specimen escalated — performed headbutt charge at trash can. Got dizzy. Flexed proudly.' },
+  { wave: 1, date: '2024-10-25', time: '01:45:33', location: 'SHI-19 / TAIPEI-TW', observer: 'R-01', type: 'Type 3', description: 'Specimen detected subway busker playing guitar. Began involuntary rhythm sway. Full-body movement escalated within 30 sec. Tail swept umbrella stand into the street. Busker incorporated chaos into performance. Crowd doubled.' },
+  { wave: 1, date: '2024-11-03', time: '02:58:16', location: 'SHI-08 / TAIPEI-TW', observer: 'R-14', type: null, description: 'Multiple specimens detected within 200m radius. All four types present simultaneously — first documented co-occurrence. Duration: 4 min 22 sec. All specimens moved in same direction before dispersing.' },
+
+  // ----- WAVE 2: Community names appear, global sightings -----
+  { wave: 2, date: '2024-11-10', time: '03:53:08', location: 'SHI-11 / TAIPEI-TW', observer: 'R-14', type: 'Type 4', description: 'Specimen locally known as "Muncha" — absorbed ambient tension near night market argument. Approx 2x resting volume. Deflated within 30 sec. Couple stopped arguing.' },
+  { wave: 2, date: '2024-11-15', time: '22:41:55', location: 'BER-03 / BERLIN-DE', observer: 'R-22', type: 'Type 3', description: 'Non-Taipei sighting confirmed. Tall specimen — community designation "Groovix" — detected in U-Bahn station Alexanderplatz. Street musician triggered involuntary dance. Three commuters knocked from bench by tail displacement.' },
+  { wave: 2, date: '2024-11-19', time: '04:07:29', location: 'SHI-22 / TAIPEI-TW', observer: 'R-07', type: 'Type 2', description: '"MrQ" performed theatrical aggression display outside researcher apartment. Arms raised, tongue extended, hips moving. Not threatening. Performing. Duration 45 sec. Ended with triumphant pose.' },
+  { wave: 2, date: '2024-11-28', time: '01:22:14', location: 'NYC-07 / NEW YORK-US', observer: 'R-31', type: 'Type 1', description: 'Subway tunnel B-7 sighting. Specimen identified as community "Fugu" — sprint-to-tenderness cycle confirmed. Explosive sprint down platform, sudden freeze at sight of sleeping kitten near ventilation grate. Full tender pause: 62 sec.' },
+  { wave: 2, date: '2024-12-03', time: '23:09:37', location: 'PAR-12 / PARIS-FR', observer: 'R-18', type: 'Type 3', description: 'Montmartre sighting. Groovix-type detected near accordion player. Rhythm drift escalated to full-body groove. Tail whipped through three easels. Artists seemed delighted rather than upset.' },
+  { wave: 2, date: '2024-12-10', time: '02:33:49', location: 'SHI-14 / TAIPEI-TW', observer: 'R-01', type: 'Type 4', description: 'Muncha positioned near hospital entrance. Antennae vibrating continuously. Absorbed ambient emotional weight for 8 min — longest recorded session. Inflation gradual, reaching 3x resting volume. Slow deflation. Squeaking sounds noted during release.' },
+  { wave: 2, date: '2024-12-18', time: '00:55:21', location: 'SHI-03 / TAIPEI-TW', observer: 'R-14', type: 'Type 2', description: 'MrQ confronted group of teenagers playing loud music. Performed concert mode: jumping, arm-waving, butt-shaking. Started involuntary crowd wave among teenagers. All parties laughing within 15 sec.' },
+  { wave: 2, date: '2024-12-22', time: '03:17:42', location: 'BKK-05 / BANGKOK-TH', observer: 'R-27', type: 'Type 1', description: 'Chatuchak Market. Fugu-type detected near spice vendor. Sprint-freeze pattern: 4 cycles in 3 min. Each freeze oriented toward different small detail — dewdrop on chili pepper, butterfly resting on ginger root. Tender pauses averaged 22 sec.' },
+
+  // ----- WAVE 3: Source references, anomalies, convergence -----
+  { wave: 3, date: '2025-01-08', time: '01:14:55', location: 'SHI-25 / TAIPEI-TW', observer: 'R-01', type: 'Type 1', description: 'Followed Fugu-type for 3 hours. Alternated between explosive sprints and complete stillness. Led to location outside Shilin district boundaries. [COORDINATES REDACTED]. Specimen oriented toward fixed point for 4 min 11 sec.' },
+  { wave: 3, date: '2025-01-15', time: '04:02:48', location: '03-17-58 / ??????-??', observer: '---', type: '-------', description: '%%SIGNAL ANOMALY. COORDINATES DO NOT RESOLVE. ENTRY FLAGGED.%%', isAnomaly: true },
+  { wave: 3, date: '2025-01-22', time: '02:38:17', location: 'SHI-07 / TAIPEI-TW', observer: 'R-14', type: null, description: 'All four types observed within 50m radius. Duration increasing: 12 min 44 sec. All oriented in same direction during final 3 min. Direction consistent with previous convergence events.' },
+  { wave: 3, date: '2025-02-01', time: '23:45:33', location: 'TPE-01 / TAIPEI-TW', observer: 'R-01', type: null, description: 'UV analysis of Shilin receipts confirms residual energy signatures at 7 of 12 documented sighting locations. Pattern is radial. Center point calculations underway.' },
+  { wave: 3, date: '2025-02-05', time: '00:19:42', location: 'SHI-16 / TAIPEI-TW', observer: 'R-07', type: 'Type 4', description: 'Muncha-type at unprecedented proximity to calculated center point. Inflation: 4x resting volume — new record. Antennae extended fully. Low-frequency humming audible. Duration: 2 min 8 sec.' },
+  { wave: 3, date: '2025-02-12', time: '03:28:51', location: 'SHI-30 / TAIPEI-TW', observer: 'R-14', type: 'Type 3', description: 'Groovix performing sustained rhythmic movement without external music. Duration: 7 min. Tail movements traced figure-eight pattern. Ground vibration measurable at 15m. Three nearby specimens appeared to respond — all oriented toward Groovix position.' },
+  { wave: 3, date: '2025-02-20', time: '01:55:08', location: 'JIU-02 / JIUFEN-TW', observer: 'R-01', type: 'Type 1', description: 'Jiufen Old Street. Fugu-type sprinted from Shilin to Jiufen — 30km in estimated 4 min. Stopped at temple steps. Tender pause: 3 min 47 sec. Longest recorded. Oriented toward ocean.' },
+  { wave: 3, date: '2025-02-28', time: '22:07:33', location: 'SHI-14 / TAIPEI-TW', observer: 'R-07', type: null, description: 'Four-type convergence event #7. Duration: 18 min — longest recorded. Fugu trembling. MrQ silent — first recorded non-performance. Groovix swaying without visible rhythm. Muncha deflated, still, antennae flat. Something was different.' },
+
+  // ----- WAVE 4: Source proximity, accelerating activity -----
+  { wave: 4, date: '2025-03-05', time: '02:44:19', location: 'SRC-01 / ??????-TW', observer: 'R-01', type: null, description: 'Source detector activated. Initial reading: coherence 34%. Fluctuating. M. says the readings are correct.' },
+  { wave: 4, date: '2025-03-08', time: '04:11:55', location: 'SHI-07 / TAIPEI-TW', observer: 'R-14', type: 'Type 1', description: 'Fugu sprint frequency doubled in 72 hours. Route patterns increasingly direct — fewer zigzags, longer stillness. Tender pauses now oriented exclusively toward Source bearing.' },
+  { wave: 4, date: '2025-03-10', time: '01:33:28', location: 'SHI-22 / TAIPEI-TW', observer: 'R-07', type: 'Type 3', description: 'Groovix rhythm has changed. Previous: irregular, reactive. Current: steady 72bpm regardless of environment. Other specimens within 100m synchronize to same tempo. Tail movements more controlled.' },
+  { wave: 4, date: '2025-03-12', time: '23:28:44', location: 'TOK-03 / TOKYO-JP', observer: 'R-09', type: 'Type 2', description: 'Shibuya Crossing. MrQ performing for office workers. Standard display — but concluded by turning toward Taipei bearing, holding pose 90 sec. First documented non-performance stillness outside convergence.' },
+  { wave: 4, date: '2025-03-14', time: '02:05:17', location: 'SHI-03 / TAIPEI-TW', observer: 'R-14', type: 'Type 4', description: 'Muncha at exact center of Shilin activity zone. Not inflating. Not eating. Simply present. Antennae fully extended, perfectly still. Duration: 22 min. Other specimens maintained 30m perimeter.' },
+  { wave: 4, date: '2025-03-15', time: '00:42:31', location: 'SRC-01 / ??????-TW', observer: 'R-01', type: null, description: 'Source coherence: 58%. Steady increase. Crystal responds to convergence — spikes +12-15%. M. suggests the relationship is bidirectional.' },
+  { wave: 4, date: '2025-03-16', time: '03:19:08', location: 'CPT-02 / CAPE TOWN-ZA', observer: 'R-35', type: 'Type 1', description: 'V&A Waterfront. Fugu-type — first Southern Hemisphere. Sprint along harbor wall, tender pause at sunset reflection. 44 sec. Oriented toward Taipei bearing, resumed sprint northeast.' },
+  { wave: 4, date: '2025-03-17', time: '01:55:44', location: 'SHI-ALL / TAIPEI-TW', observer: 'R-01', type: null, description: '14 specimens detected simultaneously across Shilin. All types. All moving toward same external point. Source detector: coherence 67%.' },
+  { wave: 4, date: '2025-03-18', time: '04:22:07', location: 'SRC-01 / ??????-TW', observer: 'R-01', type: null, description: 'Crystal responding to ambient conditions without specimen proximity. Self-sustaining? M.: "It remembers." Coherence: 71%.' },
+
+  // ----- WAVE 5: Convergence confirmed, final entries -----
+  { wave: 5, date: '2025-03-20', time: '00:08:33', location: 'SHI-ALL / TAIPEI-TW', observer: 'R-01', type: null, description: 'All documented specimens converging. Every type. Sprint paths, dance routes, waddle trajectories — all pointing to same coordinates. Global sightings dropping to zero. They are coming home.' },
+  { wave: 5, date: '2025-03-21', time: '02:14:55', location: 'SRC-01 / ??????-TW', observer: 'R-01', type: null, description: 'Source coherence: 73%. Crystal luminescence visible without instruments. Warm. Steady. Specimens gathering at perimeter. Not entering. Waiting.' },
+  { wave: 5, date: '2025-03-22', time: '03:41:17', location: 'SRC-01 / ??????-TW', observer: 'R-01', type: null, description: 'Physical convergence confirmed. All four types at Source perimeter. Fugu: still. MrQ: still. Groovix: swaying 72bpm. Muncha: deflated, antennae up, mouth closed. They are not doing anything. They are being something.' },
+  { wave: 5, date: '2025-03-23', time: '01:07:22', location: 'SRC-01 / ??????-TW', observer: '---', type: null, description: 'SOURCE COHERENCE: 89%. CRYSTAL STATE: ACTIVE. SPECIMEN COUNT: [EXCEEDS SENSOR RANGE]. Terminal feed will continue. Observation does not end. It changes.' },
+  { wave: 5, date: '2025-03-24', time: '04:33:00', location: 'SRC-01 / ??????-TW', observer: 'R-01', type: null, description: 'If you are reading this feed, you have been paying attention. The Source is not a location. It is a frequency that responds when enough beings choose to be still together. The rest you have to see.' },
 ];
 
+// ===== MAP DOTS =====
+const MAP_SIGHTINGS = [
+  { id: 0, wave: 1, city: 'Bangkok', location: 'Chatuchak Market', left: '72%', top: '48%', description: 'Type 1 detected near spice vendor. Sprint-freeze cycle: 4 repetitions.', hasFootage: false, evidenceType: 'visual' },
+  { id: 1, wave: 1, city: 'Berlin', location: 'U-Bahn Alexanderplatz', left: '50%', top: '34%', description: 'Type 3 rhythmic anomaly. Three commuters displaced by tail.', hasFootage: false, evidenceType: 'behavioral' },
+  { id: 2, wave: 1, city: 'Tokyo', location: 'Shibuya Crossing', left: '80%', top: '40%', description: 'Type 2 theatrical display during rush hour. Universal laughter.', hasFootage: false, evidenceType: 'visual' },
+  { id: 3, wave: 1, city: 'Paris', location: 'Montmartre', left: '48%', top: '34%', description: 'Type 3 near accordion player. Three easels destroyed.', hasFootage: false, evidenceType: 'behavioral' },
+  { id: 4, wave: 1, city: 'New York', location: 'Subway Tunnel B-7', left: '29%', top: '35%', description: 'Type 1 sprint-to-tenderness. 62 sec pause at sleeping kitten.', hasFootage: false, evidenceType: 'visual' },
+  { id: 5, wave: 2, city: 'Taipei', location: 'Shilin Night Market', left: '77%', top: '42%', description: 'PRIMARY CLUSTER. All four types. Convergence events increasing.', hasFootage: true, evidenceType: 'source' },
+  { id: 6, wave: 2, city: 'Cape Town', location: 'V&A Waterfront', left: '52%', top: '63%', description: 'Type 1 — first Southern Hemisphere. Oriented toward Taipei.', hasFootage: false, evidenceType: 'temporal' },
+];
+
+// ===== JOURNAL PAGES (10 pages, 5 waves) =====
+const JOURNAL_PAGES = [
+  { wave: 1, page: 1, date: 'September 3', text: 'I have started calling them Kanaputz. I do not know why — the word surfaced and stuck. Something moved through the night market tonight that should not have been possible. A small creature — no larger than a house cat — crossed 40 meters of crowded market lane in under three seconds. Then it stopped. Completely. There was a flower growing through a crack in the pavement and it stood there, perfectly still, looking at it. I could not move either. I need to come back tomorrow.', marginNote: null, contentType: 'text' },
+  { wave: 1, page: 2, date: 'November 19', text: 'A different one today. Rounder. Louder in posture, if that makes sense. It performed what I can only describe as a theatrical display of aggression outside my apartment. Arms raised, tongue extended, hips moving. It was not threatening. It was performing. Two neighbors who had been arguing on the landing stopped and watched. They were laughing before it finished.', marginNote: 'Distinct from Sept specimen. Rounder body, different behavior entirely. How many types are there?', contentType: 'text' },
+  { wave: 2, page: 3, date: 'October 12', text: 'I am now confident there are four distinct types. Type 1: hyper-alert sprinter with a tender side. Type 2: theatrical performer who thinks it is scaring away problems. Type 3: tall, clumsy, moves to rhythm involuntarily. Cannot control its tail. Type 4: opens its mouth and appears to inhale tension from the air. Inflates visibly. All four share a common trait: they appear to move in the same direction when not engaged in immediate behavior.', marginNote: 'UV confirms — check the receipts. All moving toward something.', contentType: 'text' },
+  { wave: 2, page: 4, date: 'October 29', text: 'Spoke to M. about the pattern. She was not surprised. She said she had felt them before she saw them — "concentrations of intention" was her phrase. Not wandering. Arriving. The locals have started naming them. The Type 4 near the school is "Muncha." It keeps eating whatever is in the air around that intersection.', marginNote: 'M. uses community names naturally. "Fugu stopped mid-sprint and went completely still. Something small had caught his attention."', contentType: 'text' },
+  { wave: 3, page: 5, date: 'January 8', text: 'Followed a Type 1 for three hours tonight. It alternated between explosive sprints and complete stillness, each sprint faster than the last, each stillness longer. It led me outside Shilin. Past the boundaries I had mapped. To a location I had not documented. I marked it on the map and then crossed it out. I am not ready to write what I think it means.', marginNote: 'The tall one — the internet calls it Groovix. Has rhythm in its blood. Also has a tail it cannot control.', contentType: 'text' },
+  { wave: 3, page: 6, date: 'January 15', text: 'Called M. She will come to Taipei.', marginNote: null, contentType: 'text' },
+  { wave: 4, page: 7, date: 'March 5', text: 'M. arrived yesterday. She walked through the night market without speaking for two hours. When she finally stopped, she said: "They are not scattered. They are arranged." She pointed at locations I had documented. "These are not random encounters," she said. "These are stations on a path that leads somewhere."', marginNote: 'Source detector fluctuating. 34% → 58% in 48 hours. M. says the relationship is bidirectional.', contentType: 'text' },
+  { wave: 4, page: 8, date: 'March 14', text: 'Muncha sat at the center today. Not eating. Not inflating. Just present. Antennae extended, mouth closed. The others held a perimeter — thirty meters out, perfectly spaced. They maintained this formation for twenty-two minutes. Nothing happened. Everything happened.', marginNote: 'M. sat with them. After eleven minutes she said: "It remembers." She would not explain.', contentType: 'text' },
+  { wave: 5, page: 9, date: 'March 21', text: 'They are all coming. Every documented specimen from every location. The sprint paths, the dance routes, the waddle trajectories — all converging on the same coordinates. Global sightings dropping to zero. The Source coherence hit 73% this morning and the crystal was visible to the naked eye for the first time. Warm light. Steady. Not flickering — breathing.', marginNote: 'The Source does not store data. It stores presence. Every moment a being was fully still near it, the crystal kept that moment. Now it is giving them back.', contentType: 'text' },
+  { wave: 5, page: 10, date: 'March 23', text: 'If you are reading this, you have been paying attention. That means you understand enough. The Source is not a fixed location. It is a membrane — a frequency that responds when enough beings choose to be still together. The Kanaputz are not going somewhere. They are showing us how to arrive. The rest you have to see.', marginNote: null, contentType: 'text' }
+];
+
+// ===== PINBOARD ITEMS =====
+const PINBOARD_ITEMS = [
+  { wave: 1, type: 'postit', text: 'Night market, 3am — four distinct silhouettes. None matching known fauna.', color: '#f7dc6f', rotation: -2, position: { top: '5%', left: '12%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: 'The fast one stopped at a flower growing through concrete. Stayed 47 seconds. WHY?', color: '#f1948a', rotation: 3, position: { top: '8%', left: '35%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: 'Type 4 — mouth takes up 70% of body. Inflates when near arguments. Deflates when they stop.', color: '#82e0aa', rotation: -1, position: { top: '3%', left: '55%' }, author: 'researcher' },
+  { wave: 1, type: 'sketch', image: 'fugu-sketch-1.png', position: { top: '30%', left: '8%' }, rotation: 2, label: 'Type 1 — sprint form' },
+  { wave: 1, type: 'sketch', image: 'MrQ-sketch-1.png', position: { top: '32%', left: '30%' }, rotation: -3, label: 'Type 2 — display posture' },
+  { wave: 1, type: 'postit', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '28%', left: '52%' }, author: 'researcher' },
+  { wave: 1, type: 'sketch', image: 'groovix-sketch-1.png', position: { top: '55%', left: '10%' }, rotation: -1, label: 'Type 3 — rhythm posture' },
+  { wave: 1, type: 'sketch', image: 'muncha-sketch-1.png', position: { top: '58%', left: '32%' }, rotation: 4, label: 'Type 4 — inflation state' },
+  { wave: 2, type: 'postit', text: 'Fugu stopped mid-sprint and went completely still. Something small had caught his attention — a leaf, a sound, I could not tell.', color: '#f5b7b1', rotation: -2, position: { top: '6%', left: '75%' }, author: 'm' },
+  { wave: 2, type: 'postit', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE. But they keep coming back to Taipei.', color: '#f7dc6f', rotation: 2, position: { top: '50%', left: '55%' }, author: 'researcher' },
+  { wave: 2, type: 'postit', text: 'The locals named them: Fugu, MrQ, Groovix, Muncha. I will continue using type designations.', color: '#82e0aa', rotation: -3, position: { top: '55%', left: '75%' }, author: 'researcher' },
+  { wave: 2, type: 'sketch', image: 'source crystal-1.png', position: { top: '70%', left: '15%' }, rotation: 1, label: 'Source crystal — preliminary sketch' },
+  { wave: 3, type: 'postit', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: 1, position: { top: '75%', left: '55%' }, author: 'researcher' },
+  { wave: 3, type: 'postit', text: 'UV confirms the receipts. The energy residue is REAL.', color: '#f7dc6f', rotation: -2, position: { top: '78%', left: '35%' }, author: 'researcher' },
+  { wave: 4, type: 'postit', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '75%', left: '75%' }, author: 'm' },
+  { wave: 5, type: 'postit', text: 'All observed specimens appear to be moving in the same direction.', color: '#85c1e9', rotation: -1, position: { top: '35%', left: '75%' }, author: 'researcher' },
+];
+
+const PINBOARD_UV = [
+  { type: 'arrow', from: { top: '30%', left: '50%' }, to: { top: '70%', left: '20%' }, label: 'PULL' },
+  { type: 'note', text: 'All paths converge → SE bearing 127°', position: { top: '45%', left: '60%' }, rotation: -5 },
+  { type: 'circle', position: { top: '65%', left: '25%' }, radius: '8%', label: 'NON-SHILIN LOCATION' },
+  { type: 'note', text: 'Source dot matches. Confirm with M.', position: { top: '72%', left: '45%' }, rotation: 2 },
+];
+
+// ===== CASSETTE TAPES =====
+const CASSETTE_TAPES = [
+  { id: 'T-01', wave: 1, requiresSafe: false, label: 'T-01: First Field Recording', description: 'Researcher outdoors, excited. Wind and night market ambience. "It was fast. Impossibly fast. And then it just... stopped. There was a flower growing through a crack in the concrete and it stood there, perfectly still, looking at it. I need to come back tomorrow."', audioUrl: null },
+  { id: 'T-02', wave: 2, requiresSafe: false, label: 'T-02: Night Three', description: 'In the field. A Type 4 approaches a street argument. "It seemed to be... inhaling the situation. I know how that sounds." The argument stopped. The creature inflated. Then it waddled away. "What did I just see."', audioUrl: null },
+  { id: 'T-03', wave: 2, requiresSafe: false, label: 'T-03: The Pattern', description: 'At the desk. "Every sighting. Every type. The sprinter, the performer, the dancer, the eater. They all end the same way — movement in the same direction." First time "Source" is spoken.', audioUrl: null },
+  { id: 'T-05', wave: 3, requiresSafe: true, label: 'T-05: The Medium Interview', description: 'M.: "Groovix does not dance because he wants to. The rhythm is in him." She describes them as concentrations of intention. "They are not wandering here. They are arriving." Researcher asks about the Source. Mid-word, tape cuts. Silence. M. quieter. "Let\'s leave that part out."', audioUrl: null },
+  { id: 'T-04', wave: 3, requiresSafe: true, label: 'T-04: [ ∿ ]', description: 'No label. Night ambience: traffic, insects, wind. Then — small sounds underneath. Squeaks, hums, chirps. Rhythmic and warm. Almost playful. The sounds creatures made of joy would make. No narration. Duration: 2 min 41 sec.', audioUrl: null },
+];
+
+// ===== SAFE DOSSIER =====
+const SAFE_DOSSIER = {
+  sections: [
+    { title: 'Section 1 — Type Profiles', content: [
+      { type: 'Type 1 — Fugu', classification: 'Hyper-alert Sprinter / Perceptive Guardian', text: 'Detects low vibration, danger, and emotional tension before others. Reacts with explosive speed — spine compresses into aerodynamic "bullet mode." Beneath the hyper-vigilance: a profoundly tender heart. When encountering small wonders — a baby smiling, dew on a leaf — stops completely, posture softens, warm expression emerges. Flagship: blink-and-miss-it sprint + tender pause.', footnote: 'Colloquially "Fugu" — name references defensive compression posture.' },
+      { type: 'Type 2 — MrQ', classification: 'Theatrical Aggressor / Performer', text: 'Overconfident, dramatic, emotionally reactive. Believes it is scaring away negative energy. Actual function: hyperactive performer. Arms perpetually raised. Glossy head for headbutt charges. Tongue display intended as intimidation consistently produces laughter. Flagship: frantic jumping with arm-shaking + rhythmic hip movement.', footnote: 'Colloquially "MrQ" — references inquisitive head-tilt.' },
+      { type: 'Type 3 — Groovix', classification: 'Involuntary Rhythmic Mover / Accidental Destructor', text: 'Tall, gentle, clumsy. Long tail with wide swinging range. Natural rhythm sway even when idle — involuntary nervous system response. Cannot separate emotional state from physical movement. When exposed to rhythm, movement spreads until environmental damage occurs. Flagship: involuntary rhythmic movement escalating to accidental structural damage.', footnote: 'Colloquially "Groovix." Note: specimen never decides to dance. Movement happens to it.' },
+      { type: 'Type 4 — Muncha', classification: 'Tension Ingester / Inflation-Deflation Cycle', text: 'Attempts to help by "eating" emotional heaviness. Mouth comprises 70% of body. Two antennae vibrate when detecting ingestible energy. Can inflate to 4x resting volume. Deflation rapid, accompanied by squeaking. Tiny limbs create characteristic waddle. Flagship: tension devouring + visible inflation cycle.', footnote: 'Colloquially "Muncha" — earliest community-named specimen.' }
+    ]},
+    { title: 'Section 2 — Behavioral Hypotheses', content: 'Hypothesis A (Researcher): Inter-dimensional organisms displaced by energy imbalance. Behaviors are instinctive responses to emotional frequency differentials. They do not intend to help. They react.\n\nHypothesis B (M.): Concentrations of intention — condensed nodes of high-frequency energy. Pull toward the Source is resonance, not navigation. Returning to a frequency, not a place.\n\nHypothesis C (Integrated): Both perspectives describe the same phenomenon at different scales. Physically real AND energetically coherent. The distinction may not apply.' },
+    { title: 'Section 3 — Incident Report', content: 'CLASSIFIED — Proximity Event\nShilin District — 03:17\n\n████████████ approached ████████████ at coordinates ██████████. Duration: ██ minutes. All four types present. ████████████████████████ readings exceeded ████████████.\n\nObserver: "████████████████████ something I cannot ████████████."\n\nConclusion: Observation concluded. Not approached.\n\n[Torn section — bottom third missing]', isRedacted: true },
+    { title: 'Section 4 — The Source', content: '████████████████████████████████████████████████████████████████████████\n\n...not a fixed location...\n\n████████████████████████████████████████████████████████████████████████\n\n...membrane rather than a place...\n\n████████████████████████████████████████████████████████████████████████████████████\n\nAll observed specimens appear to be moving in the same direction.\n\n████████████████████████████████████████', isRedacted: true }
+  ],
+  finalPage: 'If you are reading this, you have been paying attention.\nThat means you understand enough.\nThe rest you have to see.'
+};
+
+// ===== SOURCE MONITOR =====
+const SOURCE_MONITOR = {
+  wave4: { coherence: 73, status: 'ACTIVE — CALIBRATING', feed: 'Crystal installation in progress. Coherence baseline establishing.', readings: ['CRYSTAL STATE: RESPONSIVE', 'AMBIENT FREQ: 432.7 Hz', 'CONVERGENCE EVENTS: 7 (last 48h)', 'SPECIMEN PROXIMITY: DETECTED', 'MEMBRANE STABILITY: 67%'] },
+  wave5: { coherence: 89, status: 'ACTIVE — STABILIZED', feed: 'Physical convergence confirmed. Crystal luminescence visible without instruments.', readings: ['CRYSTAL STATE: SELF-SUSTAINING', 'AMBIENT FREQ: 528.0 Hz (LOCKED)', 'CONVERGENCE EVENTS: CONTINUOUS', 'SPECIMEN COUNT: EXCEEDS SENSOR RANGE', 'MEMBRANE STABILITY: 94%', 'NOTE: The Source remembers.'] }
+};
+
+// ===== CREATURE PROFILES =====
 const PROFILES = [
-  {
-    name: "Groovix",
-    classification: "Type-G / Kinetic",
-    firstSighting: "Taipei, November 2024",
-    height: "~18cm",
-    distinguishing: "Elongated neck, spiky dorsal crest, curved tail. Highly expressive eye placement (top of head).",
-    behavior: "Hyperactive. Constantly in motion. Tends to mimic dance-like movements observed in humans. Has been seen 'grooving' near speakers and vibrating surfaces. Appears to feed on rhythmic energy.",
-    dangerLevel: "None",
-    notes: "Most frequently sighted specimen. Possibly the first to have crossed over. Shows no fear of humans. Seems genuinely entertained by our behavior. I've started leaving music on at the field station. It helps."
-  },
-  {
-    name: "Fugu",
-    classification: "Type-F / Chaotic",
-    firstSighting: "Tokyo, December 2024",
-    height: "~22cm (variable — appears to inflate)",
-    distinguishing: "Massive jaw with irregular teeth. Spiny exterior. Bulging asymmetric eyes. Body covered in spike-like protrusions.",
-    behavior: "Unpredictable. Alternates between stillness and sudden bursts of frantic movement. Has been observed laughing (or what sounds like laughing) at inappropriate moments. Attracted to chaos — traffic, arguments, crowded spaces.",
-    dangerLevel: "None (despite appearance)",
-    notes: "Looks terrifying. Acts like a toddler who just discovered bubble wrap. I think the spines are decorative. Or maybe a defense mechanism from their home dimension. Either way, Fugu has never harmed anything. Knocked over my coffee twice though."
-  },
-  {
-    name: "Mr. Q",
-    classification: "Type-Q / Observer",
-    firstSighting: "Paris, January 2025",
-    height: "~20cm",
-    distinguishing: "Rounded body, small antennae, wide open mouth with visible tongue. Perpetually surprised expression. Stubby limbs.",
-    behavior: "The watcher. Mr. Q tends to find elevated positions and simply... observe. Rarely moves unless startled. Has been documented staring at humans for extended periods with what can only be described as bemused curiosity.",
-    dangerLevel: "None",
-    notes: "Of all specimens, Mr. Q unnerves me the most — not because he's threatening, but because he seems to understand more than the others. Sometimes I catch him looking at my notes. I've started writing in code. He doesn't seem to mind."
-  },
-  {
-    name: "Muncha",
-    classification: "Type-M / Consumer",
-    firstSighting: "London, April 2025",
-    height: "~16cm",
-    distinguishing: "Spherical body, oversized head-to-body ratio, prominent teeth along bottom jaw. Small pointed ears. Stubby legs.",
-    behavior: "Compulsive chewer. Will attempt to gnaw on virtually any object. Shows preference for wooden and paper materials. Despite aggressive chewing, rarely causes significant damage — teeth appear designed for grip, not destruction.",
-    dangerLevel: "None (watch your pencils)",
-    notes: "Muncha ate three pages of my field journal before I noticed. The irony is not lost on me that a creature from another dimension chose to consume my documentation about creatures from another dimension. I've switched to digital notes. She now chews on my USB cables."
-  }
+  { name: 'Fugu', type: 'Type 1', classification: 'Hyper-alert Sprinter', firstSighting: 'September 3, 2024', height: '22cm (variable)', behavior: 'Explosive speed, then sudden tender stillness at beauty.', dangerLevel: 'Minimal', notes: 'First to move. First to feel.' },
+  { name: 'MrQ', type: 'Type 2', classification: 'Explosive Cheerleader', firstSighting: 'November 19, 2024', height: '20cm', behavior: 'Theatrical fake intimidation. Everything is a performance.', dangerLevel: 'Minimal', notes: 'Believes he is terrifying. Has never terrified anyone.' },
+  { name: 'Groovix', type: 'Type 3', classification: 'Clumsy Dancing Giant', firstSighting: 'October 25, 2024', height: '18cm (tallest)', behavior: 'Involuntary rhythm. Tail causes accidental destruction.', dangerLevel: 'Moderate — structural damage', notes: 'Never decides to dance. Movement happens to him.' },
+  { name: 'Muncha', type: 'Type 4', classification: 'Anxiety Eater', firstSighting: 'September 12, 2024', height: '16cm', behavior: 'Devours emotional heaviness. Inflates, deflates. Mouth is 70% of body.', dangerLevel: 'None', notes: 'Pure enthusiasm, zero restraint.' }
 ];
 
-const NOTEBOOK_ENTRIES = [
-  {
-    date: "November 15, 2024",
-    text: "First confirmed sighting. I don't know what I saw tonight. Something small, fast, and absolutely not in any field guide I've ever read. It was near the night market, pressed against a steam vent, and it was... smiling? I need sleep. But I also need to go back tomorrow. I set up a motion-triggered camera near the same vent before leaving. If this thing comes back, I want proof — something more than my shaking hands and a sketch on a napkin. The night market vendor next door said she's seen 'the little shadow' before, always around closing time, always near the warmest spots."
-  },
-  {
-    date: "December 20, 2024",
-    text: "Three more sightings this month. Tokyo, Berlin, Taipei again. They're not isolated incidents. Whatever these things are, they're appearing in cities — always at night, always near sources of light or energy. I've started a proper log. My colleagues think I'm losing it. Maybe I am."
-  },
-  {
-    date: "February 2, 2025",
-    text: "I've named four distinct specimens so far. Groovix was the first. Then Fugu in Tokyo — terrifying to look at, harmless in practice. Mr. Q showed up in Paris last month. And now Muncha in London (she ate my sandwich). They're all different, but they share something: they seem drawn to human emotion. Especially chaos. Especially joy."
-  },
-  {
-    date: "April 28, 2025",
-    text: "Working theory: they're not FROM here. The way they interact with our world — it's like tourists who don't speak the language but find everything hilarious. They don't understand our technology, but they're fascinated by it. Groovix tried to 'dance' with a Roomba yesterday. I have it on camera."
-  },
-  {
-    date: "July 3, 2025",
-    text: "The crystal fragment from the gallery storage. I can't stop thinking about it. It doesn't match any known mineral. And the way the entities behave around it — reverent, almost. Like it's a piece of something larger. Something important to them. I've started calling it the Source. No scientific basis for that name. It just felt right."
-  },
-  {
-    date: "September 18, 2025",
-    text: "They appear when things get heavy. I've cross-referenced every sighting with local news data. Pattern is clear: conflict, tension, stress spikes — that's when the cracks open. That's when they slip through. But here's what I can't explain: after they appear, the tension... lifts. People laugh. Things feel lighter. Coincidence? I don't believe in those anymore."
-  },
-  {
-    date: "November 30, 2025",
-    text: "The Source theory is holding. Multiple fragments detected now. They seem to react to collective emotional states — dim when the world is angry, brighter when calm prevails. I sound insane writing this. But the data doesn't lie. Something is responding to us. Or maybe... it always was, and we just weren't paying attention."
-  },
-  {
-    date: "January 22, 2026",
-    text: "New Year's Eve surge. 47 sightings in 90 seconds. Across the entire planet. Whatever barrier separates their world from ours — it's thinning. They're coming through more frequently. More of them each time. I should be scared. Instead I find myself leaving the window open at night, hoping Groovix will visit again. What is happening to me."
-  },
-  {
-    date: "March 10, 2026",
-    text: "Source detector spiked again last night. +340%. Something is building. I can feel it. The entities are gathering — not randomly anymore, but with purpose. They're looking for something. Or someone. The investigation continues. I'm not sure I'm the one conducting it anymore."
-  }
-];
-
-const POSTIT_NOTES = [
-  { text: "WHY always near light sources??", color: "#f7dc6f", rotation: -3 },
-  { text: "Check hedonometer data — correlation with sighting frequency?", color: "#f1948a", rotation: 2 },
-  { text: "Fugu seen LAUGHING during thunderstorm. Why?", color: "#82e0aa", rotation: -1 },
-  { text: "Crystal fragment = piece of the Source?", color: "#85c1e9", rotation: 4 },
-  { text: "They never appear alone anymore", color: "#f7dc6f", rotation: -2 },
-  { text: "Mr. Q was watching me again. 3 hours. Didn't blink.", color: "#f5b7b1", rotation: 1 },
-  { text: "Muncha chewed through the USB cable AGAIN", color: "#82e0aa", rotation: -4 },
-  { text: "Night market vendor says they've 'always been here'. What does she know?", color: "#f7dc6f", rotation: 3 },
-  { text: "DO NOT tell Chen about the Source readings. Not yet.", color: "#f1948a", rotation: -2 },
-  { text: "Dimension cracks = emotional pressure valves? The Void breathes?", color: "#85c1e9", rotation: 1 },
-  { text: "New Year's Eve: 47 sightings. 12 countries. 90 seconds. THIS IS NOT RANDOM.", color: "#f1948a", rotation: -1 },
-  { text: "Groovix danced for 4 minutes straight today. I cried. I don't know why.", color: "#f7dc6f", rotation: 2 },
-];
-
-const WALL_SKETCHES = [
-  { name: "Groovix", description: "Sketch #001 — Observed dancing near steam vent. Note elongated neck, spiky crest.", image: "assets/groovix-sketch-1.png" },
-  { name: "Fugu", description: "Sketch #002 — Captured during inflation event. Spines fully extended.", image: "assets/fugu-sketch-1.png" },
-  { name: "Mr. Q", description: "Sketch #003 — Stationary observation pose. Subject was watching ME.", image: "assets/MrQ-sketch-1.png" },
-  { name: "Muncha", description: "Sketch #004 — Mid-chew. Subject consumed 3 pencils during sketch session.", image: "assets/muncha-sketch-1.png" },
-  { name: "Source Crystal", description: "Sketch #005 — Fragment found at gallery storage. Composition unknown. Entities behave reverently near it.", image: "assets/source crystal-1.png" },
+// ===== POST-IT IMAGE ASSETS =====
+const POSTIT_IMAGES = [
+  'postit-1.png', 'postit-2.png', 'postit-3.png', 'postit-4.png',
+  'postit-5.png', 'postit-6.png', 'postit-7.png', 'postit-8.png',
+  'postit-9.png', 'postit-10.png', 'postit-11.png'
 ];

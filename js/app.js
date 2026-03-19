@@ -1,5 +1,5 @@
 // ============================================================
-// KANAPUTZ OBSERVATORY — Main Application
+// KANAPUTZ OBSERVATORY v2 — Main Application (Wave-Aware)
 // ============================================================
 
 (function() {
@@ -9,14 +9,45 @@
   let isDetailOpen = false;
   let journalSpreadIndex = 0;
   let pagesPerSpread = 2;
+  let currentCassetteId = null;
 
   // ===== INIT =====
   document.addEventListener('DOMContentLoaded', () => {
     setupHotspots();
     setupCloseButton();
     setupKeyboard();
-    populateDetailViews();
+    populateAll();
+    updateZoneVisibility();
+
+    // Re-render everything when wave changes
+    document.addEventListener('wavechange', () => {
+      populateAll();
+      updateZoneVisibility();
+    });
   });
+
+  function populateAll() {
+    populateMap();
+    populatePinboard();
+    populateNotepad();
+    populateCassette();
+    populateSafe();
+    populateSource();
+  }
+
+  // ===== ZONE VISIBILITY =====
+  // Show/hide hotspot zones based on current wave
+  function updateZoneVisibility() {
+    const wave = WaveSystem.getWave();
+
+    // Safe: visible from Wave 2
+    const safezone = document.getElementById('zone-safe');
+    if (safezone) safezone.style.display = wave >= 2 ? '' : 'none';
+
+    // Source monitor: visible from Wave 4
+    const srcZone = document.getElementById('zone-source');
+    if (srcZone) srcZone.style.display = wave >= 4 ? '' : 'none';
+  }
 
   // ===== HOTSPOT CLICK HANDLING =====
   function setupHotspots() {
@@ -24,7 +55,6 @@
       hotspot.addEventListener('click', (e) => {
         e.stopPropagation();
         const targetId = hotspot.getAttribute('data-target');
-
         openDetail(targetId);
       });
     });
@@ -48,7 +78,9 @@
     if (targetId === 'terminal-detail') {
       const feedEl = document.getElementById('terminal-feed');
       if (terminal) terminal.stop();
-      terminal = new SightingTerminal(feedEl);
+      // Filter sightings by wave
+      const visibleSightings = WaveSystem.getVisibleContent(SIGHTINGS);
+      terminal = new SightingTerminal(feedEl, visibleSightings);
       terminal.start();
     }
   }
@@ -81,20 +113,17 @@
       if (e.key === 'ArrowLeft' && isDetailOpen) {
         const prevBtn = document.getElementById('journal-prev');
         if (prevBtn && prevBtn.offsetParent !== null) prevBtn.click();
-        const profPrev = document.getElementById('profile-prev');
-        if (profPrev && profPrev.offsetParent !== null) profPrev.click();
       }
       if (e.key === 'ArrowRight' && isDetailOpen) {
         const nextBtn = document.getElementById('journal-next');
         if (nextBtn && nextBtn.offsetParent !== null) nextBtn.click();
-        const profNext = document.getElementById('profile-next');
-        if (profNext && profNext.offsetParent !== null) profNext.click();
       }
-      // Press D to toggle debug mode (shows hotspot borders)
+      // Press D to toggle debug panel + hotspot borders
       if ((e.key === 'd' || e.key === 'D') && !isDetailOpen) {
         document.getElementById('room').classList.toggle('debug');
+        WaveSystem.toggleDebugPanel();
       }
-      // Hold Spacebar to reveal all hotspots (like Telltale adventure games)
+      // Hold Spacebar to reveal all hotspots
       if (e.key === ' ' && !isDetailOpen) {
         e.preventDefault();
         document.getElementById('room').classList.add('reveal');
@@ -106,8 +135,7 @@
       }
     });
 
-    // --- Mobile/Touch support ---
-    // Tap on empty room area (not a zone): briefly reveal all hotspot sparkles
+    // Mobile: tap on empty room area to briefly reveal sparkles
     document.getElementById('room').addEventListener('click', (e) => {
       if (!e.target.closest('.zone') && !isDetailOpen) {
         const room = document.getElementById('room');
@@ -117,173 +145,151 @@
     });
   }
 
-  // ===== POPULATE DETAIL VIEWS =====
-  function populateDetailViews() {
-    populateProfiles();
-    populatePinboard();
-    populateNotepad();
-    populateSketches();
-    populateMap();
-  }
+  // ===== SIGHTINGS MAP (dynamic dots from MAP_SIGHTINGS) =====
+  function populateMap() {
+    const mapScreen = document.getElementById('map-screen');
+    const mapInfo = document.getElementById('map-info');
+    if (!mapScreen || !mapInfo) return;
 
-  // --- Profiles (single-view with navigation) ---
-  let currentProfileIndex = 0;
+    // Clear existing dots
+    mapScreen.querySelectorAll('.map-dot').forEach(d => d.remove());
 
-  function populateProfiles() {
-    const viewport = document.getElementById('profiles-viewport');
-    if (!viewport) return;
+    const visibleDots = WaveSystem.getVisibleContent(MAP_SIGHTINGS);
 
-    const svgShapes = {
-      'Groovix': `<svg viewBox="0 0 100 120"><path d="M50,20 Q55,10 60,15 Q65,5 58,3 Q50,0 45,8 Q40,3 38,12 Q32,8 35,18 L30,28 Q25,35 22,50 Q18,65 22,80 L20,90 Q18,98 22,102 L28,98 Q30,94 32,90 L38,86 Q42,84 48,86 L52,90 Q54,94 56,98 L62,102 Q66,100 64,94 L62,86 Q66,76 64,60 Q63,45 58,35 Z" fill="none" stroke="#5588cc" stroke-width="1.5"/><circle cx="52" cy="12" r="3" fill="none" stroke="#5588cc" stroke-width="1"/></svg>`,
-      'Fugu': `<svg viewBox="0 0 100 100"><path d="M50,25 Q70,12 75,25 Q80,15 78,30 Q85,28 80,38 Q85,45 78,48 Q82,55 75,58 Q78,65 70,65 Q72,75 65,78 Q60,85 50,82 Q40,85 35,78 Q28,75 30,65 Q22,65 25,58 Q18,55 25,48 Q18,45 25,38 Q20,28 28,30 Q25,15 30,25 Q32,12 50,25 Z" fill="none" stroke="#5588cc" stroke-width="1.5"/><circle cx="40" cy="38" r="4" fill="none" stroke="#5588cc" stroke-width="1"/><circle cx="60" cy="35" r="3" fill="none" stroke="#5588cc" stroke-width="1"/><path d="M35,52 Q45,60 65,50" fill="none" stroke="#5588cc" stroke-width="1"/></svg>`,
-      'Mr. Q': `<svg viewBox="0 0 100 110"><ellipse cx="50" cy="55" rx="30" ry="35" fill="none" stroke="#5588cc" stroke-width="1.5"/><circle cx="42" cy="45" r="4" fill="none" stroke="#5588cc" stroke-width="1"/><path d="M40,65 Q50,75 60,65" fill="none" stroke="#5588cc" stroke-width="1.5"/><line x1="42" y1="20" x2="38" y2="8" stroke="#5588cc" stroke-width="1.5"/><circle cx="38" cy="6" r="3" fill="none" stroke="#5588cc" stroke-width="1"/><line x1="55" y1="22" x2="58" y2="10" stroke="#5588cc" stroke-width="1.5"/><circle cx="58" cy="8" r="2.5" fill="none" stroke="#5588cc" stroke-width="1"/><line x1="50" y1="90" x2="40" y2="105" stroke="#5588cc" stroke-width="1.5"/><line x1="50" y1="90" x2="60" y2="105" stroke="#5588cc" stroke-width="1.5"/></svg>`,
-      'Muncha': `<svg viewBox="0 0 100 110"><circle cx="50" cy="45" r="32" fill="none" stroke="#5588cc" stroke-width="1.5"/><circle cx="45" cy="38" r="5" fill="none" stroke="#5588cc" stroke-width="1"/><circle cx="2" cy="2" r="1.5" fill="#5588cc" transform="translate(43,36)"/><path d="M35,58 Q42,68 58,62" fill="none" stroke="#5588cc" stroke-width="1.5"/><rect x="38" y="58" width="5" height="6" rx="1" fill="none" stroke="#5588cc" stroke-width="1"/><rect x="45" y="60" width="5" height="5" rx="1" fill="none" stroke="#5588cc" stroke-width="1"/><rect x="52" y="59" width="4" height="5" rx="1" fill="none" stroke="#5588cc" stroke-width="1"/><path d="M38,15 L35,5" stroke="#5588cc" stroke-width="1.5"/><path d="M62,15 L65,5" stroke="#5588cc" stroke-width="1.5"/><line x1="40" y1="77" x2="35" y2="100" stroke="#5588cc" stroke-width="1.5"/><line x1="60" y1="77" x2="65" y2="100" stroke="#5588cc" stroke-width="1.5"/></svg>`,
-    };
+    visibleDots.forEach(dot => {
+      const el = document.createElement('div');
+      el.className = 'map-dot';
+      el.style.left = dot.left;
+      el.style.top = dot.top;
+      el.setAttribute('data-id', dot.id);
+      el.setAttribute('data-city', dot.city);
 
-    function renderProfile(index) {
-      const profile = PROFILES[index];
-      viewport.innerHTML = `
-        <div class="profile-card">
-          <div class="profile-card-header">
-            <div class="profile-avatar">${svgShapes[profile.name] || ''}</div>
-            <div>
-              <div class="profile-name">${profile.name.toUpperCase()}</div>
-              <div class="profile-class">${profile.classification}</div>
-            </div>
-          </div>
-          <div class="profile-field">
-            <div class="profile-field-label">First Sighting</div>
-            <div class="profile-field-value">${profile.firstSighting}</div>
-          </div>
-          <div class="profile-field">
-            <div class="profile-field-label">Estimated Height</div>
-            <div class="profile-field-value">${profile.height}</div>
-          </div>
-          <div class="profile-field">
-            <div class="profile-field-label">Distinguishing Features</div>
-            <div class="profile-field-value">${profile.distinguishing}</div>
-          </div>
-          <div class="profile-field">
-            <div class="profile-field-label">Observed Behavior</div>
-            <div class="profile-field-value">${profile.behavior}</div>
-          </div>
-          <div class="profile-field">
-            <div class="profile-field-label">Threat Assessment</div>
-            <div class="profile-field-value">${profile.dangerLevel}</div>
-          </div>
-          <div class="profile-notes">"${profile.notes}"</div>
-        </div>
-      `;
-      document.getElementById('profile-count').textContent = `${index + 1} / ${PROFILES.length}`;
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        WaveSystem.trackEngagement('mapDot', dot.id);
+
+        // Build info panel
+        let html = `
+          <div class="map-info-date">${dot.city} — ${dot.location}</div>
+          <div class="map-info-location">[${dot.evidenceType.toUpperCase()}]</div>
+          <div class="map-info-desc">${dot.description}</div>
+        `;
+        if (dot.hasFootage && WaveSystem.isFeatureAvailable('mapFootage')) {
+          html += `<div class="map-info-footage">▶ SURVEILLANCE FOOTAGE AVAILABLE</div>`;
+        }
+        mapInfo.innerHTML = html;
+        mapInfo.classList.add('active');
+      });
+
+      mapScreen.appendChild(el);
+    });
+
+    // Click on monitor (not a dot) closes the info panel
+    const monitor = document.querySelector('.map-monitor');
+    if (monitor && !monitor._mapClickBound) {
+      monitor.addEventListener('click', () => {
+        mapInfo.classList.remove('active');
+      });
+      monitor._mapClickBound = true;
     }
 
-    renderProfile(0);
-
-    document.getElementById('profile-prev').addEventListener('click', () => {
-      currentProfileIndex = (currentProfileIndex - 1 + PROFILES.length) % PROFILES.length;
-      renderProfile(currentProfileIndex);
-    });
-    document.getElementById('profile-next').addEventListener('click', () => {
-      currentProfileIndex = (currentProfileIndex + 1) % PROFILES.length;
-      renderProfile(currentProfileIndex);
-    });
+    // Show dots only after monitor image loads
+    if (!mapScreen.classList.contains('bg-loaded')) {
+      const bgImg = new Image();
+      bgImg.onload = () => mapScreen.classList.add('bg-loaded');
+      bgImg.src = 'assets/terminal2-bg.jpg';
+      if (bgImg.complete) mapScreen.classList.add('bg-loaded');
+    }
   }
 
-  // --- Pinboard ---
+  // ===== PINBOARD (merged: post-its + sketches + photos) =====
   function populatePinboard() {
     const surface = document.getElementById('pinboard-surface');
     if (!surface) return;
 
-    // Place post-its — constrained within the cork area of the background image
-    const postitPositions = [
-      { top: '-1%', left: '21%' },
-      { top: '2%', left: '40%' },
-      { top: '-1%', left: '55%' },
-      { top: '22%', left: '23%' },
-      { top: '25%', left: '43%' },
-      { top: '45%', left: '21%' },
-      { top: '47%', left: '42%' },
-      { top: '64%', left: '23%' },
-      { top: '66%', left: '40%' },
-      { top: '23%', left: '58%' },
-      { top: '49%', left: '55%' },
-      { top: '66%', left: '57%' },
-    ];
+    // Clear existing
+    surface.innerHTML = '';
 
-    const POSTIT_IMAGES = [
-      'postit-1.png', 'postit-2.png', 'postit-3.png', 'postit-4.png',
-      'postit-5.png', 'postit-6.png', 'postit-7.png', 'postit-8.png',
-      'postit-9.png', 'postit-10.png', 'postit-11.png'
-    ];
+    const visibleItems = WaveSystem.getVisibleContent(PINBOARD_ITEMS);
 
-    POSTIT_NOTES.forEach((note, i) => {
-      const pos = postitPositions[i] || { top: `${5 + (i * 8) % 80}%`, left: `${2 + (i * 15) % 55}%` };
-      const img = POSTIT_IMAGES[i % POSTIT_IMAGES.length];
-      const div = document.createElement('div');
-      div.className = 'full-postit';
-      div.style.backgroundImage = `url('assets/${img}')`;
-      div.style.transform = `rotate(${note.rotation}deg)`;
-      div.style.top = pos.top;
-      div.style.left = pos.left;
-      div.textContent = note.text;
-      div.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const overlay = document.querySelector('.postit-overlay');
-        if (div.classList.contains('zoomed')) {
-          div.classList.remove('zoomed');
-          overlay.classList.remove('active');
-        } else {
-          document.querySelectorAll('.full-postit.zoomed').forEach(p => p.classList.remove('zoomed'));
-          div.classList.add('zoomed');
-          overlay.classList.add('active');
-        }
-      });
-      surface.appendChild(div);
+    visibleItems.forEach((item, i) => {
+      if (item.type === 'postit') {
+        const img = POSTIT_IMAGES[i % POSTIT_IMAGES.length];
+        const div = document.createElement('div');
+        div.className = 'full-postit';
+        if (item.author === 'm') div.classList.add('postit-m');
+        div.style.backgroundImage = `url('assets/${img}')`;
+        div.style.transform = `rotate(${item.rotation}deg)`;
+        div.style.top = item.position.top;
+        div.style.left = item.position.left;
+        div.textContent = item.text;
+
+        div.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const overlay = document.querySelector('.postit-overlay');
+          if (div.classList.contains('zoomed')) {
+            div.classList.remove('zoomed');
+            if (overlay) overlay.classList.remove('active');
+          } else {
+            document.querySelectorAll('.full-postit.zoomed').forEach(p => p.classList.remove('zoomed'));
+            div.classList.add('zoomed');
+            if (overlay) overlay.classList.add('active');
+          }
+        });
+        surface.appendChild(div);
+
+      } else if (item.type === 'sketch') {
+        const div = document.createElement('div');
+        div.className = 'pinboard-sketch';
+        div.style.top = item.position.top;
+        div.style.left = item.position.left;
+        div.style.transform = `rotate(${item.rotation}deg)`;
+        div.innerHTML = `
+          <img src="assets/${item.image}" alt="${item.label}" class="pinboard-sketch-img"/>
+          <div class="pinboard-sketch-label">${item.label}</div>
+        `;
+        div.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // Zoom sketch
+          const overlay = document.querySelector('.postit-overlay');
+          if (div.classList.contains('sketch-zoomed-active')) {
+            div.classList.remove('sketch-zoomed-active');
+            if (overlay) overlay.classList.remove('active');
+          } else {
+            div.classList.add('sketch-zoomed-active');
+            if (overlay) overlay.classList.add('active');
+          }
+        });
+        surface.appendChild(div);
+      }
     });
 
-    // Overlay to close zoomed post-it
-    let overlay = document.querySelector('.postit-overlay');
+    // Overlay to close zoomed items
+    let overlay = surface.parentElement.querySelector('.postit-overlay');
     if (!overlay) {
       overlay = document.createElement('div');
       overlay.className = 'postit-overlay';
-      document.querySelector('#pinboard-detail').appendChild(overlay);
+      document.getElementById('pinboard-detail').appendChild(overlay);
     }
     overlay.addEventListener('click', () => {
       document.querySelectorAll('.full-postit.zoomed').forEach(p => p.classList.remove('zoomed'));
+      document.querySelectorAll('.sketch-zoomed-active').forEach(p => p.classList.remove('sketch-zoomed-active'));
       overlay.classList.remove('active');
     });
 
-    // Place photos
-    const photoPositions = [
-      { top: '0%', left: '66%', rotation: -3 },
-      { top: '23%', left: '69%', rotation: 4 },
-      { top: '45%', left: '64%', rotation: -2 },
-      { top: '65%', left: '67%', rotation: 5 },
-    ];
-
-    PROFILES.forEach((profile, i) => {
-      const pos = photoPositions[i];
-      const photo = document.createElement('div');
-      photo.className = 'pinboard-photo';
-      photo.style.top = pos.top;
-      photo.style.left = pos.left;
-      photo.style.transform = `rotate(${pos.rotation}deg)`;
-      photo.innerHTML = `
-        <div class="pinboard-photo-placeholder">?</div>
-        <div class="pinboard-photo-label">${profile.name}</div>
-      `;
-      surface.appendChild(photo);
-    });
-
-    // Reveal post-its only after the background image is loaded
-    const bgImg = new Image();
-    bgImg.onload = () => surface.classList.add('bg-loaded');
-    bgImg.src = 'assets/cork-bg.png';
-    // Fallback in case image is already cached
-    if (bgImg.complete) surface.classList.add('bg-loaded');
+    // Reveal items only after background image is loaded
+    if (!surface.classList.contains('bg-loaded')) {
+      const bgImg = new Image();
+      bgImg.onload = () => surface.classList.add('bg-loaded');
+      bgImg.src = 'assets/cork-bg.jpg';
+      if (bgImg.complete) surface.classList.add('bg-loaded');
+    } else {
+      // Already loaded from previous render — make sure items are visible
+      surface.classList.add('bg-loaded');
+    }
   }
 
-  // --- Notepad (page-flip journal) ---
+  // ===== JOURNAL (page-flip notebook, wave-filtered) =====
   function populateNotepad() {
     const book = document.getElementById('journal-book');
     if (!book) return;
@@ -292,68 +298,97 @@
     const isMobileTouch = !hasHoverDevice;
     const isNarrow = window.matchMedia('(max-width: 768px)');
     const notebookOuter = document.querySelector('.notebook-outer');
+
     function updatePageMode() {
       const singlePage = isMobileTouch || isNarrow.matches;
       pagesPerSpread = singlePage ? 1 : 2;
       if (notebookOuter) notebookOuter.classList.toggle('single-page', singlePage);
     }
     updatePageMode();
-    isNarrow.addEventListener('change', () => {
-      updatePageMode();
-      journalSpreadIndex = 0;
-      renderSpread();
-    });
 
+    if (!isNarrow._boundChange) {
+      isNarrow.addEventListener('change', () => {
+        updatePageMode();
+        journalSpreadIndex = 0;
+        renderSpread();
+      });
+      isNarrow._boundChange = true;
+    }
+
+    journalSpreadIndex = 0;
     renderSpread();
 
-    document.getElementById('journal-prev').addEventListener('click', () => {
-      if (journalSpreadIndex > 0) {
-        flipPage('right', () => { journalSpreadIndex--; renderSpread(); });
-      }
-    });
-    document.getElementById('journal-next').addEventListener('click', () => {
-      const totalSpreads = Math.ceil(NOTEBOOK_ENTRIES.length / pagesPerSpread);
-      if (journalSpreadIndex < totalSpreads - 1) {
-        flipPage('left', () => { journalSpreadIndex++; renderSpread(); });
-      }
-    });
+    // Only bind nav buttons once
+    const prevBtn = document.getElementById('journal-prev');
+    const nextBtn = document.getElementById('journal-next');
+    if (!prevBtn._bound) {
+      prevBtn.addEventListener('click', () => {
+        if (journalSpreadIndex > 0) {
+          flipPage('right', () => { journalSpreadIndex--; renderSpread(); });
+        }
+      });
+      prevBtn._bound = true;
+    }
+    if (!nextBtn._bound) {
+      nextBtn.addEventListener('click', () => {
+        const pages = WaveSystem.getVisibleContent(JOURNAL_PAGES);
+        const totalSpreads = Math.ceil(pages.length / pagesPerSpread);
+        if (journalSpreadIndex < totalSpreads - 1) {
+          flipPage('left', () => { journalSpreadIndex++; renderSpread(); });
+        }
+      });
+      nextBtn._bound = true;
+    }
 
     // Swipe support for mobile
-    let startX = 0, startY = 0;
-    book.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-    }, { passive: true });
-    book.addEventListener('touchend', (e) => {
-      const dx = e.changedTouches[0].clientX - startX;
-      const dy = e.changedTouches[0].clientY - startY;
-      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
-        if (dx < 0) document.getElementById('journal-next').click();
-        else document.getElementById('journal-prev').click();
-      }
-    }, { passive: true });
+    if (!book._swipeBound) {
+      let startX = 0, startY = 0;
+      book.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+      book.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+          if (dx < 0) document.getElementById('journal-next').click();
+          else document.getElementById('journal-prev').click();
+        }
+      }, { passive: true });
+      book._swipeBound = true;
+    }
   }
 
   function renderSpread() {
     const book = document.getElementById('journal-book');
-    const totalSpreads = Math.ceil(NOTEBOOK_ENTRIES.length / pagesPerSpread);
+    if (!book) return;
+
+    const pages = WaveSystem.getVisibleContent(JOURNAL_PAGES);
+    const totalSpreads = Math.ceil(pages.length / pagesPerSpread);
     const startIndex = journalSpreadIndex * pagesPerSpread;
 
     let html = '<div class="journal-spread">';
     for (let i = 0; i < pagesPerSpread; i++) {
       const entryIndex = startIndex + i;
-      const pageNum = entryIndex + 1;
       const side = (pagesPerSpread === 2) ? (i === 0 ? 'left' : 'right') : '';
 
-      if (entryIndex < NOTEBOOK_ENTRIES.length) {
-        const entry = NOTEBOOK_ENTRIES[entryIndex];
+      if (entryIndex < pages.length) {
+        const entry = pages[entryIndex];
+        // Track engagement
+        WaveSystem.trackEngagement('journal', entry.page);
+
+        let contentHtml = `<div class="notebook-date">${entry.date}</div>`;
+        contentHtml += `<div class="notebook-text">${entry.text}</div>`;
+        if (entry.marginNote) {
+          contentHtml += `<div class="notebook-margin-note">${entry.marginNote}</div>`;
+        }
+
         html += `
           <div class="journal-page ${side}">
             <div class="journal-page-content">
-              <div class="notebook-date">${entry.date}</div>
-              <div class="notebook-text">${entry.text}</div>
+              ${contentHtml}
             </div>
-            <div class="journal-page-number">${pageNum}</div>
+            <div class="journal-page-number">${entry.page}</div>
           </div>`;
       } else {
         html += `<div class="journal-page ${side}"><div class="journal-page-content"></div></div>`;
@@ -366,10 +401,10 @@
     const countEl = document.getElementById('journal-count');
     if (pagesPerSpread === 2) {
       const left = startIndex + 1;
-      const right = Math.min(startIndex + 2, NOTEBOOK_ENTRIES.length);
-      countEl.textContent = `${left}–${right} / ${NOTEBOOK_ENTRIES.length}`;
+      const right = Math.min(startIndex + 2, pages.length);
+      countEl.textContent = `${left}–${right} / ${pages.length}`;
     } else {
-      countEl.textContent = `${startIndex + 1} / ${NOTEBOOK_ENTRIES.length}`;
+      countEl.textContent = `${startIndex + 1} / ${pages.length}`;
     }
 
     document.getElementById('journal-prev').disabled = (journalSpreadIndex === 0);
@@ -393,114 +428,214 @@
     }, 620);
   }
 
-  // --- Sightings Map (click dots to show info) ---
-  function populateMap() {
-    const mapScreen = document.getElementById('map-screen');
-    const mapInfo = document.getElementById('map-info');
-    if (!mapScreen || !mapInfo) return;
+  // ===== CASSETTE PLAYER =====
+  function populateCassette() {
+    const tapeList = document.getElementById('cassette-tape-list');
+    const label = document.getElementById('cassette-label');
+    const desc = document.getElementById('cassette-description');
+    if (!tapeList) return;
 
-    mapScreen.querySelectorAll('.map-dot').forEach(dot => {
-      dot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const idx = parseInt(dot.getAttribute('data-sighting'));
-        const sighting = SIGHTINGS[idx];
-        if (!sighting) return;
+    tapeList.innerHTML = '';
 
-        mapInfo.innerHTML = `
-          <div class="map-info-date">${sighting.date} — ${sighting.time}</div>
-          <div class="map-info-location">${sighting.location}</div>
-          <div class="map-info-desc">${sighting.description}</div>
-        `;
-        mapInfo.classList.add('active');
+    // Filter tapes by wave AND safe requirement
+    const visibleTapes = WaveSystem.getVisibleContent(CASSETTE_TAPES).filter(tape => {
+      if (tape.requiresSafe && !WaveSystem.isSafeOpened()) return false;
+      return true;
+    });
+
+    visibleTapes.forEach(tape => {
+      const btn = document.createElement('button');
+      btn.className = 'cassette-tape-item';
+      if (tape.id === currentCassetteId) btn.classList.add('active');
+      btn.textContent = tape.label;
+      btn.addEventListener('click', () => {
+        loadTape(tape);
       });
+      tapeList.appendChild(btn);
     });
 
-    // Click on monitor (not a dot) closes the info panel
-    document.querySelector('.map-monitor').addEventListener('click', () => {
-      mapInfo.classList.remove('active');
-    });
-
-    // Show dots only after monitor image loads
-    const bgImg = new Image();
-    bgImg.onload = () => mapScreen.classList.add('bg-loaded');
-    bgImg.src = 'assets/terminal2-bg.png';
-    if (bgImg.complete) mapScreen.classList.add('bg-loaded');
+    // Setup controls (once)
+    const playBtn = document.getElementById('cassette-play');
+    const stopBtn = document.getElementById('cassette-stop');
+    const rewindBtn = document.getElementById('cassette-rewind');
+    if (playBtn && !playBtn._bound) {
+      playBtn.addEventListener('click', () => {
+        if (!currentCassetteId) return;
+        playBtn.classList.add('active');
+        // Visual: spin reels
+        document.querySelectorAll('.cassette-reel').forEach(r => r.classList.add('spinning'));
+        WaveSystem.trackEngagement('tape', currentCassetteId);
+      });
+      stopBtn.addEventListener('click', () => {
+        playBtn.classList.remove('active');
+        document.querySelectorAll('.cassette-reel').forEach(r => r.classList.remove('spinning'));
+      });
+      rewindBtn.addEventListener('click', () => {
+        playBtn.classList.remove('active');
+        document.querySelectorAll('.cassette-reel').forEach(r => r.classList.remove('spinning'));
+      });
+      playBtn._bound = true;
+    }
   }
 
-  // --- Sketches (wall-pinned layout with image assets) ---
-  function populateSketches() {
-    const wall = document.getElementById('sketches-grid');
-    if (!wall) return;
+  function loadTape(tape) {
+    currentCassetteId = tape.id;
+    const label = document.getElementById('cassette-label');
+    const desc = document.getElementById('cassette-description');
+    if (label) label.textContent = tape.label;
+    if (desc) desc.textContent = tape.description;
 
-    // Wall positions — 5 sketches scattered randomly (smaller to leave room for more)
-    const positions = [
-      { left: '4%',  top: '6%',  width: '16%', rotation: -3 },
-      { left: '32%', top: '3%',  width: '17%', rotation: 2 },
-      { left: '64%', top: '8%',  width: '15%', rotation: -1 },
-      { left: '8%',  top: '50%', width: '16%', rotation: 1 },
-      { left: '45%', top: '48%', width: '18%', rotation: -2 },
-    ];
-
-    // Wall annotations (scrawled on wall between sketches)
-    const annotations = [
-      { text: 'same species??', left: '60%', top: '55%', rotation: -5 },
-      { text: '→ compare with Berlin photo', left: '78%', top: '75%', rotation: 2 },
-      { text: 'SOURCE connection?', left: '80%', top: '40%', rotation: -90 },
-    ];
-
-    WALL_SKETCHES.forEach((sketch, i) => {
-      const pos = positions[i];
-      const item = document.createElement('div');
-      item.className = 'sketch-wall-item';
-      item.style.left = pos.left;
-      item.style.top = pos.top;
-      item.style.width = pos.width;
-      item.style.transform = `rotate(${pos.rotation}deg)`;
-
-      item.innerHTML = `<img src="${sketch.image}" alt="${sketch.name}" class="sketch-wall-img"/>`;
-
-      // Click to zoom
-      item.addEventListener('click', () => {
-        const overlay = document.querySelector('.sketch-overlay');
-        const zoomed = document.querySelector('.sketch-zoomed');
-        zoomed.innerHTML = `
-          <img src="${sketch.image}" alt="${sketch.name}" class="sketch-zoomed-img"/>
-        `;
-        overlay.classList.add('active');
-        zoomed.classList.add('active');
-      });
-
-      wall.appendChild(item);
+    // Highlight active tape in list
+    document.querySelectorAll('.cassette-tape-item').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent === tape.label);
     });
 
-    // Zoom overlay
-    let overlay = document.querySelector('.sketch-overlay');
-    if (!overlay) {
-      overlay = document.createElement('div');
-      overlay.className = 'sketch-overlay';
-      const zoomed = document.createElement('div');
-      zoomed.className = 'sketch-zoomed';
-      document.getElementById('sketches-detail').appendChild(overlay);
-      document.getElementById('sketches-detail').appendChild(zoomed);
+    // Stop any playback
+    document.getElementById('cassette-play')?.classList.remove('active');
+    document.querySelectorAll('.cassette-reel').forEach(r => r.classList.remove('spinning'));
+  }
 
-      const closeZoom = () => {
-        overlay.classList.remove('active');
-        zoomed.classList.remove('active');
-      };
-      overlay.addEventListener('click', closeZoom);
-      zoomed.addEventListener('click', closeZoom);
+  // ===== SAFE + DOSSIER =====
+  function populateSafe() {
+    const container = document.getElementById('safe-container');
+    if (!container) return;
+
+    const display = document.getElementById('safe-display');
+    const dial = document.getElementById('safe-dial');
+    const handle = document.getElementById('safe-handle');
+    const dossier = document.getElementById('safe-dossier');
+
+    if (!display) return;
+
+    // Update display based on state
+    if (WaveSystem.isSafeOpened()) {
+      display.textContent = 'OPEN';
+      container.classList.add('safe-opened');
+      renderDossier();
+      return;
     }
 
-    // Add wall annotations
-    annotations.forEach(ann => {
-      const el = document.createElement('div');
-      el.className = 'sketch-wall-annotation';
-      el.style.left = ann.left;
-      el.style.top = ann.top;
-      el.style.transform = `rotate(${ann.rotation}deg)`;
-      el.textContent = ann.text;
-      wall.appendChild(el);
+    if (WaveSystem.isSafeDialAvailable()) {
+      display.textContent = 'ENTER CODE';
+      container.classList.add('safe-dial-active');
+      setupSafeDial();
+    } else if (WaveSystem.getWave() >= 2) {
+      display.textContent = 'LOCKED';
+      container.classList.remove('safe-dial-active');
+    }
+  }
+
+  let safeCode = [];
+  const CORRECT_CODE = [3, 17, 58];
+
+  function setupSafeDial() {
+    const dial = document.getElementById('safe-dial');
+    const display = document.getElementById('safe-display');
+    const handle = document.getElementById('safe-handle');
+    if (!dial || dial._bound) return;
+
+    safeCode = [];
+    let rotation = 0;
+
+    dial.addEventListener('click', () => {
+      // Each click rotates dial and adds a number
+      rotation += 120;
+      dial.style.transform = `rotate(${rotation}deg)`;
+
+      // Simulate code entry: cycle through the correct code
+      const codeNum = CORRECT_CODE[safeCode.length] || 0;
+      safeCode.push(codeNum);
+      display.textContent = safeCode.map(n => String(n).padStart(2, '0')).join('-');
+
+      if (safeCode.length === 3) {
+        // Check code
+        const correct = safeCode[0] === CORRECT_CODE[0] &&
+                        safeCode[1] === CORRECT_CODE[1] &&
+                        safeCode[2] === CORRECT_CODE[2];
+        if (correct) {
+          setTimeout(() => {
+            display.textContent = 'ACCESS GRANTED';
+            handle.classList.add('turned');
+            WaveSystem.trackEngagement('safe');
+            setTimeout(() => {
+              document.getElementById('safe-container').classList.add('safe-opened');
+              document.getElementById('safe-door').classList.add('open');
+              renderDossier();
+              // Refresh cassette (unlocks safe-required tapes)
+              populateCassette();
+            }, 800);
+          }, 500);
+        } else {
+          display.textContent = 'DENIED';
+          safeCode = [];
+          setTimeout(() => { display.textContent = 'ENTER CODE'; }, 1500);
+        }
+      }
     });
+    dial._bound = true;
+  }
+
+  function renderDossier() {
+    const dossier = document.getElementById('safe-dossier');
+    if (!dossier) return;
+    dossier.classList.remove('hidden');
+
+    let html = '<div class="dossier-content">';
+    SAFE_DOSSIER.sections.forEach(section => {
+      html += `<div class="dossier-section">`;
+      html += `<div class="dossier-section-title">${section.title}</div>`;
+      if (Array.isArray(section.content)) {
+        section.content.forEach(item => {
+          html += `<div class="dossier-entry ${section.isRedacted ? 'redacted' : ''}">`;
+          html += `<div class="dossier-entry-type">${item.type}</div>`;
+          html += `<div class="dossier-entry-class">${item.classification}</div>`;
+          html += `<div class="dossier-entry-text">${item.text}</div>`;
+          if (item.footnote) html += `<div class="dossier-entry-footnote">${item.footnote}</div>`;
+          html += `</div>`;
+        });
+      } else {
+        html += `<div class="dossier-text ${section.isRedacted ? 'redacted' : ''}">${section.content}</div>`;
+      }
+      html += `</div>`;
+    });
+    html += `<div class="dossier-final">${SAFE_DOSSIER.finalPage}</div>`;
+    html += '</div>';
+    dossier.innerHTML = html;
+  }
+
+  // ===== SOURCE MONITOR =====
+  function populateSource() {
+    const screen = document.getElementById('source-screen');
+    if (!screen) return;
+
+    const coherenceEl = document.getElementById('source-coherence');
+    const feedEl = document.getElementById('source-feed');
+    const readingsEl = document.getElementById('source-readings');
+
+    if (!WaveSystem.isFeatureAvailable('sourceMonitor')) {
+      coherenceEl.innerHTML = '';
+      feedEl.innerHTML = '';
+      readingsEl.innerHTML = '';
+      return;
+    }
+
+    const wave = WaveSystem.getWave();
+    const data = wave >= 5 ? SOURCE_MONITOR.wave5 : SOURCE_MONITOR.wave4;
+
+    coherenceEl.innerHTML = `
+      <div class="source-coherence-label">SOURCE COHERENCE</div>
+      <div class="source-coherence-bar">
+        <div class="source-coherence-fill" style="width: ${data.coherence}%"></div>
+      </div>
+      <div class="source-coherence-value">${data.coherence}%</div>
+      <div class="source-status">${data.status}</div>
+    `;
+
+    feedEl.innerHTML = `<div class="source-feed-text">${data.feed}</div>`;
+
+    readingsEl.innerHTML = data.readings.map(r =>
+      `<div class="source-reading">${r}</div>`
+    ).join('');
   }
 
 })();
