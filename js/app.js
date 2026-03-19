@@ -202,6 +202,22 @@
     }
   }
 
+  // ===== PINBOARD ZOOM HELPER =====
+  function zoomPinboardItem(el, zoomClass) {
+    const overlay = document.querySelector('.postit-overlay');
+    if (el.classList.contains(zoomClass)) {
+      el.classList.remove(zoomClass);
+      if (overlay) overlay.classList.remove('active');
+    } else {
+      // Unzoom any other zoomed items
+      document.querySelectorAll('.full-postit.zoomed, .sketch-zoomed-active, .photo-zoomed-active, .receipt-zoomed-active, .diagram-zoomed-active').forEach(p => {
+        p.classList.remove('zoomed', 'sketch-zoomed-active', 'photo-zoomed-active', 'receipt-zoomed-active', 'diagram-zoomed-active');
+      });
+      el.classList.add(zoomClass);
+      if (overlay) overlay.classList.add('active');
+    }
+  }
+
   // ===== PINBOARD (merged: post-its + sketches + photos) =====
   function populatePinboard() {
     const surface = document.getElementById('pinboard-surface');
@@ -222,19 +238,19 @@
         div.style.transform = `rotate(${item.rotation}deg)`;
         div.style.top = item.position.top;
         div.style.left = item.position.left;
-        div.textContent = item.text;
+
+        // Push-pin
+        const pin = document.createElement('div');
+        pin.className = 'pin-thumb';
+        div.appendChild(pin);
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = item.text;
+        div.appendChild(textSpan);
 
         div.addEventListener('click', (e) => {
           e.stopPropagation();
-          const overlay = document.querySelector('.postit-overlay');
-          if (div.classList.contains('zoomed')) {
-            div.classList.remove('zoomed');
-            if (overlay) overlay.classList.remove('active');
-          } else {
-            document.querySelectorAll('.full-postit.zoomed').forEach(p => p.classList.remove('zoomed'));
-            div.classList.add('zoomed');
-            if (overlay) overlay.classList.add('active');
-          }
+          zoomPinboardItem(div, 'zoomed');
         });
         surface.appendChild(div);
 
@@ -245,20 +261,93 @@
         div.style.left = item.position.left;
         div.style.transform = `rotate(${item.rotation}deg)`;
         div.innerHTML = `
+          <div class="pin-thumb"></div>
           <img src="assets/${item.image}" alt="${item.label}" class="pinboard-sketch-img"/>
           <div class="pinboard-sketch-label">${item.label}</div>
         `;
         div.addEventListener('click', (e) => {
           e.stopPropagation();
-          // Zoom sketch
-          const overlay = document.querySelector('.postit-overlay');
-          if (div.classList.contains('sketch-zoomed-active')) {
-            div.classList.remove('sketch-zoomed-active');
-            if (overlay) overlay.classList.remove('active');
-          } else {
-            div.classList.add('sketch-zoomed-active');
-            if (overlay) overlay.classList.add('active');
-          }
+          zoomPinboardItem(div, 'sketch-zoomed-active');
+        });
+        surface.appendChild(div);
+
+      } else if (item.type === 'photo') {
+        const div = document.createElement('div');
+        div.className = 'pinboard-photo';
+        div.style.top = item.position.top;
+        div.style.left = item.position.left;
+        div.style.transform = `rotate(${item.rotation}deg)`;
+        div.innerHTML = `
+          <div class="pin-thumb"></div>
+          <div class="pinboard-photo-frame">
+            <div class="pinboard-photo-placeholder">
+              <span class="photo-icon">📷</span>
+              <span class="photo-static"></span>
+            </div>
+          </div>
+          <div class="pinboard-photo-label">${item.label}</div>
+          ${item.caption ? `<div class="pinboard-photo-caption">${item.caption}</div>` : ''}
+        `;
+        div.addEventListener('click', (e) => {
+          e.stopPropagation();
+          zoomPinboardItem(div, 'photo-zoomed-active');
+        });
+        surface.appendChild(div);
+
+      } else if (item.type === 'receipt') {
+        const div = document.createElement('div');
+        div.className = 'pinboard-receipt';
+        div.style.top = item.position.top;
+        div.style.left = item.position.left;
+        div.style.transform = `rotate(${item.rotation}deg)`;
+        const itemsHtml = item.items.map(line =>
+          line === '---' ? '<div class="receipt-divider"></div>' : `<div class="receipt-line">${line}</div>`
+        ).join('');
+        div.innerHTML = `
+          <div class="pin-thumb"></div>
+          <div class="receipt-header">${item.vendor}</div>
+          <div class="receipt-date">${item.date}</div>
+          ${itemsHtml}
+          <div class="receipt-divider"></div>
+          <div class="receipt-total">${item.total}</div>
+        `;
+        div.addEventListener('click', (e) => {
+          e.stopPropagation();
+          zoomPinboardItem(div, 'receipt-zoomed-active');
+        });
+        surface.appendChild(div);
+
+      } else if (item.type === 'diagram') {
+        const div = document.createElement('div');
+        div.className = 'pinboard-diagram';
+        div.style.top = item.position.top;
+        div.style.left = item.position.left;
+        div.style.transform = `rotate(${item.rotation}deg)`;
+        div.innerHTML = `
+          <div class="pin-thumb"></div>
+          <div class="diagram-title">${item.title}</div>
+          <div class="diagram-visual">
+            <svg viewBox="0 0 100 100" class="diagram-svg">
+              <circle cx="50" cy="50" r="3" fill="#cc3333" opacity="0.8"/>
+              <line x1="15" y1="20" x2="50" y2="50" stroke="#cc3333" stroke-width="0.5" opacity="0.6"/>
+              <line x1="85" y1="25" x2="50" y2="50" stroke="#cc3333" stroke-width="0.5" opacity="0.6"/>
+              <line x1="20" y1="80" x2="50" y2="50" stroke="#cc3333" stroke-width="0.5" opacity="0.6"/>
+              <line x1="80" y1="75" x2="50" y2="50" stroke="#cc3333" stroke-width="0.5" opacity="0.6"/>
+              <line x1="50" y1="10" x2="50" y2="50" stroke="#cc3333" stroke-width="0.5" opacity="0.6"/>
+              <line x1="10" y1="50" x2="50" y2="50" stroke="#cc3333" stroke-width="0.5" opacity="0.6"/>
+              <circle cx="15" cy="20" r="2" fill="none" stroke="#666" stroke-width="0.5"/>
+              <circle cx="85" cy="25" r="2" fill="none" stroke="#666" stroke-width="0.5"/>
+              <circle cx="20" cy="80" r="2" fill="none" stroke="#666" stroke-width="0.5"/>
+              <circle cx="80" cy="75" r="2" fill="none" stroke="#666" stroke-width="0.5"/>
+              <circle cx="50" cy="10" r="2" fill="none" stroke="#666" stroke-width="0.5"/>
+              <circle cx="10" cy="50" r="2" fill="none" stroke="#666" stroke-width="0.5"/>
+            </svg>
+          </div>
+          <div class="diagram-desc">${item.description}</div>
+        `;
+        div.addEventListener('click', (e) => {
+          e.stopPropagation();
+          zoomPinboardItem(div, 'diagram-zoomed-active');
         });
         surface.appendChild(div);
       }
@@ -272,8 +361,9 @@
       document.getElementById('pinboard-detail').appendChild(overlay);
     }
     overlay.addEventListener('click', () => {
-      document.querySelectorAll('.full-postit.zoomed').forEach(p => p.classList.remove('zoomed'));
-      document.querySelectorAll('.sketch-zoomed-active').forEach(p => p.classList.remove('sketch-zoomed-active'));
+      document.querySelectorAll('.full-postit.zoomed, .sketch-zoomed-active, .photo-zoomed-active, .receipt-zoomed-active, .diagram-zoomed-active').forEach(p => {
+        p.classList.remove('zoomed', 'sketch-zoomed-active', 'photo-zoomed-active', 'receipt-zoomed-active', 'diagram-zoomed-active');
+      });
       overlay.classList.remove('active');
     });
 

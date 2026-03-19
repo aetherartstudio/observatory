@@ -910,35 +910,212 @@ body {
   z-index: 5;
 }
 
+/* Push-pin thumbtack on all pinboard items */
+.pin-thumb {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e44, #a11);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.3);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ===== PHOTO (polaroid style) ===== */
 .pinboard-photo {
   position: absolute;
-  width: 10cqw;
-  height: 14cqh;
-  background: #eee;
-  border: 3px solid #fff;
-  box-shadow: 3px 4px 10px rgba(0,0,0,0.3);
+  width: 11cqw;
+  background: #f5f3ee;
+  border: none;
+  padding: 0.6cqw 0.6cqw 2.5cqw;
+  box-shadow: 3px 4px 12px rgba(0,0,0,0.35);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.pinboard-photo:hover {
+  transform: scale(1.08) !important;
+  z-index: 10;
+}
+.pinboard-photo-frame {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+.pinboard-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #2a2a2a 100%);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+.photo-icon {
+  font-size: 2cqw;
+  opacity: 0.4;
+  position: relative;
+  z-index: 1;
+}
+.photo-static {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,0.02) 2px,
+    rgba(255,255,255,0.02) 4px
+  );
+  animation: photoStatic 0.3s steps(3) infinite;
+}
+@keyframes photoStatic {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0.3; }
 }
 .pinboard-photo-label {
   font-family: var(--font-handwriting);
-  font-size: 1.2cqw;
-  color: #666;
-  margin-top: 5px;
+  font-size: 0.7cqw;
+  color: #555;
+  margin-top: 0.4cqw;
+  text-align: center;
 }
-.pinboard-photo-placeholder {
-  width: 60%;
-  height: 60%;
-  background: #ccc;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5cqw;
-  color: #999;
+.pinboard-photo-caption {
+  font-family: var(--font-handwriting);
+  font-size: 0.65cqw;
+  color: #888;
+  text-align: center;
+  font-style: italic;
+}
+.pinboard-photo.photo-zoomed-active {
+  position: fixed;
+  width: 35vw;
+  max-width: 420px;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(0deg) !important;
+  z-index: 1000;
+  padding: 12px 12px 40px;
+}
+
+/* ===== RECEIPT (thermal paper style) ===== */
+.pinboard-receipt {
+  position: absolute;
+  width: 8cqw;
+  background: #faf8f2;
+  padding: 1cqw 0.8cqw;
+  font-family: var(--font-mono);
+  font-size: 0.55cqw;
+  color: #444;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  line-height: 1.5;
+  /* Torn edge effect */
+  mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+}
+.pinboard-receipt:hover {
+  transform: scale(1.08) !important;
+  z-index: 10;
+}
+.receipt-header {
+  font-weight: 600;
+  font-size: 0.6cqw;
+  text-align: center;
+  border-bottom: 1px dashed #aaa;
+  padding-bottom: 0.3cqw;
+  margin-bottom: 0.3cqw;
+}
+.receipt-date {
+  text-align: center;
+  font-size: 0.5cqw;
+  color: #888;
+  margin-bottom: 0.4cqw;
+}
+.receipt-line {
+  padding: 0.1cqw 0;
+}
+.receipt-divider {
+  border-top: 1px dashed #bbb;
+  margin: 0.3cqw 0;
+}
+.receipt-total {
+  font-weight: 600;
+  text-align: right;
+}
+.pinboard-receipt.receipt-zoomed-active {
+  position: fixed;
+  width: 240px;
+  padding: 20px 16px;
+  font-size: 13px;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(0deg) !important;
+  z-index: 1000;
+  filter: drop-shadow(0 10px 40px rgba(0,0,0,0.5));
+}
+.pinboard-receipt.receipt-zoomed-active .receipt-header { font-size: 14px; }
+.pinboard-receipt.receipt-zoomed-active .receipt-date { font-size: 12px; }
+
+/* ===== DIAGRAM (hand-drawn on grid paper) ===== */
+.pinboard-diagram {
+  position: absolute;
+  width: 12cqw;
+  background: #f0eee5;
+  background-image:
+    linear-gradient(rgba(150,180,210,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(150,180,210,0.15) 1px, transparent 1px);
+  background-size: 8px 8px;
+  padding: 1cqw;
+  box-shadow: 2px 3px 10px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.pinboard-diagram:hover {
+  transform: scale(1.08) !important;
+  z-index: 10;
+}
+.diagram-title {
+  font-family: var(--font-typewriter);
+  font-size: 0.65cqw;
+  color: #333;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-bottom: 0.5cqw;
+  text-decoration: underline;
+}
+.diagram-visual {
+  width: 100%;
+  aspect-ratio: 1;
+}
+.diagram-svg {
+  width: 100%;
+  height: 100%;
+}
+.diagram-desc {
+  font-family: var(--font-handwriting);
+  font-size: 0.6cqw;
+  color: #555;
+  margin-top: 0.5cqw;
+  line-height: 1.3;
+}
+.pinboard-diagram.diagram-zoomed-active {
+  position: fixed;
+  width: 40vw;
+  max-width: 480px;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(0deg) !important;
+  z-index: 1000;
+  padding: 20px;
+  filter: drop-shadow(0 10px 40px rgba(0,0,0,0.5));
 }
 
 /* Red strings removed — looked like random lines without endpoint pins */
@@ -1462,7 +1639,11 @@ body {
 /* M.'s post-its — distinct handwriting style */
 .postit-m {
   font-style: italic;
-  color: #3a2a2a;
+  font-weight: 600;
+  color: #4a2233;
+  letter-spacing: 0.3px;
+  /* Slightly different pen look — darker, more deliberate */
+  text-shadow: 0 0 0.5px rgba(80, 30, 50, 0.3);
 }
 
 /* ===== CASSETTE PLAYER ===== */

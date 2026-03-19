@@ -96,10 +96,16 @@ const PINBOARD_ITEMS = [
   { wave: 2, type: 'postit', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE. But they keep coming back to Taipei.', color: '#f7dc6f', rotation: 2, position: { top: '50%', left: '55%' }, author: 'researcher' },
   { wave: 2, type: 'postit', text: 'The locals named them: Fugu, MrQ, Groovix, Muncha. I will continue using type designations.', color: '#82e0aa', rotation: -3, position: { top: '55%', left: '75%' }, author: 'researcher' },
   { wave: 2, type: 'sketch', image: 'source crystal-1.png', position: { top: '70%', left: '15%' }, rotation: 1, label: 'Source crystal — preliminary sketch' },
+  { wave: 2, type: 'photo', image: null, position: { top: '35%', left: '55%' }, rotation: -2, label: 'Shilin Night Market — 02:40', caption: 'Motion blur near flower stall. Fugu?' },
+  { wave: 2, type: 'receipt', position: { top: '62%', left: '55%' }, rotation: 3, vendor: 'SHILIN MARKET STALL #17', date: '2024-11-10', items: ['Tea egg ×2', 'Stinky tofu ×1', '---', 'ANOMALOUS RESIDUE DETECTED'], total: 'NT$ 85' },
   { wave: 3, type: 'postit', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: 1, position: { top: '75%', left: '55%' }, author: 'researcher' },
   { wave: 3, type: 'postit', text: 'UV confirms the receipts. The energy residue is REAL.', color: '#f7dc6f', rotation: -2, position: { top: '78%', left: '35%' }, author: 'researcher' },
+  { wave: 3, type: 'photo', image: null, position: { top: '42%', left: '75%' }, rotation: 2, label: 'Jiufen Old Street — 01:55', caption: 'Temple steps. Type 1 oriented toward ocean.' },
+  { wave: 3, type: 'receipt', position: { top: '50%', left: '38%' }, rotation: -4, vendor: '7-ELEVEN SHILIN #229', date: '2025-01-08', items: ['Battery pack ×1', 'Onigiri ×2', '---', 'UV TRACE: POSITIVE'], total: 'NT$ 147' },
   { wave: 4, type: 'postit', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '75%', left: '75%' }, author: 'm' },
+  { wave: 4, type: 'diagram', position: { top: '20%', left: '68%' }, rotation: -1, title: 'CONVERGENCE VECTORS', description: 'All specimen trajectories — radial pattern confirmed. Center: [REDACTED]' },
   { wave: 5, type: 'postit', text: 'All observed specimens appear to be moving in the same direction.', color: '#85c1e9', rotation: -1, position: { top: '35%', left: '75%' }, author: 'researcher' },
+  { wave: 5, type: 'postit', text: 'M. sat with them. Eleven minutes. Then: "It remembers."', color: '#f5b7b1', rotation: 2, position: { top: '82%', left: '15%' }, author: 'm' },
 ];
 
 const PINBOARD_UV = [
