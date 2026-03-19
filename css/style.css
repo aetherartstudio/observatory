@@ -517,15 +517,15 @@ body {
 
 /* ===== SIGHTINGS MAP MONITOR ===== */
 .map-monitor {
-  /* Lock to monitor image aspect ratio */
-  aspect-ratio: 1456 / 816;
-  width: min(98vw, 96vh * 1456 / 816);
-  max-height: 96vh;
+  /* Lock to monitor image ratio — explicit width+height */
+  width: min(98vw, calc(96vh * 1456 / 816));
+  height: min(96vh, calc(98vw * 816 / 1456));
   background: url('../assets/terminal2-bg.jpg') center / 100% 100% no-repeat;
   background-color: #0a0805;
   position: relative;
   border-radius: 6px;
   overflow: hidden;
+  margin: auto;
 }
 
 /* Hide dots until monitor image is loaded */
@@ -927,11 +927,9 @@ body {
 
 /* ===== NOTEBOOK DETAIL (image-backed) ===== */
 .notebook-outer {
-  /* Lock to image's native aspect ratio so it never stretches */
-  aspect-ratio: 1456 / 816;
-  width: min(96vw, 92vh * 1456 / 816);
-  max-height: 92vh;
-  max-width: none;
+  /* Lock to image ratio — explicit width+height avoids aspect-ratio bugs */
+  width: min(96vw, calc(92vh * 1456 / 816));
+  height: min(92vh, calc(96vw * 816 / 1456));
   background: url('../assets/notebook.png') center / 100% 100% no-repeat;
   background-color: #1a1510;
   display: flex;
