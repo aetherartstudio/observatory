@@ -935,11 +935,14 @@ body {
   max-height: 92vh;
   max-width: none;
   background: url('../assets/notebook.jpg') center / 100% 100% no-repeat;
-  background-color: #0a0805;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   position: relative;
-  border-radius: 6px;
+  border-radius: 0;
+  border: none;
+  outline: none;
+  box-shadow: none;
   overflow: hidden;
 }
 
