@@ -933,7 +933,7 @@ body {
   width: min(96vw, 92vh * 1456 / 816);
   max-height: 92vh;
   max-width: none;
-  background: url('../assets/notebook.jpg') center / 100% 100% no-repeat;
+  background: url('../assets/notebook.png') center / 100% 100% no-repeat;
   background-color: #1a1510;
   display: flex;
   flex-direction: column;
@@ -948,7 +948,7 @@ body {
   width: 96vw;
   height: 88vh;
   max-height: none;
-  background: url('../assets/notebook.jpg') right top / 200% 100% no-repeat;
+  background: url('../assets/notebook.png') right top / 200% 100% no-repeat;
   background-attachment: local;
   background-color: #f5f0e0;
   border-radius: 4px;
