@@ -934,7 +934,7 @@ body {
   max-height: 92vh;
   max-width: none;
   background: url('../assets/notebook.jpg') center / 100% 100% no-repeat;
-  background-color: #1a1510;
+  background-color: #0a0805;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -950,7 +950,7 @@ body {
   max-height: none;
   background: url('../assets/notebook.jpg') right top / 200% 100% no-repeat;
   background-attachment: local;
-  background-color: #f5f0e0;
+  background-color: #0a0805;
   border-radius: 4px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
