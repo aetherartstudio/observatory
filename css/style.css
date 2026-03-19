@@ -940,6 +940,8 @@ body {
   position: relative;
   border-radius: 6px;
   overflow: hidden;
+  flex-shrink: 0;
+  align-self: center;
 }
 
 /* Single-page mode: zoom into right page, scrollable */
