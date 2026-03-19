@@ -288,7 +288,8 @@
     const book = document.getElementById('journal-book');
     if (!book) return;
 
-    const isMobileTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    const hasHoverDevice = window.matchMedia('(any-hover: hover)').matches;
+    const isMobileTouch = !hasHoverDevice;
     const isNarrow = window.matchMedia('(max-width: 768px)');
     const notebookOuter = document.querySelector('.notebook-outer');
     function updatePageMode() {
