@@ -354,6 +354,14 @@ body {
   max-width: none;
 }
 
+/* Notepad: no container box, notebook-outer handles its own size */
+#notepad-detail {
+  width: auto;
+  height: auto;
+  max-width: none;
+  background: none;
+}
+
 /* Pinboard: wider view to show wall context around the board */
 #pinboard-detail {
   width: 96vw;
