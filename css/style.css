@@ -942,7 +942,7 @@ body {
   width: min(96vw, 92vh * 1456 / 816);
   max-height: 92vh;
   max-width: none;
-  background: url('../assets/notebook.jpg') center / 100% 100% no-repeat;
+  background: url('../assets/notebook.jpg') center / 102% 104% no-repeat;
   background-color: transparent;
   display: flex;
   flex-direction: column;
