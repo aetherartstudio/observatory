@@ -1897,6 +1897,14 @@ body {
   /* Slightly different pen look — darker, more deliberate */
   text-shadow: 0 0 0.5px rgba(80, 30, 50, 0.3);
 }
+.postit-sig {
+  text-align: right;
+  font-family: 'Caveat', cursive;
+  font-size: 0.85em;
+  opacity: 0.7;
+  margin-top: 4px;
+  color: #4a2233;
+}
 
 /* ===== CASSETTE PLAYER ===== */
 #cassette-detail {

@@ -408,6 +408,13 @@
         textSpan.textContent = item.text;
         div.appendChild(textSpan);
 
+        if (item.author === 'm') {
+          const sig = document.createElement('div');
+          sig.className = 'postit-sig';
+          sig.textContent = '— M.';
+          div.appendChild(sig);
+        }
+
         div.addEventListener('click', (e) => {
           e.stopPropagation();
           zoomPinboardItem(div, 'zoomed');
