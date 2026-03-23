@@ -6,7 +6,7 @@
   <title>The Observatory — Kanaputz Research Station</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Special+Elite&family=VT323&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=32">
+  <link rel="stylesheet" href="css/style.css?v=33">
   <link rel="preload" href="assets/cork-bg.png" as="image">
   <link rel="preload" href="assets/terminal-bg.png" as="image">
   <link rel="preload" href="assets/terminal2-bg.png" as="image">
@@ -94,8 +94,13 @@
         <div class="map-screen" id="map-screen">
           <!-- Dots generated dynamically from MAP_SIGHTINGS by app.js -->
         </div>
+        <div class="map-screen map-shilin" id="map-shilin">
+          <!-- Shilin detail dots generated dynamically -->
+        </div>
         <!-- Info panel shown when clicking a dot -->
         <div class="map-info" id="map-info"></div>
+        <button class="map-zoom-btn" id="map-zoom-btn" title="Zoom to Shilin">⊕ SHILIN DETAIL</button>
+        <button class="map-zoom-btn map-zoom-out" id="map-zoom-out" title="Back to Global">⊖ GLOBAL VIEW</button>
       </div>
     </div>
 
@@ -104,6 +109,10 @@
       <div class="pinboard-full">
         <div class="pinboard-header">ACTIVE INVESTIGATION BOARD</div>
         <div class="pinboard-surface" id="pinboard-surface"></div>
+        <!-- UV Layer: hidden annotations revealed by UV lamp -->
+        <div class="uv-layer" id="uv-layer"></div>
+        <div class="uv-mask" id="uv-mask"></div>
+        <button class="uv-toggle" id="uv-toggle" title="UV Lamp">🔦 UV</button>
       </div>
     </div>
 
@@ -172,9 +181,9 @@
     </div>
   </div>
 
-  <script src="js/waves.js?v=32"></script>
-  <script src="js/data.js?v=32"></script>
-  <script src="js/terminal.js?v=32"></script>
-  <script src="js/app.js?v=32"></script>
+  <script src="js/waves.js?v=33"></script>
+  <script src="js/data.js?v=33"></script>
+  <script src="js/terminal.js?v=33"></script>
+  <script src="js/app.js?v=33"></script>
 </body>
 </html>

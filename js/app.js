@@ -18,11 +18,13 @@
     setupKeyboard();
     populateAll();
     updateZoneVisibility();
+    setupUVLamp();
 
     // Re-render everything when wave changes
     document.addEventListener('wavechange', () => {
       populateAll();
       updateZoneVisibility();
+      updateUVToggleVisibility();
     });
   });
 
@@ -200,6 +202,122 @@
       bgImg.src = 'assets/terminal2-bg.jpg';
       if (bgImg.complete) mapScreen.classList.add('bg-loaded');
     }
+
+    // Shilin zoom controls
+    setupMapZoom();
+  }
+
+  let mapZoomActive = false;
+
+  function setupMapZoom() {
+    const zoomBtn = document.getElementById('map-zoom-btn');
+    const zoomOutBtn = document.getElementById('map-zoom-out');
+    if (!zoomBtn || !zoomOutBtn) return;
+
+    // Show zoom button from Wave 3+
+    if (WaveSystem.getWave() >= 3) {
+      if (!mapZoomActive) zoomBtn.classList.add('visible');
+    } else {
+      zoomBtn.classList.remove('visible');
+      zoomOutBtn.classList.remove('visible');
+      if (mapZoomActive) zoomToGlobal();
+    }
+
+    if (!zoomBtn._bound) {
+      zoomBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        zoomToShilin();
+      });
+      zoomBtn._bound = true;
+    }
+    if (!zoomOutBtn._bound) {
+      zoomOutBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        zoomToGlobal();
+      });
+      zoomOutBtn._bound = true;
+    }
+  }
+
+  function zoomToShilin() {
+    mapZoomActive = true;
+    const mapScreen = document.getElementById('map-screen');
+    const shilinScreen = document.getElementById('map-shilin');
+    const mapInfo = document.getElementById('map-info');
+    const zoomBtn = document.getElementById('map-zoom-btn');
+    const zoomOutBtn = document.getElementById('map-zoom-out');
+
+    mapScreen.style.display = 'none';
+    mapInfo.classList.remove('active');
+    zoomBtn.classList.remove('visible');
+    zoomOutBtn.classList.add('visible');
+
+    // Populate Shilin dots
+    shilinScreen.innerHTML = '';
+    const grid = document.createElement('div');
+    grid.className = 'shilin-grid';
+    shilinScreen.appendChild(grid);
+
+    const title = document.createElement('div');
+    title.className = 'shilin-title';
+    title.textContent = '◉ SHILIN DISTRICT — DETAIL VIEW';
+    shilinScreen.appendChild(title);
+
+    // Add street labels
+    const streets = [
+      { text: 'Wenlin Rd', top: '52%', left: '15%' },
+      { text: 'Danan Rd', top: '70%', left: '10%' },
+      { text: 'MRT Jiantan', top: '18%', left: '10%' },
+      { text: 'Zhishan', top: '25%', left: '65%' },
+    ];
+    streets.forEach(s => {
+      const label = document.createElement('div');
+      label.className = 'shilin-label';
+      label.style.top = s.top;
+      label.style.left = s.left;
+      label.textContent = s.text;
+      shilinScreen.appendChild(label);
+    });
+
+    // Add Shilin dots
+    const visibleDots = WaveSystem.getVisibleContent(SHILIN_DOTS);
+    visibleDots.forEach(dot => {
+      const el = document.createElement('div');
+      el.className = 'map-dot' + (dot.isSource ? ' source-dot' : '');
+      el.style.left = dot.left;
+      el.style.top = dot.top;
+
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        WaveSystem.trackEngagement('mapDot', dot.id);
+        let html = `
+          <div class="map-info-date">${dot.location}</div>
+          <div class="map-info-location">[${dot.evidenceType.toUpperCase()}]</div>
+          <div class="map-info-desc">${dot.description}</div>
+        `;
+        mapInfo.innerHTML = html;
+        mapInfo.classList.add('active');
+      });
+
+      shilinScreen.appendChild(el);
+    });
+
+    shilinScreen.classList.add('active');
+  }
+
+  function zoomToGlobal() {
+    mapZoomActive = false;
+    const mapScreen = document.getElementById('map-screen');
+    const shilinScreen = document.getElementById('map-shilin');
+    const mapInfo = document.getElementById('map-info');
+    const zoomBtn = document.getElementById('map-zoom-btn');
+    const zoomOutBtn = document.getElementById('map-zoom-out');
+
+    shilinScreen.classList.remove('active');
+    mapScreen.style.display = '';
+    mapInfo.classList.remove('active');
+    zoomOutBtn.classList.remove('visible');
+    if (WaveSystem.getWave() >= 3) zoomBtn.classList.add('visible');
   }
 
   // ===== PINBOARD ZOOM HELPER =====
@@ -726,6 +844,143 @@
     readingsEl.innerHTML = data.readings.map(r =>
       `<div class="source-reading">${r}</div>`
     ).join('');
+  }
+
+  // ===== UV LAMP =====
+  let uvActive = false;
+
+  function updateUVToggleVisibility() {
+    const toggle = document.getElementById('uv-toggle');
+    if (!toggle) return;
+    // UV available from Wave 3
+    if (WaveSystem.getWave() >= 3) {
+      toggle.classList.add('visible');
+    } else {
+      toggle.classList.remove('visible');
+      // Deactivate if wave drops below 3
+      if (uvActive) deactivateUV();
+    }
+  }
+
+  function setupUVLamp() {
+    const toggle = document.getElementById('uv-toggle');
+    const pinboardFull = document.querySelector('.pinboard-full');
+    const uvLayer = document.getElementById('uv-layer');
+    const uvMask = document.getElementById('uv-mask');
+    if (!toggle || !pinboardFull || !uvLayer || !uvMask) return;
+
+    updateUVToggleVisibility();
+
+    // Render UV items from data
+    renderUVItems();
+
+    // Toggle UV mode
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (uvActive) {
+        deactivateUV();
+      } else {
+        activateUV();
+      }
+    });
+
+    // Mouse tracking for UV radius
+    pinboardFull.addEventListener('mousemove', (e) => {
+      if (!uvActive) return;
+      updateUVRadius(e, pinboardFull);
+    });
+
+    // Touch tracking for mobile
+    pinboardFull.addEventListener('touchmove', (e) => {
+      if (!uvActive) return;
+      const touch = e.touches[0];
+      updateUVRadius(touch, pinboardFull);
+    }, { passive: true });
+
+    // Also update on touchstart
+    pinboardFull.addEventListener('touchstart', (e) => {
+      if (!uvActive) return;
+      const touch = e.touches[0];
+      updateUVRadius(touch, pinboardFull);
+    }, { passive: true });
+  }
+
+  function activateUV() {
+    uvActive = true;
+    const toggle = document.getElementById('uv-toggle');
+    const pinboardFull = document.querySelector('.pinboard-full');
+    const uvLayer = document.getElementById('uv-layer');
+    const uvMask = document.getElementById('uv-mask');
+    toggle.classList.add('active');
+    pinboardFull.classList.add('uv-mode');
+    uvLayer.classList.add('active');
+    uvMask.classList.add('active');
+    // Set initial mask to center
+    uvMask.style.background = 'radial-gradient(circle 0px at 50% 50%, transparent 100%, rgba(0,0,0,0.85) 100%)';
+  }
+
+  function deactivateUV() {
+    uvActive = false;
+    const toggle = document.getElementById('uv-toggle');
+    const pinboardFull = document.querySelector('.pinboard-full');
+    const uvLayer = document.getElementById('uv-layer');
+    const uvMask = document.getElementById('uv-mask');
+    toggle.classList.remove('active');
+    pinboardFull.classList.remove('uv-mode');
+    uvLayer.classList.remove('active');
+    uvMask.classList.remove('active');
+    // Hide all UV items
+    uvLayer.querySelectorAll('.uv-item').forEach(el => el.classList.remove('uv-visible'));
+  }
+
+  function updateUVRadius(event, container) {
+    const rect = container.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const xPct = (x / rect.width) * 100;
+    const yPct = (y / rect.height) * 100;
+    const radiusPx = Math.min(rect.width, rect.height) * 0.18; // ~18% radius
+
+    // Update mask: transparent circle follows cursor
+    const uvMask = document.getElementById('uv-mask');
+    uvMask.style.background = `radial-gradient(circle ${radiusPx}px at ${xPct}% ${yPct}%, transparent 80%, rgba(0,0,0,0.85) 100%)`;
+
+    // Show/hide UV items based on proximity to cursor
+    const uvLayer = document.getElementById('uv-layer');
+    uvLayer.querySelectorAll('.uv-item').forEach(el => {
+      const itemRect = el.getBoundingClientRect();
+      const itemCenterX = itemRect.left + itemRect.width / 2 - rect.left;
+      const itemCenterY = itemRect.top + itemRect.height / 2 - rect.top;
+      const dist = Math.sqrt((x - itemCenterX) ** 2 + (y - itemCenterY) ** 2);
+      if (dist < radiusPx * 1.1) {
+        el.classList.add('uv-visible');
+      } else {
+        el.classList.remove('uv-visible');
+      }
+    });
+  }
+
+  function renderUVItems() {
+    const uvLayer = document.getElementById('uv-layer');
+    if (!uvLayer) return;
+
+    let html = '';
+    PINBOARD_UV.forEach((item, i) => {
+      if (item.type === 'arrow') {
+        html += `<div class="uv-item uv-arrow" style="top:${item.from.top};left:${item.from.left};transform:rotate(${item.rotation || 0}deg)">
+          ← ${item.label} →
+        </div>`;
+      } else if (item.type === 'note') {
+        html += `<div class="uv-item uv-note" style="top:${item.position.top};left:${item.position.left};transform:rotate(${item.rotation || 0}deg)">
+          ${item.text}
+        </div>`;
+      } else if (item.type === 'circle') {
+        html += `<div class="uv-item uv-circle" style="top:${item.position.top};left:${item.position.left};width:${item.radius};height:${item.radius}">
+          <span class="uv-circle-label">${item.label}</span>
+        </div>`;
+      }
+    });
+    uvLayer.innerHTML = html;
   }
 
 })();
