@@ -10,6 +10,7 @@
   let journalSpreadIndex = 0;
   let pagesPerSpread = 2;
   let currentCassetteId = null;
+  let pendingRepopulate = false;
 
   // ===== INIT =====
   document.addEventListener('DOMContentLoaded', () => {
@@ -22,7 +23,12 @@
 
     // Re-render everything when wave changes
     document.addEventListener('wavechange', () => {
-      populateAll();
+      if (isDetailOpen) {
+        // Don't repopulate mid-interaction — queue it for when detail closes
+        pendingRepopulate = true;
+      } else {
+        populateAll();
+      }
       updateZoneVisibility();
       updateUVToggleVisibility();
     });
@@ -129,6 +135,12 @@
     setTimeout(() => {
       overlay.querySelectorAll('.detail-content').forEach(c => c.classList.remove('active'));
     }, 400);
+
+    // Flush any wave-triggered repopulate that was deferred
+    if (pendingRepopulate) {
+      pendingRepopulate = false;
+      populateAll();
+    }
   }
 
   function setupCloseButton() {
