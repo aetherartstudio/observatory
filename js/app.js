@@ -109,6 +109,11 @@
       terminal = new SightingTerminal(feedEl, visibleSightings);
       terminal.start();
     }
+
+    // Track journal pages when journal is opened
+    if (targetId === 'notepad-detail') {
+      trackCurrentSpread();
+    }
   }
 
   function closeDetail() {
@@ -561,7 +566,7 @@
     if (!prevBtn._bound) {
       prevBtn.addEventListener('click', () => {
         if (journalSpreadIndex > 0) {
-          flipPage('right', () => { journalSpreadIndex--; renderSpread(); });
+          flipPage('right', () => { journalSpreadIndex--; renderSpread(); trackCurrentSpread(); });
         }
       });
       prevBtn._bound = true;
@@ -571,7 +576,7 @@
         const pages = WaveSystem.getVisibleContent(JOURNAL_PAGES);
         const totalSpreads = Math.ceil(pages.length / pagesPerSpread);
         if (journalSpreadIndex < totalSpreads - 1) {
-          flipPage('left', () => { journalSpreadIndex++; renderSpread(); });
+          flipPage('left', () => { journalSpreadIndex++; renderSpread(); trackCurrentSpread(); });
         }
       });
       nextBtn._bound = true;
@@ -596,6 +601,17 @@
     }
   }
 
+  function trackCurrentSpread() {
+    const pages = WaveSystem.getVisibleContent(JOURNAL_PAGES);
+    const startIndex = journalSpreadIndex * pagesPerSpread;
+    for (let i = 0; i < pagesPerSpread; i++) {
+      const entryIndex = startIndex + i;
+      if (entryIndex < pages.length) {
+        WaveSystem.trackEngagement('journal', pages[entryIndex].page);
+      }
+    }
+  }
+
   function renderSpread() {
     const book = document.getElementById('journal-book');
     if (!book) return;
@@ -611,8 +627,6 @@
 
       if (entryIndex < pages.length) {
         const entry = pages[entryIndex];
-        // Track engagement
-        WaveSystem.trackEngagement('journal', entry.page);
 
         let contentHtml = `<div class="notebook-date">${entry.date}</div>`;
         contentHtml += `<div class="notebook-text">${entry.text}</div>`;
