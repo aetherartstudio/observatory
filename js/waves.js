@@ -230,9 +230,6 @@ const WaveSystem = (function() {
   }
 
   function checkWaveProgression() {
-    // Don't auto-promote during debug override
-    if (state.debugOverride !== null) return;
-
     const currentOrganic = state.wave;
     let nextWave = currentOrganic;
 
@@ -248,7 +245,15 @@ const WaveSystem = (function() {
     }
 
     if (nextWave > currentOrganic) {
-      setWaveOrganic(nextWave);
+      if (state.debugOverride !== null) {
+        // In debug mode: silently update earned wave without changing display
+        state.wave = nextWave;
+        saveState();
+        updateDebugPanel();
+      } else {
+        // Normal mode: full wave promotion with UI events
+        setWaveOrganic(nextWave);
+      }
     }
   }
 
