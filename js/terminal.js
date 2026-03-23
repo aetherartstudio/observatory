@@ -80,6 +80,8 @@ class SightingTerminal {
 
     // Typewriter effect for description
     this.typeText(descLine, `> ${entry.description}`, () => {
+      // Track that this entry was read (engagement-based wave progression)
+      WaveSystem.trackEngagement('terminalEntry', `${entry.date}-${entry.time}`);
       this.currentIndex++;
       setTimeout(() => this.showNextEntry(), this.entryDelay);
     });

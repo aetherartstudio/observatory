@@ -26,7 +26,31 @@
       updateZoneVisibility();
       updateUVToggleVisibility();
     });
+
+    // Subtle notification when a new wave is earned
+    document.addEventListener('waveunlock', (e) => {
+      subtleWaveNotification(e.detail.wave);
+    });
   });
+
+  // ===== WAVE UNLOCK NOTIFICATION =====
+  function subtleWaveNotification(wave) {
+    // Room light flicker
+    const roomLight = document.querySelector('.room-light');
+    if (roomLight) {
+      roomLight.classList.add('wave-shift');
+      setTimeout(() => roomLight.classList.remove('wave-shift'), 1800);
+    }
+
+    // Pulsing LED on terminal hotspot — "new data available"
+    const terminalZone = document.getElementById('zone-terminal');
+    if (terminalZone) {
+      const led = document.createElement('div');
+      led.className = 'new-data-led';
+      terminalZone.appendChild(led);
+      setTimeout(() => led.remove(), 6000);
+    }
+  }
 
   function populateAll() {
     populateMap();
@@ -241,6 +265,7 @@
 
   function zoomToShilin() {
     mapZoomActive = true;
+    WaveSystem.trackEngagement('shilinZoom');
     const mapScreen = document.getElementById('map-screen');
     const shilinScreen = document.getElementById('map-shilin');
     const mapInfo = document.getElementById('map-info');
@@ -289,7 +314,7 @@
 
       el.addEventListener('click', (e) => {
         e.stopPropagation();
-        WaveSystem.trackEngagement('mapDot', dot.id);
+        WaveSystem.trackEngagement('shilinDot', dot.id);
         let html = `
           <div class="map-info-date">${dot.location}</div>
           <div class="map-info-location">[${dot.evidenceType.toUpperCase()}]</div>
@@ -369,6 +394,10 @@
         div.addEventListener('click', (e) => {
           e.stopPropagation();
           zoomPinboardItem(div, 'zoomed');
+          // Track M.'s note interaction for wave progression
+          if (item.author === 'm') {
+            WaveSystem.trackEngagement('mNote');
+          }
         });
         surface.appendChild(div);
 
@@ -645,9 +674,10 @@
 
     tapeList.innerHTML = '';
 
-    // Filter tapes by wave AND safe requirement
+    // Filter tapes by wave, safe requirement, and tape prerequisite
     const visibleTapes = WaveSystem.getVisibleContent(CASSETTE_TAPES).filter(tape => {
       if (tape.requiresSafe && !WaveSystem.isSafeOpened()) return false;
+      if (tape.requiresTape && !WaveSystem.hasTapePlayed(tape.requiresTape)) return false;
       return true;
     });
 
@@ -704,27 +734,32 @@
   }
 
   // ===== SAFE + DOSSIER =====
+  const CORRECT_CODE = [3, 17, 58];
+  let safeDialValue = 0;       // current number the dial points to (0-59)
+  let safeCodeEntries = [];    // numbers confirmed so far
+  let safeDialRotation = 0;    // visual rotation in degrees
+  let safeDragging = false;
+  let safeDragStart = 0;
+  let safeRotationStart = 0;
+
   function populateSafe() {
     const container = document.getElementById('safe-container');
     if (!container) return;
 
     const display = document.getElementById('safe-display');
-    const dial = document.getElementById('safe-dial');
-    const handle = document.getElementById('safe-handle');
-    const dossier = document.getElementById('safe-dossier');
-
     if (!display) return;
 
-    // Update display based on state
+    // Already opened — show dossier
     if (WaveSystem.isSafeOpened()) {
       display.textContent = 'OPEN';
       container.classList.add('safe-opened');
+      document.getElementById('safe-door').classList.add('open');
       renderDossier();
       return;
     }
 
     if (WaveSystem.isSafeDialAvailable()) {
-      display.textContent = 'ENTER CODE';
+      display.textContent = 'ROTATE DIAL — CLICK TO CONFIRM';
       container.classList.add('safe-dial-active');
       setupSafeDial();
     } else if (WaveSystem.getWave() >= 2) {
@@ -733,54 +768,165 @@
     }
   }
 
-  let safeCode = [];
-  const CORRECT_CODE = [3, 17, 58];
-
   function setupSafeDial() {
     const dial = document.getElementById('safe-dial');
-    const display = document.getElementById('safe-display');
-    const handle = document.getElementById('safe-handle');
     if (!dial || dial._bound) return;
 
-    safeCode = [];
-    let rotation = 0;
+    // Render tick numbers around dial (every 5: 0, 5, 10, ... 55)
+    const numbersEl = document.getElementById('safe-dial-numbers');
+    if (numbersEl) {
+      numbersEl.innerHTML = '';
+      for (let i = 0; i < 60; i += 5) {
+        const span = document.createElement('span');
+        span.className = 'safe-dial-num';
+        span.textContent = i;
+        const angle = (i / 60) * 360;
+        span.style.transform = `rotate(${angle}deg) translateY(-42px) rotate(-${angle}deg)`;
+        numbersEl.appendChild(span);
+      }
+    }
 
-    dial.addEventListener('click', () => {
-      // Each click rotates dial and adds a number
-      rotation += 120;
-      dial.style.transform = `rotate(${rotation}deg)`;
+    updateSafeDigitDisplay();
 
-      // Simulate code entry: cycle through the correct code
-      const codeNum = CORRECT_CODE[safeCode.length] || 0;
-      safeCode.push(codeNum);
-      display.textContent = safeCode.map(n => String(n).padStart(2, '0')).join('-');
+    // Scroll to rotate dial
+    dial.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? 1 : -1;
+      safeDialRotation += delta * 6; // 6 degrees per tick = 60 ticks per full rotation
+      safeDialValue = ((Math.round(-safeDialRotation / 6) % 60) + 60) % 60;
+      dial.style.transform = `rotate(${safeDialRotation}deg)`;
+      updateSafeCurrentNumber();
+    }, { passive: false });
 
-      if (safeCode.length === 3) {
-        // Check code
-        const correct = safeCode[0] === CORRECT_CODE[0] &&
-                        safeCode[1] === CORRECT_CODE[1] &&
-                        safeCode[2] === CORRECT_CODE[2];
-        if (correct) {
-          setTimeout(() => {
-            display.textContent = 'ACCESS GRANTED';
-            handle.classList.add('turned');
-            WaveSystem.trackEngagement('safe');
-            setTimeout(() => {
-              document.getElementById('safe-container').classList.add('safe-opened');
-              document.getElementById('safe-door').classList.add('open');
-              renderDossier();
-              // Refresh cassette (unlocks safe-required tapes)
-              populateCassette();
-            }, 800);
-          }, 500);
+    // Drag to rotate (mouse)
+    dial.addEventListener('mousedown', (e) => {
+      safeDragging = true;
+      safeDragStart = getAngleFromCenter(e, dial);
+      safeRotationStart = safeDialRotation;
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!safeDragging) return;
+      const angle = getAngleFromCenter(e, dial);
+      const delta = angle - safeDragStart;
+      safeDialRotation = safeRotationStart + delta;
+      safeDialValue = ((Math.round(-safeDialRotation / 6) % 60) + 60) % 60;
+      dial.style.transform = `rotate(${safeDialRotation}deg)`;
+      updateSafeCurrentNumber();
+    });
+
+    document.addEventListener('mouseup', () => { safeDragging = false; });
+
+    // Drag to rotate (touch)
+    dial.addEventListener('touchstart', (e) => {
+      safeDragging = true;
+      safeDragStart = getAngleFromCenter(e.touches[0], dial);
+      safeRotationStart = safeDialRotation;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!safeDragging) return;
+      const angle = getAngleFromCenter(e.touches[0], dial);
+      const delta = angle - safeDragStart;
+      safeDialRotation = safeRotationStart + delta;
+      safeDialValue = ((Math.round(-safeDialRotation / 6) % 60) + 60) % 60;
+      dial.style.transform = `rotate(${safeDialRotation}deg)`;
+      updateSafeCurrentNumber();
+    }, { passive: true });
+
+    document.addEventListener('touchend', () => { safeDragging = false; });
+
+    // Click the confirm area (handle) to lock in current number
+    const handle = document.getElementById('safe-handle');
+    if (handle) {
+      handle.addEventListener('click', () => {
+        if (safeCodeEntries.length >= 3) return;
+        confirmSafeDigit();
+      });
+    }
+
+    dial._bound = true;
+  }
+
+  function getAngleFromCenter(event, element) {
+    const rect = element.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    return Math.atan2(event.clientY - cy, event.clientX - cx) * (180 / Math.PI);
+  }
+
+  function updateSafeCurrentNumber() {
+    const hint = document.getElementById('safe-hint');
+    if (hint) hint.textContent = String(safeDialValue).padStart(2, '0');
+    updateSafeDigitDisplay();
+  }
+
+  function updateSafeDigitDisplay() {
+    for (let i = 0; i < 3; i++) {
+      const el = document.getElementById(`safe-digit-${i}`);
+      if (el) {
+        if (i < safeCodeEntries.length) {
+          el.textContent = String(safeCodeEntries[i]).padStart(2, '0');
+          el.classList.add('confirmed');
+        } else if (i === safeCodeEntries.length) {
+          el.textContent = String(safeDialValue).padStart(2, '0');
+          el.classList.add('active');
+          el.classList.remove('confirmed');
         } else {
-          display.textContent = 'DENIED';
-          safeCode = [];
-          setTimeout(() => { display.textContent = 'ENTER CODE'; }, 1500);
+          el.textContent = '??';
+          el.classList.remove('confirmed', 'active');
         }
       }
-    });
-    dial._bound = true;
+    }
+  }
+
+  function confirmSafeDigit() {
+    safeCodeEntries.push(safeDialValue);
+    updateSafeDigitDisplay();
+
+    const display = document.getElementById('safe-display');
+
+    if (safeCodeEntries.length < 3) {
+      // Flash the handle to show number accepted
+      const handle = document.getElementById('safe-handle');
+      handle.classList.add('flash');
+      setTimeout(() => handle.classList.remove('flash'), 300);
+      display.textContent = `DIGIT ${safeCodeEntries.length}/3 LOCKED — ROTATE FOR NEXT`;
+      return;
+    }
+
+    // All 3 entered — check code
+    const correct = safeCodeEntries[0] === CORRECT_CODE[0] &&
+                    safeCodeEntries[1] === CORRECT_CODE[1] &&
+                    safeCodeEntries[2] === CORRECT_CODE[2];
+
+    if (correct) {
+      display.textContent = 'ACCESS GRANTED';
+      display.classList.add('granted');
+      const handle = document.getElementById('safe-handle');
+      handle.classList.add('turned');
+      WaveSystem.trackEngagement('safe');
+
+      setTimeout(() => {
+        document.getElementById('safe-container').classList.add('safe-opened');
+        document.getElementById('safe-door').classList.add('open');
+        renderDossier();
+        populateCassette();
+      }, 1000);
+    } else {
+      display.textContent = 'ACCESS DENIED';
+      display.classList.add('denied');
+      // Flash door red
+      document.getElementById('safe-door').classList.add('denied-flash');
+      setTimeout(() => {
+        document.getElementById('safe-door').classList.remove('denied-flash');
+        display.classList.remove('denied');
+        safeCodeEntries = [];
+        updateSafeDigitDisplay();
+        display.textContent = 'ROTATE DIAL — CLICK TO CONFIRM';
+      }, 2000);
+    }
   }
 
   function renderDossier() {
@@ -907,6 +1053,7 @@
 
   function activateUV() {
     uvActive = true;
+    WaveSystem.trackEngagement('uvLamp');
     const toggle = document.getElementById('uv-toggle');
     const pinboardFull = document.querySelector('.pinboard-full');
     const uvLayer = document.getElementById('uv-layer');

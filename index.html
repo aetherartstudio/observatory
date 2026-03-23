@@ -6,7 +6,7 @@
   <title>The Observatory — Kanaputz Research Station</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Special+Elite&family=VT323&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=33">
+  <link rel="stylesheet" href="css/style.css?v=34">
   <link rel="preload" href="assets/cork-bg.png" as="image">
   <link rel="preload" href="assets/terminal-bg.png" as="image">
   <link rel="preload" href="assets/terminal2-bg.png" as="image">
@@ -154,12 +154,26 @@
     <!-- Safe Detail -->
     <div class="detail-content" id="safe-detail">
       <div class="safe-container" id="safe-container">
+        <!-- Safe door with combination dial -->
         <div class="safe-door" id="safe-door">
+          <div class="safe-plate">KANAPUTZ OBSERVATORY — CLASSIFIED</div>
           <div class="safe-dial-area" id="safe-dial-area">
-            <div class="safe-dial" id="safe-dial">
-              <div class="safe-dial-marker"></div>
+            <div class="safe-dial-ring">
+              <div class="safe-dial" id="safe-dial">
+                <div class="safe-dial-marker"></div>
+                <div class="safe-dial-numbers" id="safe-dial-numbers"></div>
+              </div>
+              <div class="safe-dial-tick"></div>
+            </div>
+            <div class="safe-code-display" id="safe-code-display">
+              <span class="safe-digit" id="safe-digit-0">??</span>
+              <span class="safe-digit-sep">—</span>
+              <span class="safe-digit" id="safe-digit-1">??</span>
+              <span class="safe-digit-sep">—</span>
+              <span class="safe-digit" id="safe-digit-2">??</span>
             </div>
             <div class="safe-display" id="safe-display">LOCKED</div>
+            <div class="safe-hint" id="safe-hint"></div>
           </div>
           <div class="safe-handle" id="safe-handle"></div>
         </div>
@@ -181,9 +195,9 @@
     </div>
   </div>
 
-  <script src="js/waves.js?v=33"></script>
-  <script src="js/data.js?v=33"></script>
-  <script src="js/terminal.js?v=33"></script>
-  <script src="js/app.js?v=33"></script>
+  <script src="js/waves.js?v=34"></script>
+  <script src="js/data.js?v=34"></script>
+  <script src="js/terminal.js?v=34"></script>
+  <script src="js/app.js?v=34"></script>
 </body>
 </html>
