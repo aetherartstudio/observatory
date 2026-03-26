@@ -290,6 +290,22 @@ body {
   outline-offset: -1px;
   background: rgba(255, 50, 50, 0.1) !important;
 }
+.debug .uv-lamp-hidden {
+  outline: 2px dashed rgba(138, 43, 226, 0.9) !important;
+  outline-offset: -1px;
+  background: rgba(138, 43, 226, 0.25) !important;
+}
+.debug .uv-lamp-hidden::after {
+  content: 'UV LAMP';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  font-size: 8px;
+  font-family: 'Courier New', monospace;
+  color: #aa66ff;
+  white-space: nowrap;
+  pointer-events: none;
+}
 .debug .zone::after {
   content: attr(id) !important;
   position: absolute !important;
