@@ -1,17 +1,32 @@
 // ============================================================
-// KANAPUTZ OBSERVATORY — Wave System Controller
+// KANAPUTZ OBSERVATORY — Wave System Controller (v10)
 // ============================================================
-// Engagement-based progressive disclosure across 5 waves.
-// Every data item has a `wave` property. Only items where
-// item.wave <= currentWave are shown.
+// Dual-gated progressive disclosure across 6 waves.
+// Each wave requires BOTH elapsed time since LAUNCH_DATE
+// AND individual engagement thresholds.
 // State persists via localStorage for cross-session continuity.
 
 const WaveSystem = (function() {
   'use strict';
 
   const STORAGE_KEY = 'kanaputz_observatory_state';
-  const SCHEMA_VERSION = 1;
-  const MAX_WAVE = 5;
+  const SCHEMA_VERSION = 2; // bumped for v10 restructure
+  const MAX_WAVE = 6;
+
+  // Configurable launch date — all time gates measured from this
+  // Set to past date for testing; update to real launch date before go-live
+  const LAUNCH_DATE = new Date('2025-01-01T00:00:00Z');
+
+  // Time gates: minimum days since LAUNCH_DATE for each wave
+  // All independently adjustable based on audience reaction
+  const TIME_GATES = {
+    1: 0,    // Launch
+    2: 7,    // Launch + 1 week
+    3: 14,   // Launch + 2 weeks
+    4: 21,   // Launch + 3 weeks
+    5: 28,   // Launch + 4 weeks
+    6: 35    // Launch + 5 weeks
+  };
 
   // ===== STATE =====
 
@@ -25,7 +40,8 @@ const WaveSystem = (function() {
       terminalEntriesRead: new Set(),
       mNoteFound: false,
       shilinZoomExplored: false,
-      uvLampUsed: false,
+      uvLampFound: false,   // discovered the hidden clickable
+      uvLampUsed: false,    // actually toggled UV on pinboard
       safeOpened: false
     },
     debugOverride: null
@@ -39,20 +55,34 @@ const WaveSystem = (function() {
     journal:       1,
     pinboard:      1,
     cassette:      1,
-    uv:            3,
-    safe:          2,
-    safeDial:      3, // + engagement threshold
-    sourceMonitor: 4
+    uv:            1, // UV toggle only appears after uvLampFound, not wave-gated
+    safe:          5, // safe visible from W5 (anomalies hint at code)
+    safeDial:      5, // dial usable once safe is visible + engagement
+    sourceMonitor: 5
   };
 
   // ===== WAVE PROGRESSION THRESHOLDS =====
+  // Engagement requirements (time gate checked separately)
 
   const WAVE_THRESHOLDS = {
     2: { journalPages: 2, terminalEntries: 1, mapDots: 2 },
     3: { journalPages: 4, tapesPlayed: 1, mapDots: 5, mNoteFound: true },
-    4: { journalPages: 6, shilinZoomExplored: true, shilinDots: 3, uvLampUsed: true },
-    5: { safeOpened: true }
+    4: { journalPages: 6, mapDots: 8 },
+    5: { journalPages: 8, shilinZoomExplored: true },
+    6: { safeOpened: true }
   };
+
+  // ===== TIME GATE CHECK =====
+
+  function daysSinceLaunch() {
+    const now = new Date();
+    const diff = now - LAUNCH_DATE;
+    return Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+  }
+
+  function timeGateMet(wave) {
+    return daysSinceLaunch() >= (TIME_GATES[wave] || 0);
+  }
 
   // ===== LOCALSTORAGE PERSISTENCE =====
 
@@ -80,6 +110,7 @@ const WaveSystem = (function() {
       state.engagement.terminalEntriesRead = new Set(e.terminalEntriesRead || []);
       state.engagement.mNoteFound = !!e.mNoteFound;
       state.engagement.shilinZoomExplored = !!e.shilinZoomExplored;
+      state.engagement.uvLampFound = !!e.uvLampFound;
       state.engagement.uvLampUsed = !!e.uvLampUsed;
       state.engagement.safeOpened = !!e.safeOpened;
     } catch (err) {
@@ -101,6 +132,7 @@ const WaveSystem = (function() {
           terminalEntriesRead: [...state.engagement.terminalEntriesRead],
           mNoteFound: state.engagement.mNoteFound,
           shilinZoomExplored: state.engagement.shilinZoomExplored,
+          uvLampFound: state.engagement.uvLampFound,
           uvLampUsed: state.engagement.uvLampUsed,
           safeOpened: state.engagement.safeOpened
         },
@@ -123,6 +155,7 @@ const WaveSystem = (function() {
     state.engagement.terminalEntriesRead.clear();
     state.engagement.mNoteFound = false;
     state.engagement.shilinZoomExplored = false;
+    state.engagement.uvLampFound = false;
     state.engagement.uvLampUsed = false;
     state.engagement.safeOpened = false;
     document.dispatchEvent(new CustomEvent('wavechange', { detail: { wave: getWave() } }));
@@ -199,6 +232,9 @@ const WaveSystem = (function() {
       case 'shilinZoom':
         state.engagement.shilinZoomExplored = true;
         break;
+      case 'uvLampFind':
+        state.engagement.uvLampFound = true;
+        break;
       case 'uvLamp':
         state.engagement.uvLampUsed = true;
         break;
@@ -237,7 +273,8 @@ const WaveSystem = (function() {
     for (let w = currentOrganic + 1; w <= MAX_WAVE; w++) {
       const req = WAVE_THRESHOLDS[w];
       if (!req) continue;
-      if (meetsThreshold(req)) {
+      // Dual gate: both time AND engagement must be met
+      if (timeGateMet(w) && meetsThreshold(req)) {
         nextWave = w;
       } else {
         break; // sequential — can't skip waves
@@ -260,16 +297,16 @@ const WaveSystem = (function() {
   // ===== SAFE GATE (separate from wave progression) =====
 
   function isSafeDialAvailable() {
-    const e = state.engagement;
-    const totalMapDots = e.mapDotsClicked.size + e.shilinDotsClicked.size;
-    return getWave() >= featureWaves.safeDial &&
-      e.journalPagesOpened.size >= 3 &&
-      e.tapesPlayed.size >= 1 &&
-      totalMapDots >= 3;
+    // Safe dial available from Wave 5 when the safe is visible
+    return getWave() >= featureWaves.safeDial;
   }
 
   function isSafeOpened() {
     return state.engagement.safeOpened;
+  }
+
+  function isUVLampFound() {
+    return state.engagement.uvLampFound;
   }
 
   function hasTapePlayed(tapeId) {
@@ -278,6 +315,7 @@ const WaveSystem = (function() {
 
   function isFeatureAvailable(featureId) {
     if (featureId === 'safeDial') return isSafeDialAvailable();
+    if (featureId === 'uv') return state.engagement.uvLampFound;
     return getWave() >= (featureWaves[featureId] || 999);
   }
 
@@ -291,6 +329,7 @@ const WaveSystem = (function() {
       terminalEntries: e.terminalEntriesRead.size,
       mNoteFound: e.mNoteFound,
       shilinZoomExplored: e.shilinZoomExplored,
+      uvLampFound: e.uvLampFound,
       uvLampUsed: e.uvLampUsed,
       safeOpened: e.safeOpened
     };
@@ -306,6 +345,12 @@ const WaveSystem = (function() {
     const e = state.engagement;
     const totalMapDots = e.mapDotsClicked.size + e.shilinDotsClicked.size;
     const needs = [];
+
+    // Time gate check
+    if (!timeGateMet(nextW)) {
+      const daysNeeded = TIME_GATES[nextW] - daysSinceLaunch();
+      needs.push(`${daysNeeded} more day(s) until time gate`);
+    }
 
     if (req.journalPages && e.journalPagesOpened.size < req.journalPages) {
       needs.push(`${req.journalPages - e.journalPagesOpened.size} more journal page(s)`);
@@ -337,19 +382,20 @@ const WaveSystem = (function() {
     panel.id = 'wave-debug-panel';
     panel.className = 'wave-debug-panel';
     panel.innerHTML = `
-      <div class="debug-title">WAVE CONTROL</div>
+      <div class="debug-title">WAVE CONTROL (v10)</div>
       <div class="debug-waves">
-        ${[1,2,3,4,5].map(w => `<button class="debug-wave-btn" data-wave="${w}">${w}</button>`).join('')}
+        ${[1,2,3,4,5,6].map(w => `<button class="debug-wave-btn" data-wave="${w}">${w}</button>`).join('')}
       </div>
       <div class="debug-actions">
-        <button class="debug-action-btn" id="debug-organic">⟳ ORGANIC</button>
-        <button class="debug-action-btn debug-reset" id="debug-reset">✕ RESET</button>
+        <button class="debug-action-btn" id="debug-organic">\u27F3 ORGANIC</button>
+        <button class="debug-action-btn debug-reset" id="debug-reset">\u2715 RESET</button>
       </div>
       <div class="debug-info">
         <div>Earned: <span id="debug-wave-earned">${state.wave}</span> | Showing: <span id="debug-wave-num">${getWave()}</span>${state.debugOverride !== null ? ' (override)' : ''}</div>
+        <div>Days: <span id="debug-days">${daysSinceLaunch()}</span> | Time gate W${state.wave + 1 <= MAX_WAVE ? state.wave + 1 : MAX_WAVE}: <span id="debug-time-gate">${timeGateMet(Math.min(state.wave + 1, MAX_WAVE)) ? 'MET' : 'WAIT'}</span></div>
         <div>Journal: <span id="debug-journal">0</span> | Tapes: <span id="debug-tapes">0</span> | Map: <span id="debug-dots">0</span></div>
-        <div>Terminal: <span id="debug-terminal">0</span> | M.note: <span id="debug-mnote">✗</span> | Shilin: <span id="debug-shilin">✗</span></div>
-        <div>UV: <span id="debug-uv">✗</span> | Safe dial: <span id="debug-safe-dial">NO</span> | Safe: <span id="debug-safe-open">NO</span></div>
+        <div>Terminal: <span id="debug-terminal">0</span> | M.note: <span id="debug-mnote">\u2717</span> | Shilin: <span id="debug-shilin">\u2717</span></div>
+        <div>UV found: <span id="debug-uv-found">\u2717</span> | UV used: <span id="debug-uv">\u2717</span> | Safe dial: <span id="debug-safe-dial">NO</span> | Safe: <span id="debug-safe-open">NO</span></div>
         <div class="debug-next" id="debug-next"></div>
       </div>
       <div class="debug-features" id="debug-features"></div>
@@ -389,6 +435,15 @@ const WaveSystem = (function() {
     const numEl = document.getElementById('debug-wave-num');
     if (numEl) numEl.textContent = getWave() + (state.debugOverride !== null ? ' (override)' : '');
 
+    // Time info
+    const daysEl = document.getElementById('debug-days');
+    if (daysEl) daysEl.textContent = daysSinceLaunch();
+    const tgEl = document.getElementById('debug-time-gate');
+    if (tgEl) {
+      const nextW = Math.min(state.wave + 1, MAX_WAVE);
+      tgEl.textContent = timeGateMet(nextW) ? 'MET' : `WAIT (${TIME_GATES[nextW] - daysSinceLaunch()}d)`;
+    }
+
     // Engagement metrics
     const je = document.getElementById('debug-journal');
     if (je) je.textContent = e.journalPagesOpened.size;
@@ -399,11 +454,13 @@ const WaveSystem = (function() {
     const tr = document.getElementById('debug-terminal');
     if (tr) tr.textContent = e.terminalEntriesRead.size;
     const mn = document.getElementById('debug-mnote');
-    if (mn) mn.textContent = e.mNoteFound ? '✓' : '✗';
+    if (mn) mn.textContent = e.mNoteFound ? '\u2713' : '\u2717';
     const sh = document.getElementById('debug-shilin');
-    if (sh) sh.textContent = e.shilinZoomExplored ? '✓' : '✗';
+    if (sh) sh.textContent = e.shilinZoomExplored ? '\u2713' : '\u2717';
+    const uvf = document.getElementById('debug-uv-found');
+    if (uvf) uvf.textContent = e.uvLampFound ? '\u2713' : '\u2717';
     const uv = document.getElementById('debug-uv');
-    if (uv) uv.textContent = e.uvLampUsed ? '✓' : '✗';
+    if (uv) uv.textContent = e.uvLampUsed ? '\u2713' : '\u2717';
     const sd = document.getElementById('debug-safe-dial');
     if (sd) sd.textContent = isSafeDialAvailable() ? 'YES' : 'NO';
     const so = document.getElementById('debug-safe-open');
@@ -414,11 +471,11 @@ const WaveSystem = (function() {
     if (nextEl) {
       const info = getNextWaveNeeds();
       if (info && info.needs.length > 0) {
-        nextEl.textContent = `→ W${info.wave}: ${info.needs.join(', ')}`;
+        nextEl.textContent = `\u2192 W${info.wave}: ${info.needs.join(', ')}`;
       } else if (state.wave >= MAX_WAVE) {
-        nextEl.textContent = '→ MAX WAVE REACHED';
+        nextEl.textContent = '\u2192 MAX WAVE REACHED';
       } else {
-        nextEl.textContent = '→ Ready for next wave!';
+        nextEl.textContent = '\u2192 Ready for next wave!';
       }
     }
 
@@ -464,10 +521,13 @@ const WaveSystem = (function() {
     isFeatureAvailable,
     isSafeDialAvailable,
     isSafeOpened,
+    isUVLampFound,
     hasTapePlayed,
     getEngagement,
     toggleDebugPanel,
     resetState,
-    clearDebugOverride
+    clearDebugOverride,
+    daysSinceLaunch,
+    timeGateMet
   };
 })();

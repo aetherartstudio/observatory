@@ -72,13 +72,16 @@
   function updateZoneVisibility() {
     const wave = WaveSystem.getWave();
 
-    // Safe: visible from Wave 2
+    // Safe: visible from Wave 5 (anomalies hint at code)
     const safezone = document.getElementById('zone-safe');
-    if (safezone) safezone.style.display = wave >= 2 ? '' : 'none';
+    if (safezone) safezone.style.display = wave >= 5 ? '' : 'none';
 
-    // Source monitor: visible from Wave 4
+    // Source monitor: visible from Wave 5
     const srcZone = document.getElementById('zone-source');
-    if (srcZone) srcZone.style.display = wave >= 4 ? '' : 'none';
+    if (srcZone) srcZone.style.display = wave >= 5 ? '' : 'none';
+
+    // UV lamp hidden clickable: always present but only visible as subtle cursor hint
+    updateUVLampClickable();
   }
 
   // ===== HOTSPOT CLICK HANDLING =====
@@ -255,8 +258,8 @@
     const zoomOutBtn = document.getElementById('map-zoom-out');
     if (!zoomBtn || !zoomOutBtn) return;
 
-    // Show zoom button from Wave 3+
-    if (WaveSystem.getWave() >= 3) {
+    // Show zoom button from Wave 4+ (Shilin zoom introduced in W4)
+    if (WaveSystem.getWave() >= 4) {
       if (!mapZoomActive) zoomBtn.classList.add('visible');
     } else {
       zoomBtn.classList.remove('visible');
@@ -359,7 +362,7 @@
     mapScreen.style.display = '';
     mapInfo.classList.remove('active');
     zoomOutBtn.classList.remove('visible');
-    if (WaveSystem.getWave() >= 3) zoomBtn.classList.add('visible');
+    if (WaveSystem.getWave() >= 4) zoomBtn.classList.add('visible');
   }
 
   // ===== PINBOARD ZOOM HELPER =====
@@ -795,7 +798,7 @@
       display.textContent = 'ROTATE DIAL — CLICK TO CONFIRM';
       container.classList.add('safe-dial-active');
       setupSafeDial();
-    } else if (WaveSystem.getWave() >= 2) {
+    } else if (WaveSystem.getWave() >= 5) {
       display.textContent = 'LOCKED';
       container.classList.remove('safe-dial-active');
     }
@@ -1007,7 +1010,7 @@
     }
 
     const wave = WaveSystem.getWave();
-    const data = wave >= 5 ? SOURCE_MONITOR.wave5 : SOURCE_MONITOR.wave4;
+    const data = wave >= 6 ? SOURCE_MONITOR.wave6 : SOURCE_MONITOR.wave5;
 
     coherenceEl.innerHTML = `
       <div class="source-coherence-label">SOURCE COHERENCE</div>
@@ -1028,15 +1031,45 @@
   // ===== UV LAMP =====
   let uvActive = false;
 
+  // Hidden UV lamp clickable in the desk scene
+  function updateUVLampClickable() {
+    let lampEl = document.getElementById('uv-lamp-hidden');
+    if (!lampEl) {
+      // Create the hidden clickable in the room scene
+      lampEl = document.createElement('div');
+      lampEl.id = 'uv-lamp-hidden';
+      lampEl.className = 'uv-lamp-hidden';
+      lampEl.title = ''; // no tooltip — must discover by cursor change
+      const scene = document.querySelector('.room-scene');
+      if (scene) {
+        scene.appendChild(lampEl);
+        lampEl.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (!WaveSystem.isUVLampFound()) {
+            WaveSystem.trackEngagement('uvLampFind');
+            // Brief visual feedback: lamp glows
+            lampEl.classList.add('found');
+            setTimeout(() => lampEl.classList.remove('found'), 2000);
+            // Update UV toggle visibility on pinboard
+            updateUVToggleVisibility();
+          }
+        });
+      }
+    }
+    // If already found, add a subtle indicator
+    if (WaveSystem.isUVLampFound()) {
+      lampEl.classList.add('discovered');
+    }
+  }
+
   function updateUVToggleVisibility() {
     const toggle = document.getElementById('uv-toggle');
     if (!toggle) return;
-    // UV available from Wave 3
-    if (WaveSystem.getWave() >= 3) {
+    // UV toggle only appears after the lamp has been found in the desk
+    if (WaveSystem.isUVLampFound()) {
       toggle.classList.add('visible');
     } else {
       toggle.classList.remove('visible');
-      // Deactivate if wave drops below 3
       if (uvActive) deactivateUV();
     }
   }
