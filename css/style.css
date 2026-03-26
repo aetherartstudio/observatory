@@ -291,18 +291,23 @@ body {
   background: rgba(255, 50, 50, 0.1) !important;
 }
 .debug .uv-lamp-hidden {
-  outline: 2px dashed rgba(138, 43, 226, 0.9) !important;
-  outline-offset: -1px;
-  background: rgba(138, 43, 226, 0.25) !important;
+  outline: 3px dashed rgba(138, 43, 226, 0.95) !important;
+  outline-offset: 4px;
+  background: rgba(138, 43, 226, 0.35) !important;
+  box-shadow: 0 0 20px 8px rgba(138, 43, 226, 0.5) !important;
+  width: 40px !important;
+  height: 40px !important;
 }
 .debug .uv-lamp-hidden::after {
   content: 'UV LAMP';
   position: absolute;
-  top: -16px;
-  left: 0;
-  font-size: 8px;
+  top: -22px;
+  left: -6px;
+  font-size: 10px;
   font-family: 'Courier New', monospace;
-  color: #aa66ff;
+  color: #cc88ff;
+  background: rgba(0,0,0,0.7);
+  padding: 1px 5px;
   white-space: nowrap;
   pointer-events: none;
 }
