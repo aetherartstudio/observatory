@@ -99,7 +99,8 @@ const PINBOARD_ITEMS = [
   // W2: Community names, M.'s first notes, sketches (4 post-its)
   { wave: 2, type: 'postit', text: 'They carry what we cannot hold. It is not free.', color: '#f5b7b1', rotation: -2, position: { top: '18%', left: '15%' }, author: 'm' },
   { wave: 2, type: 'postit', text: 'Fugu stopped mid-sprint and went completely still. Something small had caught his attention. He stayed that way for almost a minute.', color: '#f5b7b1', rotation: 1, position: { top: '22%', left: '75%' }, author: 'm' },
-  { wave: 2, type: 'sketch', image: 'fugu-sketch-1.png', position: { top: '30%', left: '8%' }, rotation: 2, label: 'Type 1 — "Fugu" — sprint form' },
+  { wave: 2, type: 'sketch', image: 'fugu-sketch-1.png', position: { top: '30%', left: '8%' }, rotation: 2, label: 'Type 1 — "Fugu" — sprint form', replacedByWave: 3 },
+  { wave: 3, type: 'sketch', image: 'fugu-sketch-2.png', position: { top: '30%', left: '8%' }, rotation: 2, label: 'Type 1 — "Fugu" — annotated' },
   { wave: 2, type: 'sketch', image: 'MrQ-sketch-1.png', position: { top: '32%', left: '30%' }, rotation: -3, label: 'Type 2 — "MrQ" — display posture' },
   { wave: 2, type: 'sketch', image: 'groovix-sketch-1.png', position: { top: '55%', left: '10%' }, rotation: -1, label: 'Type 3 — "Groovix" — rhythm posture' },
   { wave: 2, type: 'sketch', image: 'muncha-sketch-1.png', position: { top: '58%', left: '32%' }, rotation: 4, label: 'Type 4 — "Muncha" — inflation state' },

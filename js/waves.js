@@ -204,7 +204,13 @@ const WaveSystem = (function() {
 
   // Filter any array by wave — returns items where item.wave <= currentWave
   function getVisibleContent(array) {
-    return array.filter(item => item.wave <= getWave());
+    const wave = getWave();
+    return array.filter(item => {
+      if (item.wave > wave) return false;
+      // Hide items that have been replaced by a newer wave version
+      if (item.replacedByWave && wave >= item.replacedByWave) return false;
+      return true;
+    });
   }
 
   // ===== ENGAGEMENT TRACKING =====
