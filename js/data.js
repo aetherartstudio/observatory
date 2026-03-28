@@ -91,42 +91,42 @@ const JOURNAL_PAGES = [
 // ===== PINBOARD ITEMS =====
 const PINBOARD_ITEMS = [
   // W1: First observations, type designations (4 post-its)
-  { wave: 1, type: 'postit', text: 'Night market, 3am — four distinct silhouettes. None matching known fauna.', color: '#f7dc6f', rotation: -2, position: { top: '4%', left: '3%' }, author: 'researcher' },
-  { wave: 1, type: 'postit', text: 'The fast one stopped at a flower growing through concrete. Stayed 47 seconds. WHY?', color: '#f1948a', rotation: 3, position: { top: '2%', left: '32%' }, author: 'researcher' },
-  { wave: 1, type: 'postit', text: 'Type 4 — mouth takes up 70% of body. Inflates when near arguments. Deflates when they stop.', color: '#82e0aa', rotation: -1, position: { top: '7%', left: '60%' }, author: 'researcher' },
-  { wave: 1, type: 'postit', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '15%', left: '85%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: 'Night market, 3am — four distinct silhouettes. None matching known fauna.', color: '#f7dc6f', rotation: -2, position: { top: '2%', left: '2%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: 'The fast one stopped at a flower growing through concrete. Stayed 47 seconds. WHY?', color: '#f1948a', rotation: 3, position: { top: '5%', left: '35%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: 'Type 4 — mouth takes up 70% of body. Inflates when near arguments. Deflates when they stop.', color: '#82e0aa', rotation: -1, position: { top: '3%', left: '62%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '8%', left: '85%' }, author: 'researcher' },
 
   // W2: Community names, M.'s first notes, sketches (4 post-its)
-  { wave: 2, type: 'postit', text: 'They carry what we cannot hold. It is not free.', color: '#f5b7b1', rotation: -2, position: { top: '20%', left: '3%' }, author: 'm' },
-  { wave: 2, type: 'postit', text: 'Fugu stopped mid-sprint and went completely still. Something small had caught his attention. He stayed that way for almost a minute.', color: '#f5b7b1', rotation: 1, position: { top: '22%', left: '72%' }, author: 'm' },
+  { wave: 2, type: 'postit', text: 'They carry what we cannot hold. It is not free.', color: '#f5b7b1', rotation: -2, position: { top: '18%', left: '15%' }, author: 'm' },
+  { wave: 2, type: 'postit', text: 'Fugu stopped mid-sprint and went completely still. Something small had caught his attention. He stayed that way for almost a minute.', color: '#f5b7b1', rotation: 1, position: { top: '22%', left: '75%' }, author: 'm' },
   { wave: 2, type: 'sketch', image: 'fugu-sketch-1.png', position: { top: '30%', left: '8%' }, rotation: 2, label: 'Type 1 — "Fugu" — sprint form' },
   { wave: 2, type: 'sketch', image: 'MrQ-sketch-1.png', position: { top: '32%', left: '30%' }, rotation: -3, label: 'Type 2 — "MrQ" — display posture' },
   { wave: 2, type: 'sketch', image: 'groovix-sketch-1.png', position: { top: '55%', left: '10%' }, rotation: -1, label: 'Type 3 — "Groovix" — rhythm posture' },
   { wave: 2, type: 'sketch', image: 'muncha-sketch-1.png', position: { top: '58%', left: '32%' }, rotation: 4, label: 'Type 4 — "Muncha" — inflation state' },
-  { wave: 2, type: 'postit', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE. But they keep coming back to Taipei.', color: '#f7dc6f', rotation: 2, position: { top: '25%', left: '45%' }, author: 'researcher' },
-  { wave: 2, type: 'postit', text: 'The locals named them: Fugu, MrQ, Groovix, Muncha. I will continue using type designations.', color: '#82e0aa', rotation: -3, position: { top: '48%', left: '68%' }, author: 'researcher' },
+  { wave: 2, type: 'postit', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE. But they keep coming back to Taipei.', color: '#f7dc6f', rotation: 2, position: { top: '28%', left: '48%' }, author: 'researcher' },
+  { wave: 2, type: 'postit', text: 'The locals named them: Fugu, MrQ, Groovix, Muncha. I will continue using type designations.', color: '#82e0aa', rotation: -3, position: { top: '46%', left: '72%' }, author: 'researcher' },
 
   // W3: Energy loss, alarm (3 post-its)
-  { wave: 3, type: 'postit', text: 'Energy output declining across ALL types. What is costing them?', color: '#f1948a', rotation: 1, position: { top: '70%', left: '52%' }, author: 'researcher' },
-  { wave: 3, type: 'postit', text: 'MrQ performed for 20 seconds today. Used to be 45. He flexed at the end but it was dimmer.', color: '#f7dc6f', rotation: -3, position: { top: '42%', left: '38%' }, author: 'researcher' },
+  { wave: 3, type: 'postit', text: 'Energy output declining across ALL types. What is costing them?', color: '#f1948a', rotation: 1, position: { top: '68%', left: '58%' }, author: 'researcher' },
+  { wave: 3, type: 'postit', text: 'MrQ performed for 20 seconds today. Used to be 45. He flexed at the end but it was dimmer.', color: '#f7dc6f', rotation: -3, position: { top: '40%', left: '42%' }, author: 'researcher' },
   { wave: 3, type: 'receipt', position: { top: '62%', left: '55%' }, rotation: 3, vendor: 'SHILIN MARKET STALL #17', date: '2024-11-10', items: ['Tea egg ×2', 'Stinky tofu ×1', '---', 'ANOMALOUS RESIDUE DETECTED'], total: 'NT$ 85' },
   { wave: 3, type: 'photo', image: null, position: { top: '35%', left: '55%' }, rotation: -2, label: 'Shilin Night Market — 02:40', caption: 'Motion blur near flower stall. Fugu?' },
-  { wave: 3, type: 'postit', text: 'M.: "Not from here. The cost is the distance."', color: '#f5b7b1', rotation: -2, position: { top: '52%', left: '22%' }, author: 'm' },
+  { wave: 3, type: 'postit', text: 'M.: "Not from here. The cost is the distance."', color: '#f5b7b1', rotation: -2, position: { top: '55%', left: '25%' }, author: 'm' },
 
   // W4: Convergence confirmed, crystal sketch, diagram (2 post-its)
   { wave: 4, type: 'diagram', position: { top: '20%', left: '68%' }, rotation: -1, title: 'CONVERGENCE VECTORS', description: 'All specimen trajectories — directional arrows all pointing toward Taipei. Radial pattern confirmed. Center: [REDACTED]' },
   { wave: 4, type: 'sketch', image: 'source crystal-1.png', position: { top: '70%', left: '15%' }, rotation: 1, label: 'Source crystal — preliminary sketch' },
-  { wave: 4, type: 'postit', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '82%', left: '72%' }, author: 'm' },
-  { wave: 4, type: 'postit', text: 'Followed Fugu for 3 hours. Sprint paths no longer random. He knows where he is going.', color: '#85c1e9', rotation: -1, position: { top: '60%', left: '82%' }, author: 'researcher' },
+  { wave: 4, type: 'postit', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '80%', left: '68%' }, author: 'm' },
+  { wave: 4, type: 'postit', text: 'Followed Fugu for 3 hours. Sprint paths no longer random. He knows where he is going.', color: '#85c1e9', rotation: -1, position: { top: '62%', left: '85%' }, author: 'researcher' },
   { wave: 4, type: 'receipt', position: { top: '50%', left: '38%' }, rotation: -4, vendor: '7-ELEVEN SHILIN #229', date: '2025-01-08', items: ['Battery pack ×1', 'Onigiri ×2', '---', 'UV TRACE: POSITIVE'], total: 'NT$ 147' },
 
   // W5: Source proximity, anomalies (2 post-its)
-  { wave: 5, type: 'postit', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: 1, position: { top: '38%', left: '82%' }, author: 'researcher' },
-  { wave: 5, type: 'postit', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '75%', left: '38%' }, author: 'researcher' },
+  { wave: 5, type: 'postit', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: 1, position: { top: '35%', left: '78%' }, author: 'researcher' },
+  { wave: 5, type: 'postit', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '74%', left: '32%' }, author: 'researcher' },
   { wave: 5, type: 'photo', image: null, position: { top: '42%', left: '18%' }, rotation: 2, label: 'Jiufen Old Street — 01:55', caption: 'Temple steps. Type 1 oriented toward ocean.' },
 
   // W6: After safe (1 post-it)
-  { wave: 6, type: 'postit', text: 'M. sat with them. Eleven minutes. Then: "It remembers." Look around you. They are closer than you think.', color: '#f5b7b1', rotation: 2, position: { top: '85%', left: '55%' }, author: 'm' },
+  { wave: 6, type: 'postit', text: 'M. sat with them. Eleven minutes. Then: "It remembers." Look around you. They are closer than you think.', color: '#f5b7b1', rotation: 2, position: { top: '84%', left: '5%' }, author: 'm' },
 ];
 
 const PINBOARD_UV = [
