@@ -1071,11 +1071,11 @@ body {
 .full-postit {
   position: absolute;
   width: 12%;
-  font-family: var(--font-handwriting);
-  font-size: 1vw;
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.35vw;
   /* Modern browsers with container query support */
   width: 10cqw;
-  font-size: 0.85cqw;
+  font-size: 1.15cqw;
   color: #2a2a2a;
   line-height: 1.4;
   cursor: pointer;
@@ -1102,7 +1102,7 @@ body {
 .full-postit.zoomed {
   position: fixed;
   width: 364px;
-  font-size: 21px;
+  font-size: 28px;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) rotate(0deg) !important;
