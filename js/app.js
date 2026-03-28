@@ -369,13 +369,29 @@
   function zoomPinboardItem(el, zoomClass) {
     const overlay = document.querySelector('.postit-overlay');
     if (el.classList.contains(zoomClass)) {
+      // Restore original inline styles
+      el.style.transform = el.dataset.originalTransform || '';
+      el.style.top = el.dataset.originalTop || '';
+      el.style.left = el.dataset.originalLeft || '';
       el.classList.remove(zoomClass);
       if (overlay) overlay.classList.remove('active');
     } else {
       // Unzoom any other zoomed items
       document.querySelectorAll('.full-postit.zoomed, .sketch-zoomed-active, .photo-zoomed-active, .receipt-zoomed-active, .diagram-zoomed-active').forEach(p => {
+        if (p.dataset.originalTransform !== undefined) {
+          p.style.transform = p.dataset.originalTransform;
+          p.style.top = p.dataset.originalTop || '';
+          p.style.left = p.dataset.originalLeft || '';
+        }
         p.classList.remove('zoomed', 'sketch-zoomed-active', 'photo-zoomed-active', 'receipt-zoomed-active', 'diagram-zoomed-active');
       });
+      // Save and clear inline styles so CSS class takes effect
+      el.dataset.originalTransform = el.style.transform;
+      el.dataset.originalTop = el.style.top;
+      el.dataset.originalLeft = el.style.left;
+      el.style.transform = '';
+      el.style.top = '';
+      el.style.left = '';
       el.classList.add(zoomClass);
       if (overlay) overlay.classList.add('active');
     }
@@ -391,9 +407,11 @@
 
     const visibleItems = WaveSystem.getVisibleContent(PINBOARD_ITEMS);
 
+    let postitIndex = 0;
     visibleItems.forEach((item, i) => {
       if (item.type === 'postit') {
-        const imgFile = POSTIT_IMAGES[i % POSTIT_IMAGES.length];
+        const imgFile = POSTIT_IMAGES[postitIndex % POSTIT_IMAGES.length];
+        postitIndex++;
         const div = document.createElement('div');
         div.className = 'full-postit';
         if (item.author === 'm') div.classList.add('postit-m');

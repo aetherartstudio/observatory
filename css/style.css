@@ -1071,17 +1071,18 @@ body {
 .full-postit {
   position: absolute;
   width: 12%;
-  font-family: 'Indie Flower', cursive;
-  font-size: 1.35vw;
+  font-family: 'Nothing You Could Do', cursive;
+  font-size: 0.7vw;
   /* Modern browsers with container query support */
   width: 10cqw;
-  font-size: 1.15cqw;
+  font-size: 0.6cqw;
   color: #2a2a2a;
-  line-height: 1.4;
+  line-height: 1.35;
   cursor: pointer;
   transition: transform 0.4s ease, z-index 0s;
   overflow: visible;
   background: transparent;
+  transform-origin: center center;
 }
 .full-postit .postit-bg {
   display: block;
@@ -1095,22 +1096,18 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 1.5cqw 1.2cqw;
+  padding: 18% 12% 12%;
   box-sizing: border-box;
   overflow: hidden;
 }
 .full-postit.zoomed {
   position: fixed;
-  width: 364px;
-  font-size: 28px;
+  width: 10cqw;
   top: 50% !important;
   left: 50% !important;
-  transform: translate(-50%, -50%) rotate(0deg) !important;
+  transform: translate(-50%, -50%) rotate(0deg) scale(4) !important;
   z-index: 1000;
-  filter: drop-shadow(0 10px 40px rgba(0,0,0,0.5));
-}
-.full-postit.zoomed .postit-inner {
-  padding: 39px 31px;
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,0.5));
 }
 .postit-overlay {
   display: none;
@@ -1966,7 +1963,7 @@ body {
 }
 .postit-sig {
   text-align: right;
-  font-family: 'Caveat', cursive;
+  font-family: 'Nothing You Could Do', cursive;
   font-size: 0.85em;
   opacity: 0.7;
   margin-top: 4px;
