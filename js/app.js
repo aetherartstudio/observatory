@@ -425,6 +425,14 @@
         bgImg.src = `assets/${imgFile}`;
         bgImg.alt = '';
         bgImg.draggable = false;
+        // Scale up square/wide images so they match the visual width of portrait ones
+        bgImg.onload = function() {
+          const ratio = this.naturalWidth / this.naturalHeight;
+          if (ratio > 0.9) {
+            // Square or wide image — scale up width to match visual mass of portrait post-its
+            div.style.width = (ratio > 0.95) ? '11cqw' : '10.5cqw';
+          }
+        };
         div.appendChild(bgImg);
 
         // Inner content wrapper
