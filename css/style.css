@@ -1030,7 +1030,7 @@ body {
   /* Lock to image ratio so stickers scale proportionally */
   width: min(96vw, 92vh * 1456 / 816);
   height: min(92vh, 96vw * 816 / 1456);
-  background: url('../assets/cork-bg.jpg') center / 100% 100% no-repeat;
+  background: url('../assets/cork-bg.png') center / 100% 100% no-repeat;
   background-color: #1a1510;
   border: none;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
