@@ -567,6 +567,12 @@
     }
     overlay.addEventListener('click', () => {
       document.querySelectorAll('.full-postit.zoomed, .sketch-zoomed-active, .photo-zoomed-active, .receipt-zoomed-active, .diagram-zoomed-active').forEach(p => {
+        // Restore saved inline styles before removing zoom class
+        if (p.dataset.originalTransform !== undefined) {
+          p.style.transform = p.dataset.originalTransform;
+          p.style.top = p.dataset.originalTop || '';
+          p.style.left = p.dataset.originalLeft || '';
+        }
         p.classList.remove('zoomed', 'sketch-zoomed-active', 'photo-zoomed-active', 'receipt-zoomed-active', 'diagram-zoomed-active');
       });
       overlay.classList.remove('active');
