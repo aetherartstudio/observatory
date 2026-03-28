@@ -393,30 +393,43 @@
 
     visibleItems.forEach((item, i) => {
       if (item.type === 'postit') {
-        const img = POSTIT_IMAGES[i % POSTIT_IMAGES.length];
+        const imgFile = POSTIT_IMAGES[i % POSTIT_IMAGES.length];
         const div = document.createElement('div');
         div.className = 'full-postit';
         if (item.author === 'm') div.classList.add('postit-m');
-        div.style.backgroundImage = `url('assets/${img}')`;
         div.style.transform = `rotate(${item.rotation}deg)`;
         div.style.top = item.position.top;
         div.style.left = item.position.left;
 
+        // Post-it background as <img> to preserve aspect ratio
+        const bgImg = document.createElement('img');
+        bgImg.className = 'postit-bg';
+        bgImg.src = `assets/${imgFile}`;
+        bgImg.alt = '';
+        bgImg.draggable = false;
+        div.appendChild(bgImg);
+
+        // Inner content wrapper
+        const inner = document.createElement('div');
+        inner.className = 'postit-inner';
+
         // Push-pin
         const pin = document.createElement('div');
         pin.className = 'pin-thumb';
-        div.appendChild(pin);
+        inner.appendChild(pin);
 
         const textSpan = document.createElement('span');
         textSpan.textContent = item.text;
-        div.appendChild(textSpan);
+        inner.appendChild(textSpan);
 
         if (item.author === 'm') {
           const sig = document.createElement('div');
           sig.className = 'postit-sig';
           sig.textContent = '— M.';
-          div.appendChild(sig);
+          inner.appendChild(sig);
         }
+
+        div.appendChild(inner);
 
         div.addEventListener('click', (e) => {
           e.stopPropagation();
