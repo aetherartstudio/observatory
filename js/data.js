@@ -91,19 +91,19 @@ const JOURNAL_PAGES = [
 // ===== PINBOARD ITEMS =====
 const PINBOARD_ITEMS = [
   // W1: First observations, type designations (4 post-its)
-  { wave: 1, type: 'postit', text: 'Night market, 3am — four distinct silhouettes. None matching known fauna.', color: '#f7dc6f', rotation: -2, position: { top: '2%', left: '2%' }, author: 'researcher' },
-  { wave: 1, type: 'postit', text: 'The fast one stopped at a flower growing through concrete. Stayed 47 seconds. WHY?', color: '#f1948a', rotation: 3, position: { top: '5%', left: '35%' }, author: 'researcher' },
-  { wave: 1, type: 'postit', text: 'Type 4 — mouth takes up 70% of body. Inflates when near arguments. Deflates when they stop.', color: '#82e0aa', rotation: -1, position: { top: '3%', left: '62%' }, author: 'researcher' },
-  { wave: 1, type: 'postit', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '8%', left: '85%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: 'Night market, 3am — four distinct silhouettes. None matching known fauna.', color: '#f7dc6f', rotation: -2, position: { top: '2%', left: '12%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: 'The fast one stopped at a flower growing through concrete. Stayed 47 seconds. WHY?', color: '#f1948a', rotation: 3, position: { top: '50%', left: '35%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: 'Type 4 — mouth takes up 70% of body. Inflates when near arguments. Deflates when they stop.', color: '#82e0aa', rotation: 6, position: { top: '12%', left: '62%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '70%', left: '82%' }, author: 'researcher' },
 
   // W2: Community names, M.'s first notes, sketches (4 post-its)
-  { wave: 2, type: 'postit', text: 'They carry what we cannot hold. It is not free.', color: '#f5b7b1', rotation: -2, position: { top: '18%', left: '15%' }, author: 'm' },
-  { wave: 2, type: 'postit', text: 'Fugu stopped mid-sprint and went completely still. Something small had caught his attention. He stayed that way for almost a minute.', color: '#f5b7b1', rotation: 1, position: { top: '22%', left: '75%' }, author: 'm' },
+  { wave: 2, type: 'postit', text: 'They carry what we cannot hold. It is not free.', color: '#f5b7b1', rotation: -2, position: { top: '18%', left: '21%' }, author: 'm' },
+  { wave: 2, type: 'postit', text: 'Fugu stopped mid-sprint and went completely still. Something small had caught his attention. He stayed that way for almost a minute.', color: '#f5b7b1', rotation: 5, position: { top: '22%', left: '75%' }, author: 'm' },
   { wave: 2, type: 'sketch', image: 'fugu-sketch-1.png', position: { top: '30%', left: '8%' }, rotation: 2, label: 'Type 1 — "Fugu" — sprint form', replacedByWave: 3 },
   { wave: 3, type: 'sketch', image: 'fugu-sketch-2.png', position: { top: '30%', left: '8%' }, rotation: 2, label: 'Type 1 — "Fugu" — annotated' },
   { wave: 2, type: 'sketch', image: 'MrQ-sketch-1.png', position: { top: '32%', left: '30%' }, rotation: -3, label: 'Type 2 — "MrQ" — display posture' },
   { wave: 2, type: 'sketch', image: 'groovix-sketch-1.png', position: { top: '55%', left: '10%' }, rotation: -1, label: 'Type 3 — "Groovix" — rhythm posture' },
-  { wave: 2, type: 'sketch', image: 'muncha-sketch-1.png', position: { top: '58%', left: '32%' }, rotation: 4, label: 'Type 4 — "Muncha" — inflation state' },
+  { wave: 2, type: 'sketch', image: 'muncha-sketch-1.png', position: { top: '58%', left: '50%' }, rotation: 4, label: 'Type 4 — "Muncha" — inflation state' },
   { wave: 2, type: 'postit', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE. But they keep coming back to Taipei.', color: '#f7dc6f', rotation: 2, position: { top: '28%', left: '48%' }, author: 'researcher' },
   { wave: 2, type: 'postit', text: 'The locals named them: Fugu, MrQ, Groovix, Muncha. I will continue using type designations.', color: '#82e0aa', rotation: -3, position: { top: '46%', left: '72%' }, author: 'researcher' },
 
