@@ -356,41 +356,41 @@ body {
 #zone-pinboard {
   left: 31%;
   top: 0%;
-  width: 40%;
+  width: 58%;
   height: 25%;
   z-index: 4;
 }
 
 /* Cassette player (right of desk) */
 #zone-cassette {
-  left: 60%;
-  top: 56%;
-  width: 12%;
+  left: 74%;
+  top: 71%;
+  width: 14%;
   height: 18%;
 }
 
 /* Safe (lower desk area) */
 #zone-safe {
-  left: 14%;
-  top: 70%;
-  width: 12%;
-  height: 20%;
+  left: 8%;
+  top: 8%;
+  width: 22%;
+  height: 29%;
 }
 
 /* Source Monitor C (empty stand — Wave 5+) */
 #zone-source {
   left: 56%;
-  top: 28%;
+  top: 32%;
   width: 14%;
   height: 20%;
 }
 
 /* Notebook (bottom right of desk) */
 #zone-notepad {
-  left: 71%;
-  top: 69%;
-  width: 18%;
-  height: 22%;
+  left: 36%;
+  top: 59%;
+  width: 13%;
+  height: 15%;
 }
 
 
@@ -400,8 +400,8 @@ body {
 /* Half-concealed in desk clutter. Only hint: cursor changes on hover. */
 .uv-lamp-hidden {
   position: absolute;
-  left: 47%;
-  top: 55%;
+  left: 65%;
+  top: 73%;
   width: 30px;
   height: 30px;
   z-index: 10;
