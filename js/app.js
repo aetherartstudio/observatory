@@ -851,7 +851,7 @@
     }
 
     if (WaveSystem.isSafeDialAvailable()) {
-      display.textContent = 'ROTATE DIAL — CLICK TO CONFIRM';
+      display.textContent = 'PULL HANDLE TO CONFIRM';
       container.classList.add('safe-dial-active');
       setupSafeDial();
     } else if (WaveSystem.getWave() >= 5) {
@@ -1016,7 +1016,7 @@
         display.classList.remove('denied');
         safeCodeEntries = [];
         updateSafeDigitDisplay();
-        display.textContent = 'ROTATE DIAL — CLICK TO CONFIRM';
+        display.textContent = 'PULL HANDLE TO CONFIRM';
       }, 2000);
     }
   }

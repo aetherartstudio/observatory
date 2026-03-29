@@ -2146,8 +2146,8 @@ body {
   position: relative;
 }
 .safe-door {
-  width: min(85vh, 80vw);
-  max-width: 500px;
+  width: min(85vh, 85vw);
+  max-width: 750px;
   aspect-ratio: 1 / 1;
   background: url('../assets/safe-bg.png') center / contain no-repeat;
   border-radius: 8px;
@@ -2181,28 +2181,29 @@ body {
 }
 .safe-dial-area {
   position: absolute;
-  top: 28%;
-  left: 50%;
-  transform: translateX(-55%);
+  top: 26%;
+  left: 28%;
+  width: 40%;
+  height: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 4px;
 }
 
 /* Dial ring — outer frame with tick mark */
 .safe-dial-ring {
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 100%;
+  aspect-ratio: 1;
 }
 .safe-dial-tick {
-  /* Tick mark is part of the background image — hide CSS version */
   display: none;
 }
 .safe-dial {
-  width: 180px;
-  height: 180px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   background: transparent;
   border: none;
@@ -2226,21 +2227,25 @@ body {
   display: none;
 }
 
-/* Code display */
+/* Code display — positioned on middle plate */
 .safe-code-display {
+  position: absolute;
+  top: 73%;
+  left: 50%;
+  transform: translateX(-55%);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   font-family: var(--font-terminal);
-  font-size: 18px;
-  letter-spacing: 2px;
+  font-size: 12px;
+  letter-spacing: 1px;
 }
 .safe-digit {
   color: rgba(255,200,100,0.3);
   background: rgba(0,0,0,0.5);
-  padding: 4px 10px;
-  border-radius: 3px;
-  min-width: 36px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  min-width: 24px;
   text-align: center;
   border: 1px solid rgba(255,200,100,0.1);
   transition: all 0.3s;
@@ -2260,23 +2265,24 @@ body {
 }
 
 .safe-display {
+  position: absolute;
+  top: 86%;
+  left: 50%;
+  transform: translateX(-55%);
   font-family: var(--font-terminal);
-  font-size: 11px;
+  font-size: 8px;
   color: rgba(255,200,100,0.5);
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-align: center;
-  min-height: 16px;
+  white-space: nowrap;
+  min-height: 12px;
   transition: color 0.3s;
 }
 .safe-display.granted { color: rgba(100,255,100,0.9); }
 .safe-display.denied { color: rgba(255,80,80,0.9); }
 
 .safe-hint {
-  font-family: var(--font-terminal);
-  font-size: 28px;
-  color: rgba(255,200,100,0.9);
-  min-height: 34px;
-  letter-spacing: 4px;
+  display: none;
 }
 
 .safe-handle {
