@@ -184,6 +184,8 @@ const WaveSystem = (function() {
   // Debug override — manually set visible wave without changing earned state
   function setWaveDebug(n) {
     state.debugOverride = Math.max(1, Math.min(MAX_WAVE, n));
+    // Safe opens at wave 6, closed for all other waves in debug
+    state.engagement.safeOpened = (state.debugOverride >= 6);
     saveState();
     document.dispatchEvent(new CustomEvent('wavechange', { detail: { wave: getWave() } }));
     updateDebugPanel();
