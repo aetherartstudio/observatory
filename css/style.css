@@ -157,8 +157,8 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 24px;
-  height: 24px;
+  width: 12px;
+  height: 12px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: radial-gradient(circle,
@@ -167,15 +167,18 @@ body {
     rgba(255, 200, 100, 0.3) 50%,
     transparent 75%
   );
-  box-shadow: 0 0 20px 10px rgba(255, 200, 100, 0.5),
-              0 0 50px 20px rgba(255, 200, 100, 0.15);
+  box-shadow: 0 0 10px 5px rgba(255, 200, 100, 0.5),
+              0 0 25px 10px rgba(255, 200, 100, 0.15);
   animation: sparkle 2s ease-in-out infinite;
   pointer-events: none;
   z-index: 3;
 }
 
 /* Move pinboard sparkle to the right — center is under the bright lamp */
-#zone-pinboard::before { left: 75%; top: 60%; }
+#zone-pinboard::before { left: 59%; top: 60%; }
+
+#zone-cassette::before { left: 36%; }
+#zone-safe::before { left: 41%; }
 
 /* Stagger the sparkle so they breathe at different times */
 #zone-terminal::before  { animation-delay: 0s; }
@@ -1794,8 +1797,8 @@ body {
 /* ---- Touch devices: smaller sparkle dots, no hover glow ---- */
 @media not (any-hover: hover) {
   .zone::before {
-    width: 17px;
-    height: 17px;
+    width: 9px;
+    height: 9px;
     box-shadow: none;
   }
 }
