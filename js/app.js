@@ -58,6 +58,14 @@
     }
   }
 
+  function updateRoomBackground() {
+    const bg = document.querySelector('.room-bg');
+    if (!bg) return;
+    bg.src = WaveSystem.isSafeOpened()
+      ? 'assets/room-bg-opened safe.png'
+      : 'assets/room-bg.png';
+  }
+
   function populateAll() {
     populateMap();
     populatePinboard();
@@ -65,6 +73,7 @@
     populateCassette();
     populateSafe();
     populateSource();
+    updateRoomBackground();
   }
 
   // ===== ZONE VISIBILITY =====
@@ -138,6 +147,8 @@
     setTimeout(() => {
       overlay.querySelectorAll('.detail-content').forEach(c => c.classList.remove('active'));
     }, 400);
+
+    updateRoomBackground();
 
     // Flush any wave-triggered repopulate that was deferred
     if (pendingRepopulate) {
