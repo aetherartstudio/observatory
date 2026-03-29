@@ -48,30 +48,50 @@ const SIGHTINGS = [
 ];
 
 // ===== MAP DOTS =====
+// Wave progression: W1=3, W2=+4=7, W3=+5=12, W4=+5=17, W5=+3=20
 const MAP_SIGHTINGS = [
-  { id: 0, wave: 1, city: 'Bangkok', location: 'Chatuchak Market', left: '72%', top: '48%', description: 'Type 1 detected near spice vendor. Sprint-freeze cycle: 4 repetitions.', hasFootage: false, evidenceType: 'visual' },
-  { id: 1, wave: 1, city: 'Berlin', location: 'U-Bahn Alexanderplatz', left: '50%', top: '34%', description: 'Type 3 rhythmic anomaly. Three commuters displaced by tail.', hasFootage: false, evidenceType: 'behavioral' },
-  { id: 2, wave: 1, city: 'Tokyo', location: 'Shibuya Crossing', left: '80%', top: '40%', description: 'Type 2 theatrical display during rush hour. Universal laughter.', hasFootage: false, evidenceType: 'visual' },
-  { id: 3, wave: 1, city: 'Paris', location: 'Montmartre', left: '48%', top: '34%', description: 'Type 3 near accordion player. Three easels destroyed.', hasFootage: false, evidenceType: 'behavioral' },
-  { id: 4, wave: 1, city: 'New York', location: 'Subway Tunnel B-7', left: '29%', top: '35%', description: 'Type 1 sprint-to-tenderness. 62 sec pause at sleeping kitten.', hasFootage: false, evidenceType: 'visual' },
-  { id: 5, wave: 2, city: 'Mumbai', location: 'Train Station District', left: '65%', top: '47%', description: 'Type 4 tension absorption event. Couple stopped arguing within 12 sec.', hasFootage: false, evidenceType: 'behavioral' },
-  { id: 6, wave: 2, city: 'London', location: 'Southbank', left: '47%', top: '33%', description: 'Type 2 aggressive hip display. Both pedestrians laughing within 4 sec.', hasFootage: false, evidenceType: 'visual' },
-  { id: 7, wave: 2, city: 'Seoul', location: 'Gangnam Station', left: '79%', top: '39%', description: 'Type 4 absorbed ambient frustration near vending machine. Worker visibly relaxed.', hasFootage: false, evidenceType: 'temporal' },
-  { id: 8, wave: 3, city: 'Taipei', location: 'Shilin Night Market', left: '77%', top: '42%', description: 'PRIMARY CLUSTER. All four types. Convergence events increasing. ENERGY STATUS: DIMINISHED across all types.', hasFootage: true, evidenceType: 'source' },
-  { id: 9, wave: 4, city: 'Cape Town', location: 'V&A Waterfront', left: '52%', top: '63%', description: 'Type 1 — first Southern Hemisphere sighting. Oriented toward Taipei bearing.', hasFootage: false, evidenceType: 'temporal' },
+  // Wave 1 — First scattered sightings (3 dots)
+  { id: 0, wave: 1, city: 'Bangkok', location: 'Chatuchak Market', left: '72%', top: '48%', description: 'Type 1 detected near spice vendor. Sprint-freeze cycle: 4 repetitions.' },
+  { id: 1, wave: 1, city: 'Tokyo', location: 'Shibuya Crossing', left: '80%', top: '40%', description: 'Type 2 theatrical display during rush hour. Universal laughter reported by 14 witnesses.' },
+  { id: 2, wave: 1, city: 'Berlin', location: 'U-Bahn Alexanderplatz', left: '50%', top: '34%', description: 'Type 3 rhythmic anomaly. Three commuters displaced by tail. No injuries.' },
+  // Wave 2 — Community names leak, spread widens (4 new dots)
+  { id: 3, wave: 2, city: 'Paris', location: 'Montmartre', left: '48%', top: '34%', description: 'Type 3 near accordion player. Three easels destroyed. Locals call it "Groovix."' },
+  { id: 4, wave: 2, city: 'New York', location: 'Subway Tunnel B-7', left: '29%', top: '35%', description: 'Type 1 sprint-to-tenderness. 62 sec pause at sleeping kitten. Transit camera confirmed.' },
+  { id: 5, wave: 2, city: 'Mumbai', location: 'Train Station District', left: '65%', top: '47%', description: 'Type 4 tension absorption event. Couple stopped arguing within 12 sec. First Muncha sighting outside Asia.' },
+  { id: 6, wave: 2, city: 'London', location: 'Southbank', left: '47%', top: '33%', description: 'Type 2 aggressive hip display near busker. Both pedestrians laughing within 4 sec.' },
+  // Wave 3 — Energy loss patterns, more cities report (5 new dots)
+  { id: 7, wave: 3, city: 'Seoul', location: 'Gangnam Station', left: '79%', top: '39%', description: 'Type 4 absorbed ambient frustration near vending machine. Worker visibly relaxed. ENERGY STATUS: DIMINISHED.' },
+  { id: 8, wave: 3, city: 'Taipei', location: 'Shilin Night Market', left: '77%', top: '42%', description: 'PRIMARY CLUSTER. All four types present. Convergence events increasing. ENERGY STATUS: DIMINISHED across all specimens.' },
+  { id: 9, wave: 3, city: 'São Paulo', location: 'Liberdade District', left: '33%', top: '58%', description: 'Type 1 confirmed in South America. Sprint duration 40% shorter than Sept baseline. Energy depletion visible.' },
+  { id: 10, wave: 3, city: 'Istanbul', location: 'Grand Bazaar', left: '56%', top: '38%', description: 'Type 3 rhythmic event disrupted three carpet stalls. Shorter duration than previous — stopped after 11 sec.' },
+  { id: 11, wave: 3, city: 'Melbourne', location: 'Queen Victoria Market', left: '84%', top: '65%', description: 'Type 2 — first Australian sighting. Display lacked usual intensity. Witnesses described it as "tired."' },
+  // Wave 4 — Convergence confirmed, global spread (5 new dots)
+  { id: 12, wave: 4, city: 'Cape Town', location: 'V&A Waterfront', left: '52%', top: '63%', description: 'Type 1 — first Southern Hemisphere sprint observed. Oriented toward Taipei bearing 127° SE.' },
+  { id: 13, wave: 4, city: 'Mexico City', location: 'Mercado de la Merced', left: '22%', top: '44%', description: 'Type 4 absorption near food court. Three separate tension events neutralised. Specimen visibly slower than baseline.' },
+  { id: 14, wave: 4, city: 'Cairo', location: 'Khan el-Khalili', left: '55%', top: '42%', description: 'Type 3 tail displacement inside narrow souk alley. Duration 6 sec — well below W1 average of 22 sec.' },
+  { id: 15, wave: 4, city: 'Toronto', location: 'St. Lawrence Market', left: '27%', top: '33%', description: 'Multi-type sighting. Types 1 and 2 observed simultaneously. Both oriented ESE before dispersal.' },
+  { id: 16, wave: 4, city: 'Osaka', location: 'Dōtonbori', left: '81%', top: '41%', description: 'Type 2 theatrical display — but muted. No laughter from witnesses. Specimen paused mid-routine, oriented toward Taipei.' },
+  // Wave 5 — Source proximity, final sightings (3 new dots)
+  { id: 17, wave: 5, city: 'Jakarta', location: 'Tanah Abang Market', left: '74%', top: '54%', description: 'Type 1 sprint lasted 0.8 sec — shortest on record. Specimen remained motionless for 4 min facing bearing 127° SE.' },
+  { id: 18, wave: 5, city: 'Hanoi', location: 'Old Quarter', left: '74%', top: '44%', description: 'Types 1, 3, and 4 observed moving in formation toward SE. No interaction with environment. First coordinated migration event.' },
+  { id: 19, wave: 5, city: 'Manila', location: 'Quiapo District', left: '79%', top: '47%', description: 'All four types. No characteristic behaviours displayed. Silent transit toward bearing 127° SE. ENERGY STATUS: CRITICAL.' },
 ];
 
 // ===== SHILIN DETAIL MAP DOTS (Wave 4+) =====
 const SHILIN_DOTS = [
-  { id: 's0', wave: 4, location: 'Shilin Night Market — Main Gate', left: '35%', top: '30%', description: 'Primary convergence node. All four types documented. Highest frequency of multi-type co-occurrence events.', evidenceType: 'behavioral' },
-  { id: 's1', wave: 4, location: 'Jiantan MRT Station', left: '25%', top: '22%', description: 'Transit point. Type 1 specimens sprint between station and market in under 3 sec. Route consistent.', evidenceType: 'visual' },
-  { id: 's2', wave: 4, location: 'Shilin Residence Park', left: '55%', top: '45%', description: 'Type 3 rhythmic events. Tail displacement damaged two park benches. Groundkeeper unaware of cause.', evidenceType: 'behavioral' },
-  { id: 's3', wave: 4, location: 'Wenlin Road Intersection', left: '40%', top: '55%', description: 'Type 4 absorption events concentrated here. Three documented cases of ambient tension reduction.', evidenceType: 'visual' },
-  { id: 's4', wave: 4, location: 'Shilin Elementary — Perimeter', left: '60%', top: '35%', description: 'Type 1 perimeter patrol pattern. Multiple tender pauses near playground fence.', evidenceType: 'temporal' },
-  { id: 's5', wave: 4, location: 'Zhishan Garden', left: '70%', top: '28%', description: 'Type 2 theatrical display. Duration 45 sec. Three witnesses, all laughing.', evidenceType: 'behavioral' },
-  { id: 's6', wave: 4, location: 'Danan Road Market Alley', left: '30%', top: '65%', description: 'Multi-specimen event #4. All types. Duration 8 min 22 sec. All oriented toward same bearing before dispersal.', evidenceType: 'temporal' },
-  { id: 's7', wave: 5, location: 'Shilin District — Outer Edge', left: '18%', top: '75%', description: 'Source proximity readings spike. UV residue on pavement. Not a sighting location — an orientation point.', evidenceType: 'source' },
-  { id: 'source', wave: 5, location: '[SOURCE LOCATION — COORDINATES WITHHELD]', left: '82%', top: '72%', description: 'Camera shakes. Timestamp anomaly. No visible specimen. Audio contains low, warm hum. Duration: longer than standard clip.', evidenceType: 'source', isSource: true },
+  // Wave 4 — Convergence cluster mapped
+  { id: 's0', wave: 4, location: 'Shilin Night Market — Main Gate', left: '35%', top: '30%', description: 'Primary convergence node. All four types documented. Highest frequency of multi-type co-occurrence events.' },
+  { id: 's1', wave: 4, location: 'Jiantan MRT Station', left: '25%', top: '22%', description: 'Transit point. Type 1 specimens sprint between station and market in under 3 sec. Route consistent.' },
+  { id: 's2', wave: 4, location: 'Shilin Residence Park', left: '55%', top: '45%', description: 'Type 3 rhythmic events. Tail displacement damaged two park benches. Groundkeeper unaware of cause.' },
+  { id: 's3', wave: 4, location: 'Wenlin Road Intersection', left: '40%', top: '55%', description: 'Type 4 absorption events concentrated here. Three documented cases of ambient tension reduction.' },
+  { id: 's4', wave: 4, location: 'Shilin Elementary — Perimeter', left: '60%', top: '35%', description: 'Type 1 perimeter patrol pattern. Multiple tender pauses near playground fence.' },
+  { id: 's5', wave: 4, location: 'Zhishan Garden', left: '70%', top: '28%', description: 'Type 2 theatrical display. Duration 45 sec. Three witnesses, all laughing.' },
+  { id: 's6', wave: 4, location: 'Danan Road Market Alley', left: '30%', top: '65%', description: 'Multi-specimen event #4. All types. Duration 8 min 22 sec. All oriented toward same bearing before dispersal.' },
+  // Wave 5 — Source proximity
+  { id: 's7', wave: 5, location: 'Shilin District — Outer Edge', left: '18%', top: '75%', description: 'Source proximity readings spike. UV residue on pavement. Not a sighting location — an orientation point.' },
+  { id: 's8', wave: 5, location: 'Keelung River Bank — North', left: '75%', top: '18%', description: 'Type 4 stationary for 22 min facing south. No absorption activity. Ambient hum detected on audio.' },
+  { id: 's9', wave: 5, location: 'Tianmu Sports Park', left: '15%', top: '40%', description: 'All types converging from different entry points. Arrived within 90 sec of each other. Departed in unison toward SE.' },
+  { id: 'source', wave: 5, location: '[SOURCE LOCATION — COORDINATES WITHHELD]', left: '82%', top: '72%', description: 'Camera shakes. Timestamp anomaly. No visible specimen. Audio contains low, warm hum. Duration: longer than standard clip.', isSource: true },
 ];
 
 // ===== JOURNAL PAGES (10 pages, 6 waves) =====

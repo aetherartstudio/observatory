@@ -229,12 +229,8 @@
         // Build info panel
         let html = `
           <div class="map-info-date">${dot.city} — ${dot.location}</div>
-          <div class="map-info-location">[${dot.evidenceType.toUpperCase()}]</div>
           <div class="map-info-desc">${dot.description}</div>
         `;
-        if (dot.hasFootage && WaveSystem.isFeatureAvailable('mapFootage')) {
-          html += `<div class="map-info-footage">▶ SURVEILLANCE FOOTAGE AVAILABLE</div>`;
-        }
         mapInfo.innerHTML = html;
         mapInfo.classList.add('active');
       });
@@ -349,7 +345,6 @@
         WaveSystem.trackEngagement('shilinDot', dot.id);
         let html = `
           <div class="map-info-date">${dot.location}</div>
-          <div class="map-info-location">[${dot.evidenceType.toUpperCase()}]</div>
           <div class="map-info-desc">${dot.description}</div>
         `;
         mapInfo.innerHTML = html;
