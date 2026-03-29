@@ -336,7 +336,7 @@ body {
 
 /* Left CRT monitor — DOS terminal */
 #zone-terminal {
-  left: 28%;
+  left: 27%;
   top: 27%;
   width: 14%;
   height: 16%;
@@ -345,9 +345,9 @@ body {
 
 /* Right CRT monitor — Profile database */
 #zone-profiles {
-  left: 43%;
+  left: 42%;
   top: 30%;
-  width: 11%;
+  width: 9%;
   height: 23%;
   z-index: 6;
 }
@@ -400,8 +400,8 @@ body {
 /* Half-concealed in desk clutter. Only hint: cursor changes on hover. */
 .uv-lamp-hidden {
   position: absolute;
-  left: 59%;
-  top: 72%;
+  left: 57%;
+  top: 71.5%;
   width: 30px;
   height: 30px;
   z-index: 10;
