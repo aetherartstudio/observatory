@@ -2158,7 +2158,7 @@ body {
 .safe-plate {
   position: absolute;
   top: 11%;
-  left: 50%;
+  left: 52%;
   transform: translateX(-55%);
   font-family: var(--font-terminal);
   font-size: 7px;
@@ -2230,8 +2230,8 @@ body {
 /* Code display — positioned on middle plate */
 .safe-code-display {
   position: absolute;
-  top: 73%;
-  left: 50%;
+  top: 100%;
+  left: 52%;
   transform: translateX(-55%);
   display: flex;
   align-items: center;
