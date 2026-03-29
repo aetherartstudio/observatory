@@ -124,7 +124,7 @@ const PINBOARD_ITEMS = [
   // W5: Source proximity, anomalies (2 post-its)
   { wave: 5, type: 'postit', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: -3, position: { top: '5%', left: '74%' }, author: 'researcher' },
   { wave: 5, type: 'postit', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '74%', left: '32%' }, author: 'researcher' },
-  { wave: 5, type: 'photo', image: null, position: { top: '5%', left: '54%' }, rotation: 2, label: 'Jiufen Old Street — 01:55', caption: 'Temple steps. Type 1 oriented toward ocean.' },
+  { wave: 5, type: 'photo', image: 'MrQ polaroid.png', position: { top: '5%', left: '54%' }, rotation: 2, label: '', caption: '' },
 
   // W6: After safe (1 post-it)
   { wave: 6, type: 'postit', text: 'M. sat with them. Eleven minutes. Then: "It remembers." Look around you. They are closer than you think.', color: '#f5b7b1', rotation: -3, position: { top: '74%', left: '8%' }, author: 'm' },
