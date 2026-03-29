@@ -842,6 +842,16 @@
     const display = document.getElementById('safe-display');
     if (!display) return;
 
+    // Reset state from any previous session
+    const door = document.getElementById('safe-door');
+    container.classList.remove('safe-opened', 'safe-dial-active');
+    if (door) door.classList.remove('safe-door-opened');
+    const dossier = document.getElementById('safe-dossier');
+    if (dossier) { dossier.classList.add('hidden'); dossier.innerHTML = ''; }
+    safeCodeEntries = [];
+    safeDialValue = 0;
+    safeDialRotation = 0;
+
     // Already opened — show opened safe, click to view dossier
     if (WaveSystem.isSafeOpened()) {
       display.textContent = 'OPEN';
