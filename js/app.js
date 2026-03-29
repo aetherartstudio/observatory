@@ -828,9 +828,9 @@
 
   // ===== SAFE + DOSSIER =====
   const CORRECT_CODE = [3, 17, 58];
-  let safeDialValue = 1;       // current number the dial points to (0-99), starts at 1
+  let safeDialValue = 1;       // current number the dial points to (1-99), dial starts at 1
   let safeCodeEntries = [];    // numbers confirmed so far
-  let safeDialRotation = -(360 / 100);  // initial rotation so dial starts at 1
+  let safeDialRotation = 0;    // visual rotation in degrees
   let safeDragging = false;
   let safeDragStart = 0;
   let safeRotationStart = 0;
@@ -879,8 +879,6 @@
       }
     }
 
-    // Set initial rotation so dial starts at 1
-    dial.style.transform = `rotate(${safeDialRotation}deg)`;
     updateSafeDigitDisplay();
 
     // Scroll to rotate dial
@@ -888,7 +886,7 @@
       e.preventDefault();
       const delta = e.deltaY > 0 ? 1 : -1;
       safeDialRotation += delta * (360 / 100); // ~3.27 degrees per tick = 110 ticks per full rotation
-      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) % 100) + 100) % 100;
+      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) + 1) % 100 + 100) % 100;
       dial.style.transform = `rotate(${safeDialRotation}deg)`;
       updateSafeCurrentNumber();
     }, { passive: false });
@@ -906,7 +904,7 @@
       const angle = getAngleFromCenter(e, dial);
       const delta = angle - safeDragStart;
       safeDialRotation = safeRotationStart + delta;
-      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) % 100) + 100) % 100;
+      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) + 1) % 100 + 100) % 100;
       dial.style.transform = `rotate(${safeDialRotation}deg)`;
       updateSafeCurrentNumber();
     });
@@ -925,7 +923,7 @@
       const angle = getAngleFromCenter(e.touches[0], dial);
       const delta = angle - safeDragStart;
       safeDialRotation = safeRotationStart + delta;
-      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) % 100) + 100) % 100;
+      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) + 1) % 100 + 100) % 100;
       dial.style.transform = `rotate(${safeDialRotation}deg)`;
       updateSafeCurrentNumber();
     }, { passive: true });
