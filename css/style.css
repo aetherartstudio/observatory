@@ -2181,10 +2181,10 @@ body {
 }
 .safe-dial-area {
   position: absolute;
-  top: 26%;
-  left: 28%;
-  width: 40%;
-  height: 40%;
+  top: 30%;
+  left: 32%;
+  width: 32%;
+  height: 32%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2230,7 +2230,7 @@ body {
 /* Code display — positioned on middle plate */
 .safe-code-display {
   position: absolute;
-  top: 100%;
+  top: 73%;
   left: 52%;
   transform: translateX(-55%);
   display: flex;
@@ -2287,8 +2287,8 @@ body {
 
 .safe-handle {
   position: absolute;
-  left: 14%;
-  top: 38%;
+  left: 18%;
+  top: 44%;
   width: 12%;
   height: 22%;
   background: transparent;

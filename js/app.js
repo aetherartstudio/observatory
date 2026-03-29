@@ -167,6 +167,7 @@
       // Press D to toggle debug panel + hotspot borders
       if ((e.key === 'd' || e.key === 'D') && !isDetailOpen) {
         document.getElementById('room').classList.toggle('debug');
+        document.getElementById('detail-overlay').classList.toggle('debug');
         WaveSystem.toggleDebugPanel();
       }
       // Hold Spacebar to reveal all hotspots
