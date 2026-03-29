@@ -2149,7 +2149,7 @@ body {
   width: min(85vh, 85vw);
   max-width: 750px;
   aspect-ratio: 1 / 1;
-  background: url('../assets/safe-bg.png') center / contain no-repeat;
+  background: url('../assets/safe-bg.png?v=2') center / contain no-repeat;
   border-radius: 8px;
   position: relative;
   box-shadow: 0 8px 40px rgba(0,0,0,0.6);
