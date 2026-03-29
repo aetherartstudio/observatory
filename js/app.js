@@ -486,25 +486,36 @@
 
       } else if (item.type === 'photo') {
         const div = document.createElement('div');
-        div.className = 'pinboard-photo';
         div.style.top = item.position.top;
         div.style.left = item.position.left;
         div.style.transform = `rotate(${item.rotation}deg)`;
-        const photoContent = item.image
-          ? `<img src="assets/${item.image}" alt="${item.label}" class="pinboard-photo-img"/>`
-          : `<div class="pinboard-photo-placeholder"><span class="photo-icon">📷</span><span class="photo-static"></span></div>`;
-        div.innerHTML = `
-          <div class="pin-thumb"></div>
-          <div class="pinboard-photo-frame">
-            ${photoContent}
-          </div>
-          <div class="pinboard-photo-label">${item.label}</div>
-          ${item.caption ? `<div class="pinboard-photo-caption">${item.caption}</div>` : ''}
-        `;
-        div.addEventListener('click', (e) => {
-          e.stopPropagation();
-          zoomPinboardItem(div, 'photo-zoomed-active');
-        });
+        if (item.image) {
+          // Photo with asset: render like a sketch — just the image
+          div.className = 'pinboard-sketch';
+          div.innerHTML = `
+            <div class="pin-thumb"></div>
+            <img src="assets/${item.image}" alt="${item.label || ''}" class="pinboard-sketch-img"/>
+          `;
+          div.addEventListener('click', (e) => {
+            e.stopPropagation();
+            zoomPinboardItem(div, 'sketch-zoomed-active');
+          });
+        } else {
+          // No asset: placeholder polaroid
+          div.className = 'pinboard-photo';
+          div.innerHTML = `
+            <div class="pin-thumb"></div>
+            <div class="pinboard-photo-frame">
+              <div class="pinboard-photo-placeholder"><span class="photo-icon">📷</span><span class="photo-static"></span></div>
+            </div>
+            <div class="pinboard-photo-label">${item.label}</div>
+            ${item.caption ? `<div class="pinboard-photo-caption">${item.caption}</div>` : ''}
+          `;
+          div.addEventListener('click', (e) => {
+            e.stopPropagation();
+            zoomPinboardItem(div, 'photo-zoomed-active');
+          });
+        }
         surface.appendChild(div);
 
       } else if (item.type === 'receipt') {
