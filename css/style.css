@@ -2181,10 +2181,10 @@ body {
 }
 .safe-dial-area {
   position: absolute;
-  top: 34%;
-  left: 34%;
-  width: 28%;
-  height: 28%;
+  top: 36%;
+  left: 36%;
+  width: 23%;
+  height: 23%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2230,7 +2230,7 @@ body {
 /* Code display — positioned on middle plate */
 .safe-code-display {
   position: absolute;
-  top: 71.5%;
+  top: 71%;
   left: 51%;
   transform: translateX(-55%);
   display: flex;
@@ -2266,8 +2266,8 @@ body {
 
 .safe-display {
   position: absolute;
-  top: 82%;
-  left: 52.5%;
+  top: 79%;
+  left: 51%;
   transform: translateX(-55%);
   font-family: var(--font-terminal);
   font-size: 8px;
@@ -2287,10 +2287,10 @@ body {
 
 .safe-handle {
   position: absolute;
-  left: 20%;
+  left: 19%;
   top: 46%;
   width: 12%;
-  height: 22%;
+  height: 24%;
   background: transparent;
   border-radius: 4px;
   border: none;
