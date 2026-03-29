@@ -305,6 +305,10 @@
     zoomBtn.classList.remove('visible');
     zoomOutBtn.classList.add('visible');
 
+    // Swap monitor background to Shilin map
+    const monitor = document.querySelector('.map-monitor');
+    if (monitor) monitor.style.backgroundImage = "url('assets/terminal-bg-shihlin.jpg')";
+
     // Populate Shilin dots
     shilinScreen.innerHTML = '';
     const grid = document.createElement('div');
@@ -370,6 +374,10 @@
     mapInfo.classList.remove('active');
     zoomOutBtn.classList.remove('visible');
     if (WaveSystem.getWave() >= 4) zoomBtn.classList.add('visible');
+
+    // Restore monitor background to global map
+    const monitor = document.querySelector('.map-monitor');
+    if (monitor) monitor.style.backgroundImage = "url('assets/terminal2-bg.jpg')";
   }
 
   // ===== PINBOARD ZOOM HELPER =====
