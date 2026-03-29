@@ -886,7 +886,7 @@
       e.preventDefault();
       const delta = e.deltaY > 0 ? 1 : -1;
       safeDialRotation += delta * (360 / 100); // ~3.27 degrees per tick = 110 ticks per full rotation
-      safeDialValue = ((Math.round(safeDialRotation / (360 / 100)) + 1) % 100 + 100) % 100;
+      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) + 1) % 100 + 100) % 100;
       dial.style.transform = `rotate(${safeDialRotation}deg)`;
       updateSafeCurrentNumber();
     }, { passive: false });
@@ -904,7 +904,7 @@
       const angle = getAngleFromCenter(e, dial);
       const delta = angle - safeDragStart;
       safeDialRotation = safeRotationStart + delta;
-      safeDialValue = ((Math.round(safeDialRotation / (360 / 100)) + 1) % 100 + 100) % 100;
+      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) + 1) % 100 + 100) % 100;
       dial.style.transform = `rotate(${safeDialRotation}deg)`;
       updateSafeCurrentNumber();
     });
@@ -923,7 +923,7 @@
       const angle = getAngleFromCenter(e.touches[0], dial);
       const delta = angle - safeDragStart;
       safeDialRotation = safeRotationStart + delta;
-      safeDialValue = ((Math.round(safeDialRotation / (360 / 100)) + 1) % 100 + 100) % 100;
+      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) + 1) % 100 + 100) % 100;
       dial.style.transform = `rotate(${safeDialRotation}deg)`;
       updateSafeCurrentNumber();
     }, { passive: true });
