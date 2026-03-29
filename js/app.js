@@ -828,7 +828,7 @@
 
   // ===== SAFE + DOSSIER =====
   const CORRECT_CODE = [3, 17, 58];
-  let safeDialValue = 0;       // current number the dial points to (0-109)
+  let safeDialValue = 0;       // current number the dial points to (0-99)
   let safeCodeEntries = [];    // numbers confirmed so far
   let safeDialRotation = 0;    // visual rotation in degrees
   let safeDragging = false;
@@ -869,11 +869,11 @@
     const numbersEl = document.getElementById('safe-dial-numbers');
     if (numbersEl) {
       numbersEl.innerHTML = '';
-      for (let i = 0; i < 110; i += 10) {
+      for (let i = 0; i < 100; i += 10) {
         const span = document.createElement('span');
         span.className = 'safe-dial-num';
         span.textContent = i;
-        const angle = (i / 110) * 360;
+        const angle = (i / 100) * 360;
         span.style.transform = `rotate(${angle}deg) translateY(-42px) rotate(-${angle}deg)`;
         numbersEl.appendChild(span);
       }
@@ -885,8 +885,8 @@
     dial.addEventListener('wheel', (e) => {
       e.preventDefault();
       const delta = e.deltaY > 0 ? 1 : -1;
-      safeDialRotation += delta * (360 / 110); // ~3.27 degrees per tick = 110 ticks per full rotation
-      safeDialValue = ((Math.round(-safeDialRotation / (360 / 110)) % 110) + 110) % 110;
+      safeDialRotation += delta * (360 / 100); // ~3.27 degrees per tick = 110 ticks per full rotation
+      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) % 100) + 100) % 100;
       dial.style.transform = `rotate(${safeDialRotation}deg)`;
       updateSafeCurrentNumber();
     }, { passive: false });
@@ -904,7 +904,7 @@
       const angle = getAngleFromCenter(e, dial);
       const delta = angle - safeDragStart;
       safeDialRotation = safeRotationStart + delta;
-      safeDialValue = ((Math.round(-safeDialRotation / (360 / 110)) % 110) + 110) % 110;
+      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) % 100) + 100) % 100;
       dial.style.transform = `rotate(${safeDialRotation}deg)`;
       updateSafeCurrentNumber();
     });
@@ -923,7 +923,7 @@
       const angle = getAngleFromCenter(e.touches[0], dial);
       const delta = angle - safeDragStart;
       safeDialRotation = safeRotationStart + delta;
-      safeDialValue = ((Math.round(-safeDialRotation / (360 / 110)) % 110) + 110) % 110;
+      safeDialValue = ((Math.round(-safeDialRotation / (360 / 100)) % 100) + 100) % 100;
       dial.style.transform = `rotate(${safeDialRotation}deg)`;
       updateSafeCurrentNumber();
     }, { passive: true });
