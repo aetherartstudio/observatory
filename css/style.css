@@ -2167,13 +2167,20 @@ body {
   text-align: center;
   white-space: nowrap;
 }
+.safe-door.safe-door-opened {
+  background: url('../assets/safe-opened-bg.png') center / contain no-repeat;
+  cursor: pointer;
+}
+.safe-door.safe-door-opened .safe-plate,
+.safe-door.safe-door-opened .safe-dial-area,
+.safe-door.safe-door-opened .safe-code-display,
+.safe-door.safe-door-opened .safe-display,
+.safe-door.safe-door-opened .safe-hint,
+.safe-door.safe-door-opened .safe-handle {
+  display: none;
+}
 .safe-container.safe-opened .safe-door {
-  transform: perspective(600px) rotateY(-85deg);
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  left: 0;
-  top: 50%;
+  display: none;
 }
 .safe-container.safe-opened {
   justify-content: center;

@@ -842,12 +842,15 @@
     const display = document.getElementById('safe-display');
     if (!display) return;
 
-    // Already opened — show dossier
+    // Already opened — show opened safe, click to view dossier
     if (WaveSystem.isSafeOpened()) {
       display.textContent = 'OPEN';
-      container.classList.add('safe-opened');
-      document.getElementById('safe-door').classList.add('open');
-      renderDossier();
+      const door = document.getElementById('safe-door');
+      door.classList.add('safe-door-opened');
+      door.addEventListener('click', () => {
+        container.classList.add('safe-opened');
+        renderDossier();
+      }, { once: true });
       return;
     }
 
@@ -1002,9 +1005,13 @@
       WaveSystem.trackEngagement('safe');
 
       setTimeout(() => {
-        document.getElementById('safe-container').classList.add('safe-opened');
-        document.getElementById('safe-door').classList.add('open');
-        renderDossier();
+        const door = document.getElementById('safe-door');
+        door.classList.add('safe-door-opened');
+        // Click on the opened safe (file inside) to view dossier
+        door.addEventListener('click', () => {
+          document.getElementById('safe-container').classList.add('safe-opened');
+          renderDossier();
+        }, { once: true });
         populateCassette();
       }, 1000);
     } else {
