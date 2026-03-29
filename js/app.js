@@ -828,9 +828,9 @@
 
   // ===== SAFE + DOSSIER =====
   const CORRECT_CODE = [3, 17, 58];
-  let safeDialValue = 0;       // current number the dial points to (0-99)
+  let safeDialValue = 1;       // current number the dial points to (0-99), starts at 1
   let safeCodeEntries = [];    // numbers confirmed so far
-  let safeDialRotation = 0;    // visual rotation in degrees
+  let safeDialRotation = -(360 / 100);  // initial rotation so dial starts at 1
   let safeDragging = false;
   let safeDragStart = 0;
   let safeRotationStart = 0;
@@ -879,6 +879,8 @@
       }
     }
 
+    // Set initial rotation so dial starts at 1
+    dial.style.transform = `rotate(${safeDialRotation}deg)`;
     updateSafeDigitDisplay();
 
     // Scroll to rotate dial
