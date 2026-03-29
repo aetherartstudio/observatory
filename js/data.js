@@ -93,7 +93,7 @@ const PINBOARD_ITEMS = [
   // W1: First observations, type designations (4 post-its)
   { wave: 1, type: 'postit', text: 'Night market, 3am — four distinct silhouettes. None matching known fauna.', color: '#f7dc6f', rotation: -2, position: { top: '2%', left: '12%' }, author: 'researcher' },
   { wave: 1, type: 'postit', text: 'The fast one stopped at a flower growing through concrete. Stayed 47 seconds. WHY?', color: '#f1948a', rotation: 3, position: { top: '53%', left: '35%' }, author: 'researcher' },
-  { wave: 1, type: 'postit', text: 'Type 4 — mouth takes up 70% of body. Inflates when near arguments. Deflates when they stop.', color: '#82e0aa', rotation: 6, position: { top: '4%', left: '65%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: 'Type 4 — mouth takes up 70% of body. Inflates when near arguments. Deflates when they stop.', color: '#82e0aa', rotation: 6, position: { top: '12%', left: '63%' }, author: 'researcher' },
   { wave: 1, type: 'postit', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '60%', left: '85%' }, author: 'researcher' },
 
   // W2: Community names, M.'s first notes, sketches (4 post-its)
@@ -117,17 +117,17 @@ const PINBOARD_ITEMS = [
   // W4: Convergence confirmed, crystal sketch, diagram (2 post-its)
   { wave: 4, type: 'diagram', position: { top: '5%', left: '83%' }, rotation: -1, title: 'CONVERGENCE VECTORS', description: 'All specimen trajectories — directional arrows all pointing toward Taipei. Radial pattern confirmed. Center: [REDACTED]' },
   { wave: 4, type: 'sketch', image: 'source crystal-1.png', position: { top: '42%', left: '21%' }, rotation: 1, label: '' },
-  { wave: 4, type: 'postit', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '45%', left: '82%' }, author: 'm' },
+  { wave: 4, type: 'postit', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '39%', left: '84%' }, author: 'm' },
   { wave: 4, type: 'postit', text: 'Followed Fugu for 3 hours. Sprint paths no longer random. He knows where he is going.', color: '#85c1e9', rotation: -1, position: { top: '62%', left: '60%' }, author: 'researcher' },
   { wave: 4, type: 'receipt', position: { top: '50%', left: '44%' }, rotation: -4, vendor: '7-ELEVEN SHILIN #229', date: '2025-01-08', items: ['Battery pack ×1', 'Onigiri ×2', '---', 'UV TRACE: POSITIVE'], total: 'NT$ 147' },
 
   // W5: Source proximity, anomalies (2 post-its)
-  { wave: 5, type: 'postit', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: 1, position: { top: '5%', left: '68%' }, author: 'researcher' },
+  { wave: 5, type: 'postit', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: 1, position: { top: '5%', left: '74%' }, author: 'researcher' },
   { wave: 5, type: 'postit', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '74%', left: '32%' }, author: 'researcher' },
   { wave: 5, type: 'photo', image: null, position: { top: '2%', left: '55%' }, rotation: 2, label: 'Jiufen Old Street — 01:55', caption: 'Temple steps. Type 1 oriented toward ocean.' },
 
   // W6: After safe (1 post-it)
-  { wave: 6, type: 'postit', text: 'M. sat with them. Eleven minutes. Then: "It remembers." Look around you. They are closer than you think.', color: '#f5b7b1', rotation: 2, position: { top: '77%', left: '5%' }, author: 'm' },
+  { wave: 6, type: 'postit', text: 'M. sat with them. Eleven minutes. Then: "It remembers." Look around you. They are closer than you think.', color: '#f5b7b1', rotation: 2, position: { top: '74%', left: '9%' }, author: 'm' },
 ];
 
 const PINBOARD_UV = [
@@ -180,8 +180,8 @@ const PROFILES = [
 
 // ===== POST-IT IMAGE ASSETS =====
 const POSTIT_IMAGES = [
-  'postit-1.png', 'postit-2.png', 'postit-3.png', 'postit-4.png',
+  'postit-16.png', 'postit-2.png', 'postit-3.png', 'postit-4.png',
   'postit-5.png', 'postit-6.png', 'postit-7.png', 'postit-8.png',
   'postit-9.png', 'postit-10.png', 'postit-11.png', 'postit-12.png',
-  'postit-13.png', 'postit-14.png', 'postit-15.png', 'postit-16.png'
+  'postit-13.png', 'postit-14.png', 'postit-15.png', 'postit-1.png'
 ];
