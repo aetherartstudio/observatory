@@ -102,13 +102,13 @@ const PINBOARD_ITEMS = [
   { wave: 2, type: 'sketch', image: 'fugu-sketch-1.png', position: { top: '30%', left: '8%' }, rotation: 2, label: '', replacedByWave: 3 },
   { wave: 3, type: 'sketch', image: 'fugu-sketch-2.png', position: { top: '30%', left: '8%' }, rotation: 2, label: '' },
   { wave: 2, type: 'sketch', image: 'MrQ-sketch-1.png', position: { top: '21%', left: '35%' }, rotation: -3, label: '' },
-  { wave: 2, type: 'sketch', image: 'groovix-sketch-1.png', position: { top: '55%', left: '10%' }, rotation: -1, label: '' },
+  { wave: 2, type: 'sketch', image: 'groovix-sketch-1.png', position: { top: '55%', left: '10%' }, rotation: -3, label: '' },
   { wave: 2, type: 'sketch', image: 'muncha-sketch-1.png', position: { top: '58%', left: '50%' }, rotation: 4, label: '' },
   { wave: 2, type: 'postit', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE. But they keep coming back to Taipei.', color: '#f7dc6f', rotation: 2, position: { top: '28%', left: '48%' }, author: 'researcher' },
   { wave: 2, type: 'postit', text: 'The locals named them: Fugu, MrQ, Groovix, Muncha. I will continue using type designations.', color: '#82e0aa', rotation: -3, position: { top: '46%', left: '70%' }, author: 'researcher' },
 
   // W3: Energy loss, alarm (3 post-its)
-  { wave: 3, type: 'postit', text: 'Energy output declining across ALL types. What is costing them?', color: '#f1948a', rotation: 1, position: { top: '66%', left: '76%' }, author: 'researcher' },
+  { wave: 3, type: 'postit', text: 'Energy output declining across ALL types. What is costing them?', color: '#f1948a', rotation: 4, position: { top: '66%', left: '76%' }, author: 'researcher' },
   { wave: 3, type: 'postit', text: 'MrQ performed for 20 seconds today. Used to be 45. He flexed at the end but it was dimmer.', color: '#f7dc6f', rotation: -3, position: { top: '5%', left: '45%' }, author: 'researcher' },
   { wave: 3, type: 'receipt', position: { top: '4%', left: '30%' }, rotation: 3, vendor: 'SHILIN MARKET STALL #17', date: '2024-11-10', items: ['Tea egg ×2', 'Stinky tofu ×1', '---', 'ANOMALOUS RESIDUE DETECTED'], total: 'NT$ 85' },
   { wave: 3, type: 'photo', image: null, position: { top: '35%', left: '60%' }, rotation: -2, label: 'Shilin Night Market — 02:40', caption: 'Motion blur near flower stall. Fugu?' },
@@ -122,12 +122,12 @@ const PINBOARD_ITEMS = [
   { wave: 4, type: 'receipt', position: { top: '50%', left: '44%' }, rotation: -4, vendor: '7-ELEVEN SHILIN #229', date: '2025-01-08', items: ['Battery pack ×1', 'Onigiri ×2', '---', 'UV TRACE: POSITIVE'], total: 'NT$ 147' },
 
   // W5: Source proximity, anomalies (2 post-its)
-  { wave: 5, type: 'postit', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: 1, position: { top: '5%', left: '74%' }, author: 'researcher' },
+  { wave: 5, type: 'postit', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: -3, position: { top: '5%', left: '74%' }, author: 'researcher' },
   { wave: 5, type: 'postit', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '74%', left: '32%' }, author: 'researcher' },
   { wave: 5, type: 'photo', image: null, position: { top: '5%', left: '54%' }, rotation: 2, label: 'Jiufen Old Street — 01:55', caption: 'Temple steps. Type 1 oriented toward ocean.' },
 
   // W6: After safe (1 post-it)
-  { wave: 6, type: 'postit', text: 'M. sat with them. Eleven minutes. Then: "It remembers." Look around you. They are closer than you think.', color: '#f5b7b1', rotation: 2, position: { top: '74%', left: '5%' }, author: 'm' },
+  { wave: 6, type: 'postit', text: 'M. sat with them. Eleven minutes. Then: "It remembers." Look around you. They are closer than you think.', color: '#f5b7b1', rotation: -3, position: { top: '74%', left: '8%' }, author: 'm' },
 ];
 
 const PINBOARD_UV = [
