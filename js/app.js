@@ -490,13 +490,13 @@
         div.style.top = item.position.top;
         div.style.left = item.position.left;
         div.style.transform = `rotate(${item.rotation}deg)`;
+        const photoContent = item.image
+          ? `<img src="assets/${item.image}" alt="${item.label}" class="pinboard-photo-img"/>`
+          : `<div class="pinboard-photo-placeholder"><span class="photo-icon">📷</span><span class="photo-static"></span></div>`;
         div.innerHTML = `
           <div class="pin-thumb"></div>
           <div class="pinboard-photo-frame">
-            <div class="pinboard-photo-placeholder">
-              <span class="photo-icon">📷</span>
-              <span class="photo-static"></span>
-            </div>
+            ${photoContent}
           </div>
           <div class="pinboard-photo-label">${item.label}</div>
           ${item.caption ? `<div class="pinboard-photo-caption">${item.caption}</div>` : ''}

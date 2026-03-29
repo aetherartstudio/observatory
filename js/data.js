@@ -111,7 +111,7 @@ const PINBOARD_ITEMS = [
   { wave: 3, type: 'postit', text: 'Energy output declining across ALL types. What is costing them?', color: '#f1948a', rotation: 4, position: { top: '66%', left: '76%' }, author: 'researcher' },
   { wave: 3, type: 'postit', text: 'MrQ performed for 20 seconds today. Used to be 45. He flexed at the end but it was dimmer.', color: '#f7dc6f', rotation: -3, position: { top: '5%', left: '45%' }, author: 'researcher' },
   { wave: 3, type: 'receipt', position: { top: '4%', left: '30%' }, rotation: 3, vendor: 'SHILIN MARKET STALL #17', date: '2024-11-10', items: ['Tea egg ×2', 'Stinky tofu ×1', '---', 'ANOMALOUS RESIDUE DETECTED'], total: 'NT$ 85' },
-  { wave: 3, type: 'photo', image: null, position: { top: '35%', left: '60%' }, rotation: -2, label: 'Shilin Night Market — 02:40', caption: 'Motion blur near flower stall. Fugu?' },
+  { wave: 3, type: 'photo', image: 'groovix polaroid.png', position: { top: '35%', left: '60%' }, rotation: -2, label: 'Shilin Night Market — 02:40', caption: 'Motion blur near flower stall. Fugu?' },
   { wave: 3, type: 'postit', text: 'M.: "Not from here. The cost is the distance."', color: '#f5b7b1', rotation: -2, position: { top: '60%', left: '25%' }, author: 'm' },
 
   // W4: Convergence confirmed, crystal sketch, diagram (2 post-its)
