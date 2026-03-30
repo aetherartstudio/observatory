@@ -2058,8 +2058,8 @@ body {
 /* Loaded tape on top of player */
 .cassette-loaded-tape {
   position: absolute;
-  top: 16%;
-  left: 36%;
+  top: 15%;
+  left: 37%;
   width: 22%;
   transition: opacity 0.3s;
 }
