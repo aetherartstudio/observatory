@@ -674,10 +674,10 @@ body {
 .map-screen {
   position: absolute;
   /* Padding to position within the LCD screen area — adjust to match your image */
-  top: 15%;
-  left: 10.7%;
+  top: 15.3%;
+  left: 10%;
   right: 10%;
-  bottom: 30%;
+  bottom: 31.5%;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
