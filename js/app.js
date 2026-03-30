@@ -774,7 +774,7 @@
 
   // ===== CASSETTE PLAYER =====
   // Map tape IDs to image assets
-  const TAPE_IMAGES = { 'T-01': 'tape1.jpg', 'T-02': 'tape2.jpg', 'T-03': 'tape3.jpg', 'T-04': 'tape4.jpg', 'T-05': 'tape5.jpg' };
+  const TAPE_IMAGES = { 'T-01': 'tape1.png', 'T-02': 'tape2.png', 'T-03': 'tape3.png', 'T-04': 'tape4.png', 'T-05': 'tape5.png' };
 
   function populateCassette() {
     const stack = document.getElementById('cassette-tape-stack');
@@ -822,12 +822,7 @@
 
   function loadTape(tape) {
     currentCassetteId = tape.id;
-    const label = document.getElementById('cassette-label');
-    const desc = document.getElementById('cassette-description');
     const loadedTape = document.getElementById('cassette-loaded-tape');
-
-    if (label) label.textContent = tape.label;
-    if (desc) desc.textContent = tape.description;
 
     // Show tape image on top of player
     if (loadedTape) {

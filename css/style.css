@@ -2025,12 +2025,12 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 120px;
+  width: 260px;
   flex-shrink: 0;
   align-items: center;
 }
 .cassette-tape-thumb {
-  width: 100px;
+  width: 250px;
   cursor: pointer;
   transition: transform 0.2s, filter 0.2s;
   border-radius: 4px;
@@ -2050,7 +2050,7 @@ body {
   flex: 1;
   aspect-ratio: 1 / 1;
   max-height: 80vh;
-  background: url('../assets/cassette player-bg.jpg') center / contain no-repeat;
+  background: url('../assets/cassette player-bg.png') center / contain no-repeat;
   position: relative;
   border-radius: 8px;
 }
