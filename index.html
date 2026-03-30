@@ -132,21 +132,22 @@
 
     <!-- Cassette Player Detail -->
     <div class="detail-content" id="cassette-detail">
-      <div class="cassette-player">
-        <div class="cassette-deck">
-          <div class="cassette-window">
-            <div class="cassette-reel left-reel"></div>
-            <div class="cassette-reel right-reel"></div>
-            <div class="cassette-tape-label" id="cassette-label">NO TAPE LOADED</div>
+      <div class="cassette-scene">
+        <!-- Tapes stacked on the left -->
+        <div class="cassette-tape-stack" id="cassette-tape-stack"></div>
+        <!-- Cassette player with background image -->
+        <div class="cassette-player" id="cassette-player">
+          <!-- Selected tape shown on top of player -->
+          <div class="cassette-loaded-tape" id="cassette-loaded-tape"></div>
+          <!-- Controls overlay -->
+          <div class="cassette-controls">
+            <button class="cassette-btn" id="cassette-rewind" title="Rewind">◀◀</button>
+            <button class="cassette-btn" id="cassette-play" title="Play">▶</button>
+            <button class="cassette-btn" id="cassette-stop" title="Stop">■</button>
           </div>
-          <div class="cassette-waveform" id="cassette-waveform"></div>
+          <div class="cassette-tape-label" id="cassette-label"></div>
         </div>
-        <div class="cassette-controls">
-          <button class="cassette-btn" id="cassette-play" title="Play">▶</button>
-          <button class="cassette-btn" id="cassette-stop" title="Stop">■</button>
-          <button class="cassette-btn" id="cassette-rewind" title="Rewind">◀◀</button>
-        </div>
-        <div class="cassette-tape-list" id="cassette-tape-list"></div>
+        <!-- Description below -->
         <div class="cassette-description" id="cassette-description"></div>
       </div>
     </div>

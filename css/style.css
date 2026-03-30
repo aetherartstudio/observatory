@@ -2007,95 +2007,85 @@ body {
 
 /* ===== CASSETTE PLAYER ===== */
 #cassette-detail {
-  width: 90vw;
-  height: 85vh;
-  max-width: 700px;
+  width: 95vw;
+  height: 90vh;
+  max-width: 900px;
 }
-.cassette-player {
+.cassette-scene {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
-  background: url('../assets/cassette player-bg.png') center / contain no-repeat;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.8);
-  overflow: hidden;
-}
-.cassette-deck {
-  background: linear-gradient(180deg, #1a1a18 0%, #111110 100%);
-  border-radius: 8px;
-  padding: 20px;
-  border: 1px solid rgba(255,255,255,0.05);
-  margin-bottom: 15px;
-}
-.cassette-window {
-  background: rgba(0,0,0,0.6);
-  border-radius: 6px;
-  padding: 15px 20px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 30px;
-  margin-bottom: 12px;
-  border: 1px solid rgba(255,255,255,0.05);
+  gap: 20px;
   position: relative;
 }
-.cassette-reel {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 3px solid rgba(255,255,255,0.15);
-  background: radial-gradient(circle, #222 0%, #111 70%);
-  position: relative;
-}
-.cassette-reel::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: #333;
-  border: 2px solid rgba(255,255,255,0.1);
-}
-.cassette-reel.spinning {
-  animation: reelSpin 1s linear infinite;
-}
-@keyframes reelSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-.cassette-tape-label {
-  font-family: var(--font-typewriter);
-  font-size: 12px;
-  color: rgba(255,200,100,0.6);
-  letter-spacing: 1px;
-  text-align: center;
-  min-width: 120px;
-}
-.cassette-waveform {
-  height: 30px;
-  background: rgba(0,0,0,0.4);
-  border-radius: 4px;
-  border: 1px solid rgba(255,255,255,0.03);
-}
-.cassette-controls {
+
+/* Tape stack on the left */
+.cassette-tape-stack {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 15px;
+  flex-direction: column;
+  gap: 8px;
+  width: 120px;
+  flex-shrink: 0;
+  align-items: center;
+}
+.cassette-tape-thumb {
+  width: 100px;
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+  border-radius: 4px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+}
+.cassette-tape-thumb:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 4px 12px rgba(255,200,100,0.3));
+}
+.cassette-tape-thumb.active {
+  outline: 2px solid rgba(255,200,100,0.6);
+  filter: drop-shadow(0 4px 12px rgba(255,200,100,0.4));
+}
+
+/* Cassette player */
+.cassette-player {
+  flex: 1;
+  aspect-ratio: 1 / 1;
+  max-height: 80vh;
+  background: url('../assets/cassette player-bg.jpg') center / contain no-repeat;
+  position: relative;
+  border-radius: 8px;
+}
+
+/* Loaded tape on top of player */
+.cassette-loaded-tape {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  transition: opacity 0.3s;
+}
+.cassette-loaded-tape img {
+  width: 100%;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.7));
+}
+
+/* Controls */
+.cassette-controls {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
 }
 .cassette-btn {
-  width: 44px;
-  height: 36px;
-  background: linear-gradient(180deg, #3a3835 0%, #2a2825 100%);
-  border: 1px solid rgba(255,255,255,0.1);
+  width: 40px;
+  height: 32px;
+  background: rgba(30, 28, 25, 0.8);
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: 4px;
   color: rgba(255,200,100,0.7);
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -2103,52 +2093,49 @@ body {
   transition: all 0.15s;
 }
 .cassette-btn:hover {
-  background: linear-gradient(180deg, #4a4845 0%, #3a3835 100%);
+  background: rgba(60, 55, 48, 0.9);
   color: rgba(255,220,150,1);
 }
 .cassette-btn.active {
-  background: rgba(255,100,50,0.2);
-  border-color: rgba(255,100,50,0.4);
+  background: rgba(255,100,50,0.3);
+  border-color: rgba(255,100,50,0.5);
 }
-.cassette-tape-list {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 10px;
-}
-.cassette-tape-item {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 4px;
-  padding: 8px 12px;
-  margin-bottom: 4px;
+
+/* Tape label */
+.cassette-tape-label {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--font-typewriter);
-  font-size: 13px;
-  color: rgba(255,200,100,0.6);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.cassette-tape-item:hover {
-  background: rgba(255,200,100,0.08);
-  color: rgba(255,220,150,0.9);
-}
-.cassette-tape-item.active {
-  background: rgba(255,200,100,0.12);
-  border-color: rgba(255,200,100,0.3);
-  color: rgba(255,220,150,1);
-}
-.cassette-description {
-  font-family: var(--font-typewriter);
-  font-size: 13px;
+  font-size: 10px;
   color: rgba(255,200,100,0.5);
-  line-height: 1.6;
-  padding: 10px;
-  background: rgba(0,0,0,0.3);
-  border-radius: 4px;
-  min-height: 60px;
+  letter-spacing: 1px;
+  text-align: center;
+  white-space: nowrap;
 }
+
+/* Description below player */
+.cassette-description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-family: var(--font-typewriter);
+  font-size: 12px;
+  color: rgba(255,200,100,0.5);
+  line-height: 1.5;
+  padding: 10px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 4px;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+/* Debug outlines for cassette */
+.debug .cassette-loaded-tape { outline: 2px solid cyan; }
+.debug .cassette-controls { outline: 2px solid yellow; }
+.debug .cassette-tape-label { outline: 1px solid pink; }
 
 /* ===== SAFE ===== */
 #safe-detail {

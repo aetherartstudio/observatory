@@ -773,13 +773,14 @@
   }
 
   // ===== CASSETTE PLAYER =====
-  function populateCassette() {
-    const tapeList = document.getElementById('cassette-tape-list');
-    const label = document.getElementById('cassette-label');
-    const desc = document.getElementById('cassette-description');
-    if (!tapeList) return;
+  // Map tape IDs to image assets
+  const TAPE_IMAGES = { 'T-01': 'tape1.jpg', 'T-02': 'tape2.jpg', 'T-03': 'tape3.jpg', 'T-04': 'tape4.jpg', 'T-05': 'tape5.jpg' };
 
-    tapeList.innerHTML = '';
+  function populateCassette() {
+    const stack = document.getElementById('cassette-tape-stack');
+    if (!stack) return;
+
+    stack.innerHTML = '';
 
     // Filter tapes by wave, safe requirement, and tape prerequisite
     const visibleTapes = WaveSystem.getVisibleContent(CASSETTE_TAPES).filter(tape => {
@@ -789,14 +790,14 @@
     });
 
     visibleTapes.forEach(tape => {
-      const btn = document.createElement('button');
-      btn.className = 'cassette-tape-item';
-      if (tape.id === currentCassetteId) btn.classList.add('active');
-      btn.textContent = tape.label;
-      btn.addEventListener('click', () => {
-        loadTape(tape);
-      });
-      tapeList.appendChild(btn);
+      const img = document.createElement('img');
+      img.className = 'cassette-tape-thumb';
+      img.src = `assets/${TAPE_IMAGES[tape.id]}`;
+      img.alt = tape.label;
+      img.title = tape.label;
+      if (tape.id === currentCassetteId) img.classList.add('active');
+      img.addEventListener('click', () => loadTape(tape));
+      stack.appendChild(img);
     });
 
     // Setup controls (once)
@@ -807,17 +808,13 @@
       playBtn.addEventListener('click', () => {
         if (!currentCassetteId) return;
         playBtn.classList.add('active');
-        // Visual: spin reels
-        document.querySelectorAll('.cassette-reel').forEach(r => r.classList.add('spinning'));
         WaveSystem.trackEngagement('tape', currentCassetteId);
       });
       stopBtn.addEventListener('click', () => {
         playBtn.classList.remove('active');
-        document.querySelectorAll('.cassette-reel').forEach(r => r.classList.remove('spinning'));
       });
       rewindBtn.addEventListener('click', () => {
         playBtn.classList.remove('active');
-        document.querySelectorAll('.cassette-reel').forEach(r => r.classList.remove('spinning'));
       });
       playBtn._bound = true;
     }
@@ -827,17 +824,23 @@
     currentCassetteId = tape.id;
     const label = document.getElementById('cassette-label');
     const desc = document.getElementById('cassette-description');
+    const loadedTape = document.getElementById('cassette-loaded-tape');
+
     if (label) label.textContent = tape.label;
     if (desc) desc.textContent = tape.description;
 
-    // Highlight active tape in list
-    document.querySelectorAll('.cassette-tape-item').forEach(btn => {
-      btn.classList.toggle('active', btn.textContent === tape.label);
+    // Show tape image on top of player
+    if (loadedTape) {
+      loadedTape.innerHTML = `<img src="assets/${TAPE_IMAGES[tape.id]}" alt="${tape.label}">`;
+    }
+
+    // Highlight active tape in stack
+    document.querySelectorAll('.cassette-tape-thumb').forEach(img => {
+      img.classList.toggle('active', img.alt === tape.label);
     });
 
     // Stop any playback
     document.getElementById('cassette-play')?.classList.remove('active');
-    document.querySelectorAll('.cassette-reel').forEach(r => r.classList.remove('spinning'));
   }
 
   // ===== SAFE + DOSSIER =====
