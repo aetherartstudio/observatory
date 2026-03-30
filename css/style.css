@@ -519,7 +519,7 @@ body {
 
 /* --- Image-backed CRT (terminal) --- */
 .crt-green {
-  background: url('../assets/terminal-bg.jpg') center / 100% 100% no-repeat;
+  background: url('../assets/left monitor-bg.jpg') center / contain no-repeat;
 }
 .crt-green .crt-bezel {
   background: transparent;
