@@ -2058,9 +2058,9 @@ body {
 /* Loaded tape on top of player */
 .cassette-loaded-tape {
   position: absolute;
-  top: 8%;
-  left: 25%;
-  width: 58%;
+  top: 11%;
+  left: 23%;
+  width: 54%;
   transition: opacity 0.3s;
 }
 .cassette-loaded-tape img {
@@ -2071,7 +2071,7 @@ body {
 /* Controls — invisible hotspots over the player's physical buttons */
 .cassette-controls {
   position: absolute;
-  bottom: 24%;
+  bottom: 25%;
   left: 0;
   right: 0;
   display: flex;
@@ -2088,20 +2088,23 @@ body {
   pointer-events: auto;
   position: relative;
 }
-#cassette-play { margin-left: 1%; }
-#cassette-rewind { margin-right: 1%; }
+#cassette-play { margin-left: 2%; }
+#cassette-rewind { margin-right: 2%; }
+.cassette-btn {
+  border-radius: 50%;
+}
 .cassette-btn:hover::after {
   content: '';
   position: absolute;
   inset: -2px;
-  border-radius: 3px;
+  border-radius: 50%;
   background: rgba(255,200,100,0.08);
 }
 .cassette-btn.active::after {
   content: '';
   position: absolute;
   inset: -2px;
-  border-radius: 3px;
+  border-radius: 50%;
   background: rgba(255,100,50,0.15);
   animation: btnPulse 1s ease-in-out infinite;
 }
