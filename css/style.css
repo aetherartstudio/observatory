@@ -659,10 +659,10 @@ body {
 
 /* ===== SIGHTINGS MAP MONITOR ===== */
 .map-monitor {
-  /* Lock to monitor image ratio — explicit width+height */
-  width: min(98vw, calc(96vh * 1456 / 816));
-  height: min(96vh, calc(98vw * 816 / 1456));
-  background: url('../assets/right monitor levelled with global map-bg.png') center / 100% 100% no-repeat;
+  /* Lock to monitor image ratio — 4096 x 3567 = 1.1483 */
+  width: min(98vw, calc(96vh * 4096 / 3567));
+  height: min(96vh, calc(98vw * 3567 / 4096));
+  background: url('../assets/right monitor levelled with global map-bg.png') center / contain no-repeat;
   background-color: #0a0805;
   position: relative;
   border-radius: 6px;
@@ -673,11 +673,11 @@ body {
 /* Hide dots until monitor image is loaded */
 .map-screen {
   position: absolute;
-  /* Padding to position within the screen area — adjust to match your image */
-  top: 15%;
-  left: 25%;
-  right: 30%;
-  bottom: 25%;
+  /* Padding to position within the LCD screen area — adjust to match your image */
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
