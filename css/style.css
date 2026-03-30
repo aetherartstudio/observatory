@@ -2058,9 +2058,9 @@ body {
 /* Loaded tape on top of player */
 .cassette-loaded-tape {
   position: absolute;
-  top: 12%;
-  left: 25%;
-  width: 42%;
+  top: 17%;
+  left: 30%;
+  width: 78%;
   transition: opacity 0.3s;
 }
 .cassette-loaded-tape img {
@@ -2071,7 +2071,7 @@ body {
 /* Controls — invisible hotspots over the player's physical buttons */
 .cassette-controls {
   position: absolute;
-  bottom: 20%;
+  bottom: 27%;
   left: 0;
   right: 0;
   display: flex;
@@ -2081,7 +2081,7 @@ body {
 }
 .cassette-btn {
   width: 8%;
-  height: 10%;
+  aspect-ratio: 1 / 1;
   background: transparent;
   border: none;
   cursor: pointer;
