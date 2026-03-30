@@ -605,8 +605,27 @@ body {
   background: transparent;
   box-shadow: none;
 }
-.crt-green .crt-scanlines { background: none; }
+/* Re-enable scanlines for old-monitor feel */
+.crt-green .crt-scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+}
 .crt-green .crt-curvature { box-shadow: none; }
+
+/* Grainy, low-res text effect */
+.crt-green .crt-screen {
+  text-shadow:
+    0 0 2px rgba(51, 255, 51, 0.6),
+    0 0 5px rgba(51, 255, 51, 0.15);
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  text-rendering: optimizeSpeed;
+}
 
 /* Amber screen glow */
 .crt-amber .crt-screen {
