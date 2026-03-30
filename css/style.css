@@ -2058,9 +2058,9 @@ body {
 /* Loaded tape on top of player */
 .cassette-loaded-tape {
   position: absolute;
-  top: 17%;
-  left: 30%;
-  width: 78%;
+  top: 8%;
+  left: 25%;
+  width: 58%;
   transition: opacity 0.3s;
 }
 .cassette-loaded-tape img {
@@ -2071,7 +2071,7 @@ body {
 /* Controls — invisible hotspots over the player's physical buttons */
 .cassette-controls {
   position: absolute;
-  bottom: 27%;
+  bottom: 24%;
   left: 0;
   right: 0;
   display: flex;
@@ -2088,6 +2088,8 @@ body {
   pointer-events: auto;
   position: relative;
 }
+#cassette-play { margin-left: 1%; }
+#cassette-rewind { margin-right: 1%; }
 .cassette-btn:hover::after {
   content: '';
   position: absolute;
