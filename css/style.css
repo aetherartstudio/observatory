@@ -662,7 +662,7 @@ body {
   /* Lock to monitor image ratio — explicit width+height */
   width: min(98vw, calc(96vh * 1456 / 816));
   height: min(96vh, calc(98vw * 816 / 1456));
-  background: url('../assets/terminal2-bg.jpg') center / 100% 100% no-repeat;
+  background: url('../assets/right monitor levelled with global map-bg.png') center / 100% 100% no-repeat;
   background-color: #0a0805;
   position: relative;
   border-radius: 6px;
