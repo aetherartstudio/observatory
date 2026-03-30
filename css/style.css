@@ -674,10 +674,10 @@ body {
 .map-screen {
   position: absolute;
   /* Padding to position within the LCD screen area — adjust to match your image */
-  top: 10%;
+  top: 16%;
   left: 10%;
   right: 10%;
-  bottom: 10%;
+  bottom: 29%;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -803,8 +803,8 @@ body {
 }
 .map-zoom-btn {
   position: absolute;
-  bottom: 28%;
-  right: 33%;
+  bottom: 32%;
+  right: 22%;
   z-index: 15;
   background: rgba(0, 20, 0, 0.8);
   border: 1px solid rgba(68, 255, 68, 0.3);
