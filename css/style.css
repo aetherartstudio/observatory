@@ -535,6 +535,8 @@ body {
   padding: 0;
 }
 .crt-green .crt-controls { display: none; }
+.debug .crt-green .crt-bezel { outline: 2px solid red; }
+.debug .crt-green .crt-screen-well { outline: 2px solid cyan; }
 
 /* --- CSS-only CRT (profiles — no image yet) --- */
 .crt-amber .crt-bezel {
