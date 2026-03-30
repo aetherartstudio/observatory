@@ -662,7 +662,7 @@ body {
   /* Lock to monitor image ratio — 4096 x 3567 = 1.1483 */
   width: min(98vw, calc(96vh * 4096 / 3567));
   height: min(96vh, calc(98vw * 3567 / 4096));
-  background: url('../assets/right monitor levelled with global map-bg.png') center / contain no-repeat;
+  background: url('../assets/right monitor levelled with global map-bg.jpg') center / contain no-repeat;
   background-color: #0a0805;
   position: relative;
   border-radius: 6px;

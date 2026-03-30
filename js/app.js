@@ -251,7 +251,7 @@
     if (!mapScreen.classList.contains('bg-loaded')) {
       const bgImg = new Image();
       bgImg.onload = () => mapScreen.classList.add('bg-loaded');
-      bgImg.src = 'assets/right monitor levelled with global map-bg.png';
+      bgImg.src = 'assets/right monitor levelled with global map-bg.jpg';
       if (bgImg.complete) mapScreen.classList.add('bg-loaded');
     }
 
@@ -307,7 +307,7 @@
 
     // Swap monitor background to Shilin map
     const monitor = document.querySelector('.map-monitor');
-    if (monitor) monitor.style.backgroundImage = "url('assets/right monitor levelled without map-bg.png')";
+    if (monitor) monitor.style.backgroundImage = "url('assets/right monitor levelled without map-bg.jpg')";
 
     // Populate Shilin dots
     shilinScreen.innerHTML = '';
@@ -377,7 +377,7 @@
 
     // Restore monitor background to global map
     const monitor = document.querySelector('.map-monitor');
-    if (monitor) monitor.style.backgroundImage = "url('assets/right monitor levelled with global map-bg.png')";
+    if (monitor) monitor.style.backgroundImage = "url('assets/right monitor levelled with global map-bg.jpg')";
   }
 
   // ===== PINBOARD ZOOM HELPER =====
