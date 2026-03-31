@@ -844,6 +844,7 @@
   let safeDialValue = 0;       // current number the dial points to (0-99)
   let safeCodeEntries = [];    // numbers confirmed so far
   let safeDialRotation = 0;    // visual rotation in degrees
+  let safeDoorClickable = false; // flag: door click opens dossier
   let safeDragging = false;
   let safeDragStart = 0;
   let safeRotationStart = 0;
@@ -858,11 +859,22 @@
     // Reset state from any previous session
     const door = document.getElementById('safe-door');
     container.classList.remove('safe-opened', 'safe-dial-active');
+    safeDoorClickable = false;
     if (door) {
       door.classList.remove('safe-door-opened', 'safe-door-animating');
       // Remove any lingering video
       const oldVideo = door.querySelector('.safe-opening-video');
       if (oldVideo) oldVideo.remove();
+      // Attach persistent click listener once (uses flag to decide action)
+      if (!door._safeDoorListener) {
+        door.addEventListener('click', () => {
+          if (!safeDoorClickable) return;
+          safeDoorClickable = false;
+          container.classList.add('safe-opened');
+          renderDossier();
+        });
+        door._safeDoorListener = true;
+      }
     }
     const handle = document.getElementById('safe-handle');
     if (handle) handle.classList.remove('turned');
@@ -882,10 +894,7 @@
       display.textContent = 'OPEN';
       const door = document.getElementById('safe-door');
       door.classList.add('safe-door-opened');
-      door.addEventListener('click', () => {
-        container.classList.add('safe-opened');
-        renderDossier();
-      }, { once: true });
+      safeDoorClickable = true;
       return;
     }
 
@@ -971,7 +980,8 @@
     // Click the confirm area (handle) to lock in current number
     const handle = document.getElementById('safe-handle');
     if (handle) {
-      handle.addEventListener('click', () => {
+      handle.addEventListener('click', (e) => {
+        e.stopPropagation(); // prevent bubbling to door
         if (safeCodeEntries.length >= 3) return;
         confirmSafeDigit();
       });
@@ -1054,12 +1064,9 @@
         video.addEventListener('ended', () => {
           // Pause on last frame — don't remove video, don't swap background
           video.pause();
-          // Click on the video (last frame showing open safe) to view dossier
+          // Enable clicking the door/video to view dossier
           video.style.cursor = 'pointer';
-          video.addEventListener('click', () => {
-            document.getElementById('safe-container').classList.add('safe-opened');
-            renderDossier();
-          }, { once: true });
+          safeDoorClickable = true;
         }, { once: true });
         populateCassette();
       }, 1000);
