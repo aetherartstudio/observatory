@@ -872,24 +872,12 @@
     safeDialValue = 0;
     safeDialRotation = 0;
 
-    // Already opened — show video last frame, click to view dossier
+    // Already opened — show opened safe background, click to view dossier
     if (WaveSystem.isSafeOpened()) {
       display.textContent = 'OPEN';
       const door = document.getElementById('safe-door');
-      door.classList.add('safe-door-animating');
-      // Load video and seek to last frame
-      const video = document.createElement('video');
-      video.src = 'assets/safe-opening.mp4';
-      video.className = 'safe-opening-video';
-      video.muted = true;
-      video.playsInline = true;
-      video.preload = 'auto';
-      video.style.cursor = 'pointer';
-      door.appendChild(video);
-      video.addEventListener('loadedmetadata', () => {
-        video.currentTime = video.duration;
-      }, { once: true });
-      video.addEventListener('click', () => {
+      door.classList.add('safe-door-opened');
+      door.addEventListener('click', () => {
         container.classList.add('safe-opened');
         renderDossier();
       }, { once: true });
