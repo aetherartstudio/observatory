@@ -1029,11 +1029,27 @@
 
       setTimeout(() => {
         const door = document.getElementById('safe-door');
-        door.classList.add('safe-door-opened');
-        // Click on the opened safe (file inside) to view dossier
-        door.addEventListener('click', () => {
-          document.getElementById('safe-container').classList.add('safe-opened');
-          renderDossier();
+        // Play opening animation video
+        const video = document.createElement('video');
+        video.src = 'assets/safe-opening.mp4';
+        video.className = 'safe-opening-video';
+        video.muted = true;
+        video.playsInline = true;
+        video.autoplay = true;
+        door.appendChild(video);
+        // Hide dial/handle/displays behind the video
+        door.classList.add('safe-door-animating');
+
+        video.play().catch(() => {});
+        video.addEventListener('ended', () => {
+          video.remove();
+          door.classList.remove('safe-door-animating');
+          door.classList.add('safe-door-opened');
+          // Click on the opened safe (file inside) to view dossier
+          door.addEventListener('click', () => {
+            document.getElementById('safe-container').classList.add('safe-opened');
+            renderDossier();
+          }, { once: true });
         }, { once: true });
         populateCassette();
       }, 1000);

@@ -2167,6 +2167,25 @@ body {
 .safe-door.safe-door-opened .safe-handle {
   display: none;
 }
+/* Video plays over the safe door during opening animation */
+.safe-opening-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 20;
+  border-radius: 8px;
+}
+.safe-door.safe-door-animating .safe-plate,
+.safe-door.safe-door-animating .safe-dial-area,
+.safe-door.safe-door-animating .safe-code-display,
+.safe-door.safe-door-animating .safe-display,
+.safe-door.safe-door-animating .safe-hint,
+.safe-door.safe-door-animating .safe-handle {
+  opacity: 0;
+}
 .safe-container.safe-opened .safe-door {
   display: none;
 }
