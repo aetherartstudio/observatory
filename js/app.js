@@ -871,6 +871,11 @@
     safeCodeEntries = [];
     safeDialValue = 0;
     safeDialRotation = 0;
+    // Reset dial rotation visually
+    const dial = document.getElementById('safe-dial');
+    if (dial) {
+      dial.style.transform = 'rotate(0deg)';
+    }
 
     // Already opened — show opened safe background, click to view dossier
     if (WaveSystem.isSafeOpened()) {
@@ -1018,7 +1023,7 @@
       const handle = document.getElementById('safe-handle');
       handle.classList.add('flash');
       setTimeout(() => handle.classList.remove('flash'), 300);
-      display.textContent = `DIGIT ${safeCodeEntries.length}/3 LOCKED — ROTATE FOR NEXT`;
+      display.textContent = 'PULL HANDLE TO CONFIRM';
       return;
     }
 

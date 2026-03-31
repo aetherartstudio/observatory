@@ -2178,13 +2178,16 @@ body {
   z-index: 20;
   border-radius: 8px;
 }
-.safe-door.safe-door-animating .safe-plate,
 .safe-door.safe-door-animating .safe-dial-area,
 .safe-door.safe-door-animating .safe-code-display,
 .safe-door.safe-door-animating .safe-display,
 .safe-door.safe-door-animating .safe-hint,
 .safe-door.safe-door-animating .safe-handle {
   opacity: 0;
+}
+.safe-door.safe-door-animating .safe-plate {
+  z-index: 25;
+  position: relative;
 }
 .safe-container.safe-opened .safe-door {
   display: none;
