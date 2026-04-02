@@ -152,10 +152,10 @@ const PINBOARD_ITEMS = [
 
 const PINBOARD_UV = [
   { type: 'arrow', from: { top: '30%', left: '50%' }, to: { top: '70%', left: '20%' }, label: 'PULL' },
-  { type: 'note', text: 'All paths converge \u2192 SE bearing 127\u00B0', position: { top: '45%', left: '60%' }, rotation: -5 },
-  { type: 'circle', position: { top: '65%', left: '25%' }, radius: '8%', label: 'NON-SHILIN LOCATION' },
-  { type: 'note', text: 'Source dot matches. Confirm with M.', position: { top: '72%', left: '45%' }, rotation: 2 },
-  { type: 'note', text: '03 . 17 . 58 — check the feed', position: { top: '82%', left: '60%' }, rotation: -3 },
+  { type: 'note', text: 'All paths converge \u2192 SE bearing 127\u00B0', position: { top: '45%', left: '60%' }, rotation: -5, wave: 4 },
+  { type: 'circle', position: { top: '65%', left: '25%' }, radius: '8%', label: 'NON-SHILIN LOCATION', wave: 4 },
+  { type: 'note', text: 'Source dot matches. Confirm with M.', position: { top: '72%', left: '45%' }, rotation: 2, wave: 5 },
+  { type: 'note', text: '03 . 17 . 58 — check the feed', position: { top: '82%', left: '60%' }, rotation: -3, wave: 5 },
 ];
 
 // ===== CASSETTE TAPES =====

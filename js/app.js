@@ -1314,8 +1314,9 @@
     const uvLayer = document.getElementById('uv-layer');
     if (!uvLayer) return;
 
+    const currentWave = WaveSystem.getWave();
     let html = '';
-    PINBOARD_UV.forEach((item, i) => {
+    PINBOARD_UV.filter(item => !item.wave || item.wave <= currentWave).forEach((item, i) => {
       if (item.type === 'arrow') {
         html += `<div class="uv-item uv-arrow" style="top:${item.from.top};left:${item.from.left};transform:rotate(${item.rotation || 0}deg)">
           ← ${item.label} →
