@@ -442,6 +442,8 @@ body {
   justify-content: center;
   opacity: 1;
   transition: opacity 0.4s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .detail-overlay.hidden {
@@ -1479,6 +1481,12 @@ body {
   height: min(92vh, calc(96vw * 816 / 1456));
   max-width: none;
 }
+@supports (height: 1dvh) {
+  #notepad-detail {
+    width: min(96vw, calc(92dvh * 1456 / 816));
+    height: min(92dvh, calc(96vw * 816 / 1456));
+  }
+}
 #notepad-detail.active {
   display: flex;
   align-items: center;
@@ -1504,6 +1512,7 @@ body {
   aspect-ratio: auto;
   width: 96vw;
   height: 88vh;
+  height: 88dvh;
   max-height: none;
   background: url('../assets/notebook.png?v=2') right top / 200% 100% no-repeat;
   background-attachment: local;
@@ -1612,6 +1621,16 @@ body {
   bottom: 2%;
   left: 0;
   right: 0;
+}
+/* On touch devices, make nav sticky so it's always visible */
+.single-page .notebook-nav {
+  position: sticky;
+  bottom: 0;
+  background: rgba(26, 21, 16, 0.85);
+  padding: 10px 30px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 0 0 4px 4px;
 }
 .notebook-nav-btn {
   background: rgba(0,0,0,0.3);
