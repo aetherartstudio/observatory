@@ -286,6 +286,9 @@ body {
 @media (max-width: 768px) and (orientation: portrait) {
   .landscape-prompt { display: flex; }
 }
+@media (pointer: coarse) and (orientation: portrait) {
+  .landscape-prompt { display: flex; }
+}
 @media not (any-hover: hover) and (orientation: portrait) {
   .landscape-prompt { display: flex; }
 }
