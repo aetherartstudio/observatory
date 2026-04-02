@@ -282,8 +282,11 @@ body {
   50%      { transform: rotate(90deg); }
 }
 
-/* Show landscape prompt only on portrait mobile */
+/* Show landscape prompt on portrait touch devices (phones + tablets) */
 @media (max-width: 768px) and (orientation: portrait) {
+  .landscape-prompt { display: flex; }
+}
+@media not (any-hover: hover) and (orientation: portrait) {
   .landscape-prompt { display: flex; }
 }
 
