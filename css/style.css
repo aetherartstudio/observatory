@@ -1075,9 +1075,9 @@ body {
 
 .pinboard-header {
   background: transparent;
-  padding: 3% 15px 8px;
+  padding: 4.5% 15px 8px;
   font-family: var(--font-typewriter);
-  font-size: 14px;
+  font-size: 17.5px;
   font-weight: 700;
   color: rgba(60,40,20,0.95);
   text-align: center;
