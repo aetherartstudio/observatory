@@ -201,6 +201,23 @@
         setTimeout(() => room.classList.remove('reveal'), 1500);
       }
     });
+
+    // Touch devices: triple-tap on room to toggle debug mode
+    let debugTapCount = 0;
+    let debugTapTimer = null;
+    document.getElementById('room').addEventListener('touchend', (e) => {
+      if (isDetailOpen || e.target.closest('.zone')) return;
+      debugTapCount++;
+      clearTimeout(debugTapTimer);
+      debugTapTimer = setTimeout(() => { debugTapCount = 0; }, 500);
+      if (debugTapCount >= 3) {
+        debugTapCount = 0;
+        clearTimeout(debugTapTimer);
+        document.getElementById('room').classList.toggle('debug');
+        document.getElementById('detail-overlay').classList.toggle('debug');
+        WaveSystem.toggleDebugPanel();
+      }
+    });
   }
 
   // ===== SIGHTINGS MAP (dynamic dots from MAP_SIGHTINGS) =====
