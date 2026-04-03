@@ -400,8 +400,6 @@
   // ===== PINBOARD ZOOM HELPER =====
   function zoomPinboardItem(el, zoomClass) {
     const overlay = document.querySelector('.postit-overlay');
-    const pinboardFull = document.querySelector('.pinboard-full');
-    const surface = document.getElementById('pinboard-surface');
     if (el.classList.contains(zoomClass)) {
       // Restore original inline styles
       el.style.transform = el.dataset.originalTransform || '';
@@ -409,11 +407,8 @@
       el.style.left = el.dataset.originalLeft || '';
       el.classList.remove(zoomClass);
       if (overlay) overlay.classList.remove('active');
-      // Move back to surface if it was reparented for UV mode
-      if (el.dataset.uvReparented) {
-        surface.appendChild(el);
-        delete el.dataset.uvReparented;
-      }
+      // Remove zoomed-in-uv marker
+      document.querySelector('.pinboard-full')?.classList.remove('uv-has-zoom');
     } else {
       // Unzoom any other zoomed items
       document.querySelectorAll('.full-postit.zoomed, .sketch-zoomed-active, .photo-zoomed-active, .receipt-zoomed-active, .diagram-zoomed-active').forEach(p => {
@@ -423,11 +418,6 @@
           p.style.left = p.dataset.originalLeft || '';
         }
         p.classList.remove('zoomed', 'sketch-zoomed-active', 'photo-zoomed-active', 'receipt-zoomed-active', 'diagram-zoomed-active');
-        if (p.dataset.uvReparented) {
-          surface.appendChild(p);
-          delete p.dataset.uvReparented;
-        }
-        // Clear any UV reveals
         p.querySelectorAll('.postit-uv-content').forEach(uv => uv.classList.remove('uv-revealed'));
       });
       // Save and clear inline styles so CSS class takes effect
@@ -439,10 +429,9 @@
       el.style.left = '';
       el.classList.add(zoomClass);
       if (overlay) overlay.classList.add('active');
-      // In UV mode, reparent to pinboard-full to escape the dim filter on surface
-      if (uvActive && pinboardFull && el.parentElement === surface) {
-        pinboardFull.appendChild(el);
-        el.dataset.uvReparented = 'true';
+      // Mark that we have a zoomed item in UV mode (for bigger torch radius)
+      if (uvActive) {
+        document.querySelector('.pinboard-full')?.classList.add('uv-has-zoom');
       }
     }
   }
@@ -505,23 +494,22 @@
           inner.appendChild(sig);
         }
 
-        div.appendChild(inner);
-
-        // Embed UV content if this post-it has linked UV items
+        // Embed UV content inside the inner content (inline with text)
         if (item.id) {
           const currentWave = WaveSystem.getWave();
           const uvItems = PINBOARD_UV.filter(uv => uv.postitId === item.id && (!uv.wave || uv.wave <= currentWave));
           if (uvItems.length > 0) {
             div.dataset.hasUv = 'true';
-            div.dataset.postitId = item.id;
             uvItems.forEach(uv => {
               const uvEl = document.createElement('div');
               uvEl.className = 'postit-uv-content';
               uvEl.textContent = uv.text;
-              div.appendChild(uvEl);
+              inner.appendChild(uvEl);
             });
           }
         }
+
+        div.appendChild(inner);
 
         div.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -659,15 +647,10 @@
           p.style.left = p.dataset.originalLeft || '';
         }
         p.classList.remove('zoomed', 'sketch-zoomed-active', 'photo-zoomed-active', 'receipt-zoomed-active', 'diagram-zoomed-active');
-        // Move back to surface if reparented for UV mode
-        if (p.dataset.uvReparented) {
-          surface.appendChild(p);
-          delete p.dataset.uvReparented;
-        }
-        // Clear UV reveals
         p.querySelectorAll('.postit-uv-content').forEach(uv => uv.classList.remove('uv-revealed'));
       });
       overlay.classList.remove('active');
+      document.querySelector('.pinboard-full')?.classList.remove('uv-has-zoom');
     });
 
     // Reveal items only after background image is loaded
@@ -1318,10 +1301,13 @@
     const uvMask = document.getElementById('uv-mask');
     toggle.classList.remove('active');
     pinboardFull.classList.remove('uv-mode');
+    pinboardFull.classList.remove('uv-has-zoom');
     uvLayer.classList.remove('active');
     uvMask.classList.remove('active');
     // Hide all UV items
     uvLayer.querySelectorAll('.uv-item').forEach(el => el.classList.remove('uv-visible'));
+    // Hide all post-it UV content
+    document.querySelectorAll('.postit-uv-content').forEach(el => el.classList.remove('uv-revealed'));
   }
 
   function updateUVRadius(event, container) {
@@ -1330,7 +1316,9 @@
     const y = event.clientY - rect.top;
     const xPct = (x / rect.width) * 100;
     const yPct = (y / rect.height) * 100;
-    const radiusPx = Math.min(rect.width, rect.height) * 0.18; // ~18% radius
+    // Bigger torch radius when a post-it is zoomed
+    const hasZoom = container.closest('.pinboard-full')?.classList.contains('uv-has-zoom');
+    const radiusPx = Math.min(rect.width, rect.height) * (hasZoom ? 0.32 : 0.18);
 
     // Update mask: transparent circle follows cursor
     const uvMask = document.getElementById('uv-mask');

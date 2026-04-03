@@ -1479,14 +1479,11 @@ body {
 .uv-toggle.visible {
   display: block;
 }
-/* UV content embedded inside post-its */
+/* UV content embedded inside post-its — flows inline after normal text */
 .postit-uv-content {
-  position: absolute;
-  bottom: 8%;
-  left: 10%;
-  right: 10%;
+  margin-top: 0.6em;
   font-family: var(--font-handwriting);
-  font-size: 0.55cqw;
+  font-size: inherit;
   line-height: 1.3;
   color: #88aaff;
   text-shadow:
@@ -1497,14 +1494,9 @@ body {
   opacity: 0;
   transition: opacity 0.2s ease;
   pointer-events: none;
-  z-index: 2;
 }
 .postit-uv-content.uv-revealed {
   opacity: 1;
-}
-/* Bigger UV text when post-it is zoomed */
-.full-postit.zoomed .postit-uv-content {
-  font-size: 10px;
 }
 
 /* Dark overlay for UV mode — pinboard gets dim, UV items glow */
@@ -1513,6 +1505,12 @@ body {
 }
 .pinboard-full.uv-mode .pinboard-header {
   filter: brightness(0.3);
+}
+/* When zoomed in UV mode, disable the surface filter so the zoomed
+   post-it renders correctly (filter creates a containing block that
+   breaks position:fixed). The UV mask handles the dimming instead. */
+.pinboard-full.uv-has-zoom .pinboard-surface {
+  filter: none;
 }
 
 /* ===== NOTEBOOK DETAIL (image-backed) ===== */
