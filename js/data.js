@@ -138,12 +138,12 @@ const PINBOARD_ITEMS = [
   { wave: 4, type: 'diagram', position: { top: '5%', left: '83%' }, rotation: -1, title: 'CONVERGENCE VECTORS', description: 'All specimen trajectories — directional arrows all pointing toward Taipei. Radial pattern confirmed. Center: [REDACTED]' },
   { wave: 4, type: 'sketch', image: 'source crystal-1.png', position: { top: '42%', left: '21%' }, rotation: 1, label: '' },
   { wave: 4, type: 'postit', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '39%', left: '84%' }, author: 'm' },
-  { wave: 4, type: 'postit', text: 'Followed Fugu for 3 hours. Sprint paths no longer random. He knows where he is going.', color: '#85c1e9', rotation: -1, position: { top: '62%', left: '60%' }, author: 'researcher' },
+  { wave: 4, type: 'postit', id: 'fugu-direction', text: 'Followed Fugu for 3 hours. Sprint paths no longer random. He knows where he is going.', color: '#85c1e9', rotation: -1, position: { top: '62%', left: '60%' }, author: 'researcher' },
   { wave: 4, type: 'receipt', position: { top: '50%', left: '44%' }, rotation: -4, vendor: '7-ELEVEN SHILIN #229', date: '2025-01-08', items: ['Battery pack ×1', 'Onigiri ×2', '---', 'UV TRACE: POSITIVE'], total: 'NT$ 147' },
 
   // W5: Source proximity, anomalies (2 post-its)
-  { wave: 5, type: 'postit', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: -3, position: { top: '5%', left: '74%' }, author: 'researcher' },
-  { wave: 5, type: 'postit', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '74%', left: '32%' }, author: 'researcher' },
+  { wave: 5, type: 'postit', id: 'feed-hint', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: -3, position: { top: '5%', left: '74%' }, author: 'researcher' },
+  { wave: 5, type: 'postit', id: 'convergence-all', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '74%', left: '32%' }, author: 'researcher' },
   { wave: 5, type: 'photo', image: 'MrQ polaroid.png', position: { top: '5%', left: '54%' }, rotation: 2, label: '', caption: '' },
 
   // W6: After safe (1 post-it)
@@ -152,10 +152,10 @@ const PINBOARD_ITEMS = [
 
 const PINBOARD_UV = [
   { type: 'arrow', from: { top: '30%', left: '50%' }, to: { top: '70%', left: '20%' }, label: 'PULL' },
-  { type: 'note', text: 'All paths converge \u2192 SE bearing 127\u00B0', position: { top: '45%', left: '60%' }, rotation: -5, wave: 4 },
+  { type: 'note', text: 'All paths converge \u2192 SE bearing 127\u00B0', postitId: 'fugu-direction', wave: 4 },
   { type: 'circle', position: { top: '65%', left: '25%' }, radius: '8%', label: 'NON-SHILIN LOCATION', wave: 4 },
-  { type: 'note', text: 'Source dot matches. Confirm with M.', position: { top: '72%', left: '45%' }, rotation: 2, wave: 5 },
-  { type: 'note', text: '03 . 17 . 58 — check the feed', position: { top: '82%', left: '60%' }, rotation: -3, wave: 5 },
+  { type: 'note', text: 'Source dot matches. Confirm with M.', postitId: 'convergence-all', wave: 5 },
+  { type: 'note', text: '03 . 17 . 58 \u2014 check the feed', postitId: 'feed-hint', wave: 5 },
 ];
 
 // ===== CASSETTE TAPES =====

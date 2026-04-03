@@ -400,6 +400,8 @@
   // ===== PINBOARD ZOOM HELPER =====
   function zoomPinboardItem(el, zoomClass) {
     const overlay = document.querySelector('.postit-overlay');
+    const pinboardFull = document.querySelector('.pinboard-full');
+    const surface = document.getElementById('pinboard-surface');
     if (el.classList.contains(zoomClass)) {
       // Restore original inline styles
       el.style.transform = el.dataset.originalTransform || '';
@@ -407,6 +409,11 @@
       el.style.left = el.dataset.originalLeft || '';
       el.classList.remove(zoomClass);
       if (overlay) overlay.classList.remove('active');
+      // Move back to surface if it was reparented for UV mode
+      if (el.dataset.uvReparented) {
+        surface.appendChild(el);
+        delete el.dataset.uvReparented;
+      }
     } else {
       // Unzoom any other zoomed items
       document.querySelectorAll('.full-postit.zoomed, .sketch-zoomed-active, .photo-zoomed-active, .receipt-zoomed-active, .diagram-zoomed-active').forEach(p => {
@@ -416,6 +423,12 @@
           p.style.left = p.dataset.originalLeft || '';
         }
         p.classList.remove('zoomed', 'sketch-zoomed-active', 'photo-zoomed-active', 'receipt-zoomed-active', 'diagram-zoomed-active');
+        if (p.dataset.uvReparented) {
+          surface.appendChild(p);
+          delete p.dataset.uvReparented;
+        }
+        // Clear any UV reveals
+        p.querySelectorAll('.postit-uv-content').forEach(uv => uv.classList.remove('uv-revealed'));
       });
       // Save and clear inline styles so CSS class takes effect
       el.dataset.originalTransform = el.style.transform;
@@ -426,6 +439,11 @@
       el.style.left = '';
       el.classList.add(zoomClass);
       if (overlay) overlay.classList.add('active');
+      // In UV mode, reparent to pinboard-full to escape the dim filter on surface
+      if (uvActive && pinboardFull && el.parentElement === surface) {
+        pinboardFull.appendChild(el);
+        el.dataset.uvReparented = 'true';
+      }
     }
   }
 
@@ -488,6 +506,22 @@
         }
 
         div.appendChild(inner);
+
+        // Embed UV content if this post-it has linked UV items
+        if (item.id) {
+          const currentWave = WaveSystem.getWave();
+          const uvItems = PINBOARD_UV.filter(uv => uv.postitId === item.id && (!uv.wave || uv.wave <= currentWave));
+          if (uvItems.length > 0) {
+            div.dataset.hasUv = 'true';
+            div.dataset.postitId = item.id;
+            uvItems.forEach(uv => {
+              const uvEl = document.createElement('div');
+              uvEl.className = 'postit-uv-content';
+              uvEl.textContent = uv.text;
+              div.appendChild(uvEl);
+            });
+          }
+        }
 
         div.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -625,6 +659,13 @@
           p.style.left = p.dataset.originalLeft || '';
         }
         p.classList.remove('zoomed', 'sketch-zoomed-active', 'photo-zoomed-active', 'receipt-zoomed-active', 'diagram-zoomed-active');
+        // Move back to surface if reparented for UV mode
+        if (p.dataset.uvReparented) {
+          surface.appendChild(p);
+          delete p.dataset.uvReparented;
+        }
+        // Clear UV reveals
+        p.querySelectorAll('.postit-uv-content').forEach(uv => uv.classList.remove('uv-revealed'));
       });
       overlay.classList.remove('active');
     });
@@ -1308,6 +1349,20 @@
         el.classList.remove('uv-visible');
       }
     });
+
+    // Show/hide UV content embedded in post-its
+    document.querySelectorAll('.full-postit[data-has-uv]').forEach(postit => {
+      const pRect = postit.getBoundingClientRect();
+      const pCenterX = pRect.left + pRect.width / 2;
+      const pCenterY = pRect.top + pRect.height / 2;
+      const cursorScreenX = rect.left + x;
+      const cursorScreenY = rect.top + y;
+      const dist = Math.sqrt((cursorScreenX - pCenterX) ** 2 + (cursorScreenY - pCenterY) ** 2);
+      const reveal = dist < radiusPx * 1.3;
+      postit.querySelectorAll('.postit-uv-content').forEach(uv => {
+        uv.classList.toggle('uv-revealed', reveal);
+      });
+    });
   }
 
   function renderUVItems() {
@@ -1316,7 +1371,7 @@
 
     const currentWave = WaveSystem.getWave();
     let html = '';
-    PINBOARD_UV.filter(item => !item.wave || item.wave <= currentWave).forEach((item, i) => {
+    PINBOARD_UV.filter(item => !item.postitId && (!item.wave || item.wave <= currentWave)).forEach((item, i) => {
       if (item.type === 'arrow') {
         html += `<div class="uv-item uv-arrow" style="top:${item.from.top};left:${item.from.left};transform:rotate(${item.rotation || 0}deg)">
           ← ${item.label} →
