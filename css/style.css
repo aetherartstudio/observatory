@@ -1144,6 +1144,10 @@ body {
   z-index: 1000;
   filter: drop-shadow(0 3px 10px rgba(0,0,0,0.5));
 }
+/* Disable expensive drop-shadow filter in UV mode to prevent flickering */
+.uv-mode .full-postit.zoomed {
+  filter: none;
+}
 .postit-overlay {
   display: none;
   position: fixed;
