@@ -114,7 +114,7 @@ const PINBOARD_ITEMS = [
   { wave: 1, type: 'postit', text: 'Night market, 3am — four distinct silhouettes. None matching known fauna.', color: '#f7dc6f', rotation: -2, position: { top: '6%', left: '8%' }, author: 'researcher' },
   { wave: 1, type: 'postit', text: 'The fast one stopped at a flower growing through concrete. Stayed 47 seconds. WHY?', color: '#f1948a', rotation: 3, position: { top: '53%', left: '35%' }, author: 'researcher' },
   { wave: 1, type: 'postit', text: 'Type 4 — mouth takes up 70% of body. Inflates when near arguments. Deflates when they stop.', color: '#82e0aa', rotation: 0, position: { top: '12%', left: '64%' }, author: 'researcher' },
-  { wave: 1, type: 'postit', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '60%', left: '85%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', id: 'why-shilin', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '60%', left: '85%' }, author: 'researcher' },
 
   // W2: Community names, M.'s first notes, sketches (4 post-its)
   { wave: 2, type: 'postit', text: 'They carry what we cannot hold. It is not free.', color: '#f5b7b1', rotation: -2, position: { top: '18%', left: '21%' }, author: 'm' },
@@ -124,7 +124,7 @@ const PINBOARD_ITEMS = [
   { wave: 2, type: 'sketch', image: 'MrQ-sketch-1.png', position: { top: '21%', left: '35%' }, rotation: -3, label: '' },
   { wave: 2, type: 'sketch', image: 'groovix-sketch-1.png', position: { top: '55%', left: '10%' }, rotation: -3, label: '' },
   { wave: 2, type: 'sketch', image: 'muncha-sketch-1.png', position: { top: '58%', left: '50%' }, rotation: 4, label: '' },
-  { wave: 2, type: 'postit', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE. But they keep coming back to Taipei.', color: '#f7dc6f', rotation: 2, position: { top: '28%', left: '48%' }, author: 'researcher' },
+  { wave: 2, type: 'postit', id: 'everywhere', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE. But they keep coming back to Taipei.', color: '#f7dc6f', rotation: 2, position: { top: '28%', left: '48%' }, author: 'researcher' },
   { wave: 2, type: 'postit', text: 'The locals named them: Fugu, MrQ, Groovix, Muncha. I will continue using type designations.', color: '#82e0aa', rotation: -3, position: { top: '46%', left: '70%' }, author: 'researcher' },
 
   // W3: Energy loss, alarm (3 post-its)
@@ -151,9 +151,9 @@ const PINBOARD_ITEMS = [
 ];
 
 const PINBOARD_UV = [
-  { type: 'arrow', from: { top: '30%', left: '50%' }, to: { top: '70%', left: '20%' }, label: 'PULL' },
+  { type: 'note', text: 'PULL \u2192 they keep pulling toward one point', postitId: 'why-shilin', wave: 3 },
   { type: 'note', text: 'All paths converge \u2192 SE bearing 127\u00B0', postitId: 'fugu-direction', wave: 4 },
-  { type: 'circle', position: { top: '65%', left: '25%' }, radius: '8%', label: 'NON-SHILIN LOCATION', wave: 4 },
+  { type: 'note', text: 'NON-SHILIN LOCATIONS = transit only?', postitId: 'everywhere', wave: 4 },
   { type: 'note', text: 'Source dot matches. Confirm with M.', postitId: 'convergence-all', wave: 5 },
   { type: 'note', text: '03 . 17 . 58 \u2014 check the feed', postitId: 'feed-hint', wave: 5 },
 ];
