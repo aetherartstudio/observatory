@@ -1515,15 +1515,6 @@ body {
 .pinboard-full.uv-mode .pinboard-header {
   opacity: 0.3;
 }
-/* Local UV mask inside zoomed post-it — avoids z-index stacking issues */
-.postit-local-uv-mask {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 3;
-  border-radius: inherit;
-  background: rgba(0, 0, 0, 0.85);
-}
 
 /* ===== NOTEBOOK DETAIL (image-backed) ===== */
 #notepad-detail {

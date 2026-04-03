@@ -111,7 +111,7 @@ const JOURNAL_PAGES = [
 // ===== PINBOARD ITEMS =====
 const PINBOARD_ITEMS = [
   // W1: First observations, type designations (4 post-its)
-  { wave: 1, type: 'postit', text: 'Night market, 3am — four distinct silhouettes. None matching known fauna.', color: '#f7dc6f', rotation: -2, position: { top: '6%', left: '8%' }, author: 'researcher' },
+  { wave: 1, type: 'postit', text: '', color: '#f7dc6f', rotation: -2, position: { top: '6%', left: '8%' }, author: 'researcher' },
   { wave: 1, type: 'postit', text: 'The fast one stopped at a flower growing through concrete. Stayed 47 seconds. WHY?', color: '#f1948a', rotation: 3, position: { top: '53%', left: '35%' }, author: 'researcher' },
   { wave: 1, type: 'postit', text: 'Type 4 — mouth takes up 70% of body. Inflates when near arguments. Deflates when they stop.', color: '#82e0aa', rotation: 0, position: { top: '12%', left: '64%' }, author: 'researcher' },
   { wave: 1, type: 'postit', id: 'why-shilin', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '60%', left: '85%' }, author: 'researcher' },
