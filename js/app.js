@@ -1266,7 +1266,7 @@
     uvLayer.classList.add('active');
     uvMask.classList.add('active');
     // Set initial mask to center
-    uvMask.style.background = 'radial-gradient(circle 0px at 50% 50%, rgba(100,80,255,0.35) 0%, rgba(60,40,220,0.2) 50%, rgba(30,10,140,0.08) 75%, rgba(0,0,0,0.85) 100%)';
+    uvMask.style.background = 'radial-gradient(circle 0px at 50% 50%, rgba(60,50,200,0.25) 0%, rgba(70,55,220,0.35) 70%, rgba(40,20,180,0.15) 95%, rgba(0,0,0,0.85) 100%)';
   }
 
   function deactivateUV() {
@@ -1293,7 +1293,7 @@
 
     // Update mask: transparent circle follows cursor
     const uvMask = document.getElementById('uv-mask');
-    uvMask.style.background = `radial-gradient(circle ${radiusPx}px at ${xPct}% ${yPct}%, rgba(100,80,255,0.35) 0%, rgba(60,40,220,0.2) 50%, rgba(30,10,140,0.08) 75%, rgba(0,0,0,0.85) 100%)`;
+    uvMask.style.background = `radial-gradient(circle ${radiusPx}px at ${xPct}% ${yPct}%, rgba(60,50,200,0.25) 0%, rgba(70,55,220,0.35) 70%, rgba(40,20,180,0.15) 95%, rgba(0,0,0,0.85) 100%)`;
 
     // Show/hide UV items based on proximity to cursor
     const uvLayer = document.getElementById('uv-layer');
