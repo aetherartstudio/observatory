@@ -1501,12 +1501,11 @@ body {
   opacity: 1;
 }
 
-/* Dark overlay for UV mode — pinboard gets dim, UV items glow */
-.pinboard-full.uv-mode .pinboard-surface {
-  filter: brightness(0.3) saturate(0.2);
-}
+/* Dark overlay for UV mode — the UV mask handles dimming via its
+   dark radial gradient. No filter on surface so UV text inside
+   post-its is not dimmed. */
 .pinboard-full.uv-mode .pinboard-header {
-  filter: brightness(0.3);
+  opacity: 0.3;
 }
 /* When zoomed in UV mode, raise mask above the zoomed post-it
    so the torch spotlight covers it properly */
