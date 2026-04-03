@@ -1257,21 +1257,24 @@
       }
     });
 
-    // Mouse tracking for UV radius
-    pinboardFull.addEventListener('mousemove', (e) => {
+    // Mouse/touch tracking for UV radius — listen on pinboard-detail
+    // (parent of both pinboardFull and postit-overlay) so the torch
+    // keeps working when the overlay captures events during zoom
+    const pinboardDetail = document.getElementById('pinboard-detail');
+    const uvTarget = pinboardDetail || pinboardFull;
+
+    uvTarget.addEventListener('mousemove', (e) => {
       if (!uvActive) return;
       updateUVRadius(e, pinboardFull);
     });
 
-    // Touch tracking for mobile
-    pinboardFull.addEventListener('touchmove', (e) => {
+    uvTarget.addEventListener('touchmove', (e) => {
       if (!uvActive) return;
       const touch = e.touches[0];
       updateUVRadius(touch, pinboardFull);
     }, { passive: true });
 
-    // Also update on touchstart
-    pinboardFull.addEventListener('touchstart', (e) => {
+    uvTarget.addEventListener('touchstart', (e) => {
       if (!uvActive) return;
       const touch = e.touches[0];
       updateUVRadius(touch, pinboardFull);
