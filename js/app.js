@@ -407,7 +407,8 @@
       el.style.left = el.dataset.originalLeft || '';
       el.classList.remove(zoomClass);
       if (overlay) overlay.classList.remove('active');
-      // Remove zoomed-in-uv marker
+      // Remove local UV overlay from post-it
+      removeLocalUVMask(el);
       document.querySelector('.pinboard-full')?.classList.remove('uv-has-zoom');
     } else {
       // Unzoom any other zoomed items
@@ -419,6 +420,7 @@
         }
         p.classList.remove('zoomed', 'sketch-zoomed-active', 'photo-zoomed-active', 'receipt-zoomed-active', 'diagram-zoomed-active');
         p.querySelectorAll('.postit-uv-content').forEach(uv => uv.classList.remove('uv-revealed'));
+        removeLocalUVMask(p);
       });
       // Save and clear inline styles so CSS class takes effect
       el.dataset.originalTransform = el.style.transform;
@@ -429,11 +431,25 @@
       el.style.left = '';
       el.classList.add(zoomClass);
       if (overlay) overlay.classList.add('active');
-      // Mark that we have a zoomed item in UV mode (for bigger torch radius)
-      if (uvActive) {
+      // In UV mode, add a local UV mask inside the post-it
+      if (uvActive && zoomClass === 'zoomed') {
+        addLocalUVMask(el);
         document.querySelector('.pinboard-full')?.classList.add('uv-has-zoom');
       }
     }
+  }
+
+  function addLocalUVMask(postit) {
+    if (postit.querySelector('.postit-local-uv-mask')) return;
+    const mask = document.createElement('div');
+    mask.className = 'postit-local-uv-mask';
+    mask.style.background = 'rgba(0,0,0,0.85)';
+    postit.appendChild(mask);
+  }
+
+  function removeLocalUVMask(el) {
+    const mask = el.querySelector('.postit-local-uv-mask');
+    if (mask) mask.remove();
   }
 
   // ===== PINBOARD (merged: post-its + sketches + photos) =====
@@ -648,6 +664,7 @@
         }
         p.classList.remove('zoomed', 'sketch-zoomed-active', 'photo-zoomed-active', 'receipt-zoomed-active', 'diagram-zoomed-active');
         p.querySelectorAll('.postit-uv-content').forEach(uv => uv.classList.remove('uv-revealed'));
+        removeLocalUVMask(p);
       });
       overlay.classList.remove('active');
       document.querySelector('.pinboard-full')?.classList.remove('uv-has-zoom');
@@ -1308,8 +1325,9 @@
     uvMask.classList.remove('active');
     // Hide all UV items
     uvLayer.querySelectorAll('.uv-item').forEach(el => el.classList.remove('uv-visible'));
-    // Hide all post-it UV content
+    // Hide all post-it UV content and remove local masks
     document.querySelectorAll('.postit-uv-content').forEach(el => el.classList.remove('uv-revealed'));
+    document.querySelectorAll('.postit-local-uv-mask').forEach(el => el.remove());
   }
 
   function updateUVRadius(event, container) {
@@ -1318,13 +1336,25 @@
     const y = event.clientY - rect.top;
     const xPct = (x / rect.width) * 100;
     const yPct = (y / rect.height) * 100;
-    // Bigger torch radius when a post-it is zoomed
-    const hasZoom = container.closest('.pinboard-full')?.classList.contains('uv-has-zoom');
-    const radiusPx = Math.min(rect.width, rect.height) * (hasZoom ? 0.32 : 0.18);
+    const radiusPx = Math.min(rect.width, rect.height) * 0.18;
 
-    // Update mask: transparent circle follows cursor
+    // Update pinboard-level mask
     const uvMask = document.getElementById('uv-mask');
     uvMask.style.background = `radial-gradient(circle ${radiusPx}px at ${xPct}% ${yPct}%, rgba(60,50,200,0.25) 0%, rgba(70,55,220,0.35) 70%, rgba(40,20,180,0.15) 95%, rgba(0,0,0,0.85) 100%)`;
+
+    // Update local UV mask inside any zoomed post-it
+    const zoomedPostit = document.querySelector('.full-postit.zoomed');
+    if (zoomedPostit) {
+      const localMask = zoomedPostit.querySelector('.postit-local-uv-mask');
+      if (localMask) {
+        const pRect = zoomedPostit.getBoundingClientRect();
+        const lx = ((event.clientX - pRect.left) / pRect.width) * 100;
+        const ly = ((event.clientY - pRect.top) / pRect.height) * 100;
+        // Torch radius relative to the zoomed post-it size
+        const localRadius = Math.min(pRect.width, pRect.height) * 0.45;
+        localMask.style.background = `radial-gradient(circle ${localRadius}px at ${lx}% ${ly}%, rgba(60,50,200,0.2) 0%, rgba(70,55,220,0.3) 70%, rgba(40,20,180,0.12) 90%, rgba(0,0,0,0.85) 100%)`;
+      }
+    }
 
     // Show/hide UV items based on proximity to cursor
     const uvLayer = document.getElementById('uv-layer');
@@ -1345,7 +1375,6 @@
       const isZoomed = postit.classList.contains('zoomed');
       let reveal;
       if (isZoomed) {
-        // Always reveal on zoomed post-it — the UV mask handles visibility
         reveal = true;
       } else {
         const pRect = postit.getBoundingClientRect();
