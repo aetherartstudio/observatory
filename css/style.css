@@ -1396,13 +1396,14 @@ body {
 .uv-layer .uv-item {
   position: absolute;
   font-family: var(--font-handwriting);
-  color: #d0e8ff;
+  color: #88aaff;
   text-shadow:
-    0 0 4px #a0c0ff,
-    0 0 10px #6080ff,
-    0 0 24px #4060ff,
-    0 0 50px rgba(60,80,255,0.6),
-    0 0 80px rgba(40,40,255,0.3);
+    0 0 6px #6090ff,
+    0 0 14px #4070ff,
+    0 0 30px #3355ee,
+    0 0 60px rgba(50,60,255,0.7),
+    0 0 100px rgba(40,40,255,0.5),
+    0 0 150px rgba(30,30,220,0.3);
   opacity: 0;
   transition: opacity 0.2s ease;
 }
@@ -1431,8 +1432,8 @@ body {
   transform: translateX(-50%);
   white-space: nowrap;
   font-size: clamp(8px, 1vw, 14px);
-  color: #d0e8ff;
-  text-shadow: 0 0 4px #a0c0ff, 0 0 12px #6080ff, 0 0 30px rgba(60,80,255,0.5);
+  color: #88aaff;
+  text-shadow: 0 0 6px #6090ff, 0 0 14px #4070ff, 0 0 30px rgba(50,60,255,0.7);
 }
 .uv-mask {
   position: absolute;
