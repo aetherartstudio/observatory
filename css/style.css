@@ -1396,10 +1396,15 @@ body {
 .uv-layer .uv-item {
   position: absolute;
   font-family: var(--font-handwriting);
-  color: #c4c0ff;
-  text-shadow: 0 0 8px #4400ff, 0 0 20px #3300cc, 0 0 40px #2200aa;
+  color: #d0e8ff;
+  text-shadow:
+    0 0 4px #a0c0ff,
+    0 0 10px #6080ff,
+    0 0 24px #4060ff,
+    0 0 50px rgba(60,80,255,0.6),
+    0 0 80px rgba(40,40,255,0.3);
   opacity: 0;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.2s ease;
 }
 .uv-layer .uv-item.uv-visible {
   opacity: 1;
@@ -1415,9 +1420,9 @@ body {
   line-height: 1.4;
 }
 .uv-layer .uv-circle {
-  border: 2px solid rgba(68, 0, 255, 0.6);
+  border: 2px solid rgba(100, 120, 255, 0.7);
   border-radius: 50%;
-  box-shadow: 0 0 15px rgba(68, 0, 255, 0.4), inset 0 0 15px rgba(68, 0, 255, 0.15);
+  box-shadow: 0 0 12px rgba(80, 100, 255, 0.5), 0 0 30px rgba(60, 60, 255, 0.25), inset 0 0 15px rgba(80, 100, 255, 0.15);
 }
 .uv-layer .uv-circle-label {
   position: absolute;
@@ -1426,8 +1431,8 @@ body {
   transform: translateX(-50%);
   white-space: nowrap;
   font-size: clamp(8px, 1vw, 14px);
-  color: #c4f0ff;
-  text-shadow: 0 0 6px #00ccff;
+  color: #d0e8ff;
+  text-shadow: 0 0 4px #a0c0ff, 0 0 12px #6080ff, 0 0 30px rgba(60,80,255,0.5);
 }
 .uv-mask {
   position: absolute;
