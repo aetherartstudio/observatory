@@ -1343,13 +1343,20 @@
 
     // Show/hide UV content embedded in post-its
     document.querySelectorAll('.full-postit[data-has-uv]').forEach(postit => {
-      const pRect = postit.getBoundingClientRect();
-      const pCenterX = pRect.left + pRect.width / 2;
-      const pCenterY = pRect.top + pRect.height / 2;
-      const cursorScreenX = rect.left + x;
-      const cursorScreenY = rect.top + y;
-      const dist = Math.sqrt((cursorScreenX - pCenterX) ** 2 + (cursorScreenY - pCenterY) ** 2);
-      const reveal = dist < radiusPx * 1.3;
+      const isZoomed = postit.classList.contains('zoomed');
+      let reveal;
+      if (isZoomed) {
+        // Always reveal on zoomed post-it — the UV mask handles visibility
+        reveal = true;
+      } else {
+        const pRect = postit.getBoundingClientRect();
+        const pCenterX = pRect.left + pRect.width / 2;
+        const pCenterY = pRect.top + pRect.height / 2;
+        const cursorScreenX = rect.left + x;
+        const cursorScreenY = rect.top + y;
+        const dist = Math.sqrt((cursorScreenX - pCenterX) ** 2 + (cursorScreenY - pCenterY) ** 2);
+        reveal = dist < radiusPx * 1.3;
+      }
       postit.querySelectorAll('.postit-uv-content').forEach(uv => {
         uv.classList.toggle('uv-revealed', reveal);
       });
