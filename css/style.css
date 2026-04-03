@@ -1453,8 +1453,6 @@ body {
   z-index: 19;
   display: none;
   background: rgba(0, 0, 0, 0.85);
-  will-change: background;
-  transform: translateZ(0);
   /* The radial gradient will be set dynamically via JS for the UV circle */
 }
 .uv-mask.active {

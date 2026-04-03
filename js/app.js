@@ -1259,26 +1259,25 @@
 
     // Mouse/touch tracking for UV radius — listen on pinboard-detail
     // (parent of both pinboardFull and postit-overlay) so the torch
-    // keeps working when the overlay captures events during zoom
+    // keeps working when the overlay captures events during zoom.
+    // Throttled via rAF to prevent paint thrashing.
     const pinboardDetail = document.getElementById('pinboard-detail');
     const uvTarget = pinboardDetail || pinboardFull;
+    let uvRafPending = false;
 
-    uvTarget.addEventListener('mousemove', (e) => {
+    function scheduleUVUpdate(event) {
       if (!uvActive) return;
-      updateUVRadius(e, pinboardFull);
-    });
+      if (uvRafPending) return;
+      uvRafPending = true;
+      requestAnimationFrame(() => {
+        uvRafPending = false;
+        updateUVRadius(event, pinboardFull);
+      });
+    }
 
-    uvTarget.addEventListener('touchmove', (e) => {
-      if (!uvActive) return;
-      const touch = e.touches[0];
-      updateUVRadius(touch, pinboardFull);
-    }, { passive: true });
-
-    uvTarget.addEventListener('touchstart', (e) => {
-      if (!uvActive) return;
-      const touch = e.touches[0];
-      updateUVRadius(touch, pinboardFull);
-    }, { passive: true });
+    uvTarget.addEventListener('mousemove', (e) => scheduleUVUpdate(e));
+    uvTarget.addEventListener('touchmove', (e) => scheduleUVUpdate(e.touches[0]), { passive: true });
+    uvTarget.addEventListener('touchstart', (e) => scheduleUVUpdate(e.touches[0]), { passive: true });
   }
 
   function activateUV() {
