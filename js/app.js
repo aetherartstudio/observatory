@@ -405,18 +405,9 @@
       el.style.transform = el.dataset.originalTransform || '';
       el.style.top = el.dataset.originalTop || '';
       el.style.left = el.dataset.originalLeft || '';
-      el.style.webkitMaskImage = '';
-      el.style.maskImage = '';
       el.classList.remove(zoomClass);
       if (overlay) overlay.classList.remove('active');
       document.querySelector('.pinboard-full')?.classList.remove('uv-has-zoom');
-      // Restore pinboard torch mask immediately on unzoom
-      if (uvActive && lastUVEvent) {
-        requestAnimationFrame(() => {
-          const pinboardFull = document.querySelector('.pinboard-full');
-          if (pinboardFull) updateUVRadius(lastUVEvent, pinboardFull);
-        });
-      }
     } else {
       // Unzoom any other zoomed items
       document.querySelectorAll('.full-postit.zoomed, .sketch-zoomed-active, .photo-zoomed-active, .receipt-zoomed-active, .diagram-zoomed-active').forEach(p => {
@@ -439,20 +430,6 @@
       if (overlay) overlay.classList.add('active');
       if (uvActive) {
         document.querySelector('.pinboard-full')?.classList.add('uv-has-zoom');
-        // Start dark, then apply correct torch mask once CSS transform settles.
-        // Double-rAF ensures the scale(4) transform is fully applied before
-        // we read getBoundingClientRect to compute the mask radius.
-        const darkMask = 'radial-gradient(circle 0px at 50% 50%, white 0%, transparent 100%)';
-        el.style.webkitMaskImage = darkMask;
-        el.style.maskImage = darkMask;
-        if (lastUVEvent) {
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              const pinboardFull = document.querySelector('.pinboard-full');
-              if (pinboardFull) updateUVRadius(lastUVEvent, pinboardFull);
-            });
-          });
-        }
       }
     }
   }
@@ -1336,11 +1313,6 @@
     uvLayer.querySelectorAll('.uv-item').forEach(el => el.classList.remove('uv-visible'));
     // Hide all post-it UV content
     document.querySelectorAll('.postit-uv-content').forEach(el => el.classList.remove('uv-revealed'));
-    // Clear self-masks on any zoomed items
-    document.querySelectorAll('.zoomed, .sketch-zoomed-active, .photo-zoomed-active, .receipt-zoomed-active, .diagram-zoomed-active').forEach(el => {
-      el.style.webkitMaskImage = '';
-      el.style.maskImage = '';
-    });
   }
 
   function updateUVRadius(event, container) {
@@ -1351,40 +1323,10 @@
     const yPct = (y / rect.height) * 100;
     const radiusPx = Math.min(rect.width, rect.height) * 0.18;
 
-    // Find any zoomed item (post-it, sketch, photo, etc.)
-    const zoomedEl = container.querySelector('.zoomed, .sketch-zoomed-active, .photo-zoomed-active, .receipt-zoomed-active, .diagram-zoomed-active');
-
-    // Update pinboard-level mask
+    // Update pinboard-level mask — this single mask handles both normal and
+    // zoomed states. When zoomed, CSS raises uv-mask above the zoomed element.
     const uvMask = document.getElementById('uv-mask');
-    if (zoomedEl) {
-      // When an item is zoomed, make pinboard mask fully dark — only the
-      // self-mask on the zoomed element should show the torch circle.
-      uvMask.style.background = 'rgba(0,0,0,0.85)';
-    } else {
-      uvMask.style.background = `radial-gradient(circle ${radiusPx}px at ${xPct}% ${yPct}%, rgba(60,50,200,0.25) 0%, rgba(70,55,220,0.35) 70%, rgba(40,20,180,0.15) 95%, rgba(0,0,0,0.85) 100%)`;
-    }
-
-    // Apply self-mask on zoomed items so torch works above z-index.
-    // The zoomed post-it uses CSS scale(4), so getBoundingClientRect()
-    // returns the visual size but mask-image operates in local (pre-transform)
-    // coordinates. We must convert screen-space values to local space.
-    if (zoomedEl) {
-      const zRect = zoomedEl.getBoundingClientRect();
-      // Compute the CSS scale factor: visual size / layout size
-      const cssScale = zRect.width / zoomedEl.offsetWidth;
-      // Cursor position in local element coordinates
-      const zx = (event.clientX - zRect.left) / cssScale;
-      const zy = (event.clientY - zRect.top) / cssScale;
-      const localWidth = zoomedEl.offsetWidth;
-      const localHeight = zoomedEl.offsetHeight;
-      const zxPct = (zx / localWidth) * 100;
-      const zyPct = (zy / localHeight) * 100;
-      // Torch radius in local pixels (shrink by CSS scale to match screen size)
-      const zRadiusPx = radiusPx / cssScale;
-      const maskGrad = `radial-gradient(circle ${zRadiusPx}px at ${zxPct}% ${zyPct}%, white 0%, white 70%, rgba(255,255,255,0.15) 95%, transparent 100%)`;
-      zoomedEl.style.webkitMaskImage = maskGrad;
-      zoomedEl.style.maskImage = maskGrad;
-    }
+    uvMask.style.background = `radial-gradient(circle ${radiusPx}px at ${xPct}% ${yPct}%, rgba(60,50,200,0.25) 0%, rgba(70,55,220,0.35) 70%, rgba(40,20,180,0.15) 95%, rgba(0,0,0,0.85) 100%)`;
 
     // Show/hide UV items based on proximity to cursor
     const uvLayer = document.getElementById('uv-layer');

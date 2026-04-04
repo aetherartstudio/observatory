@@ -1162,6 +1162,10 @@ body {
 .uv-has-zoom .postit-overlay.active {
   background: transparent;
 }
+/* Raise UV mask above zoomed items so the single pinboard torch works */
+.uv-has-zoom .uv-mask {
+  z-index: 1001;
+}
 .full-postit:hover {
   transform: scale(1.08);
   z-index: 5;
