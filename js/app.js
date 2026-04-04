@@ -439,14 +439,18 @@
       if (overlay) overlay.classList.add('active');
       if (uvActive) {
         document.querySelector('.pinboard-full')?.classList.add('uv-has-zoom');
-        // Start dark, then apply correct torch mask once layout settles
+        // Start dark, then apply correct torch mask once CSS transform settles.
+        // Double-rAF ensures the scale(4) transform is fully applied before
+        // we read getBoundingClientRect to compute the mask radius.
         const darkMask = 'radial-gradient(circle 0px at 50% 50%, white 0%, transparent 100%)';
         el.style.webkitMaskImage = darkMask;
         el.style.maskImage = darkMask;
         if (lastUVEvent) {
           requestAnimationFrame(() => {
-            const pinboardFull = document.querySelector('.pinboard-full');
-            if (pinboardFull) updateUVRadius(lastUVEvent, pinboardFull);
+            requestAnimationFrame(() => {
+              const pinboardFull = document.querySelector('.pinboard-full');
+              if (pinboardFull) updateUVRadius(lastUVEvent, pinboardFull);
+            });
           });
         }
       }
