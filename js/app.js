@@ -432,10 +432,16 @@
       if (overlay) overlay.classList.add('active');
       if (uvActive) {
         document.querySelector('.pinboard-full')?.classList.add('uv-has-zoom');
-        // Start fully masked so it doesn't flash fully lit before first mousemove
+        // Start dark, then apply correct torch mask once layout settles
         const darkMask = 'radial-gradient(circle 0px at 50% 50%, white 0%, transparent 100%)';
         el.style.webkitMaskImage = darkMask;
         el.style.maskImage = darkMask;
+        if (lastUVEvent) {
+          requestAnimationFrame(() => {
+            const pinboardFull = document.querySelector('.pinboard-full');
+            if (pinboardFull) updateUVRadius(lastUVEvent, pinboardFull);
+          });
+        }
       }
     }
   }
@@ -1198,6 +1204,7 @@
 
   // ===== UV LAMP =====
   let uvActive = false;
+  let lastUVEvent = null; // track last mouse position for immediate mask on zoom
 
   // Hidden UV lamp clickable in the desk scene
   function updateUVLampClickable() {
@@ -1274,11 +1281,12 @@
 
     function scheduleUVUpdate(event) {
       if (!uvActive) return;
+      lastUVEvent = event;
       if (uvRafPending) return;
       uvRafPending = true;
       requestAnimationFrame(() => {
         uvRafPending = false;
-        updateUVRadius(event, pinboardFull);
+        updateUVRadius(lastUVEvent, pinboardFull);
       });
     }
 
