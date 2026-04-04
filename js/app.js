@@ -1335,15 +1335,23 @@
     const uvMask = document.getElementById('uv-mask');
     uvMask.style.background = `radial-gradient(circle ${radiusPx}px at ${xPct}% ${yPct}%, rgba(60,50,200,0.25) 0%, rgba(70,55,220,0.35) 70%, rgba(40,20,180,0.15) 95%, rgba(0,0,0,0.85) 100%)`;
 
-    // Apply self-mask on zoomed items so torch works above z-index
+    // Apply self-mask on zoomed items so torch works above z-index.
+    // The zoomed post-it uses CSS scale(4), so getBoundingClientRect()
+    // returns the visual size but mask-image operates in local (pre-transform)
+    // coordinates. We must convert screen-space values to local space.
     if (zoomedEl) {
       const zRect = zoomedEl.getBoundingClientRect();
-      const zx = event.clientX - zRect.left;
-      const zy = event.clientY - zRect.top;
-      const zxPct = (zx / zRect.width) * 100;
-      const zyPct = (zy / zRect.height) * 100;
-      // Scale torch radius relative to zoomed element size
-      const zRadiusPx = radiusPx;
+      // Compute the CSS scale factor: visual size / layout size
+      const cssScale = zRect.width / zoomedEl.offsetWidth;
+      // Cursor position in local element coordinates
+      const zx = (event.clientX - zRect.left) / cssScale;
+      const zy = (event.clientY - zRect.top) / cssScale;
+      const localWidth = zoomedEl.offsetWidth;
+      const localHeight = zoomedEl.offsetHeight;
+      const zxPct = (zx / localWidth) * 100;
+      const zyPct = (zy / localHeight) * 100;
+      // Torch radius in local pixels (shrink by CSS scale to match screen size)
+      const zRadiusPx = radiusPx / cssScale;
       const maskGrad = `radial-gradient(circle ${zRadiusPx}px at ${zxPct}% ${zyPct}%, white 0%, white 70%, rgba(255,255,255,0.15) 95%, transparent 100%)`;
       zoomedEl.style.webkitMaskImage = maskGrad;
       zoomedEl.style.maskImage = maskGrad;
