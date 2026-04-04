@@ -432,6 +432,10 @@
       if (overlay) overlay.classList.add('active');
       if (uvActive) {
         document.querySelector('.pinboard-full')?.classList.add('uv-has-zoom');
+        // Start fully masked so it doesn't flash fully lit before first mousemove
+        const darkMask = 'radial-gradient(circle 0px at 50% 50%, white 0%, transparent 100%)';
+        el.style.webkitMaskImage = darkMask;
+        el.style.maskImage = darkMask;
       }
     }
   }
