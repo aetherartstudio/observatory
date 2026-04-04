@@ -410,6 +410,13 @@
       el.classList.remove(zoomClass);
       if (overlay) overlay.classList.remove('active');
       document.querySelector('.pinboard-full')?.classList.remove('uv-has-zoom');
+      // Restore pinboard torch mask immediately on unzoom
+      if (uvActive && lastUVEvent) {
+        requestAnimationFrame(() => {
+          const pinboardFull = document.querySelector('.pinboard-full');
+          if (pinboardFull) updateUVRadius(lastUVEvent, pinboardFull);
+        });
+      }
     } else {
       // Unzoom any other zoomed items
       document.querySelectorAll('.full-postit.zoomed, .sketch-zoomed-active, .photo-zoomed-active, .receipt-zoomed-active, .diagram-zoomed-active').forEach(p => {
@@ -1345,7 +1352,13 @@
 
     // Update pinboard-level mask
     const uvMask = document.getElementById('uv-mask');
-    uvMask.style.background = `radial-gradient(circle ${radiusPx}px at ${xPct}% ${yPct}%, rgba(60,50,200,0.25) 0%, rgba(70,55,220,0.35) 70%, rgba(40,20,180,0.15) 95%, rgba(0,0,0,0.85) 100%)`;
+    if (zoomedEl) {
+      // When an item is zoomed, make pinboard mask fully dark — only the
+      // self-mask on the zoomed element should show the torch circle.
+      uvMask.style.background = 'rgba(0,0,0,0.85)';
+    } else {
+      uvMask.style.background = `radial-gradient(circle ${radiusPx}px at ${xPct}% ${yPct}%, rgba(60,50,200,0.25) 0%, rgba(70,55,220,0.35) 70%, rgba(40,20,180,0.15) 95%, rgba(0,0,0,0.85) 100%)`;
+    }
 
     // Apply self-mask on zoomed items so torch works above z-index.
     // The zoomed post-it uses CSS scale(4), so getBoundingClientRect()
