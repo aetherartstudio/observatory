@@ -63,7 +63,7 @@
     if (!bg) return;
     bg.src = WaveSystem.isSafeOpened()
       ? 'assets/room-bg-opened safe.png'
-      : 'assets/room-bg.png';
+      : 'assets/room-bg.jpg';
   }
 
   function populateAll() {
