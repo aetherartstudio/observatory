@@ -218,6 +218,41 @@
         WaveSystem.toggleDebugPanel();
       }
     });
+
+    // Debug cursor position indicator — shows % coordinates relative to
+    // the hovered element's offset parent (the nearest positioned ancestor).
+    const cursorInfo = document.createElement('div');
+    cursorInfo.id = 'debug-cursor-info';
+    cursorInfo.style.cssText = 'position:fixed;top:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.85);color:#0f0;font:bold 13px monospace;padding:4px 12px;border-radius:4px;z-index:99999;pointer-events:none;display:none;white-space:nowrap;';
+    document.body.appendChild(cursorInfo);
+
+    document.addEventListener('mousemove', (e) => {
+      const isDebug = document.getElementById('room')?.classList.contains('debug');
+      if (!isDebug) { cursorInfo.style.display = 'none'; return; }
+      cursorInfo.style.display = 'block';
+
+      // Find the nearest positioned container for % calculation
+      let container = e.target;
+      while (container && container !== document.body) {
+        const pos = getComputedStyle(container).position;
+        if (pos === 'relative' || pos === 'absolute' || pos === 'fixed') break;
+        container = container.parentElement;
+      }
+      if (!container || container === document.body) container = document.documentElement;
+
+      const rect = container.getBoundingClientRect();
+      const xPct = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+      const yPct = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+
+      // Also show which element/class we're over
+      const tag = e.target.tagName.toLowerCase();
+      const cls = e.target.className && typeof e.target.className === 'string'
+        ? '.' + e.target.className.split(' ').filter(Boolean).slice(0, 2).join('.')
+        : '';
+      const containerId = container.id ? '#' + container.id : container.className?.split(' ')[0] || tag;
+
+      cursorInfo.textContent = `${xPct}% / ${yPct}%  in ${containerId}  [${tag}${cls}]`;
+    });
   }
 
   // ===== SIGHTINGS MAP (dynamic dots from MAP_SIGHTINGS) =====
