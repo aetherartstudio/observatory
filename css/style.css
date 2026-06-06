@@ -174,12 +174,6 @@ body {
   z-index: 3;
 }
 
-/* Move pinboard sparkle to the right — center is under the bright lamp */
-#zone-pinboard::before { left: 59%; top: 60%; }
-
-#zone-cassette::before { left: 36%; }
-#zone-safe::before { left: 41%; }
-
 /* Stagger the sparkle so they breathe at different times */
 #zone-terminal::before  { animation-delay: 0s; }
 #zone-profiles::before  { animation-delay: 0.4s; }
@@ -304,8 +298,6 @@ body {
   outline-offset: 4px;
   background: rgba(138, 43, 226, 0.35) !important;
   box-shadow: 0 0 20px 8px rgba(138, 43, 226, 0.5) !important;
-  width: 40px !important;
-  height: 40px !important;
 }
 .debug .uv-lamp-hidden::after {
   content: 'UV LAMP';
@@ -345,45 +337,45 @@ body {
 
 /* Left CRT monitor — DOS terminal */
 #zone-terminal {
-  left: 27%;
-  top: 27%;
-  width: 14%;
-  height: 16%;
+  left: 15%;
+  top: 33%;
+  width: 20%;
+  height: 24%;
   z-index: 6;
 }
 
 /* Right CRT monitor — Profile database */
 #zone-profiles {
-  left: 42%;
+  left: 36%;
   top: 30%;
-  width: 9%;
-  height: 23%;
+  width: 16%;
+  height: 30%;
   z-index: 6;
 }
 
 /* Cork pin board on wall (behind monitors) */
 #zone-pinboard {
-  left: 31%;
+  left: 54%;
   top: 0%;
-  width: 58%;
-  height: 25%;
+  width: 40%;
+  height: 58%;
   z-index: 4;
 }
 
 /* Cassette player (right of desk) */
 #zone-cassette {
   left: 76%;
-  top: 71%;
-  width: 14%;
-  height: 18%;
+  top: 75%;
+  width: 18%;
+  height: 14%;
 }
 
 /* Safe (lower desk area) */
 #zone-safe {
-  left: 8%;
-  top: 8%;
-  width: 17%;
-  height: 29%;
+  left: 4%;
+  top: 26%;
+  width: 11%;
+  height: 31%;
 }
 
 /* Source Monitor C (empty stand — Wave 5+) */
@@ -396,10 +388,10 @@ body {
 
 /* Notebook (bottom right of desk) */
 #zone-notepad {
-  left: 36%;
-  top: 56%;
-  width: 15%;
-  height: 15%;
+  left: 37%;
+  top: 64%;
+  width: 12%;
+  height: 14%;
 }
 
 
@@ -409,10 +401,10 @@ body {
 /* Half-concealed in desk clutter. Only hint: cursor changes on hover. */
 .uv-lamp-hidden {
   position: absolute;
-  left: 58%;
-  top: 71%;
-  width: 30px;
-  height: 30px;
+  left: 71%;
+  top: 79%;
+  width: 2%;
+  height: 4%;
   z-index: 10;
   cursor: pointer;
   border-radius: 50%;
