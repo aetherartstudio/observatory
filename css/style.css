@@ -337,19 +337,19 @@ body {
 
 /* Left CRT monitor — DOS terminal */
 #zone-terminal {
-  left: 15%;
-  top: 33%;
-  width: 20%;
-  height: 24%;
+  left: 16%;
+  top: 34%;
+  width: 17%;
+  height: 23%;
   z-index: 6;
 }
 
 /* Right CRT monitor — Profile database */
 #zone-profiles {
-  left: 36%;
+  left: 33%;
   top: 30%;
-  width: 16%;
-  height: 30%;
+  width: 19%;
+  height: 27%;
   z-index: 6;
 }
 
@@ -357,24 +357,24 @@ body {
 #zone-pinboard {
   left: 54%;
   top: 0%;
-  width: 40%;
-  height: 58%;
+  width: 41%;
+  height: 46%;
   z-index: 4;
 }
 
 /* Cassette player (right of desk) */
 #zone-cassette {
-  left: 76%;
+  left: 77%;
   top: 75%;
-  width: 18%;
-  height: 14%;
+  width: 17%;
+  height: 17%;
 }
 
 /* Safe (lower desk area) */
 #zone-safe {
   left: 4%;
   top: 26%;
-  width: 11%;
+  width: 10%;
   height: 31%;
 }
 
@@ -393,6 +393,7 @@ body {
   width: 12%;
   height: 14%;
 }
+
 
 
 /* (Hotspot hints removed — glow effect is the only hover feedback) */
