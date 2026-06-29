@@ -1653,9 +1653,10 @@ body {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 10px 30px;
+  padding: 6px 30px;
   position: absolute;
-  bottom: -40px;
+  top: 97%;
+  transform: translateY(-100%);
   left: 0;
   right: 0;
 }
