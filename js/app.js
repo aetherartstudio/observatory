@@ -303,7 +303,7 @@
     if (!mapScreen.classList.contains('bg-loaded')) {
       const bgImg = new Image();
       bgImg.onload = () => mapScreen.classList.add('bg-loaded');
-      bgImg.src = 'assets/right monitor levelled with global map-bg.jpg';
+      bgImg.src = 'assets/right monitor-bg.jpg';
       if (bgImg.complete) mapScreen.classList.add('bg-loaded');
     }
 
@@ -429,7 +429,7 @@
 
     // Restore monitor background to global map
     const monitor = document.querySelector('.map-monitor');
-    if (monitor) monitor.style.backgroundImage = "url('assets/right monitor levelled with global map-bg.jpg')";
+    if (monitor) monitor.style.backgroundImage = "url('assets/right monitor-bg.jpg')";
   }
 
   // ===== PINBOARD ZOOM HELPER =====
@@ -693,7 +693,7 @@
     if (!surface.classList.contains('bg-loaded')) {
       const bgImg = new Image();
       bgImg.onload = () => surface.classList.add('bg-loaded');
-      bgImg.src = 'assets/cork-bg.png';
+      bgImg.src = 'assets/cork pinboard-new.jpg';
       if (bgImg.complete) surface.classList.add('bg-loaded');
     } else {
       // Already loaded from previous render — make sure items are visible
