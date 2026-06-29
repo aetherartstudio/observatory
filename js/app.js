@@ -62,7 +62,7 @@
     const bg = document.querySelector('.room-bg');
     if (!bg) return;
     bg.src = WaveSystem.isSafeOpened()
-      ? 'assets/room-bg-opened safe.png'
+      ? 'assets/Room-bg_opened safe.jpg'
       : 'assets/room-bg.jpg';
   }
 
