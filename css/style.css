@@ -1068,7 +1068,7 @@ body {
 
 .pinboard-header {
   background: transparent;
-  padding: 2.9% 15px 8px;
+  padding: 4% 15px 8px;
   font-family: var(--font-typewriter);
   font-size: 18px;
   font-weight: 700;
@@ -1081,9 +1081,9 @@ body {
 .pinboard-surface {
   position: absolute;
   left: 7%;
-  top: 35%;
+  top: 9%;
   width: 87%;
-  height: 43%;
+  height: 69%;
   overflow: hidden;
   container-type: size;
 }
@@ -1566,7 +1566,7 @@ body {
 .notebook-content {
   flex: 1;
   /* Padding maps text onto the two page areas of the notebook image */
-  padding: 8% 13% 12% 17%;
+  padding: 8% 13% 12% 14%;
   position: relative;
   overflow: hidden;
   container-type: size;
@@ -1582,12 +1582,12 @@ body {
 
 /* Bigger text in single-page mode */
 .single-page .notebook-date {
-  font-size: 22px;
+  font-size: 28px;
   margin-bottom: 8px;
   line-height: 1.4;
 }
 .single-page .notebook-text {
-  font-size: 25px;
+  font-size: 31px;
   line-height: 1.5;
 }
 
@@ -1698,7 +1698,7 @@ body {
 /* --- Journal Entry Styles --- */
 .notebook-date {
   font-family: var(--font-handwriting);
-  font-size: 1.84cqw;
+  font-size: 2.3cqw;
   font-weight: 700;
   color: #8b4a4a;
   margin-bottom: 0.7cqh;
@@ -1707,7 +1707,7 @@ body {
 
 .notebook-text {
   font-family: var(--font-handwriting);
-  font-size: 2.08cqw;
+  font-size: 2.6cqw;
   color: #2c3e6b;
   line-height: 1.05;
 }
