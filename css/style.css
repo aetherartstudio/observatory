@@ -1566,7 +1566,7 @@ body {
 .notebook-content {
   flex: 1;
   /* Padding maps text onto the two page areas of the notebook image */
-  padding: 8% 13% 12% 14%;
+  padding: 4% 13% 12% 14%;
   position: relative;
   overflow: hidden;
   container-type: size;
