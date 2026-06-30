@@ -1066,7 +1066,7 @@ body {
   /* Lock to image ratio so stickers scale proportionally */
   width: min(96vw, 92vh * 1456 / 816);
   height: min(92vh, 96vw * 816 / 1456);
-  background: url('../assets/cork pinboard-new.jpg') center / 100% 100% no-repeat;
+  background: url('../assets/cork pinboard_with plate.jpg') center / 100% 100% no-repeat;
   background-color: #1a1510;
   border: none;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
@@ -1078,15 +1078,7 @@ body {
 }
 
 .pinboard-header {
-  background: transparent;
-  padding: 4% 15px 8px;
-  font-family: var(--font-typewriter);
-  font-size: 18px;
-  font-weight: 700;
-  color: #a89070;
-  text-align: center;
-  letter-spacing: 3px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  display: none;
 }
 
 .pinboard-surface {
