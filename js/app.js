@@ -309,8 +309,8 @@
       bgImg.src = mapBgFile;
       if (bgImg.complete) mapScreen.classList.add('bg-loaded');
     }
-    const monitor = document.querySelector('.map-monitor');
-    if (monitor) monitor.style.backgroundImage = `url('${mapBgFile}')`;
+    const mapMonitor = document.querySelector('.map-monitor');
+    if (mapMonitor) mapMonitor.style.backgroundImage = `url('${mapBgFile}')`;
 
     // Shilin zoom controls
     setupMapZoom();
