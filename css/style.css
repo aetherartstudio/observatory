@@ -1708,16 +1708,8 @@ body {
 
 
 /* --- Journal Entry Styles --- */
-.journal-font-1  { font-family: 'Brittany', var(--font-handwriting); }
-.journal-font-2  { font-family: 'Catlove', var(--font-handwriting); }
-.journal-font-3  { font-family: 'CollectionFree', var(--font-handwriting); }
-.journal-font-4  { font-family: 'Fadegent', var(--font-handwriting); }
-.journal-font-5  { font-family: 'Farmhouse', var(--font-handwriting); }
-.journal-font-6  { font-family: 'Festigan', var(--font-handwriting); }
-.journal-font-7  { font-family: 'Glendora', var(--font-handwriting); }
-.journal-font-8  { font-family: 'Quentin', var(--font-handwriting); }
-.journal-font-9  { font-family: 'RosallinaScript', var(--font-handwriting); }
-.journal-font-10 { font-family: 'LadyBoulevard', var(--font-handwriting); }
+.journal-font-researcher { font-family: 'Festigan', var(--font-handwriting); }
+.journal-font-m          { font-family: 'Quentin', var(--font-handwriting); }
 
 .notebook-date {
   font-family: inherit;
@@ -1732,7 +1724,7 @@ body {
   font-family: inherit;
   font-size: 2.6cqw;
   color: #2c3e6b;
-  line-height: 1.05;
+  line-height: 3.95cqh;
 }
 
 /* ===== SKETCHES DETAIL — DARK WALL ===== */

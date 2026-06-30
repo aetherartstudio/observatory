@@ -108,20 +108,7 @@ const JOURNAL_PAGES_BACKUP = [
   { wave: 6, page: 10, date: 'March 23', text: 'If you are reading this, you have been paying attention. That means you understand enough. The Source is not a fixed location. It is a membrane — a frequency that responds when enough beings choose to be still together. The Kanaputz are not going somewhere. They are showing us how to arrive. The rest you have to see.', marginNote: null, contentType: 'text' }
 ];
 
-// FONT TEST: 10 copies of page 1 text, all wave 1, one per font
-const _t = 'I have started calling them Kanaputz. I do not know why — the word surfaced and stuck. Something moved through the night market tonight that should not have been possible. A small creature — no larger than a house cat — crossed 40 meters of crowded market lane in under three seconds. Then it stopped. Completely. There was a flower growing through a crack in the pavement and it stood there, perfectly still, looking at it. I could not move either. I need to come back tomorrow.';
-const JOURNAL_PAGES = [
-  { wave: 1, page: 1,  date: 'Font: Brittany',       text: _t, marginNote: null, contentType: 'text' },
-  { wave: 1, page: 2,  date: 'Font: Catlove',         text: _t, marginNote: null, contentType: 'text' },
-  { wave: 1, page: 3,  date: 'Font: CollectionFree',  text: _t, marginNote: null, contentType: 'text' },
-  { wave: 1, page: 4,  date: 'Font: Fadegent',        text: _t, marginNote: null, contentType: 'text' },
-  { wave: 1, page: 5,  date: 'Font: Farmhouse',       text: _t, marginNote: null, contentType: 'text' },
-  { wave: 1, page: 6,  date: 'Font: Festigan',        text: _t, marginNote: null, contentType: 'text' },
-  { wave: 1, page: 7,  date: 'Font: Glendora',        text: _t, marginNote: null, contentType: 'text' },
-  { wave: 1, page: 8,  date: 'Font: Quentin',         text: _t, marginNote: null, contentType: 'text' },
-  { wave: 1, page: 9,  date: 'Font: RosallinaScript',  text: _t, marginNote: null, contentType: 'text' },
-  { wave: 1, page: 10, date: 'Font: LadyBoulevard',   text: _t, marginNote: null, contentType: 'text' },
-];
+const JOURNAL_PAGES = JOURNAL_PAGES_BACKUP;
 
 // ===== PINBOARD ITEMS =====
 const PINBOARD_ITEMS = [
