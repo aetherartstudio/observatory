@@ -2,6 +2,14 @@
    KANAPUTZ OBSERVATORY — Styles
    ============================================================ */
 
+@font-face {
+  font-family: 'WhiteAngelica';
+  src: url('../assets/WhiteAngelica.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --cork: #b8956a;
   --cork-dark: #9a7a55;
@@ -1698,7 +1706,7 @@ body {
 
 /* --- Journal Entry Styles --- */
 .notebook-date {
-  font-family: var(--font-handwriting);
+  font-family: 'WhiteAngelica', var(--font-handwriting);
   font-size: 2.3cqw;
   font-weight: 700;
   color: #8b4a4a;
@@ -1707,7 +1715,7 @@ body {
 }
 
 .notebook-text {
-  font-family: var(--font-handwriting);
+  font-family: 'WhiteAngelica', var(--font-handwriting);
   font-size: 2.6cqw;
   color: #2c3e6b;
   line-height: 1.05;
