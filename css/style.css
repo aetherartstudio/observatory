@@ -3,8 +3,8 @@
    ============================================================ */
 
 @font-face {
-  font-family: 'Borgemore';
-  src: url('../assets/Borgemore.ttf') format('truetype');
+  font-family: 'CollectionFree';
+  src: url('../assets/CollectionFree.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -1706,7 +1706,7 @@ body {
 
 /* --- Journal Entry Styles --- */
 .notebook-date {
-  font-family: 'Borgemore', var(--font-handwriting);
+  font-family: 'CollectionFree', var(--font-handwriting);
   font-size: 2.3cqw;
   font-weight: 700;
   color: #8b4a4a;
@@ -1715,7 +1715,7 @@ body {
 }
 
 .notebook-text {
-  font-family: 'Borgemore', var(--font-handwriting);
+  font-family: 'CollectionFree', var(--font-handwriting);
   font-size: 2.6cqw;
   color: #2c3e6b;
   line-height: 1.05;
