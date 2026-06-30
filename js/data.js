@@ -108,12 +108,7 @@ const JOURNAL_PAGES_BACKUP = [
   { wave: 6, page: 10, date: 'March 23', text: 'If you are reading this, you have been paying attention. That means you understand enough. The Source is not a fixed location. It is a membrane — a frequency that responds when enough beings choose to be still together. The Kanaputz are not going somewhere. They are showing us how to arrive. The rest you have to see.', marginNote: null, contentType: 'text' }
 ];
 
-// FONT TEST: 2 pages, same text, Festigan vs Quentin
-const _t = 'I have started calling them Kanaputz. I do not know why — the word surfaced and stuck. Something moved through the night market tonight that should not have been possible. A small creature — no larger than a house cat — crossed 40 meters of crowded market lane in under three seconds. Then it stopped. Completely. There was a flower growing through a crack in the pavement and it stood there, perfectly still, looking at it. I could not move either. I need to come back tomorrow.';
-const JOURNAL_PAGES = [
-  { wave: 1, page: 1, date: 'Festigan', text: _t, marginNote: null, contentType: 'text', author: 'researcher' },
-  { wave: 1, page: 2, date: 'Quentin',  text: _t, marginNote: null, contentType: 'text', author: 'm' },
-];
+const JOURNAL_PAGES = JOURNAL_PAGES_BACKUP;
 
 // ===== PINBOARD ITEMS =====
 const PINBOARD_ITEMS = [
