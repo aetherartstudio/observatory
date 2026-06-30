@@ -2,13 +2,16 @@
    KANAPUTZ OBSERVATORY — Styles
    ============================================================ */
 
-@font-face {
-  font-family: 'CollectionFree';
-  src: url('../assets/CollectionFree.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+@font-face { font-family: 'Brittany'; src: url('../assets/fonts/Brittany.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Catlove'; src: url('../assets/fonts/Catlove.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'CollectionFree'; src: url('../assets/fonts/CollectionFree.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Fadegent'; src: url('../assets/fonts/Fadegent.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Farmhouse'; src: url('../assets/fonts/Farmhouse.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Festigan'; src: url('../assets/fonts/Festigan.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Glendora'; src: url('../assets/fonts/Glendora.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Quentin'; src: url('../assets/fonts/Quentin.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'RosallinaScript'; src: url('../assets/fonts/Rosallina Script PERSONAL USE ONLY!.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'LadyBoulevard'; src: url('../assets/fonts/The Lady in the Boulevard.ttf') format('truetype'); font-display: swap; }
 
 :root {
   --cork: #b8956a;
@@ -1705,8 +1708,19 @@ body {
 
 
 /* --- Journal Entry Styles --- */
+.journal-font-1  { font-family: 'Brittany', var(--font-handwriting); }
+.journal-font-2  { font-family: 'Catlove', var(--font-handwriting); }
+.journal-font-3  { font-family: 'CollectionFree', var(--font-handwriting); }
+.journal-font-4  { font-family: 'Fadegent', var(--font-handwriting); }
+.journal-font-5  { font-family: 'Farmhouse', var(--font-handwriting); }
+.journal-font-6  { font-family: 'Festigan', var(--font-handwriting); }
+.journal-font-7  { font-family: 'Glendora', var(--font-handwriting); }
+.journal-font-8  { font-family: 'Quentin', var(--font-handwriting); }
+.journal-font-9  { font-family: 'RosallinaScript', var(--font-handwriting); }
+.journal-font-10 { font-family: 'LadyBoulevard', var(--font-handwriting); }
+
 .notebook-date {
-  font-family: 'CollectionFree', var(--font-handwriting);
+  font-family: inherit;
   font-size: 2.3cqw;
   font-weight: 700;
   color: #8b4a4a;
@@ -1715,10 +1729,8 @@ body {
 }
 
 .notebook-text {
-  font-family: 'CollectionFree', var(--font-handwriting);
+  font-family: inherit;
   font-size: 2.6cqw;
-  font-weight: bold;
-  -webkit-text-stroke: 0.3px currentColor;
   color: #2c3e6b;
   line-height: 1.05;
 }

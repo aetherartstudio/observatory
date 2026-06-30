@@ -805,7 +805,7 @@
         }
 
         html += `
-          <div class="journal-page ${side}">
+          <div class="journal-page ${side} journal-font-${entry.page}">
             <div class="journal-page-content">
               ${contentHtml}
             </div>
