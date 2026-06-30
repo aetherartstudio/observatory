@@ -95,7 +95,7 @@ const SHILIN_DOTS = [
 ];
 
 // ===== JOURNAL PAGES (10 pages, 6 waves) =====
-const JOURNAL_PAGES = [
+const JOURNAL_PAGES_BACKUP = [
   { wave: 1, page: 1, date: 'September 3', text: 'I have started calling them Kanaputz. I do not know why — the word surfaced and stuck. Something moved through the night market tonight that should not have been possible. A small creature — no larger than a house cat — crossed 40 meters of crowded market lane in under three seconds. Then it stopped. Completely. There was a flower growing through a crack in the pavement and it stood there, perfectly still, looking at it. I could not move either. I need to come back tomorrow.', marginNote: null, contentType: 'text' },
   { wave: 1, page: 2, date: 'November 19', text: 'A different one today. Rounder. Louder in posture, if that makes sense. It performed what I can only describe as a theatrical display of aggression outside my apartment. Arms raised, tongue extended, hips moving. It was not threatening. It was performing. Two neighbors who had been arguing on the landing stopped and watched. They were laughing before it finished.', marginNote: 'Distinct from Sept specimen. Rounder body, different behavior entirely. How many types are there?', contentType: 'text' },
   { wave: 2, page: 3, date: 'October 12', text: 'I am now confident there are four distinct types. Type 1: hyper-alert sprinter with a tender side. Type 2: theatrical performer who thinks it is scaring away problems. Type 3: tall, clumsy, moves to rhythm involuntarily. Cannot control its tail. Type 4: opens its mouth and appears to inhale tension from the air. Inflates visibly. All four share a common trait: they appear to move in the same direction when not engaged in immediate behavior.', marginNote: 'All moving toward something. Every type, every time.', contentType: 'text' },
@@ -106,6 +106,21 @@ const JOURNAL_PAGES = [
   { wave: 4, page: 8, date: 'March 14', text: 'Muncha sat at the center today. Not eating. Not inflating. Just present. Antennae extended, mouth closed. The others held a perimeter — thirty meters out, perfectly spaced. They maintained this formation for twenty-two minutes. Nothing happened. Everything happened.', marginNote: 'M. sat with them. After eleven minutes she said: "It remembers." She would not explain.', contentType: 'text' },
   { wave: 5, page: 9, date: 'March 21', text: 'They are all coming. Every documented specimen from every location. The sprint paths, the dance routes, the waddle trajectories — all converging on the same coordinates. Global sightings dropping to zero. The Source coherence hit 73% this morning and the crystal was visible to the naked eye for the first time. Warm light. Steady. Not flickering — breathing.', marginNote: 'The Source does not store data. It stores presence. Every moment a being was fully still near it, the crystal kept that moment. Now it is giving them back.', contentType: 'text' },
   { wave: 6, page: 10, date: 'March 23', text: 'If you are reading this, you have been paying attention. That means you understand enough. The Source is not a fixed location. It is a membrane — a frequency that responds when enough beings choose to be still together. The Kanaputz are not going somewhere. They are showing us how to arrive. The rest you have to see.', marginNote: null, contentType: 'text' }
+];
+
+// FONT TEST: 10 copies of page 1 text, all wave 1, one per font
+const _t = 'I have started calling them Kanaputz. I do not know why — the word surfaced and stuck. Something moved through the night market tonight that should not have been possible. A small creature — no larger than a house cat — crossed 40 meters of crowded market lane in under three seconds. Then it stopped. Completely. There was a flower growing through a crack in the pavement and it stood there, perfectly still, looking at it. I could not move either. I need to come back tomorrow.';
+const JOURNAL_PAGES = [
+  { wave: 1, page: 1,  date: 'Font: Brittany',       text: _t, marginNote: null, contentType: 'text' },
+  { wave: 1, page: 2,  date: 'Font: Catlove',         text: _t, marginNote: null, contentType: 'text' },
+  { wave: 1, page: 3,  date: 'Font: CollectionFree',  text: _t, marginNote: null, contentType: 'text' },
+  { wave: 1, page: 4,  date: 'Font: Fadegent',        text: _t, marginNote: null, contentType: 'text' },
+  { wave: 1, page: 5,  date: 'Font: Farmhouse',       text: _t, marginNote: null, contentType: 'text' },
+  { wave: 1, page: 6,  date: 'Font: Festigan',        text: _t, marginNote: null, contentType: 'text' },
+  { wave: 1, page: 7,  date: 'Font: Glendora',        text: _t, marginNote: null, contentType: 'text' },
+  { wave: 1, page: 8,  date: 'Font: Quentin',         text: _t, marginNote: null, contentType: 'text' },
+  { wave: 1, page: 9,  date: 'Font: RosallinaScript',  text: _t, marginNote: null, contentType: 'text' },
+  { wave: 1, page: 10, date: 'Font: LadyBoulevard',   text: _t, marginNote: null, contentType: 'text' },
 ];
 
 // ===== PINBOARD ITEMS =====
