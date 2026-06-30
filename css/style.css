@@ -1574,7 +1574,7 @@ body {
 .notebook-content {
   flex: 1;
   /* Padding maps text onto the two page areas of the notebook image */
-  padding: 4% 13% 12% 14%;
+  padding: 5% 13% 12% 14%;
   position: relative;
   overflow: hidden;
   container-type: size;
@@ -1707,7 +1707,7 @@ body {
 /* --- Journal Entry Styles --- */
 .notebook-date {
   font-family: 'Borgemore', var(--font-handwriting);
-  font-size: 2.3cqw;
+  font-size: 2.185cqw;
   font-weight: 700;
   color: #8b4a4a;
   margin-bottom: 0.7cqh;
@@ -1716,7 +1716,7 @@ body {
 
 .notebook-text {
   font-family: 'Borgemore', var(--font-handwriting);
-  font-size: 2.6cqw;
+  font-size: 2.47cqw;
   color: #2c3e6b;
   line-height: 1.05;
 }
