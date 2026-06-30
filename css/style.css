@@ -836,8 +836,8 @@ body {
 }
 .map-zoom-btn {
   position: absolute;
-  left: 75%;
-  top: 42%;
+  left: 65%;
+  top: 32%;
   z-index: 15;
   border: none;
   padding: 0;
