@@ -1653,12 +1653,12 @@ body {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 6px 30px;
-  position: absolute;
-  top: 97%;
-  transform: translateY(-100%);
+  padding: 10px 30px;
+  position: fixed;
+  bottom: 10px;
   left: 0;
   right: 0;
+  z-index: 10;
 }
 /* On touch devices, make nav sticky so it's always visible */
 .single-page .notebook-nav {
