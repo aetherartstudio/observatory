@@ -1717,6 +1717,8 @@ body {
 .notebook-text {
   font-family: 'CollectionFree', var(--font-handwriting);
   font-size: 2.6cqw;
+  font-weight: bold;
+  -webkit-text-stroke: 0.3px currentColor;
   color: #2c3e6b;
   line-height: 1.05;
 }
