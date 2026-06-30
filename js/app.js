@@ -300,17 +300,12 @@
     }
 
     // Show dots only after monitor image loads
-    const mapBgFile = WaveSystem.getWave() >= 4
-      ? 'assets/left monitor levelled with global map-bg with button_V2.jpg'
-      : 'assets/left monitor levelled with global map-bg.jpg';
     if (!mapScreen.classList.contains('bg-loaded')) {
       const bgImg = new Image();
       bgImg.onload = () => mapScreen.classList.add('bg-loaded');
-      bgImg.src = mapBgFile;
+      bgImg.src = 'assets/left monitor levelled with global map-bg.jpg';
       if (bgImg.complete) mapScreen.classList.add('bg-loaded');
     }
-    const mapMonitor = document.querySelector('.map-monitor');
-    if (mapMonitor) mapMonitor.style.backgroundImage = `url('${mapBgFile}')`;
 
     // Shilin zoom controls
     setupMapZoom();
@@ -362,12 +357,8 @@
     zoomBtn.classList.remove('visible');
     zoomOutBtn.classList.add('visible');
 
-    // Swap monitor background to Shilin map (keep V2 if wave 4+)
-    const shilinMapBg = WaveSystem.getWave() >= 4
-      ? 'assets/left monitor levelled with global map-bg with button_V2.jpg'
-      : 'assets/left monitor levelled with global map-bg.jpg';
     const monitor = document.querySelector('.map-monitor');
-    if (monitor) monitor.style.backgroundImage = `url('${shilinMapBg}')`;
+    if (monitor) monitor.style.backgroundImage = "url('assets/left monitor levelled with global map-bg.jpg')";
 
     // Populate Shilin dots
     shilinScreen.innerHTML = '';
@@ -435,12 +426,8 @@
     zoomOutBtn.classList.remove('visible');
     if (WaveSystem.getWave() >= 4) zoomBtn.classList.add('visible');
 
-    // Restore monitor background to global map
-    const globalMapBg = WaveSystem.getWave() >= 4
-      ? 'assets/left monitor levelled with global map-bg with button_V2.jpg'
-      : 'assets/left monitor levelled with global map-bg.jpg';
     const monitor = document.querySelector('.map-monitor');
-    if (monitor) monitor.style.backgroundImage = `url('${globalMapBg}')`;
+    if (monitor) monitor.style.backgroundImage = "url('assets/left monitor levelled with global map-bg.jpg')";
   }
 
   // ===== PINBOARD ZOOM HELPER =====
