@@ -300,12 +300,17 @@
     }
 
     // Show dots only after monitor image loads
+    const mapBgFile = WaveSystem.getWave() >= 4
+      ? 'assets/left monitor levelled with global map-bg with button_V2.jpg'
+      : 'assets/left monitor levelled with global map-bg.jpg';
     if (!mapScreen.classList.contains('bg-loaded')) {
       const bgImg = new Image();
       bgImg.onload = () => mapScreen.classList.add('bg-loaded');
-      bgImg.src = 'assets/left monitor levelled with global map-bg.jpg';
+      bgImg.src = mapBgFile;
       if (bgImg.complete) mapScreen.classList.add('bg-loaded');
     }
+    const monitor = document.querySelector('.map-monitor');
+    if (monitor) monitor.style.backgroundImage = `url('${mapBgFile}')`;
 
     // Shilin zoom controls
     setupMapZoom();
@@ -357,9 +362,12 @@
     zoomBtn.classList.remove('visible');
     zoomOutBtn.classList.add('visible');
 
-    // Swap monitor background to Shilin map
+    // Swap monitor background to Shilin map (keep V2 if wave 4+)
+    const shilinMapBg = WaveSystem.getWave() >= 4
+      ? 'assets/left monitor levelled with global map-bg with button_V2.jpg'
+      : 'assets/left monitor levelled with global map-bg.jpg';
     const monitor = document.querySelector('.map-monitor');
-    if (monitor) monitor.style.backgroundImage = "url('assets/left monitor levelled with global map-bg.jpg')";
+    if (monitor) monitor.style.backgroundImage = `url('${shilinMapBg}')`;
 
     // Populate Shilin dots
     shilinScreen.innerHTML = '';
@@ -428,8 +436,11 @@
     if (WaveSystem.getWave() >= 4) zoomBtn.classList.add('visible');
 
     // Restore monitor background to global map
+    const globalMapBg = WaveSystem.getWave() >= 4
+      ? 'assets/left monitor levelled with global map-bg with button_V2.jpg'
+      : 'assets/left monitor levelled with global map-bg.jpg';
     const monitor = document.querySelector('.map-monitor');
-    if (monitor) monitor.style.backgroundImage = "url('assets/left monitor levelled with global map-bg.jpg')";
+    if (monitor) monitor.style.backgroundImage = `url('${globalMapBg}')`;
   }
 
   // ===== PINBOARD ZOOM HELPER =====
