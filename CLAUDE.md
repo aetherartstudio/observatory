@@ -1,7 +1,7 @@
 # The Observatory — Kanaputz Research Station
 
 ## Project Overview
-A narrative web experience for the Kanaputz universe. Players explore a fictional research station desk scene, discovering clues about mysterious creatures through interactive elements. Content unlocks progressively across 6 waves gated by time and engagement.
+A narrative web experience for the Kanaputz universe. Players explore a fictional research station desk scene, discovering clues about mysterious creatures through interactive elements. Content unlocks progressively across 5 waves released purely on time (design brief v12) — no engagement thresholds, no accounts.
 
 **Live site:** https://aetherartstudio.github.io/observatory/
 **Deployment:** GitHub Pages from `master` branch — every push to master auto-deploys.
@@ -22,11 +22,26 @@ D:/Dropbox/Kanaputz/observatory-v2/
 
 ## Key Concepts
 
-### Wave System (waves.js)
-- 6 waves, dual-gated: elapsed time since LAUNCH_DATE + engagement thresholds
-- State persists in localStorage (`kanaputz_observatory_state`)
-- Features unlock per wave: safe/safeDial/sourceMonitor at wave 5, wave 6 requires safe opened
-- `WaveSystem.getVisibleContent(array)` filters data arrays by current wave
+### Wave System (waves.js) — v12, TIME-ONLY
+- 5 waves, offsets from `LAUNCH_DATE`: +0 / +14 / +28 / +35 / +42 days
+  (W1 "They are everywhere — and they have names" · W2 "Something is wrong" ·
+  W3 "Converging on Taipei" · W4 "The Source is in Shilin" · W5 "The full picture")
+- Every content item carries `{ wave, releaseDay }` — releaseDay drips it in N days
+  after its wave starts, so the desk keeps changing between waves
+- `LAUNCH_DATE` is a placeholder future date until go-live: organic visitors see
+  Wave 1 launch-day content only; preview any wave with the debug panel (D key)
+- `GALLERY_DATE` (LAUNCH_DATE + 44d default) flips the Source Monitor from
+  installation footage to the live feed — set to the real gallery opening date
+- localStorage (`kanaputz_observatory_state`) keeps ONLY cosmetic flags:
+  uvLampFound / uvLampUsed / safeOpened / liveEntryShown. Safe to lose (in-app browsers wipe it)
+- Feature waves: safe visible (locked) from W1, safeDial W4, sourceMonitor W5,
+  Shilin zoom W3, UV lamp object appears W2 (UV content W3+, safe hint W4)
+- Only T-06 and the dossier are behind the safe (code 3-17-58); the safe gates
+  content, never wave progression
+- `WaveSystem.getVisibleContent(array)` filters by wave + releaseDay
+- CONTENT SOURCES OF TRUTH: `pinboard-content-map.xlsx`, `notepad-content-map.docx`,
+  `map-dots.xlsx` in `D:/Dropbox/Kanaputz/viral marketing/observatory design/text assets
+  for observatory/` — edit those and regenerate data.js blocks, don't hand-edit texts
 
 ### Interactive Elements (Clickable Zones)
 All zones are positioned as percentage-based overlays on the room background image (`room-bg.jpg`, 3840×2160).
@@ -50,14 +65,17 @@ All zones are positioned as percentage-based overlays on the room background ima
 - Room background swaps to `room-bg-opened safe.png` when safe is opened
 
 ### Cassette Player
-- 5 tapes: `tape1.png`–`tape5.png` with label overlays `tape1 label.png`–`tape5 label.png`
-- Background: `cassette player-bg.png`
+- 6 tapes (v12 dictaphone lineup): T-01 Field Log 01 (W1), T-02 Naming Them (W1+7d),
+  T-03 The Call — M.'s voice first heard (W2), T-04 Vectors (W3), T-05 The Site (W4),
+  T-06 The Interview (W5, safe-locked)
+- Assets `tape1.png`–`tape6.png` with label overlays `tapeN label.png`
+- NOTE: tape6.png / `tape6 label.png` are generated placeholders (Caveat font) — replace with artist versions
 - Tape stack on left, player on right with play/stop/rewind buttons
 
 ### Map (Right Monitor)
 - LCD monitor with two views: global map and Shilin zoom
 - Background swaps between `right monitor levelled with global map-bg.jpg` and `right monitor levelled without map-bg.jpg`
-- Progressive sightings across waves (W1=3, W2=7, W3=12, W4=17, W5=20 global; 11 Shilin dots)
+- Progressive sightings across waves (v12: W1=7, W2=12, W3=17, W4=20 global, dripped; 11 Shilin dots from W3). Positions/waves mastered in `map-dots.xlsx`
 
 ### UV Lamp
 - Hidden clickable in desk scene; discovered by cursor change, no visual indicator
@@ -75,7 +93,7 @@ All zones are positioned as percentage-based overlays on the room background ima
 - **Adds `.debug` class** to `#room` and `#detail-overlay`
 - **Shows:** Red dashed outlines on all zones, purple outline on UV lamp, wave control panel
 - **Cursor position indicator:** Fixed green bar at top center showing `X% / Y%` relative to nearest positioned container — useful for positioning zones after asset changes
-- **Wave shortcuts:** Debug panel has wave 1–6 buttons; safe state auto-sets (opened at wave ≥6)
+- **Wave shortcuts:** Debug panel has wave 1–5 buttons; safe state auto-sets (opened at wave 5 override)
 - **Spacebar:** Hold to reveal all hotspot sparkles
 
 ## Asset Conventions

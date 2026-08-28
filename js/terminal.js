@@ -48,9 +48,28 @@ class SightingTerminal {
 
   showNextEntry() {
     if (!this.running) return;
-    if (this.currentIndex >= this.entries.length) {
+
+    // One-time "live" moment (v12): on a first session, hold back the
+    // final entry, go quiet, then let it type itself in after a delay —
+    // the feed is alive while the visitor watches.
+    const canGoLive = typeof WaveSystem !== 'undefined' && !WaveSystem.isLiveEntryShown();
+    if (canGoLive && this.entries.length >= 3 && this.currentIndex === this.entries.length - 1 && !this._liveQueued) {
+      this._liveQueued = true;
       this.addSystemLine('');
       this.addSystemLine('[ MONITORING... AWAITING NEW SIGNALS ]');
+      this.liveTimer = setTimeout(() => {
+        if (!this.running) return;
+        WaveSystem.trackEngagement('liveEntry');
+        this.addSystemLine('');
+        this.addSystemLine('>> INCOMING TRANSMISSION <<');
+        setTimeout(() => this.showNextEntry(), 900);
+      }, 40000);
+      return;
+    }
+
+    if (this.currentIndex >= this.entries.length) {
+      this.addSystemLine('');
+      this.addNextObservationLine();
       this.addCursor();
       return;
     }
@@ -104,6 +123,19 @@ class SightingTerminal {
     type();
   }
 
+  // Diegetic footer: when the next drip is scheduled (v12 time-only waves)
+  addNextObservationLine() {
+    let info = null;
+    try {
+      info = WaveSystem.getNextDropInfo([SIGHTINGS, JOURNAL_PAGES, PINBOARD_ITEMS, CASSETTE_TAPES]);
+    } catch (e) { /* data arrays not present — degrade */ }
+    if (info) {
+      this.addSystemLine(`[ NEXT SCHEDULED OBSERVATION: ${info.label} ]`);
+    } else {
+      this.addSystemLine('[ MONITORING... AWAITING NEW SIGNALS ]');
+    }
+  }
+
   addCursor() {
     const cursor = document.createElement('div');
     cursor.style.color = 'var(--dos-green)';
@@ -120,5 +152,6 @@ class SightingTerminal {
 
   stop() {
     this.running = false;
+    if (this.liveTimer) { clearTimeout(this.liveTimer); this.liveTimer = null; }
   }
 }

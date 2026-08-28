@@ -81,11 +81,11 @@
   function updateZoneVisibility() {
     const wave = WaveSystem.getWave();
 
-    // Safe: visible from Wave 5 (anomalies hint at code)
+    // Safe: visible (locked) from launch — it is part of the desk. Dial activates at W4.
     const safezone = document.getElementById('zone-safe');
-    if (safezone) safezone.style.display = wave >= 5 ? '' : 'none';
+    if (safezone) safezone.style.display = '';
 
-    // Source monitor: visible from Wave 5
+    // Source monitor: appears at Wave 5 (gallery bridge)
     const srcZone = document.getElementById('zone-source');
     if (srcZone) srcZone.style.display = wave >= 5 ? '' : 'none';
 
@@ -318,8 +318,8 @@
     const zoomOutBtn = document.getElementById('map-zoom-out');
     if (!zoomBtn || !zoomOutBtn) return;
 
-    // Show zoom button from Wave 4+ (Shilin zoom introduced in W4)
-    if (WaveSystem.getWave() >= 4) {
+    // Show zoom button from Wave 3+ (Shilin zoom introduced in W3, v12)
+    if (WaveSystem.getWave() >= 3) {
       if (!mapZoomActive) zoomBtn.classList.add('visible');
     } else {
       zoomBtn.classList.remove('visible');
@@ -424,7 +424,7 @@
     mapScreen.style.display = '';
     mapInfo.classList.remove('active');
     zoomOutBtn.classList.remove('visible');
-    if (WaveSystem.getWave() >= 4) zoomBtn.classList.add('visible');
+    if (WaveSystem.getWave() >= 3) zoomBtn.classList.add('visible');
 
     const monitor = document.querySelector('.map-monitor');
     if (monitor) monitor.style.backgroundImage = "url('assets/left monitor levelled with global map-bg.jpg')";
@@ -551,6 +551,7 @@
             WaveSystem.trackEngagement('mNote');
           }
         });
+        if (WaveSystem.isNewlyReleased(item)) div.classList.add('newly-pinned');
         surface.appendChild(div);
 
       } else if (item.type === 'sketch') {
@@ -568,6 +569,7 @@
           e.stopPropagation();
           zoomPinboardItem(div, 'sketch-zoomed-active');
         });
+        if (WaveSystem.isNewlyReleased(item)) div.classList.add('newly-pinned');
         surface.appendChild(div);
 
       } else if (item.type === 'photo') {
@@ -602,6 +604,7 @@
             zoomPinboardItem(div, 'photo-zoomed-active');
           });
         }
+        if (WaveSystem.isNewlyReleased(item)) div.classList.add('newly-pinned');
         surface.appendChild(div);
 
       } else if (item.type === 'receipt') {
@@ -625,6 +628,7 @@
           e.stopPropagation();
           zoomPinboardItem(div, 'receipt-zoomed-active');
         });
+        if (WaveSystem.isNewlyReleased(item)) div.classList.add('newly-pinned');
         surface.appendChild(div);
 
       } else if (item.type === 'diagram') {
@@ -659,6 +663,7 @@
           e.stopPropagation();
           zoomPinboardItem(div, 'diagram-zoomed-active');
         });
+        if (WaveSystem.isNewlyReleased(item)) div.classList.add('newly-pinned');
         surface.appendChild(div);
       }
     });
@@ -849,8 +854,8 @@
 
   // ===== CASSETTE PLAYER =====
   // Map tape IDs to image assets
-  const TAPE_IMAGES = { 'T-01': 'tape1.png', 'T-02': 'tape2.png', 'T-03': 'tape3.png', 'T-04': 'tape4.png', 'T-05': 'tape5.png' };
-  const TAPE_LABELS = { 'T-01': 'tape1 label.png', 'T-02': 'tape2 label.png', 'T-03': 'tape3 label.png', 'T-04': 'tape4 label.png', 'T-05': 'tape5 label.png' };
+  const TAPE_IMAGES = { 'T-01': 'tape1.png', 'T-02': 'tape2.png', 'T-03': 'tape3.png', 'T-04': 'tape4.png', 'T-05': 'tape5.png', 'T-06': 'tape6.png' };
+  const TAPE_LABELS = { 'T-01': 'tape1 label.png', 'T-02': 'tape2 label.png', 'T-03': 'tape3 label.png', 'T-04': 'tape4 label.png', 'T-05': 'tape5 label.png', 'T-06': 'tape6 label.png' };
 
   function populateCassette() {
     const stack = document.getElementById('cassette-tape-stack');
@@ -977,7 +982,8 @@
       display.textContent = 'PULL HANDLE TO CONFIRM';
       container.classList.add('safe-dial-active');
       setupSafeDial();
-    } else if (WaveSystem.getWave() >= 5) {
+    } else {
+      // Visible from launch, locked until Wave 4
       display.textContent = 'LOCKED';
       container.classList.remove('safe-dial-active');
     }
@@ -1204,8 +1210,8 @@
       return;
     }
 
-    const wave = WaveSystem.getWave();
-    const data = wave >= 6 ? SOURCE_MONITOR.wave6 : SOURCE_MONITOR.wave5;
+    // Installation footage until gallery opening day, then the live feed
+    const data = WaveSystem.isGalleryLive() ? SOURCE_MONITOR.live : SOURCE_MONITOR.pre;
 
     coherenceEl.innerHTML = `
       <div class="source-coherence-label">SOURCE COHERENCE</div>
@@ -1252,6 +1258,8 @@
         });
       }
     }
+    // v12: the lamp object appears in the desk clutter from Wave 2
+    lampEl.style.display = WaveSystem.isFeatureAvailable('uvLampObject') ? '' : 'none';
     // If already found, add a subtle indicator
     if (WaveSystem.isUVLampFound()) {
       lampEl.classList.add('discovered');

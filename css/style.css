@@ -836,8 +836,8 @@ body {
 }
 .map-zoom-btn {
   position: absolute;
-  left: 65%;
-  top: 32%;
+  left: 75%;
+  top: 45%;
   z-index: 15;
   border: none;
   padding: 0;
@@ -1978,6 +1978,16 @@ body {
 }
 
 /* ===== TERMINAL ANOMALY ENTRY ===== */
+/* v12: freshly dripped pinboard items sit askew with a warm pin glow
+   for ~3 days after release — the returning visitor's "what's new" cue */
+.newly-pinned {
+  filter: drop-shadow(0 0 6px rgba(255, 200, 120, 0.35));
+}
+.newly-pinned > .pin-thumb,
+.newly-pinned .pin-thumb {
+  box-shadow: 0 0 8px 2px rgba(255, 190, 90, 0.75);
+}
+
 .feed-anomaly {
   border-left-color: rgba(255, 50, 50, 0.5) !important;
   animation: feedAnomaly 0.8s ease-in-out 2 !important;
