@@ -1,7 +1,7 @@
 # The Observatory — Kanaputz Research Station
 
 ## Project Overview
-A narrative web experience for the Kanaputz universe. Players explore a fictional research station desk scene, discovering clues about mysterious creatures through interactive elements. Content unlocks progressively across 5 waves released purely on time (design brief v12) — no engagement thresholds, no accounts.
+A narrative web experience for the Kanaputz universe. Players explore a fictional research station desk scene, discovering clues about mysterious creatures through interactive elements. Content unlocks progressively across 5 waves released purely on time (design brief v13) — no engagement thresholds, no accounts.
 
 **Live site:** https://aetherartstudio.github.io/observatory/
 **Deployment:** GitHub Pages from `master` branch — every push to master auto-deploys.
@@ -22,7 +22,7 @@ D:/Dropbox/Kanaputz/observatory-v2/
 
 ## Key Concepts
 
-### Wave System (waves.js) — v12, TIME-ONLY
+### Wave System (waves.js) — v13, TIME-ONLY
 - 5 waves, offsets from `LAUNCH_DATE`: +0 / +14 / +28 / +35 / +42 days
   (W1 "They are everywhere — and they have names" · W2 "Something is wrong" ·
   W3 "Converging on Taipei" · W4 "The Source is in Shilin" · W5 "The full picture")
@@ -42,6 +42,9 @@ D:/Dropbox/Kanaputz/observatory-v2/
 - CONTENT SOURCES OF TRUTH: `pinboard-content-map.xlsx`, `notepad-content-map.docx`,
   `map-dots.xlsx` in `D:/Dropbox/Kanaputz/viral marketing/observatory design/text assets
   for observatory/` — edit those and regenerate data.js blocks, don't hand-edit texts
+- DESIGN GUIDELINE: `observatory_design_brief_v13.docx` (observatory design folder) —
+  Section 5 (surface role doctrine) and Section 6 (Wave Playbook, MUST/MUST NOT per
+  surface per wave) govern all content writing; Appendix B has the consistency rules
 
 ### Interactive Elements (Clickable Zones)
 All zones are positioned as percentage-based overlays on the room background image (`room-bg.jpg`, 3840×2160).
@@ -65,7 +68,7 @@ All zones are positioned as percentage-based overlays on the room background ima
 - Room background swaps to `room-bg-opened safe.png` when safe is opened
 
 ### Cassette Player
-- 6 tapes (v12 dictaphone lineup): T-01 Field Log 01 (W1), T-02 Naming Them (W1+7d),
+- 6 tapes (v13 dictaphone lineup): T-01 Field Log 01 (W1), T-02 Naming Them (W1+3d),
   T-03 The Call — M.'s voice first heard (W2), T-04 Vectors (W3), T-05 The Site (W4),
   T-06 The Interview (W5, safe-locked)
 - Assets `tape1.png`–`tape6.png` with label overlays `tapeN label.png`
