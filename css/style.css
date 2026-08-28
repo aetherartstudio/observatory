@@ -1325,6 +1325,15 @@ body {
   font-weight: 600;
   text-align: right;
 }
+/* Researcher's handwritten scrawl across the bottom of a receipt */
+.receipt-annotation {
+  font-family: 'Festigan', var(--font-handwriting);
+  color: #8b3232;
+  font-size: 1.35em;
+  line-height: 1.1;
+  margin-top: 6px;
+  transform: rotate(-2deg);
+}
 .pinboard-receipt.receipt-zoomed-active {
   position: fixed;
   width: 240px;

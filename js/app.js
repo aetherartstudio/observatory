@@ -623,6 +623,7 @@
           ${itemsHtml}
           <div class="receipt-divider"></div>
           <div class="receipt-total">${item.total}</div>
+          ${item.annotation ? `<div class="receipt-annotation">${item.annotation}</div>` : ''}
         `;
         div.addEventListener('click', (e) => {
           e.stopPropagation();
