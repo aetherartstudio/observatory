@@ -2126,7 +2126,7 @@ body {
   flex: 1;
   aspect-ratio: 1 / 1;
   max-height: 80vh;
-  background: url('../assets/cassette player-bg.png') center / contain no-repeat;
+  background: url('../assets/cassette player-bg with desk.jpg') center / contain no-repeat;
   position: relative;
   border-radius: 8px;
 }
