@@ -55,12 +55,13 @@ body {
    Hotspots are children of this div so their % positions track the image. */
 .room-scene {
   position: relative;
-  /* Cover the viewport while keeping the image's native 3840/2160 ratio
-     (like object-fit:cover but as a div). max() fills both dimensions at a
-     locked ratio; flex:none stops the flex parent from shrinking the box,
+  /* Fit the entire image in the viewport at its native 3840/2160 ratio
+     (like object-fit:contain but as a div). min() picks the largest size
+     that fully fits; leftover space shows the dark body background as
+     letterbox bars. flex:none stops the flex parent from resizing the box,
      which distorted the image on window resize. */
-  width: max(100vw, calc(100vh * 3840 / 2160));
-  height: max(100vh, calc(100vw * 2160 / 3840));
+  width: min(100vw, calc(100vh * 3840 / 2160));
+  height: min(100vh, calc(100vw * 2160 / 3840));
   flex: none;
 }
 
