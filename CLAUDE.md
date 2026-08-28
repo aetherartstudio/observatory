@@ -69,7 +69,9 @@ All zones are positioned as percentage-based overlays on the room background ima
   T-03 The Call — M.'s voice first heard (W2), T-04 Vectors (W3), T-05 The Site (W4),
   T-06 The Interview (W5, safe-locked)
 - Assets `tape1.png`–`tape6.png` with label overlays `tapeN label.png`
-- NOTE: tape6.png / `tape6 label.png` are generated placeholders (Caveat font) — replace with artist versions
+- Tape text is composited onto the clean `cassette.png` base in the Quentin font
+  (~140px wide at font size 45; on-cassette text at (155,50), label text at (49,22)
+  in a 248×96 canvas) — tape6 was regenerated this way to match tapes 1–5
 - Tape stack on left, player on right with play/stop/rewind buttons
 
 ### Map (Right Monitor)
