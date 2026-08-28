@@ -368,7 +368,7 @@
 
     const title = document.createElement('div');
     title.className = 'shilin-title';
-    title.textContent = '◉ SHILIN DISTRICT — DETAIL VIEW';
+    title.textContent = '◉ TAIPEI — DETAIL VIEW';
     shilinScreen.appendChild(title);
 
     // Add street labels
