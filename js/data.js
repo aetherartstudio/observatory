@@ -120,43 +120,43 @@ const JOURNAL_PAGES = [
 // Source of truth: pinboard-content-map.xlsx ("text assets for observatory").
 const PINBOARD_ITEMS = [
   // W1 (launch, drips across two weeks): observations, sketches, M.'s first notes, the naming
-  { wave: 1, releaseDay: 0, type: 'postit', text: 'Night market, 3am — four distinct silhouettes. None matching known fauna.', color: '#f7dc6f', rotation: -2, position: { top: '2%', left: '2%' }, author: 'researcher' },
-  { wave: 1, releaseDay: 0, type: 'postit', text: 'The fast one stopped at a flower growing through concrete. Stayed 47 seconds. WHY?', color: '#f1948a', rotation: 3, position: { top: '48%', left: '32%' }, author: 'researcher' },
-  { wave: 1, releaseDay: 0, type: 'postit', text: 'Type 4 — mouth takes up 70% of body. Inflates when near arguments. Deflates when they stop.', color: '#82e0aa', rotation: 0, position: { top: '2%', left: '62%' }, author: 'researcher' },
-  { wave: 1, releaseDay: 2, type: 'postit', id: 'why-shilin', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '55%', left: '82%' }, author: 'researcher' },
+  { wave: 1, releaseDay: 0, type: 'postit', asset: 'postit-13.png', text: 'Night market, 3am — four distinct silhouettes. None matching known fauna.', color: '#f7dc6f', rotation: -2, position: { top: '2%', left: '2%' }, author: 'researcher' },
+  { wave: 1, releaseDay: 0, type: 'postit', asset: 'postit-2.png', text: 'The fast one stopped at a flower growing through concrete. Stayed 47 seconds. WHY?', color: '#f1948a', rotation: 3, position: { top: '48%', left: '32%' }, author: 'researcher' },
+  { wave: 1, releaseDay: 0, type: 'postit', asset: 'postit-3.png', text: 'Type 4 — mouth takes up 70% of body. Inflates when near arguments. Deflates when they stop.', color: '#82e0aa', rotation: 0, position: { top: '2%', left: '62%' }, author: 'researcher' },
+  { wave: 1, releaseDay: 2, type: 'postit', asset: 'postit-4.png', id: 'why-shilin', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '55%', left: '82%' }, author: 'researcher' },
   { wave: 1, releaseDay: 0, type: 'sketch', image: 'fugu-sketch-1.png', position: { top: '28%', left: '2%' }, rotation: 2, label: '', replacedByWave: 2 },
   { wave: 2, releaseDay: 0, type: 'sketch', image: 'fugu-sketch-2.png', position: { top: '28%', left: '2%' }, rotation: 2, label: '' },
   { wave: 1, releaseDay: 0, type: 'sketch', image: 'MrQ-sketch-1.png', position: { top: '16%', left: '35%' }, rotation: -3, label: '' },
   { wave: 1, releaseDay: 0, type: 'sketch', image: 'groovix-sketch-1.png', position: { top: '50%', left: '4%' }, rotation: -3, label: '' },
   { wave: 1, releaseDay: 0, type: 'sketch', image: 'muncha-sketch-1.png', position: { top: '52%', left: '48%' }, rotation: 4, label: '' },
-  { wave: 1, releaseDay: 5, type: 'postit', text: 'They carry what we cannot hold. It is not free.', color: '#f5b7b1', rotation: -2, position: { top: '14%', left: '18%' }, author: 'm' },
-  { wave: 1, releaseDay: 6, type: 'postit', text: 'Fugu stopped mid-sprint and went completely still. Something small had caught his attention. He stayed that way for almost a minute.', color: '#f5b7b1', rotation: 5, position: { top: '14%', left: '74%' }, author: 'm' },
-  { wave: 1, releaseDay: 6, type: 'postit', id: 'everywhere', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE. But they keep coming back to Taipei.', color: '#f7dc6f', rotation: 2, position: { top: '24%', left: '48%' }, author: 'researcher' },
-  { wave: 1, releaseDay: 8, type: 'postit', text: 'Names are not scientific. I have named them anyway. Fugu. Mr Q. Groovix. Muncha.', color: '#82e0aa', rotation: -3, position: { top: '38%', left: '68%' }, author: 'researcher' },
-  { wave: 1, releaseDay: 10, type: 'postit', text: 'She keeps pinning things to my board. I did not ask her to.', color: '#f7dc6f', rotation: 2, position: { top: '70%', left: '14%' }, author: 'researcher' },
+  { wave: 1, releaseDay: 5, type: 'postit', asset: 'postit-5.png', text: 'They carry what we cannot hold. It is not free.', color: '#f5b7b1', rotation: -2, position: { top: '14%', left: '18%' }, author: 'm' },
+  { wave: 1, releaseDay: 6, type: 'postit', asset: 'postit-6.png', text: 'Fugu stopped mid-sprint and went completely still. Something small had caught his attention. He stayed that way for almost a minute.', color: '#f5b7b1', rotation: 5, position: { top: '14%', left: '74%' }, author: 'm' },
+  { wave: 1, releaseDay: 6, type: 'postit', asset: 'postit-7.png', id: 'everywhere', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE. But they keep coming back to Taipei.', color: '#f7dc6f', rotation: 2, position: { top: '24%', left: '48%' }, author: 'researcher' },
+  { wave: 1, releaseDay: 8, type: 'postit', asset: 'postit-8.png', text: 'Names are not scientific. I have named them anyway. Fugu. Mr Q. Groovix. Muncha.', color: '#82e0aa', rotation: -3, position: { top: '38%', left: '68%' }, author: 'researcher' },
+  { wave: 1, releaseDay: 10, type: 'postit', asset: 'postit-12.png', text: 'She keeps pinning things to my board. I did not ask her to.', color: '#f7dc6f', rotation: 2, position: { top: '70%', left: '14%' }, author: 'researcher' },
 
   // W2: energy loss, alarm — with the Fading
-  { wave: 2, releaseDay: 0, type: 'postit', text: 'Energy output declining across ALL types. What is costing them?', color: '#f1948a', rotation: 4, position: { top: '62%', left: '72%' }, author: 'researcher' },
-  { wave: 2, releaseDay: 2, type: 'postit', text: 'MrQ performed for 20 seconds today. Used to be 45. He flexed at the end but it was dimmer.', color: '#f7dc6f', rotation: -3, position: { top: '2%', left: '40%' }, author: 'researcher' },
+  { wave: 2, releaseDay: 0, type: 'postit', asset: 'postit-9.png', text: 'Energy output declining across ALL types. What is costing them?', color: '#f1948a', rotation: 4, position: { top: '62%', left: '72%' }, author: 'researcher' },
+  { wave: 2, releaseDay: 2, type: 'postit', asset: 'postit-10.png', text: 'MrQ performed for 20 seconds today. Used to be 45. He flexed at the end but it was dimmer.', color: '#f7dc6f', rotation: -3, position: { top: '2%', left: '40%' }, author: 'researcher' },
   { wave: 2, releaseDay: 4, type: 'receipt', position: { top: '2%', left: '26%' }, rotation: 3, vendor: 'SHILIN MARKET STALL #17', date: '2024-11-10', items: ['Tea egg ×2', 'Stinky tofu ×1', '---', 'ANOMALOUS RESIDUE DETECTED'], total: 'NT$ 85' },
   { wave: 2, releaseDay: 5, type: 'photo', image: 'groovix polaroid.png', position: { top: '30%', left: '56%' }, rotation: -2, label: 'Shilin Night Market — 02:40', caption: 'Motion blur near flower stall. Fugu?' },
-  { wave: 2, releaseDay: 7, type: 'postit', text: 'M.: "Not from here. The cost is the distance."', color: '#f5b7b1', rotation: -2, position: { top: '55%', left: '22%' }, author: 'm' },
+  { wave: 2, releaseDay: 7, type: 'postit', asset: 'postit-11.png', text: 'M.: "Not from here. The cost is the distance."', color: '#f5b7b1', rotation: -2, position: { top: '55%', left: '22%' }, author: 'm' },
 
   // W3: convergence confirmed, crystal sketch, diagram
   { wave: 3, releaseDay: 0, type: 'diagram', position: { top: '2%', left: '82%' }, rotation: -1, title: 'CONVERGENCE VECTORS', description: 'All specimen trajectories — directional arrows all pointing toward Taipei. Radial pattern confirmed. Center: [REDACTED]' },
   { wave: 3, releaseDay: 2, type: 'sketch', image: 'source crystal-1.png', position: { top: '36%', left: '18%' }, rotation: 1, label: '' },
-  { wave: 3, releaseDay: 4, type: 'postit', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '30%', left: '82%' }, author: 'm' },
-  { wave: 3, releaseDay: 6, type: 'postit', id: 'fugu-direction', text: 'Followed Fugu for 3 hours. Sprint paths no longer random. He knows where he is going.', color: '#85c1e9', rotation: -1, position: { top: '58%', left: '55%' }, author: 'researcher' },
+  { wave: 3, releaseDay: 4, type: 'postit', asset: 'postit-12.png', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '30%', left: '82%' }, author: 'm' },
+  { wave: 3, releaseDay: 6, type: 'postit', asset: 'postit-13.png', id: 'fugu-direction', text: 'Followed Fugu for 3 hours. Sprint paths no longer random. He knows where he is going.', color: '#85c1e9', rotation: -1, position: { top: '58%', left: '55%' }, author: 'researcher' },
   { wave: 3, releaseDay: 9, type: 'receipt', position: { top: '44%', left: '40%' }, rotation: -4, vendor: '7-ELEVEN SHILIN #229', date: '2025-01-08', items: ['Battery pack ×1', 'Onigiri ×2', '---', 'UV TRACE: POSITIVE'], total: 'NT$ 147' },
 
   // W4: Source proximity, anomalies, safety valve
-  { wave: 4, releaseDay: 0, type: 'postit', id: 'feed-hint', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: -3, position: { top: '2%', left: '52%' }, author: 'researcher' },
-  { wave: 4, releaseDay: 0, type: 'postit', id: 'convergence-all', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '68%', left: '28%' }, author: 'researcher' },
+  { wave: 4, releaseDay: 0, type: 'postit', asset: 'postit-11.png', id: 'feed-hint', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: -3, position: { top: '2%', left: '52%' }, author: 'researcher' },
+  { wave: 4, releaseDay: 0, type: 'postit', asset: 'postit-3.png', id: 'convergence-all', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '68%', left: '28%' }, author: 'researcher' },
   { wave: 4, releaseDay: 2, type: 'photo', image: 'MrQ polaroid.png', position: { top: '10%', left: '52%' }, rotation: 2, label: '', caption: '' },
-  { wave: 4, releaseDay: 4, type: 'postit', id: 'safety-valve', text: 'Three numbers. I keep repeating them on the tape.', color: '#f7dc6f', rotation: 3, position: { top: '44%', left: '64%' }, author: 'researcher' },
+  { wave: 4, releaseDay: 4, type: 'postit', asset: 'postit-5.png', id: 'safety-valve', text: 'Three numbers. I keep repeating them on the tape.', color: '#f7dc6f', rotation: 3, position: { top: '44%', left: '64%' }, author: 'researcher' },
 
   // W5: after safe — M.'s final note
-  { wave: 5, releaseDay: 0, type: 'postit', text: 'M. sat with them. Eleven minutes. Then: "It remembers." Look around you. They are closer than you think.', color: '#f5b7b1', rotation: -3, position: { top: '68%', left: '4%' }, author: 'm' },
+  { wave: 5, releaseDay: 0, type: 'postit', asset: 'postit-1.png', text: 'M. sat with them. Eleven minutes. Then: "It remembers." Look around you. They are closer than you think.', color: '#f5b7b1', rotation: -3, position: { top: '68%', left: '4%' }, author: 'm' },
 ];
 
 // UV layer content: annotations from Wave 3, safe hint from Wave 4 (brief v12).

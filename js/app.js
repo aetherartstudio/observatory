@@ -481,7 +481,7 @@
     let postitIndex = 0;
     visibleItems.forEach((item, i) => {
       if (item.type === 'postit') {
-        const imgFile = POSTIT_IMAGES[postitIndex % POSTIT_IMAGES.length];
+        const imgFile = item.asset || POSTIT_IMAGES[postitIndex % POSTIT_IMAGES.length];
         postitIndex++;
         const div = document.createElement('div');
         div.className = 'full-postit';
