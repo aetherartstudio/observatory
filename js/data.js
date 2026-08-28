@@ -216,8 +216,8 @@ const PROFILES = [
 
 // ===== POST-IT IMAGE ASSETS =====
 const POSTIT_IMAGES = [
-  'postit-16.png', 'postit-2.png', 'postit-3.png', 'postit-4.png',
+  'postit-1.png', 'postit-2.png', 'postit-3.png', 'postit-4.png',
   'postit-5.png', 'postit-6.png', 'postit-7.png', 'postit-8.png',
   'postit-9.png', 'postit-10.png', 'postit-11.png', 'postit-12.png',
-  'postit-13.png', 'postit-14.png', 'postit-15.png', 'postit-1.png'
+  'postit-13.png'
 ];
