@@ -55,11 +55,13 @@ body {
    Hotspots are children of this div so their % positions track the image. */
 .room-scene {
   position: relative;
-  /* Cover the viewport while keeping aspect ratio (like object-fit:cover but as a div) */
-  min-width: 100%;
-  min-height: 100%;
-  /* Image native ratio: 1456/816 ≈ 1.7843 */
-  aspect-ratio: 1456 / 816;
+  /* Cover the viewport while keeping the image's native 3840/2160 ratio
+     (like object-fit:cover but as a div). max() fills both dimensions at a
+     locked ratio; flex:none stops the flex parent from shrinking the box,
+     which distorted the image on window resize. */
+  width: max(100vw, calc(100vh * 3840 / 2160));
+  height: max(100vh, calc(100vw * 2160 / 3840));
+  flex: none;
 }
 
 .room-bg {
@@ -2126,7 +2128,7 @@ body {
   flex: 1;
   aspect-ratio: 1 / 1;
   max-height: 80vh;
-  background: url('../assets/cassette player-bg with desk.jpg') center / contain no-repeat;
+  background: url('../assets/cassette player-bg.png') center / contain no-repeat;
   position: relative;
   border-radius: 8px;
 }
