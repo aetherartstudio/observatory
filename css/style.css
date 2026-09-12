@@ -1072,7 +1072,7 @@ body {
   /* Lock to image ratio so stickers scale proportionally */
   width: min(96vw, 92vh * 1456 / 816);
   height: min(92vh, 96vw * 816 / 1456);
-  background: url('../assets/cork pinboard_with plate.jpg?v=2') center / 100% 100% no-repeat;
+  background: url('../assets/pinboard-bg.jpg?v=1') center / 100% 100% no-repeat;
   background-color: #1a1510;
   border: none;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
@@ -1556,7 +1556,7 @@ body {
   /* Fill the detail container */
   width: 100%;
   height: 100%;
-  background: url('../assets/notebook-new.png') center / 100% 100% no-repeat;
+  background: url('../assets/notebook-new.jpg') center / 100% 100% no-repeat;
   background-color: #1a1510;
   display: flex;
   flex-direction: column;
@@ -1573,7 +1573,7 @@ body {
   height: 88vh;
   height: 88dvh;
   max-height: none;
-  background: url('../assets/notebook-new.png') right top / 200% 100% no-repeat;
+  background: url('../assets/notebook-new.jpg') right top / 200% 100% no-repeat;
   background-attachment: local;
   background-color: #f5f0e0;
   border-radius: 4px;
@@ -2138,7 +2138,7 @@ body {
   flex: 1;
   aspect-ratio: 1 / 1;
   max-height: 80vh;
-  background: url('../assets/cassette player-bg.png') center / contain no-repeat;
+  background: url('../assets/cassette player-bg.jpg') center / contain no-repeat;
   position: relative;
   border-radius: 8px;
 }
@@ -2225,7 +2225,7 @@ body {
   width: min(85vh, 85vw);
   max-width: 750px;
   aspect-ratio: 1 / 1;
-  background: url('../assets/safe-bg.png?v=2') center / contain no-repeat;
+  background: url('../assets/safe-bg.jpg?v=3') center / contain no-repeat;
   border-radius: 8px;
   position: relative;
   box-shadow: 0 8px 40px rgba(0,0,0,0.6);
@@ -2244,7 +2244,7 @@ body {
   white-space: nowrap;
 }
 .safe-door.safe-door-opened {
-  background: url('../assets/safe-opened-bg.png') center / contain no-repeat;
+  background: url('../assets/safe-opened-bg.jpg') center / contain no-repeat;
   cursor: pointer;
 }
 .safe-door.safe-door-opened .safe-plate,
@@ -2310,7 +2310,7 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: url('../assets/rotary dial-bg.png?v=4') center / contain no-repeat;
+  background: url('../assets/rotary dial-bg.webp?v=5') center / contain no-repeat;
   border: none;
   cursor: grab;
   position: relative;

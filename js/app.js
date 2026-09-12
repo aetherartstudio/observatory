@@ -697,7 +697,7 @@
     if (!surface.classList.contains('bg-loaded')) {
       const bgImg = new Image();
       bgImg.onload = () => surface.classList.add('bg-loaded');
-      bgImg.src = 'assets/cork pinboard_with plate.jpg';
+      bgImg.src = 'assets/pinboard-bg.jpg';
       if (bgImg.complete) surface.classList.add('bg-loaded');
     } else {
       // Already loaded from previous render — make sure items are visible
