@@ -102,8 +102,10 @@ All zones are positioned as percentage-based overlays on the room background ima
 - **Spacebar:** Hold to reveal all hotspot sparkles
 
 ## Asset Conventions
-- **Large background images:** Convert to JPG (quality 90) for web performance. Source TIF/PNG files kept in assets folder.
-- **Transparency needed:** Use PNG (post-its, tapes, overlays, safe elements)
+- **Large background images:** Convert to JPG (quality 90) for web performance. Source TIF/PNG files kept in `assets/old assets/` (untracked).
+- **Transparency needed:** Use WebP quality 88 (post-its, sketches, polaroids, rotary dial) — post-its ~1000px wide, sketches/polaroids max 1600px. Small UI elements (tapes, buttons) may stay PNG.
+- **Never ship multi-MB PNGs:** anything over ~1MB should be resized/converted before commit (this caused the 2025-09 slow-pinboard bug).
+- **Pinboard background:** `pinboard-bg.jpg` (referenced in index.html preload, style.css, app.js)
 - **Video:** MP4 (safe-opening.mp4)
 - **Cache busting:** Increment `?v=N` on CSS link in index.html when making style changes
 
