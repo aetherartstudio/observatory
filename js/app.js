@@ -418,11 +418,6 @@
     // Populate Shilin dots
     shilinScreen.innerHTML = '';
 
-    const title = document.createElement('div');
-    title.className = 'shilin-title';
-    title.textContent = '◉ TAIPEI — DETAIL VIEW';
-    shilinScreen.appendChild(title);
-
     // Add Shilin dots
     const visibleDots = WaveSystem.getVisibleContent(SHILIN_DOTS);
     visibleDots.forEach(dot => {

@@ -836,18 +836,6 @@ body {
   letter-spacing: 2px;
   pointer-events: none;
 }
-.map-shilin .shilin-title {
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-terminal);
-  font-size: 14px;
-  color: rgba(68,255,68,0.6);
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  pointer-events: none;
-}
 .map-dot.source-dot {
   background: #ffaa44;
   box-shadow: 0 0 12px #ffaa44, 0 0 30px rgba(255,170,68,0.5);
