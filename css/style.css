@@ -9,7 +9,6 @@
 @font-face { font-family: 'Farmhouse'; src: url('../assets/fonts/Farmhouse.otf') format('opentype'); font-display: swap; }
 @font-face { font-family: 'Festigan'; src: url('../assets/fonts/Festigan.otf') format('opentype'); font-display: swap; }
 @font-face { font-family: 'Glendora'; src: url('../assets/fonts/Glendora.otf') format('opentype'); font-display: swap; }
-@font-face { font-family: 'Quentin'; src: url('../assets/fonts/Quentin.otf') format('opentype'); font-display: swap; }
 @font-face { font-family: 'RosallinaScript'; src: url('../assets/fonts/Rosallina Script PERSONAL USE ONLY!.ttf') format('truetype'); font-display: swap; }
 @font-face { font-family: 'LadyBoulevard'; src: url('../assets/fonts/The Lady in the Boulevard.ttf') format('truetype'); font-display: swap; }
 
@@ -1746,8 +1745,8 @@ body {
 
 
 /* --- Journal Entry Styles --- */
+/* One hand only — M. never writes in the journal (design brief 5.3) */
 .journal-font-researcher { font-family: 'Festigan', var(--font-handwriting); }
-.journal-font-m          { font-family: 'Quentin', var(--font-handwriting); }
 
 .notebook-date {
   font-family: inherit;
