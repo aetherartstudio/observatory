@@ -89,7 +89,8 @@ const SHILIN_DOTS = [
   // Positions derived from "Monitor02_TaipeiMap.png" (old assets) callout arrows,
   // mapped onto the Taipei overlay canvas. Percentages are of #map-shilin.
   // Wave 3 — convergence cluster mapped
-  { id: 's0', wave: 3, releaseDay: 0, location: 'Shilin Night Market — Main Gate', left: '40.1%', top: '26.3%', description: 'Primary convergence node. All four types documented. Highest frequency of multi-type co-occurrence events.' },
+  // Night market dot held back to W4 — it is the gallery/Source location
+  { id: 's0', wave: 4, releaseDay: 0, location: 'Shilin Night Market — Main Gate', left: '40.1%', top: '26.3%', description: 'Primary convergence node. All four types documented. Highest frequency of multi-type co-occurrence events.' },
   { id: 's1', wave: 3, releaseDay: 0, location: 'Taipei Arena', left: '51.7%', top: '69.0%', description: 'Type 3 rhythmic event during concert egress. Sway synchronized with the crowd noise. Duration 40 sec.' },
   { id: 's2', wave: 3, releaseDay: 1, location: 'Songshan Cultural and Creative Park', left: '57.0%', top: '77.3%', description: 'Type 2 theatrical display on the plaza. Duration 45 sec. Three witnesses, all laughing.' },
   { id: 's3', wave: 3, releaseDay: 3, location: 'Longshan Temple', left: '28.8%', top: '82.8%', description: 'Type 4 stationary in the incense court through evening prayer. Ambient tension reading dropped steadily.' },
@@ -100,7 +101,10 @@ const SHILIN_DOTS = [
   { id: 's7', wave: 4, releaseDay: 0, location: 'Dadaocheng Wharf', left: '32.8%', top: '65.8%', description: 'Source proximity readings rise along the wharf. UV residue on the boardwalk planks. Not a sighting location — an orientation point.' },
   { id: 's8', wave: 4, releaseDay: 1, location: 'Taipei Expo Park', left: '47.9%', top: '42.8%', description: 'Type 4 stationary for 22 min facing north across the river. No absorption activity. Ambient hum detected on audio.' },
   { id: 's9', wave: 4, releaseDay: 3, location: 'Xiangshan Trail — Viewing Platform', left: '67.1%', top: '92.9%', description: 'All types on the viewing platform at 03:00. Motionless. Every specimen oriented NW toward Shilin. Departed in unison.' },
-  { id: 'source', wave: 4, releaseDay: 2, location: '[SOURCE LOCATION — COORDINATES WITHHELD]', left: '44.7%', top: '24.9%', description: 'Camera shakes. Timestamp anomaly. No visible specimen. Audio contains low, warm hum. Duration: longer than standard clip.', isSource: true },
+  // W4: source signal offset "a bit on the side" of the market, unknown location
+  { id: 'source', wave: 4, releaseDay: 2, replacedByWave: 5, location: '[SOURCE LOCATION — COORDINATES WITHHELD]', left: '44.7%', top: '24.9%', description: 'Camera shakes. Timestamp anomaly. No visible specimen. Audio contains low, warm hum. Duration: longer than standard clip.', isSource: true },
+  // W5: coordinates resolve to the gallery, beside the night market dot
+  { id: 'source-revealed', wave: 5, releaseDay: 0, location: 'SRC-01 — Shilin Night Market — [GALLERY NAME TBD]', left: '41.0%', top: '28.2%', description: 'Coordinates resolved. The signal was stationary all along. Street-level exhibition space. The door is open during gallery hours.', isSource: true },
 ];
 
 // ===== JOURNAL PAGES (10 pages, waves 1–4) =====

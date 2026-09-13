@@ -297,6 +297,11 @@
     const mapInfo = document.getElementById('map-info');
     if (!mapScreen || !mapInfo) return;
 
+    // Reset zoom state on repopulate (e.g. wave change while the Taipei
+    // view was open last) — otherwise its screen/buttons leak into the
+    // rebuilt global view
+    if (mapZoomActive) zoomToGlobal();
+
     // Map overlay on the empty monitor screen — W3+ shows the Taipei button variant
     updateMapOverlay();
 
