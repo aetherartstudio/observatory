@@ -520,6 +520,26 @@ body {
   display: block;
 }
 
+/* Background-first loading: hide a view's content until app.js marks the
+   view .bg-ready (its background images finished loading) */
+#terminal-detail .crt-monitor,
+#profiles-detail .map-monitor,
+#notepad-detail .notebook-outer,
+#notepad-detail .notebook-nav,
+#cassette-detail .cassette-scene,
+#safe-detail .safe-container {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+#terminal-detail.bg-ready .crt-monitor,
+#profiles-detail.bg-ready .map-monitor,
+#notepad-detail.bg-ready .notebook-outer,
+#notepad-detail.bg-ready .notebook-nav,
+#cassette-detail.bg-ready .cassette-scene,
+#safe-detail.bg-ready .safe-container {
+  opacity: 1;
+}
+
 /* ===== CRT MONITOR FRAME (shared by terminal + profiles) ===== */
 .crt-monitor {
   width: 100%;

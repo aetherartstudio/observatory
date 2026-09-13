@@ -20,6 +20,7 @@
     populateAll();
     updateZoneVisibility();
     setupUVLamp();
+    setupDetailBgGating();
 
     // Re-render everything when wave changes
     document.addEventListener('wavechange', () => {
@@ -38,6 +39,41 @@
       subtleWaveNotification(e.detail.wave);
     });
   });
+
+  // ===== BACKGROUND-FIRST LOADING =====
+  // Each detail view's content stays hidden (CSS: opacity 0 until .bg-ready)
+  // until its background images are loaded, so overlays never appear
+  // floating over a missing background on slow connections.
+  const DETAIL_BGS = {
+    'terminal-detail': ['Mid_Monitor_v01.jpg'],
+    'profiles-detail': ['left monitor levelled_noMap.jpg', 'Left Monitor_screenMap.webp', 'Left Monitor_screenMapwithButton.webp'],
+    'notepad-detail': ['notebook-new.jpg'],
+    'cassette-detail': ['cassette player-bg.jpg'],
+    'safe-detail': ['safe-bg.jpg', 'rotary dial-bg.webp', 'safe-opened-bg.jpg'],
+  };
+
+  function setupDetailBgGating() {
+    Object.keys(DETAIL_BGS).forEach(id => {
+      const el = document.getElementById(id);
+      if (!el || el.classList.contains('bg-ready')) return;
+      let remaining = DETAIL_BGS[id].length;
+      const done = () => {
+        remaining--;
+        if (remaining <= 0) el.classList.add('bg-ready');
+      };
+      DETAIL_BGS[id].forEach(file => {
+        const img = new Image();
+        img.onload = done;
+        img.onerror = done; // never block a view on a failed file
+        img.src = 'assets/' + file;
+        if (img.complete && img.naturalWidth) {
+          img.onload = null;
+          img.onerror = null;
+          done();
+        }
+      });
+    });
+  }
 
   // ===== WAVE UNLOCK NOTIFICATION =====
   function subtleWaveNotification(wave) {
