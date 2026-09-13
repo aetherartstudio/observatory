@@ -86,19 +86,21 @@ const MAP_SIGHTINGS = [
 
 // ===== SHILIN DETAIL MAP DOTS (zoom unlocks Wave 3) =====
 const SHILIN_DOTS = [
+  // Positions derived from "Monitor02_TaipeiMap.png" (old assets) callout arrows,
+  // mapped onto the Taipei overlay canvas. Percentages are of #map-shilin.
   // Wave 3 — convergence cluster mapped
-  { id: 's0', wave: 3, releaseDay: 0, location: 'Shilin Night Market — Main Gate', left: '35%', top: '30%', description: 'Primary convergence node. All four types documented. Highest frequency of multi-type co-occurrence events.' },
-  { id: 's1', wave: 3, releaseDay: 0, location: 'Jiantan MRT Station', left: '25%', top: '22%', description: 'Transit point. Type 1 specimens sprint between station and market in under 3 sec. Route consistent.' },
-  { id: 's2', wave: 3, releaseDay: 1, location: 'Shilin Residence Park', left: '55%', top: '45%', description: 'Type 3 rhythmic events. Tail displacement damaged two park benches. Groundkeeper unaware of cause.' },
-  { id: 's3', wave: 3, releaseDay: 3, location: 'Wenlin Road Intersection', left: '40%', top: '55%', description: 'Type 4 absorption events concentrated here. Three documented cases of ambient tension reduction.' },
-  { id: 's4', wave: 3, releaseDay: 5, location: 'Shilin Elementary — Perimeter', left: '60%', top: '35%', description: 'Type 1 perimeter patrol pattern. Multiple tender pauses near playground fence.' },
-  { id: 's5', wave: 3, releaseDay: 7, location: 'Zhishan Garden', left: '70%', top: '28%', description: 'Type 2 theatrical display. Duration 45 sec. Three witnesses, all laughing.' },
-  { id: 's6', wave: 3, releaseDay: 9, location: 'Danan Road Market Alley', left: '30%', top: '65%', description: 'Multi-specimen event #4. All types. Duration 8 min 22 sec. All oriented toward same bearing before dispersal.' },
+  { id: 's0', wave: 3, releaseDay: 0, location: 'Shilin Night Market — Main Gate', left: '40.1%', top: '26.3%', description: 'Primary convergence node. All four types documented. Highest frequency of multi-type co-occurrence events.' },
+  { id: 's1', wave: 3, releaseDay: 0, location: 'Taipei Arena', left: '51.7%', top: '69.0%', description: 'Type 3 rhythmic event during concert egress. Sway synchronized with the crowd noise. Duration 40 sec.' },
+  { id: 's2', wave: 3, releaseDay: 1, location: 'Songshan Cultural and Creative Park', left: '57.0%', top: '77.3%', description: 'Type 2 theatrical display on the plaza. Duration 45 sec. Three witnesses, all laughing.' },
+  { id: 's3', wave: 3, releaseDay: 3, location: 'Longshan Temple', left: '28.8%', top: '82.8%', description: 'Type 4 stationary in the incense court through evening prayer. Ambient tension reading dropped steadily.' },
+  { id: 's4', wave: 3, releaseDay: 5, location: 'Chiang Kai-shek Memorial Hall — Liberty Square', left: '38.1%', top: '84.1%', description: 'Type 1 sprint circuits across the plaza between guard changes. Tender pause at the flower beds. Route consistent.' },
+  { id: 's5', wave: 3, releaseDay: 7, location: 'Daan Forest Park', left: '45.5%', top: '87.4%', description: 'Type 3 rhythmic events near the pond. Tail displacement damaged two park benches. Groundskeeper unaware of cause.' },
+  { id: 's6', wave: 3, releaseDay: 9, location: 'Taipei 101 — Tower Base', left: '61.0%', top: '86.4%', description: 'Multi-specimen event #4. All types. Duration 8 min 22 sec. All oriented toward the same bearing before dispersal.' },
   // Wave 4 — Source proximity
-  { id: 's7', wave: 4, releaseDay: 0, location: 'Shilin District — Outer Edge', left: '18%', top: '75%', description: 'Source proximity readings spike. UV residue on pavement. Not a sighting location — an orientation point.' },
-  { id: 's8', wave: 4, releaseDay: 1, location: 'Keelung River Bank — North', left: '75%', top: '18%', description: 'Type 4 stationary for 22 min facing south. No absorption activity. Ambient hum detected on audio.' },
-  { id: 's9', wave: 4, releaseDay: 3, location: 'Tianmu Sports Park', left: '15%', top: '40%', description: 'All types converging from different entry points. Arrived within 90 sec of each other. Departed in unison toward SE.' },
-  { id: 'source', wave: 4, releaseDay: 2, location: '[SOURCE LOCATION — COORDINATES WITHHELD]', left: '82%', top: '72%', description: 'Camera shakes. Timestamp anomaly. No visible specimen. Audio contains low, warm hum. Duration: longer than standard clip.', isSource: true },
+  { id: 's7', wave: 4, releaseDay: 0, location: 'Dadaocheng Wharf', left: '32.8%', top: '65.8%', description: 'Source proximity readings rise along the wharf. UV residue on the boardwalk planks. Not a sighting location — an orientation point.' },
+  { id: 's8', wave: 4, releaseDay: 1, location: 'Taipei Expo Park', left: '47.9%', top: '42.8%', description: 'Type 4 stationary for 22 min facing north across the river. No absorption activity. Ambient hum detected on audio.' },
+  { id: 's9', wave: 4, releaseDay: 3, location: 'Xiangshan Trail — Viewing Platform', left: '67.1%', top: '92.9%', description: 'All types on the viewing platform at 03:00. Motionless. Every specimen oriented NW toward Shilin. Departed in unison.' },
+  { id: 'source', wave: 4, releaseDay: 2, location: '[SOURCE LOCATION — COORDINATES WITHHELD]', left: '44.7%', top: '24.9%', description: 'Camera shakes. Timestamp anomaly. No visible specimen. Audio contains low, warm hum. Duration: longer than standard clip.', isSource: true },
 ];
 
 // ===== JOURNAL PAGES (10 pages, waves 1–4) =====

@@ -418,22 +418,6 @@
     title.textContent = '◉ TAIPEI — DETAIL VIEW';
     shilinScreen.appendChild(title);
 
-    // Add street labels
-    const streets = [
-      { text: 'Wenlin Rd', top: '52%', left: '15%' },
-      { text: 'Danan Rd', top: '70%', left: '10%' },
-      { text: 'MRT Jiantan', top: '18%', left: '10%' },
-      { text: 'Zhishan', top: '25%', left: '65%' },
-    ];
-    streets.forEach(s => {
-      const label = document.createElement('div');
-      label.className = 'shilin-label';
-      label.style.top = s.top;
-      label.style.left = s.left;
-      label.textContent = s.text;
-      shilinScreen.appendChild(label);
-    });
-
     // Add Shilin dots
     const visibleDots = WaveSystem.getVisibleContent(SHILIN_DOTS);
     visibleDots.forEach(dot => {
