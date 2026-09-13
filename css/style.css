@@ -534,14 +534,18 @@ body {
 
 /* --- Image-backed CRT (terminal) --- */
 .crt-green {
-  background: url('../assets/right monitor-bg.jpg') center / contain no-repeat;
+  background: url('../assets/Mid_Monitor_v01.jpg') center / contain no-repeat;
+  /* Lock to the square Mid_Monitor image so bezel padding maps onto it */
+  width: min(87vw, 90vh);
+  height: min(87vw, 90vh);
+  margin: auto;
 }
 .crt-green .crt-bezel {
   background: transparent;
   box-shadow: none;
   border-radius: 0;
   /* Padding maps content onto the screen area of the monitor image. */
-  padding: 9.5% 23% 15.5% 23%;
+  padding: 15.5% 13.5% 37.5% 20.5%;
 }
 .crt-green .crt-screen-well {
   background: transparent;
@@ -698,12 +702,21 @@ body {
   /* Lock to monitor image ratio — 4096 x 3567 = 1.1483 */
   width: min(98vw, calc(96vh * 4096 / 3567));
   height: min(96vh, calc(98vw * 3567 / 4096));
-  background: url('../assets/left monitor levelled with global map-bg.jpg') center / contain no-repeat;
+  background: url('../assets/left monitor levelled_noMap.jpg') center / contain no-repeat;
   background-color: #0a0805;
   position: relative;
   border-radius: 6px;
   overflow: hidden;
   margin: auto;
+}
+
+/* Map image as separate overlay on the empty monitor screen —
+   swapped per wave (global map / map with Taipei button) by app.js */
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  background: center / contain no-repeat;
+  pointer-events: none;
 }
 
 /* Hide dots until monitor image is loaded */

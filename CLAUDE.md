@@ -52,8 +52,8 @@ All zones are positioned as percentage-based overlays on the room background ima
 | Zone ID | Element | Approx Position |
 |---------|---------|-----------------|
 | `#zone-safe` | Safe with combination dial | left:4%, top:26% |
-| `#zone-terminal` | Left monitor (DOS terminal) | left:16%, top:34% |
-| `#zone-profiles` | Right monitor (map/sightings) | left:36%, top:31% |
+| `#zone-terminal` | Left monitor (map/sightings → profiles-detail) | left:16%, top:34% |
+| `#zone-profiles` | Center monitor (DOS terminal → terminal-detail) | left:36%, top:31% |
 | `#zone-pinboard` | Cork pinboard on wall | left:54%, top:0% |
 | `#zone-notepad` | Field notebook | left:35%, top:68% |
 | `#zone-cassette` | Cassette tape player | left:77%, top:75% |
@@ -77,9 +77,13 @@ All zones are positioned as percentage-based overlays on the room background ima
   in a 248×96 canvas) — tape6 was regenerated this way to match tapes 1–5
 - Tape stack on left, player on right with play/stop/rewind buttons
 
-### Map (Right Monitor)
-- LCD monitor with two views: global map and Shilin zoom
-- Background swaps between `right monitor levelled with global map-bg.jpg` and `right monitor levelled without map-bg.jpg`
+### Map (Left Monitor)
+- LCD monitor with two views: global map and Shilin/Taipei zoom
+- Monitor frame: `left monitor levelled_noMap.jpg` (empty screen); the map is a
+  separate `.map-overlay` layer swapped by wave in app.js —
+  `Left Monitor_screenMap.webp` (W1–2) / `Left Monitor_screenMapwithButton.webp`
+  (W3+, has baked-in Taipei button); overlay hidden in the Taipei detail view.
+  All three share the same 2048×2048 canvas so they align via `contain`.
 - Progressive sightings across waves (v12: W1=7, W2=12, W3=17, W4=20 global, dripped; 11 Shilin dots from W3). Positions/waves mastered in `map-dots.xlsx`
 
 ### UV Lamp
@@ -88,9 +92,10 @@ All zones are positioned as percentage-based overlays on the room background ima
 - Torch effect: single pinboard-level `uv-mask` with radial gradient, raised to z-index 1001 when items are zoomed
 - Reveals hidden text on post-its and UV annotations on pinboard
 
-### Terminal (Left Monitor)
+### Terminal (Center Monitor)
 - CRT scanline/grainy effects via CSS
-- Background: `left monitor-bg.jpg`
+- Background: `Mid_Monitor_v01.jpg` (square 2048×2048; `.crt-green` is ratio-locked
+  and `.crt-green .crt-bezel` padding maps the text onto the screen area)
 - Typewriter effect via `terminal.js`
 
 ## Debug Mode

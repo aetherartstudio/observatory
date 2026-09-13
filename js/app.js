@@ -261,6 +261,15 @@
     const mapInfo = document.getElementById('map-info');
     if (!mapScreen || !mapInfo) return;
 
+    // Map overlay on the empty monitor screen — W3+ shows the Taipei button variant
+    const mapOverlay = document.getElementById('map-overlay');
+    if (mapOverlay) {
+      const mapFile = WaveSystem.getWave() >= 3
+        ? 'Left Monitor_screenMapwithButton.webp'
+        : 'Left Monitor_screenMap.webp';
+      mapOverlay.style.backgroundImage = `url('assets/${mapFile}')`;
+    }
+
     // Clear existing dots
     mapScreen.querySelectorAll('.map-dot').forEach(d => d.remove());
 
@@ -303,7 +312,7 @@
     if (!mapScreen.classList.contains('bg-loaded')) {
       const bgImg = new Image();
       bgImg.onload = () => mapScreen.classList.add('bg-loaded');
-      bgImg.src = 'assets/left monitor levelled with global map-bg.jpg';
+      bgImg.src = 'assets/left monitor levelled_noMap.jpg';
       if (bgImg.complete) mapScreen.classList.add('bg-loaded');
     }
 
@@ -357,8 +366,9 @@
     zoomBtn.classList.remove('visible');
     zoomOutBtn.classList.add('visible');
 
-    const monitor = document.querySelector('.map-monitor');
-    if (monitor) monitor.style.backgroundImage = "url('assets/left monitor levelled with global map-bg.jpg')";
+    // Hide the global map overlay in the Taipei detail view
+    const mapOverlay = document.getElementById('map-overlay');
+    if (mapOverlay) mapOverlay.style.display = 'none';
 
     // Populate Shilin dots
     shilinScreen.innerHTML = '';
@@ -426,8 +436,8 @@
     zoomOutBtn.classList.remove('visible');
     if (WaveSystem.getWave() >= 3) zoomBtn.classList.add('visible');
 
-    const monitor = document.querySelector('.map-monitor');
-    if (monitor) monitor.style.backgroundImage = "url('assets/left monitor levelled with global map-bg.jpg')";
+    const mapOverlay = document.getElementById('map-overlay');
+    if (mapOverlay) mapOverlay.style.display = '';
   }
 
   // ===== PINBOARD ZOOM HELPER =====
