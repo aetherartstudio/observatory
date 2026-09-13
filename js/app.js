@@ -52,27 +52,40 @@
     'safe-detail': ['safe-bg.jpg', 'rotary dial-bg.webp', 'safe-opened-bg.jpg'],
   };
 
-  function setupDetailBgGating() {
-    Object.keys(DETAIL_BGS).forEach(id => {
-      const el = document.getElementById(id);
-      if (!el || el.classList.contains('bg-ready')) return;
-      let remaining = DETAIL_BGS[id].length;
-      const done = () => {
-        remaining--;
-        if (remaining <= 0) el.classList.add('bg-ready');
-      };
-      DETAIL_BGS[id].forEach(file => {
+  const bgPreloadPromises = {};
+
+  // Load AND decode a view's background images, then mark the view ready.
+  // decode() matters: onload alone leaves the pixels undecoded, so the big
+  // background can paint several frames after the small, already-decoded
+  // content — tapes/text briefly visible before their backdrop.
+  function ensureViewBackgrounds(id) {
+    const files = DETAIL_BGS[id];
+    const el = document.getElementById(id);
+    if (!files || !el) return;
+    if (!bgPreloadPromises[id]) {
+      bgPreloadPromises[id] = Promise.all(files.map(file => new Promise(resolve => {
         const img = new Image();
-        img.onload = done;
-        img.onerror = done; // never block a view on a failed file
-        img.src = 'assets/' + file;
-        if (img.complete && img.naturalWidth) {
+        const settle = () => {
           img.onload = null;
-          img.onerror = null;
-          done();
-        }
-      });
-    });
+          // decode() so the pixels are ready and the background paints in
+          // the same frame the content fades in — but capped at 300ms,
+          // because decode() may never settle in a hidden tab
+          Promise.race([
+            img.decode().catch(() => {}),
+            new Promise(r => setTimeout(r, 300)),
+          ]).then(resolve);
+        };
+        img.onload = settle;
+        img.onerror = () => resolve(); // never block a view on a failed file
+        img.src = 'assets/' + file;
+        if (img.complete && img.naturalWidth) settle();
+      })));
+    }
+    bgPreloadPromises[id].then(() => el.classList.add('bg-ready'));
+  }
+
+  function setupDetailBgGating() {
+    Object.keys(DETAIL_BGS).forEach(ensureViewBackgrounds);
   }
 
   // ===== WAVE UNLOCK NOTIFICATION =====
@@ -149,6 +162,10 @@
 
     const target = document.getElementById(targetId);
     if (!target) return;
+
+    // Re-check this view's backgrounds are loaded+decoded before its
+    // content shows (no-op once bg-ready is set)
+    ensureViewBackgrounds(targetId);
 
     target.classList.add('active');
     overlay.classList.remove('hidden');
