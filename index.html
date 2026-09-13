@@ -6,7 +6,7 @@
   <title>The Observatory — Kanaputz Research Station</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Sedgwick+Ave&family=Special+Elite&family=VT323&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=111">
+  <link rel="stylesheet" href="css/style.css?v=112">
   <link rel="preload" href="assets/pinboard-bg.jpg?v=1" as="image">
   <link rel="preload" href="assets/left monitor levelled_noMap.jpg" as="image">
 </head>
@@ -91,9 +91,10 @@
     <div class="detail-content" id="profiles-detail">
       <div class="map-monitor">
         <div class="map-overlay" id="map-overlay"></div>
+        <!-- Invisible click area over the Taipei button baked into the map -->
+        <button class="map-zoom-btn" id="map-zoom-btn" title="Zoom to Taipei"></button>
         <div class="map-screen" id="map-screen">
           <!-- Dots generated dynamically from MAP_SIGHTINGS by app.js -->
-          <button class="map-zoom-btn" id="map-zoom-btn" title="Zoom to Taipei"></button>
         </div>
         <div class="map-screen map-shilin" id="map-shilin">
           <!-- Shilin detail dots generated dynamically -->
@@ -196,6 +197,6 @@
   <script src="js/waves.js?v=41"></script>
   <script src="js/data.js?v=63"></script>
   <script src="js/terminal.js?v=41"></script>
-  <script src="js/app.js?v=71"></script>
+  <script src="js/app.js?v=72"></script>
 </body>
 </html>

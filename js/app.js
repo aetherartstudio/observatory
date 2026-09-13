@@ -46,7 +46,7 @@
   // floating over a missing background on slow connections.
   const DETAIL_BGS = {
     'terminal-detail': ['Mid_Monitor_v01.jpg'],
-    'profiles-detail': ['left monitor levelled_noMap.jpg', 'Left Monitor_screenMap.webp', 'Left Monitor_screenMapwithButton.webp'],
+    'profiles-detail': ['left monitor levelled_noMap.jpg', 'Left Monitor_screenMap.webp', 'Left Monitor_screenMapwithButton.webp', 'Mid_Monitor_TaipeiMap_withButton.webp'],
     'notepad-detail': ['notebook-new.jpg'],
     'cassette-detail': ['cassette player-bg.jpg'],
     'safe-detail': ['safe-bg.jpg', 'rotary dial-bg.webp', 'safe-opened-bg.jpg'],
@@ -298,13 +298,7 @@
     if (!mapScreen || !mapInfo) return;
 
     // Map overlay on the empty monitor screen — W3+ shows the Taipei button variant
-    const mapOverlay = document.getElementById('map-overlay');
-    if (mapOverlay) {
-      const mapFile = WaveSystem.getWave() >= 3
-        ? 'Left Monitor_screenMapwithButton.webp'
-        : 'Left Monitor_screenMap.webp';
-      mapOverlay.style.backgroundImage = `url('assets/${mapFile}')`;
-    }
+    updateMapOverlay();
 
     // Clear existing dots
     mapScreen.querySelectorAll('.map-dot').forEach(d => d.remove());
@@ -358,6 +352,16 @@
 
   let mapZoomActive = false;
 
+  // Global map overlay for the current wave (Taipei-button variant from W3)
+  function updateMapOverlay() {
+    const mapOverlay = document.getElementById('map-overlay');
+    if (!mapOverlay) return;
+    const mapFile = WaveSystem.getWave() >= 3
+      ? 'Left Monitor_screenMapwithButton.webp'
+      : 'Left Monitor_screenMap.webp';
+    mapOverlay.style.backgroundImage = `url('assets/${mapFile}')`;
+  }
+
   function setupMapZoom() {
     const zoomBtn = document.getElementById('map-zoom-btn');
     const zoomOutBtn = document.getElementById('map-zoom-out');
@@ -402,15 +406,12 @@
     zoomBtn.classList.remove('visible');
     zoomOutBtn.classList.add('visible');
 
-    // Hide the global map overlay in the Taipei detail view
+    // Swap the overlay to the Taipei detail map (has baked-in Global Map button)
     const mapOverlay = document.getElementById('map-overlay');
-    if (mapOverlay) mapOverlay.style.display = 'none';
+    if (mapOverlay) mapOverlay.style.backgroundImage = "url('assets/Mid_Monitor_TaipeiMap_withButton.webp')";
 
     // Populate Shilin dots
     shilinScreen.innerHTML = '';
-    const grid = document.createElement('div');
-    grid.className = 'shilin-grid';
-    shilinScreen.appendChild(grid);
 
     const title = document.createElement('div');
     title.className = 'shilin-title';
@@ -472,8 +473,7 @@
     zoomOutBtn.classList.remove('visible');
     if (WaveSystem.getWave() >= 3) zoomBtn.classList.add('visible');
 
-    const mapOverlay = document.getElementById('map-overlay');
-    if (mapOverlay) mapOverlay.style.display = '';
+    updateMapOverlay();
   }
 
   // ===== PINBOARD ZOOM HELPER =====

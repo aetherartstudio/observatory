@@ -822,21 +822,11 @@ body {
 /* Shilin detail map */
 .map-shilin {
   display: none;
-  /* Same position as map-screen */
-  background: radial-gradient(ellipse at 60% 50%, rgba(0,30,0,0.3) 0%, rgba(0,10,0,0.7) 100%);
+  /* Transparent: the real Taipei map is the .map-overlay layer below */
 }
 .map-shilin.active {
   display: block;
   opacity: 1;
-}
-.map-shilin .shilin-grid {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  /* Subtle street grid overlay */
-  background:
-    repeating-linear-gradient(0deg, transparent, transparent 19%, rgba(68,255,68,0.04) 19%, rgba(68,255,68,0.04) 20%),
-    repeating-linear-gradient(90deg, transparent, transparent 24%, rgba(68,255,68,0.04) 24%, rgba(68,255,68,0.04) 25%);
-  pointer-events: none;
 }
 .map-shilin .shilin-label {
   position: absolute;
@@ -870,37 +860,42 @@ body {
   0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 12px #ffaa44, 0 0 30px rgba(255,170,68,0.5); }
   50% { opacity: 0.7; transform: scale(1.3); box-shadow: 0 0 20px #ffaa44, 0 0 50px rgba(255,170,68,0.6); }
 }
+/* Invisible click areas aligned with the buttons baked into the map
+   overlay images. Percentages are of .map-monitor (ratio-locked, so the
+   square overlay maps as x% = 6.46 + fx*87.09, y% = fy*100). */
 .map-zoom-btn {
   position: absolute;
-  left: 75%;
-  top: 45%;
+  left: 70.3%;
+  top: 38.1%;
+  width: 10.2%;
+  height: 6.2%;
   z-index: 15;
   border: none;
   padding: 0;
-  width: 15%;
-  aspect-ratio: 1225 / 683;
   cursor: pointer;
   display: none;
-  overflow: hidden;
   background: transparent;
-}
-.map-zoom-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('../assets/button_v01.png') center / contain no-repeat;
-}
-.map-zoom-btn:hover {
-  opacity: 0.85;
+  font-size: 0;
+  color: transparent;
 }
 .map-zoom-btn.visible {
   display: block;
 }
+/* "Global Map" button baked into the Taipei map overlay */
 .map-zoom-out {
+  left: 70.1%;
+  top: 59.1%;
+  width: 9.6%;
+  height: 6.5%;
   display: none;
 }
 .map-zoom-out.visible {
   display: block;
+}
+/* Debug mode: show the click areas as dotted outlines */
+.debug .map-zoom-btn.visible {
+  outline: 2px dashed #ff44ff;
+  outline-offset: 1px;
 }
 
 /* ===== TERMINAL CONTENT (inside CRT) ===== */
@@ -1203,7 +1198,9 @@ body {
 .uv-has-zoom .uv-mask {
   z-index: 1001;
 }
-.full-postit:hover {
+/* :not(.zoomed) — otherwise this rule's z-index would drop a zoomed post-it
+   behind the overlay backdrop on hover, causing a hover/unhover flicker loop */
+.full-postit:not(.zoomed):hover {
   transform: scale(1.08);
   z-index: 5;
 }
