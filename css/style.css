@@ -1538,8 +1538,7 @@ body {
 .postit-uv-content {
   margin-top: 0.6em;
   font-family: var(--font-handwriting);
-  font-size: 1.15em;
-  font-weight: 700;
+  font-size: 1em;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   line-height: 1.3;
