@@ -92,19 +92,20 @@ const SHILIN_DOTS = [
   // Night market dot held back to W4 — it is the gallery/Source location
   { id: 's0', wave: 4, releaseDay: 0, location: 'Shilin Night Market — Main Gate', left: '39.6%', top: '24.6%', description: 'Primary convergence node. All four types documented. Highest frequency of multi-type co-occurrence events.' },
   { id: 's1', wave: 3, releaseDay: 0, location: 'Taipei Arena', left: '52.5%', top: '68.0%', description: 'Type 3 rhythmic event during concert egress. Sway synchronized with the crowd noise. Duration 40 sec.' },
-  { id: 's2', wave: 3, releaseDay: 1, location: 'Songshan Cultural and Creative Park', left: '57.0%', top: '77.3%', description: 'Type 2 theatrical display on the plaza. Duration 45 sec. Three witnesses, all laughing.' },
+  { id: 's2', wave: 3, releaseDay: 1, location: 'Songshan Cultural and Creative Park', left: '57.0%', top: '76%', description: 'Type 2 theatrical display on the plaza. Duration 45 sec. Three witnesses, all laughing.' },
   { id: 's3', wave: 3, releaseDay: 3, location: 'Longshan Temple', left: '27.1%', top: '83.2%', description: 'Type 4 stationary in the incense court through evening prayer. Ambient tension reading dropped steadily.' },
   { id: 's4', wave: 3, releaseDay: 5, location: 'Chiang Kai-shek Memorial Hall — Liberty Square', left: '37.1%', top: '84.2%', description: 'Type 1 sprint circuits across the plaza between guard changes. Tender pause at the flower beds. Route consistent.' },
   { id: 's5', wave: 3, releaseDay: 7, location: 'Daan Forest Park', left: '45%', top: '88.7%', description: 'Type 3 rhythmic events near the pond. Tail displacement damaged two park benches. Groundskeeper unaware of cause.' },
-  { id: 's6', wave: 3, releaseDay: 9, location: 'Taipei 101 — Tower Base', left: '61.0%', top: '86.4%', description: 'Multi-specimen event #4. All types. Duration 8 min 22 sec. All oriented toward the same bearing before dispersal.' },
+  { id: 's6', wave: 3, releaseDay: 9, location: 'Taipei 101 — Tower Base', left: '59.6%', top: '86.4%', description: 'Multi-specimen event #4. All types. Duration 8 min 22 sec. All oriented toward the same bearing before dispersal.' },
   // Wave 4 — Source proximity
   { id: 's7', wave: 4, releaseDay: 0, location: 'Dadaocheng', left: '33.2%', top: '62.9%', description: 'Source proximity readings rise along the old riverside streets. UV residue on the pavement. Not a sighting location — an orientation point.' },
   { id: 's8', wave: 4, releaseDay: 1, location: 'Taipei Expo Park', left: '47.2%', top: '41.8%', description: 'Type 4 stationary for 22 min facing north across the river. No absorption activity. Ambient hum detected on audio.' },
   { id: 's9', wave: 4, releaseDay: 3, location: 'Xiangshan Trail — Viewing Platform', left: '67.1%', top: '92.9%', description: 'All types on the viewing platform at 03:00. Motionless. Every specimen oriented NW toward Shilin. Departed in unison.' },
+  { id: 's10', wave: 4, releaseDay: 4, location: 'National Palace Museum — Hillside', left: '51.4%', top: '13.7%', description: 'Specimens skirt the museum hillside after closing. None enter. Movement paths bend downhill toward the district — circling, not visiting.' },
   // W4: source signal offset "a bit on the side" of the market, unknown location
   { id: 'source', wave: 4, releaseDay: 2, replacedByWave: 5, location: '[SOURCE LOCATION — COORDINATES WITHHELD]', left: '44.7%', top: '24.9%', description: 'Camera shakes. Timestamp anomaly. No visible specimen. Audio contains low, warm hum. Duration: longer than standard clip.', isSource: true },
   // W5: coordinates resolve to the gallery, beside the night market dot
-  { id: 'source-revealed', wave: 5, releaseDay: 0, location: 'SRC-01 — Aether Art Gallery — No. 72, Wenlin Rd, Shilin', left: '40.1%', top: '26.3%', description: 'Coordinates resolved. The signal was stationary all along. Street-level exhibition space. The door is open during gallery hours.', isSource: true },
+  { id: 'source-revealed', wave: 5, releaseDay: 0, location: 'SRC-01 — Aether Art Gallery — No. 72, Wenlin Rd, Shilin', left: '40.4%', top: '28.2%', description: 'Coordinates resolved. The signal was stationary all along. Street-level exhibition space. The door is open during gallery hours.', isSource: true },
 ];
 
 // ===== JOURNAL PAGES (10 pages, waves 1–4) =====
