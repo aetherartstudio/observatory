@@ -1136,11 +1136,12 @@ body {
 .full-postit {
   position: absolute;
   width: 12%;
-  font-family: 'Sedgwick Ave', cursive;
-  font-size: 0.7vw;
+  /* Researcher's hand — same font as his journal (design brief 5.4) */
+  font-family: 'Festigan', var(--font-handwriting);
+  font-size: 0.875vw;
   /* Modern browsers with container query support */
   width: 10cqw;
-  font-size: 0.6cqw;
+  font-size: 0.75cqw;
   color: #2a2a2a;
   line-height: 1.35;
   cursor: pointer;
@@ -1968,8 +1969,8 @@ body {
 
 /* M.'s post-its — distinct handwriting style */
 .postit-m {
-  font-style: italic;
-  font-weight: 600;
+  /* M.'s hand — distinct font per design brief 5.4 ("distinct paper, distinct hand") */
+  font-family: 'Catlove', var(--font-handwriting);
   color: #4a2233;
   letter-spacing: 0.3px;
   /* Slightly different pen look — darker, more deliberate */
@@ -1977,7 +1978,7 @@ body {
 }
 .postit-sig {
   text-align: right;
-  font-family: 'Sedgwick Ave', cursive;
+  font-family: inherit;
   font-size: 0.85em;
   opacity: 0.7;
   margin-top: 4px;

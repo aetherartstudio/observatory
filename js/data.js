@@ -130,7 +130,7 @@ const PINBOARD_ITEMS = [
   { wave: 1, releaseDay: 0, type: 'sketch', image: 'MrQ-sketch-1.webp', position: { top: '16%', left: '35%' }, rotation: -3, label: '' },
   { wave: 1, releaseDay: 0, type: 'sketch', image: 'groovix-sketch-1.webp', position: { top: '50%', left: '4%' }, rotation: -3, label: '' },
   { wave: 1, releaseDay: 0, type: 'sketch', image: 'muncha-sketch-1.webp', position: { top: '52%', left: '48%' }, rotation: 4, label: '' },
-  { wave: 1, releaseDay: 5, type: 'postit', asset: 'postit-5.webp', text: 'You are measuring the wrong thing.', color: '#f5b7b1', rotation: -2, position: { top: '14%', left: '18%' }, author: 'm' },
+  { wave: 1, releaseDay: 5, type: 'postit', asset: 'postit-1.webp', text: 'You are measuring the wrong thing.', color: '#f5b7b1', rotation: -2, position: { top: '14%', left: '18%' }, author: 'm' },
   { wave: 1, releaseDay: 0, type: 'postit', asset: 'postit-6.webp', text: 'Fugu was not looking at the flower. He was listening to it.', color: '#f5b7b1', rotation: 5, position: { top: '14%', left: '74%' }, author: 'm' },
   { wave: 1, releaseDay: 6, type: 'postit', asset: 'postit-7.webp', id: 'everywhere', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE.', color: '#f7dc6f', rotation: 2, position: { top: '24%', left: '48%' }, author: 'researcher' },
   { wave: 1, releaseDay: 4, type: 'postit', asset: 'postit-8.webp', text: 'Their names: Fugu — the puff. Mr Q — the tilt. Groovix — the sway. Muncha — the mouth.', color: '#82e0aa', rotation: -3, position: { top: '38%', left: '68%' }, author: 'researcher' },
@@ -142,13 +142,13 @@ const PINBOARD_ITEMS = [
   { wave: 2, releaseDay: 2, type: 'postit', asset: 'postit-10.webp', text: 'MrQ performed for 20 seconds today. Used to be 45. He flexed at the end but it was dimmer.', color: '#f7dc6f', rotation: -3, position: { top: '2%', left: '40%' }, author: 'researcher' },
   { wave: 2, releaseDay: 4, type: 'receipt', position: { top: '2%', left: '26%' }, rotation: 3, vendor: 'SHILIN MARKET STALL #17', date: '2024-11-10', items: ['Tea egg ×2', 'Stinky tofu ×1'], total: 'NT$ 85', annotation: 'residue on the bag — anomalous??' },
   { wave: 2, releaseDay: 5, type: 'photo', image: 'groovix polaroid.webp', position: { top: '30%', left: '56%' }, rotation: -2, label: 'Shilin Night Market — 02:40', caption: 'Motion blur by the speaker stack. Groovix mid-sway.' },
-  { wave: 2, releaseDay: 7, type: 'postit', asset: 'postit-11.webp', id: 'm-not-from-here', text: 'M.: "Not from here. The cost is the distance."', color: '#f5b7b1', rotation: -2, position: { top: '55%', left: '22%' }, author: 'm' },
+  { wave: 2, releaseDay: 7, type: 'postit', asset: 'postit-6.webp', id: 'm-not-from-here', text: 'M.: "Not from here. The cost is the distance."', color: '#f5b7b1', rotation: -2, position: { top: '55%', left: '22%' }, author: 'm' },
 
   // W3: convergence confirmed, crystal sketch, diagram
   { wave: 3, releaseDay: 0, type: 'postit', asset: 'postit-4.webp', id: 'why-shilin', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '74%', left: '80%' }, author: 'researcher' },
   { wave: 3, releaseDay: 0, type: 'diagram', position: { top: '2%', left: '82%' }, rotation: -1, title: 'CONVERGENCE VECTORS', description: 'All specimen trajectories — directional arrows all pointing toward Taipei. Radial pattern confirmed. Center: [REDACTED]' },
   { wave: 3, releaseDay: 2, type: 'sketch', image: 'source crystal-1.webp', position: { top: '36%', left: '18%' }, rotation: 1, label: '' },
-  { wave: 3, releaseDay: 4, type: 'postit', asset: 'postit-12.webp', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '30%', left: '82%' }, author: 'm' },
+  { wave: 3, releaseDay: 4, type: 'postit', asset: 'postit-1.webp', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '30%', left: '82%' }, author: 'm' },
   { wave: 3, releaseDay: 6, type: 'postit', asset: 'postit-13.webp', id: 'fugu-direction', text: 'Followed Fugu for 3 hours. Sprint paths no longer random. He knows where he is going.', color: '#85c1e9', rotation: -1, position: { top: '58%', left: '55%' }, author: 'researcher' },
   { wave: 3, releaseDay: 9, type: 'receipt', position: { top: '44%', left: '40%' }, rotation: -4, vendor: '7-ELEVEN SHILIN #229', date: '2025-01-08', items: ['Battery pack ×1', 'Onigiri ×2'], total: 'NT$ 147', annotation: 'UV trace on this one. POSITIVE.' },
 

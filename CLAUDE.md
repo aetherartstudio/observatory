@@ -111,6 +111,10 @@ All zones are positioned as percentage-based overlays on the room background ima
 - **Transparency needed:** Use WebP quality 88 (post-its, sketches, polaroids, rotary dial) — post-its ~1000px wide, sketches/polaroids max 1600px. Small UI elements (tapes, buttons) may stay PNG.
 - **Never ship multi-MB PNGs:** anything over ~1MB should be resized/converted before commit (this caused the 2025-09 slow-pinboard bug).
 - **Pinboard background:** `pinboard-bg.jpg` (referenced in index.html preload, style.css, app.js)
+- **Handwriting fonts (design brief 5.3/5.4):** researcher = Festigan everywhere
+  (journal, post-its, receipt annotations); M. = Catlove, pinboard post-its ONLY
+  (never the journal), on her exclusive papers `postit-1.webp` / `postit-6.webp`;
+  tape labels = Quentin
 - **Video:** MP4 (safe-opening.mp4)
 - **Cache busting:** Increment `?v=N` on CSS link in index.html when making style changes
 
