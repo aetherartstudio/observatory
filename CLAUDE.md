@@ -141,6 +141,14 @@ git commit -m "message"
 git push   # auto-deploys to GitHub Pages
 ```
 
+## Open Items (as of 2026-09-13)
+- Confirm gallery spelling: site uses "Aether Art Gallery" (W5 source dot;
+  user once typed "Aethyer") — No. 72, Wenlin Rd, Shilin
+- Design brief Appendix B still says Source coordinates "withheld everywhere";
+  site now reveals them at W5 (gallery dot) — brief needs a one-line update
+- Still to produce (brief's own list): W5 gallery-prep photos for pinboard,
+  red string overlay (W2+), tape audio recordings
+
 ## Important Notes
 - Claude Code launches from `D:/Dropbox/Baldone website (new design)/` but this project is at `D:/Dropbox/Kanaputz/observatory-v2/` — always use absolute paths.
 - The `{ once: true }` pattern on event listeners causes bugs when elements are reused across resets. Use flag variables (e.g., `safeDoorClickable`) with a single persistent listener instead.
