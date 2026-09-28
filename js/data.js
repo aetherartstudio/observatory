@@ -144,29 +144,29 @@ const PINBOARD_ITEMS = [
   { wave: 1, releaseDay: 10, type: 'postit', asset: 'postit-12.webp', text: 'She keeps pinning things to my board. I did not ask her to.', color: '#f7dc6f', rotation: 2, position: { top: '70%', left: '14%' }, author: 'researcher' },
 
   // W2: energy loss, alarm — with the Fading
-  { wave: 2, releaseDay: 3, type: 'postit', asset: 'postit-8.webp', text: 'They keep coming back to Taipei. Why Taipei?', color: '#f7dc6f', rotation: 2, position: { top: '42%', left: '12%' }, author: 'researcher' },
+  { wave: 2, releaseDay: 3, type: 'postit', asset: 'postit-22.webp', text: 'They keep coming back to Taipei. Why Taipei?', color: '#f7dc6f', rotation: 2, position: { top: '42%', left: '12%' }, author: 'researcher' },
   { wave: 2, releaseDay: 0, type: 'postit', asset: 'postit-9.webp', text: 'Energy output declining across ALL types. What is costing them?', color: '#f1948a', rotation: 4, position: { top: '62%', left: '72%' }, author: 'researcher' },
   { wave: 2, releaseDay: 2, type: 'postit', asset: 'postit-10.webp', text: 'MrQ performed for 20 seconds today. Used to be 45. He flexed at the end but it was dimmer.', color: '#f7dc6f', rotation: -3, position: { top: '2%', left: '40%' }, author: 'researcher' },
   { wave: 2, releaseDay: 4, type: 'receipt', position: { top: '2%', left: '26%' }, rotation: 3, vendor: 'SHILIN MARKET STALL #17', date: '2024-11-10', items: ['Tea egg ×2', 'Stinky tofu ×1'], total: 'NT$ 85', annotation: 'residue on the bag — anomalous??' },
   { wave: 2, releaseDay: 5, type: 'photo', image: 'groovix polaroid.webp', position: { top: '30%', left: '56%' }, rotation: -2, label: 'Shilin Night Market — 02:40', caption: 'Motion blur by the speaker stack. Groovix mid-sway.' },
-  { wave: 2, releaseDay: 7, type: 'postit', asset: 'postit-6.webp', id: 'm-not-from-here', text: 'M.: "Not from here. The cost is the distance."', color: '#f5b7b1', rotation: -2, position: { top: '55%', left: '22%' }, author: 'm' },
+  { wave: 2, releaseDay: 7, type: 'postit', asset: 'postit-14.webp', id: 'm-not-from-here', text: 'M.: "Not from here. The cost is the distance."', color: '#f5b7b1', rotation: -2, position: { top: '55%', left: '22%' }, author: 'm' },
 
   // W3: convergence confirmed, crystal sketch, diagram
-  { wave: 3, releaseDay: 0, type: 'postit', asset: 'postit-4.webp', id: 'why-shilin', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '74%', left: '80%' }, author: 'researcher' },
+  { wave: 3, releaseDay: 0, type: 'postit', asset: 'postit-19.webp', id: 'why-shilin', text: 'Every sighting clusters around Shilin. WHY SHILIN?', color: '#85c1e9', rotation: 1, position: { top: '74%', left: '80%' }, author: 'researcher' },
   { wave: 3, releaseDay: 0, type: 'diagram', position: { top: '2%', left: '82%' }, rotation: -1, title: 'CONVERGENCE VECTORS', description: 'All specimen trajectories — directional arrows all pointing toward Taipei. Radial pattern confirmed. Center: [REDACTED]' },
   { wave: 3, releaseDay: 2, type: 'sketch', image: 'source crystal-1.webp', position: { top: '36%', left: '18%' }, rotation: 1, label: '' },
-  { wave: 3, releaseDay: 4, type: 'postit', asset: 'postit-1.webp', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '30%', left: '82%' }, author: 'm' },
-  { wave: 3, releaseDay: 6, type: 'postit', asset: 'postit-13.webp', id: 'fugu-direction', text: 'Followed Fugu for 3 hours. Sprint paths no longer random. He knows where he is going.', color: '#85c1e9', rotation: -1, position: { top: '58%', left: '55%' }, author: 'researcher' },
+  { wave: 3, releaseDay: 4, type: 'postit', asset: 'postit-15.webp', text: 'M.: "They are not wandering here. They are arriving."', color: '#f5b7b1', rotation: 3, position: { top: '30%', left: '82%' }, author: 'm' },
+  { wave: 3, releaseDay: 6, type: 'postit', asset: 'postit-23.webp', id: 'fugu-direction', text: 'Followed Fugu for 3 hours. Sprint paths no longer random. He knows where he is going.', color: '#85c1e9', rotation: -1, position: { top: '58%', left: '55%' }, author: 'researcher' },
   { wave: 3, releaseDay: 9, type: 'receipt', position: { top: '44%', left: '40%' }, rotation: -4, vendor: '7-ELEVEN SHILIN #229', date: '2025-01-08', items: ['Battery pack ×1', 'Onigiri ×2'], total: 'NT$ 147', annotation: 'UV trace on this one. POSITIVE.' },
 
   // W4: Source proximity, anomalies, safety valve
   { wave: 4, releaseDay: 0, type: 'postit', asset: 'postit-11.webp', id: 'feed-hint', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: -3, position: { top: '2%', left: '52%' }, author: 'researcher' },
-  { wave: 4, releaseDay: 0, type: 'postit', asset: 'postit-3.webp', id: 'convergence-all', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '68%', left: '28%' }, author: 'researcher' },
+  { wave: 4, releaseDay: 0, type: 'postit', asset: 'postit-16.webp', id: 'convergence-all', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '68%', left: '28%' }, author: 'researcher' },
   { wave: 4, releaseDay: 2, type: 'photo', image: 'MrQ polaroid.webp', position: { top: '10%', left: '52%' }, rotation: 2, label: 'Shilin — 04:10', caption: 'He stood with his arms down.' },
   { wave: 4, releaseDay: 4, type: 'postit', asset: 'postit-5.webp', id: 'safety-valve', text: 'Three numbers. I keep repeating them on the tape.', color: '#f7dc6f', rotation: 3, position: { top: '44%', left: '64%' }, author: 'researcher' },
 
   // W5: after safe — M.'s final note
-  { wave: 5, releaseDay: 0, type: 'postit', asset: 'postit-1.webp', text: 'M. sat with them. Eleven minutes. Then: "It remembers." Look around you. They are closer than you think.', color: '#f5b7b1', rotation: -3, position: { top: '68%', left: '4%' }, author: 'm' },
+  { wave: 5, releaseDay: 0, type: 'postit', asset: 'postit-21.webp', text: 'M. sat with them. Eleven minutes. Then: "It remembers." Look around you. They are closer than you think.', color: '#f5b7b1', rotation: -3, position: { top: '68%', left: '4%' }, author: 'm' },
 ];
 
 // UV layer content: annotations from Wave 3, safe hint from Wave 4 (brief v12).
@@ -232,5 +232,8 @@ const POSTIT_IMAGES = [
   'postit-1.webp', 'postit-2.webp', 'postit-3.webp', 'postit-4.webp',
   'postit-5.webp', 'postit-6.webp', 'postit-7.webp', 'postit-8.webp',
   'postit-9.webp', 'postit-10.webp', 'postit-11.webp', 'postit-12.webp',
-  'postit-13.webp'
+  'postit-13.webp', 'postit-14.webp', 'postit-15.webp', 'postit-16.webp',
+  'postit-17.webp', 'postit-18.webp', 'postit-19.webp', 'postit-20.webp',
+  'postit-21.webp', 'postit-22.webp', 'postit-23.webp', 'postit-24.webp',
+  'postit-25.webp', 'postit-26.webp', 'postit-27.webp', 'postit-28.webp'
 ];
