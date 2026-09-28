@@ -8,7 +8,8 @@
 //
 // CONTENT SOURCES OF TRUTH (Dropbox / observatory design /
 // "text assets for observatory"): pinboard-content-map.xlsx,
-// notepad-content-map.docx, map-dots.xlsx, terminal-content-map.xlsx. Edit those, then
+// notepad-content-map.docx, map-dots.xlsx, terminal-content-map.xlsx,
+// tapes-content-map.docx. Edit those, then
 // regenerate these blocks — do not hand-edit texts here.
 
 // ===== TERMINAL SIGHTINGS (30 entries across waves 1–4) =====
@@ -203,6 +204,7 @@ const PINBOARD_UV = [
 ];
 
 // ===== CASSETTE TAPES (v12 lineup — dictaphone logic) =====
+// Source of truth: tapes-content-map.docx (tape tables + full recording scripts).
 // A micro-cassette recorder is a dictaphone: dictated logs, recorded
 // calls, and the one natively audible phenomenon (the hum). M.'s voice
 // arrives in Wave 2 (T-03); only T-06 is locked behind the safe.
