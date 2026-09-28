@@ -16,16 +16,21 @@ class SightingTerminal {
     if (this.running) return;
     this.running = true;
     this.container.innerHTML = '';
-    this.addSystemLine('KANAPUTZ OBSERVATION NETWORK v3.7.1');
-    this.addSystemLine('================================');
-    this.addSystemLine('CONNECTING TO FIELD STATIONS...');
+    const header = this.container.parentElement.querySelector('.terminal-header');
+    if (header) {
+      header.firstElementChild.textContent = '  ' + TERMINAL_LINES.header_title;
+      header.querySelector('.terminal-status').textContent = TERMINAL_LINES.header_status;
+    }
+    this.addSystemLine(TERMINAL_LINES.boot_1);
+    this.addSystemLine(TERMINAL_LINES.boot_2);
+    this.addSystemLine(TERMINAL_LINES.boot_3);
     setTimeout(() => {
-      this.addSystemLine('CONNECTION ESTABLISHED');
-      this.addSystemLine('LOADING SIGHTING DATABASE...');
+      this.addSystemLine(TERMINAL_LINES.boot_4);
+      this.addSystemLine(TERMINAL_LINES.boot_5);
       setTimeout(() => {
-        this.addSystemLine(`${this.entries.length} RECORDS FOUND`);
+        this.addSystemLine(TERMINAL_LINES.records_found.replace('{count}', this.entries.length));
         this.addSystemLine('');
-        this.addSystemLine('--- BEGIN LIVE FEED ---');
+        this.addSystemLine(TERMINAL_LINES.feed_start);
         this.addSystemLine('');
         setTimeout(() => this.showNextEntry(), 800);
       }, 600);
@@ -56,12 +61,12 @@ class SightingTerminal {
     if (canGoLive && this.entries.length >= 3 && this.currentIndex === this.entries.length - 1 && !this._liveQueued) {
       this._liveQueued = true;
       this.addSystemLine('');
-      this.addSystemLine('[ MONITORING... AWAITING NEW SIGNALS ]');
+      this.addSystemLine(TERMINAL_LINES.live_waiting);
       this.liveTimer = setTimeout(() => {
         if (!this.running) return;
         WaveSystem.trackEngagement('liveEntry');
         this.addSystemLine('');
-        this.addSystemLine('>> INCOMING TRANSMISSION <<');
+        this.addSystemLine(TERMINAL_LINES.live_incoming);
         setTimeout(() => this.showNextEntry(), 900);
       }, 40000);
       return;
@@ -130,9 +135,9 @@ class SightingTerminal {
       info = WaveSystem.getNextDropInfo([SIGHTINGS, JOURNAL_PAGES, PINBOARD_ITEMS, CASSETTE_TAPES]);
     } catch (e) { /* data arrays not present — degrade */ }
     if (info) {
-      this.addSystemLine(`[ NEXT SCHEDULED OBSERVATION: ${info.label} ]`);
+      this.addSystemLine(TERMINAL_LINES.next_drop.replace('{next}', info.label));
     } else {
-      this.addSystemLine('[ MONITORING... AWAITING NEW SIGNALS ]');
+      this.addSystemLine(TERMINAL_LINES.no_next_drop);
     }
   }
 
@@ -141,7 +146,11 @@ class SightingTerminal {
     cursor.style.color = 'var(--dos-green)';
     cursor.style.fontSize = '16px';
     cursor.style.marginTop = '10px';
-    cursor.innerHTML = 'C:\\OBSERVATORY\\FEED&gt; <span class="blink">_</span>';
+    cursor.textContent = TERMINAL_LINES.prompt + ' ';
+    const blink = document.createElement('span');
+    blink.className = 'blink';
+    blink.textContent = '_';
+    cursor.appendChild(blink);
     this.container.appendChild(cursor);
     this.scrollToBottom();
   }

@@ -8,10 +8,11 @@
 //
 // CONTENT SOURCES OF TRUTH (Dropbox / observatory design /
 // "text assets for observatory"): pinboard-content-map.xlsx,
-// notepad-content-map.docx, map-dots.xlsx. Edit those, then
+// notepad-content-map.docx, map-dots.xlsx, terminal-content-map.xlsx. Edit those, then
 // regenerate these blocks — do not hand-edit texts here.
 
 // ===== TERMINAL SIGHTINGS (30 entries across waves 1–4) =====
+// Source of truth: terminal-content-map.xlsx, sheet "Sightings" (row order = display order).
 const SIGHTINGS = [
   // ----- WAVE 1 (13): global documentation, pre-Fading. Early entries dry
   // ----- Type-only language; names appear from mid-wave (journal naming beat, day 8).
@@ -52,6 +53,26 @@ const SIGHTINGS = [
   { wave: 4, releaseDay: 5, date: '2025-03-17', time: '23:28:44', location: 'LOC: 03-17-58', observer: '???', type: null, description: '%%DATA CORRUPTION — TIMESTAMP MISMATCH — COORDINATES ECHO PREVIOUS ANOMALY — FLAGGED FOR REVIEW%%', isAnomaly: true },
   { wave: 4, releaseDay: 6, date: '2025-03-18', time: '04:22:07', location: 'SRC-01 / ??????-TW', observer: 'R-01', type: null, description: 'Crystal responding to ambient conditions without specimen proximity. Self-sustaining? M.: "It remembers." Coherence: 71%.' },
 ];
+
+// ===== TERMINAL SYSTEM LINES =====
+// Source of truth: terminal-content-map.xlsx, sheet "System Lines".
+// {count} = visible entries, {next} = next drop label.
+const TERMINAL_LINES = {
+  header_title: 'KANAPUTZ OBSERVATORY — LIVE SIGHTING FEED',
+  header_status: 'SIGNAL: ACTIVE',
+  boot_1: 'KANAPUTZ OBSERVATION NETWORK v3.7.1',
+  boot_2: '================================',
+  boot_3: 'CONNECTING TO FIELD STATIONS...',
+  boot_4: 'CONNECTION ESTABLISHED',
+  boot_5: 'LOADING SIGHTING DATABASE...',
+  records_found: '{count} RECORDS FOUND',
+  feed_start: '--- BEGIN LIVE FEED ---',
+  live_waiting: '[ MONITORING... AWAITING NEW SIGNALS ]',
+  live_incoming: '>> INCOMING TRANSMISSION <<',
+  next_drop: '[ NEXT SCHEDULED OBSERVATION: {next} ]',
+  no_next_drop: '[ MONITORING... AWAITING NEW SIGNALS ]',
+  prompt: 'C:\\OBSERVATORY\\FEED>',
+};
 
 // ===== MAP DOTS =====
 // Source of truth for positions/waves: map-dots.xlsx (observatory design folder).
