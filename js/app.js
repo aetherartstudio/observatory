@@ -1306,7 +1306,7 @@
         });
       }
     }
-    // v12: the lamp object appears in the desk clutter from Wave 2
+    // The lamp object appears in the desk clutter from Wave 3
     lampEl.style.display = WaveSystem.isFeatureAvailable('uvLampObject') ? '' : 'none';
     // If already found, add a subtle indicator
     if (WaveSystem.isUVLampFound()) {

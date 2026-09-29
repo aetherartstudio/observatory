@@ -55,7 +55,7 @@ const WaveSystem = (function() {
     journal:       1,
     pinboard:      1,
     cassette:      1,
-    uvLampObject:  2, // the hidden lamp appears in the clutter from W2
+    uvLampObject:  3, // the hidden lamp appears in the clutter from W3, with the first UV writing
     uv:            1, // UV toggle appears after uvLampFound, not wave-gated
     safe:          1, // safe visible (locked) from launch — it is in the desk art
     safeDial:      4, // dial becomes interactive at W4 (anomalies carry the code)
