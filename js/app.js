@@ -329,7 +329,7 @@
 
     visibleDots.forEach(dot => {
       const el = document.createElement('div');
-      el.className = 'map-dot';
+      el.className = 'map-dot' + mapDotAgeClass(dot);
       el.style.left = dot.left;
       el.style.top = dot.top;
       el.setAttribute('data-id', dot.id);
@@ -341,7 +341,8 @@
 
         // Build info panel
         let html = `
-          <div class="map-info-date">${dot.city} — ${dot.location}</div>
+          <div class="map-info-date">[${dot.date} ${dot.time} UTC]</div>
+          <div class="map-info-location">${dot.city} — ${dot.location}</div>
           <div class="map-info-desc">${dot.description}</div>
         `;
         mapInfo.innerHTML = html;
@@ -373,6 +374,14 @@
   }
 
   let mapZoomActive = false;
+
+  // Dots from earlier waves fade, so the brightest dots are always the most recent sightings
+  function mapDotAgeClass(dot) {
+    const age = WaveSystem.getWave() - dot.wave;
+    if (age >= 2) return ' map-dot-older';
+    if (age === 1) return ' map-dot-old';
+    return '';
+  }
 
   // Global map overlay for the current wave (Taipei-button variant from W3)
   function updateMapOverlay() {
@@ -439,7 +448,7 @@
     const visibleDots = WaveSystem.getVisibleContent(SHILIN_DOTS);
     visibleDots.forEach(dot => {
       const el = document.createElement('div');
-      el.className = 'map-dot' + (dot.isSource ? ' source-dot' : '');
+      el.className = 'map-dot' + (dot.isSource ? ' source-dot' : mapDotAgeClass(dot));
       el.style.left = dot.left;
       el.style.top = dot.top;
 
@@ -447,7 +456,8 @@
         e.stopPropagation();
         WaveSystem.trackEngagement('shilinDot', dot.id);
         let html = `
-          <div class="map-info-date">${dot.location}</div>
+          <div class="map-info-date">[${dot.date} ${dot.time} UTC]</div>
+          <div class="map-info-location">${dot.location}</div>
           <div class="map-info-desc">${dot.description}</div>
         `;
         mapInfo.innerHTML = html;

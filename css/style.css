@@ -784,6 +784,19 @@ body {
   box-shadow: 0 0 12px #44ff44, 0 0 30px rgba(68, 255, 68, 0.6);
 }
 
+/* Sightings from earlier waves fade: bright = recent */
+.map-dot.map-dot-old {
+  filter: brightness(0.6) saturate(0.7);
+}
+.map-dot.map-dot-older {
+  filter: brightness(0.45) saturate(0.55);
+  animation: none;
+}
+.map-dot.map-dot-old:hover,
+.map-dot.map-dot-older:hover {
+  filter: none;
+}
+
 .map-info {
   display: none;
   position: absolute;

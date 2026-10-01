@@ -27,7 +27,7 @@ const SIGHTINGS = [
   { wave: 1, releaseDay: 8, date: '2024-10-20', time: '01:22:14', location: 'NYC-07 / NEW YORK-US', observer: 'R-31', type: 'Type 1', description: 'Specimen "Fugu" — sprint-to-tenderness cycle confirmed. Explosive sprint down platform, sudden freeze at sight of sleeping kitten near ventilation grate. Full tender pause: 62 sec.' },
   { wave: 1, releaseDay: 10, date: '2024-10-23', time: '23:09:37', location: 'PAR-12 / PARIS-FR', observer: 'R-18', type: 'Type 3', description: 'Montmartre sighting. "Groovix" detected near accordion player. Rhythm drift escalated to full-body groove. Tail whipped through three easels. Artists seemed delighted rather than upset.' },
   { wave: 1, releaseDay: 12, date: '2024-10-25', time: '00:55:21', location: 'TPE-03 / TAIPEI-TW', observer: 'R-14', type: 'Type 2', description: 'MrQ confronted group of teenagers playing loud music. Performed concert mode: jumping, arm-waving, butt-shaking. Started involuntary crowd wave among teenagers. All parties laughing within 15 sec.' },
-  { wave: 1, releaseDay: 13, date: '2024-10-27', time: '03:17:42', location: 'BKK-05 / BANGKOK-TH', observer: 'R-27', type: 'Type 1', description: 'Chatuchak Market. Fugu detected near spice vendor. Sprint-freeze pattern: 4 cycles in 3 min. Each freeze oriented toward different small detail — dewdrop on chili pepper, butterfly resting on ginger root.' },
+  { wave: 1, releaseDay: 13, date: '2024-10-27', time: '03:12:42', location: 'BKK-05 / BANGKOK-TH', observer: 'R-27', type: 'Type 1', description: 'Chatuchak Market. Fugu detected near spice vendor. Sprint-freeze pattern: 4 cycles in 3 min. Each freeze oriented toward different small detail — dewdrop on chili pepper, butterfly resting on ginger root.' },
   // Wave 2
   { wave: 2, releaseDay: 0, date: '2024-10-31', time: '02:33:49', location: 'TPE-14 / TAIPEI-TW', observer: 'R-01', type: 'Type 4', description: 'Muncha positioned near hospital entrance. Antennae vibrating continuously. Absorbed ambient emotional weight for 8 min — longest recorded session. Inflation gradual, reaching 3x resting volume. ENERGY STATUS: DIMINISHED — slow deflation, squeaking sounds weak.' },
   { wave: 2, releaseDay: 2, date: '2024-11-08', time: '04:07:29', location: 'NYC-07 / NEW YORK-US', observer: 'R-31', type: 'Type 1', description: 'Fugu sprint-to-tenderness cycle. ENERGY STATUS: DIMINISHED — sprint speed measurably slower than September baseline. Tender pauses shorter: 14 sec avg vs 22 sec.' },
@@ -43,7 +43,7 @@ const SIGHTINGS = [
   { wave: 3, releaseDay: 6, date: '2025-01-14', time: '01:55:08', location: 'JIU-02 / JIUFEN-TW', observer: 'R-01', type: 'Type 1', description: 'Jiufen Old Street. Fugu sprinted from central Taipei to Jiufen — 30km in estimated 4 min. Stopped at temple steps. Tender pause: 3 min 47 sec. Longest recorded. Oriented toward ocean.' },
   // Wave 4
   { wave: 4, releaseDay: 0, date: '2025-01-15', time: '02:44:19', location: 'SRC-01 / ??????-TW', observer: 'R-01', type: null, description: 'Source detector activated. Initial reading: coherence 34%. Fluctuating. M. says the readings are correct.' },
-  { wave: 4, releaseDay: 1, date: '2025-01-16', time: '04:11:55', location: 'SHI-07 / TAIPEI-TW', observer: 'R-14', type: 'Type 1', description: 'Fugu sprint frequency doubled in 72 hours. Route patterns increasingly direct — fewer zigzags, longer stillness. Tender pauses now oriented exclusively toward Source bearing.' },
+  { wave: 4, releaseDay: 1, date: '2025-01-16', time: '04:11:55', location: 'SHI-07 / TAIPEI-TW', observer: 'R-14', type: 'Type 1', description: 'Fugu sprint frequency doubled in 72 hours. Route patterns increasingly direct — fewer zigzags, longer stillness. Tender pauses now oriented exclusively toward the Source.' },
   { wave: 4, releaseDay: 2, date: '2025-01-18', time: '04:02:48', location: '03-17-58 / ??????-??', observer: '---', type: '-------', description: '%%SIGNAL ANOMALY. COORDINATES DO NOT RESOLVE. ENTRY FLAGGED.%%', isAnomaly: true },
   { wave: 4, releaseDay: 3, date: '2025-01-20', time: '01:55:44', location: 'SHI-ALL / TAIPEI-TW', observer: 'R-01', type: null, description: '14 specimens detected simultaneously across Shilin. All types. All moving toward same external point. Source detector: coherence 47%.' },
   { wave: 4, releaseDay: 4, date: '2025-01-23', time: '00:42:31', location: 'SRC-01 / ??????-TW', observer: 'R-01', type: null, description: 'Source coherence: 58%. Steady increase. Crystal responds to convergence — spikes +12-15%. M. suggests the relationship is bidirectional.' },
@@ -66,7 +66,7 @@ const TERMINAL_LINES = {
   feed_start: '--- BEGIN LIVE FEED ---',
   live_waiting: '[ MONITORING... AWAITING NEW SIGNALS ]',
   live_incoming: '>> INCOMING TRANSMISSION <<',
-  next_drop: '[ NEXT SCHEDULED OBSERVATION: {next} ]',
+  next_drop: '[ NEXT FIELD-STATION SYNC: {next} ]',
   no_next_drop: '[ MONITORING... AWAITING NEW SIGNALS ]',
   prompt: 'C:\\OBSERVATORY\\FEED>',
 };
@@ -76,52 +76,51 @@ const TERMINAL_LINES = {
 // v12 wave progression: W1 = 7 dots (staggered), W2 = +5, W3 = +5, W4 = +3. Total 20.
 const MAP_SIGHTINGS = [
   // Wave 1
-  { id: 0, wave: 1, releaseDay: 0, city: 'Bangkok', location: 'Chatuchak Market', left: '72%', top: '48%', description: 'Type 1 detected near spice vendor. Sprint-freeze cycle: 4 repetitions.' },
-  { id: 1, wave: 1, releaseDay: 0, city: 'Tokyo', location: 'Shibuya Crossing', left: '80%', top: '40%', description: 'Type 2 theatrical display during rush hour. Universal laughter reported by 14 witnesses.' },
-  { id: 2, wave: 1, releaseDay: 0, city: 'Berlin', location: 'U-Bahn Alexanderplatz', left: '50%', top: '34%', description: 'Type 3 rhythmic anomaly. Three commuters displaced by tail. No injuries.' },
-  { id: 4, wave: 1, releaseDay: 3, city: 'New York', location: 'Subway Tunnel B-7', left: '29%', top: '35%', description: 'Type 1 sprint-to-tenderness. 62 sec pause at sleeping kitten. Transit camera confirmed.' },
-  { id: 6, wave: 1, releaseDay: 5, city: 'London', location: 'Southbank', left: '47%', top: '33%', description: 'Type 2 aggressive hip display near busker. Both pedestrians laughing within 4 sec.' },
-  { id: 3, wave: 1, releaseDay: 8, city: 'Paris', location: 'Montmartre', left: '48%', top: '34%', description: 'Type 3 near accordion player. Three easels destroyed. The journal calls him "Groovix."' },
-  { id: 5, wave: 1, releaseDay: 10, city: 'Mumbai', location: 'Train Station District', left: '65%', top: '47%', description: 'Type 4 tension absorption event. Couple stopped arguing within 12 sec. First Muncha sighting outside Asia.' },
+  { id: 5, wave: 1, releaseDay: 0, date: '2024-09-12', time: '01:23:08', city: 'Mumbai', location: 'Train Station District', left: '65%', top: '47%', description: 'Type 4 tension absorption event. Couple stopped arguing within 12 sec. First Type 4 sighting on record.' },
+  { id: 1, wave: 1, releaseDay: 0, date: '2024-09-15', time: '09:40:00', city: 'Tokyo', location: 'Shibuya Crossing', left: '80%', top: '40%', description: 'Type 2 theatrical display during rush hour. Universal laughter reported by 14 witnesses.' },
+  { id: 6, wave: 1, releaseDay: 0, date: '2024-09-18', time: '23:55:17', city: 'London', location: 'Southbank', left: '47%', top: '33%', description: 'Type 2 aggressive hip display near busker. Both pedestrians laughing within 4 sec.' },
+  { id: 2, wave: 1, releaseDay: 0, date: '2024-09-20', time: '06:15:00', city: 'Berlin', location: 'U-Bahn Alexanderplatz', left: '50%', top: '34%', description: 'Type 3 rhythmic anomaly. Three commuters displaced by tail. No injuries.' },
+  { id: 4, wave: 1, releaseDay: 8, date: '2024-10-20', time: '01:22:14', city: 'New York', location: 'Subway Tunnel B-7', left: '29%', top: '35%', description: 'Type 1 sprint-to-tenderness. 62 sec pause at sleeping kitten. Transit camera confirmed.' },
+  { id: 3, wave: 1, releaseDay: 10, date: '2024-10-23', time: '23:09:37', city: 'Paris', location: 'Montmartre', left: '48%', top: '34%', description: 'Type 3 near accordion player. Three easels destroyed. The journal calls him "Groovix."' },
+  { id: 0, wave: 1, releaseDay: 13, date: '2024-10-27', time: '03:12:42', city: 'Bangkok', location: 'Chatuchak Market', left: '72%', top: '48%', description: 'Type 1 detected near spice vendor. Sprint-freeze cycle: 4 repetitions.' },
   // Wave 2
-  { id: 7, wave: 2, releaseDay: 0, city: 'Seoul', location: 'Gangnam Station', left: '79%', top: '39%', description: 'Type 4 absorbed ambient frustration near vending machine. Worker visibly relaxed. ENERGY STATUS: DIMINISHED.' },
-  { id: 8, wave: 2, releaseDay: 0, city: 'Taipei', location: 'Ximending', left: '77%', top: '42%', description: 'Types 1 and 4 observed near a crowded pedestrian street. ENERGY STATUS: DIMINISHED — both specimens slower than baseline.', replacedByWave: 3 },
-  { id: 9, wave: 2, releaseDay: 3, city: 'São Paulo', location: 'Liberdade District', left: '33%', top: '58%', description: 'Type 1 confirmed in South America. Sprint duration 40% shorter than Sept baseline. Energy depletion visible.' },
-  { id: 10, wave: 2, releaseDay: 6, city: 'Istanbul', location: 'Grand Bazaar', left: '56%', top: '38%', description: 'Type 3 rhythmic event disrupted three carpet stalls. Shorter duration than previous — stopped after 11 sec.' },
-  { id: 11, wave: 2, releaseDay: 9, city: 'Melbourne', location: 'Queen Victoria Market', left: '84%', top: '65%', description: 'Type 2 — first Australian sighting. Display lacked usual intensity. Witnesses described it as "tired."' },
+  { id: 8, wave: 2, releaseDay: 0, date: '2024-11-01', time: '13:30:00', city: 'Taipei', location: 'Ximending', left: '77%', top: '42%', description: 'Types 1 and 4 observed near a crowded pedestrian street. ENERGY STATUS: DIMINISHED — both specimens slower than baseline.', replacedByWave: 3 },
+  { id: 9, wave: 2, releaseDay: 3, date: '2024-11-11', time: '03:20:00', city: 'São Paulo', location: 'Liberdade District', left: '33%', top: '58%', description: 'Type 1 confirmed in South America. Sprint duration 40% shorter than Sept baseline. Energy depletion visible.' },
+  { id: 7, wave: 2, releaseDay: 5, date: '2024-11-15', time: '01:14:55', city: 'Seoul', location: 'Gangnam Station', left: '79%', top: '39%', description: 'Type 4 absorbed ambient frustration near vending machine. Worker visibly relaxed. ENERGY STATUS: DIMINISHED.' },
+  { id: 10, wave: 2, releaseDay: 6, date: '2024-11-19', time: '19:40:00', city: 'Istanbul', location: 'Grand Bazaar', left: '56%', top: '38%', description: 'Type 3 rhythmic event disrupted three carpet stalls. Shorter duration than previous — stopped after 11 sec.' },
+  { id: 11, wave: 2, releaseDay: 9, date: '2024-11-28', time: '08:05:00', city: 'Melbourne', location: 'Queen Victoria Market', left: '84%', top: '65%', description: 'Type 2 — first Australian sighting. Display lacked usual intensity. Witnesses described it as "tired."' },
   // Wave 3
-  { id: 21, wave: 3, releaseDay: 0, city: 'Taipei', location: 'Multiple locations', left: '77%', top: '42%', description: 'REPEAT SIGHTINGS. All four types seen here again and again. ENERGY STATUS: DIMINISHED across all specimens.' },
-  { id: 12, wave: 3, releaseDay: 0, city: 'Cape Town', location: 'V&A Waterfront', left: '52%', top: '63%', description: 'Type 1 — first African sighting. Oriented toward Taipei.' },
-  { id: 13, wave: 3, releaseDay: 1, city: 'Mexico City', location: 'Mercado de la Merced', left: '22%', top: '44%', description: 'Type 4 absorption near food court. Three separate tension events neutralised. Specimen visibly slower than baseline.' },
-  { id: 14, wave: 3, releaseDay: 2, city: 'Cairo', location: 'Khan el-Khalili', left: '55%', top: '42%', description: 'Type 3 tail displacement inside narrow souk alley. Duration 6 sec — well below baseline average of 22 sec.' },
-  { id: 15, wave: 3, releaseDay: 4, city: 'Toronto', location: 'St. Lawrence Market', left: '27%', top: '33%', description: 'Multi-type sighting. Types 1 and 2 observed simultaneously. Both oriented ESE before dispersal.' },
-  { id: 16, wave: 3, releaseDay: 6, city: 'Osaka', location: 'Dōtonbori', left: '81%', top: '41%', description: 'Type 2 theatrical display — but muted. No laughter from witnesses. Specimen paused mid-routine, oriented toward Taipei.' },
+  { id: 21, wave: 3, releaseDay: 0, date: '2025-01-02', time: '02:38:17', city: 'Taipei', location: 'Multiple locations', left: '77%', top: '42%', description: 'REPEAT SIGHTINGS. All four types seen here again and again. ENERGY STATUS: DIMINISHED across all specimens.' },
+  { id: 12, wave: 3, releaseDay: 0, date: '2025-01-02', time: '17:05:00', city: 'Cape Town', location: 'V&A Waterfront', left: '52%', top: '63%', description: 'Type 1 — first African sighting. Oriented toward Taipei.' },
+  { id: 13, wave: 3, releaseDay: 1, date: '2025-01-04', time: '22:30:00', city: 'Mexico City', location: 'Mercado de la Merced', left: '22%', top: '44%', description: 'Type 4 absorption near food court. Three separate tension events neutralised. Specimen visibly slower than baseline.' },
+  { id: 14, wave: 3, releaseDay: 2, date: '2025-01-06', time: '18:15:00', city: 'Cairo', location: 'Khan el-Khalili', left: '55%', top: '42%', description: 'Type 3 tail displacement inside narrow souk alley. Duration 6 sec — well below baseline average of 22 sec.' },
+  { id: 15, wave: 3, releaseDay: 4, date: '2025-01-08', time: '19:50:00', city: 'Toronto', location: 'St. Lawrence Market', left: '27%', top: '33%', description: 'Multi-type sighting. Types 1 and 2 observed simultaneously. Both oriented toward Taipei before dispersal.' },
+  { id: 16, wave: 3, releaseDay: 6, date: '2025-01-13', time: '03:10:00', city: 'Osaka', location: 'Dōtonbori', left: '81%', top: '41%', description: 'Type 2 theatrical display — but muted. No laughter from witnesses. Specimen paused mid-routine, oriented toward Taipei.' },
   // Wave 4
-  { id: 17, wave: 4, releaseDay: 0, city: 'Jakarta', location: 'Tanah Abang Market', left: '74%', top: '54%', description: 'Type 1 sprint lasted 0.8 sec — shortest on record. Specimen remained motionless for 4 min, oriented north-northeast — toward Taipei.' },
-  { id: 18, wave: 4, releaseDay: 2, city: 'Hanoi', location: 'Old Quarter', left: '74%', top: '44%', description: 'Types 1, 3, and 4 observed moving in formation toward Taipei. No interaction with environment. First coordinated migration event.' },
-  { id: 19, wave: 4, releaseDay: 4, city: 'Manila', location: 'Quiapo District', left: '79%', top: '47%', description: 'All four types. No characteristic behaviours displayed. Silent transit toward Taipei. ENERGY STATUS: CRITICAL.' },
+  { id: 17, wave: 4, releaseDay: 0, date: '2025-01-15', time: '16:40:00', city: 'Jakarta', location: 'Tanah Abang Market', left: '74%', top: '54%', description: 'Type 1 sprint lasted 0.8 sec — shortest on record. Specimen remained motionless for 4 min, oriented toward Taipei.' },
+  { id: 18, wave: 4, releaseDay: 2, date: '2025-01-18', time: '14:15:00', city: 'Hanoi', location: 'Old Quarter', left: '74%', top: '44%', description: 'Types 1, 3, and 4 observed moving in formation toward Taipei. No interaction with environment. First coordinated migration event.' },
+  { id: 19, wave: 4, releaseDay: 4, date: '2025-01-23', time: '09:30:00', city: 'Manila', location: 'Quiapo District', left: '79%', top: '47%', description: 'All four types. No characteristic behaviours displayed. Silent transit toward Taipei. ENERGY STATUS: CRITICAL.' },
 ];
 
 // ===== SHILIN DETAIL MAP DOTS (zoom unlocks Wave 3) =====
 const SHILIN_DOTS = [
-  // Wave 4
-  { id: 's0', wave: 4, releaseDay: 0, location: 'Shilin Night Market — Main Gate', left: '39.6%', top: '24.6%', description: 'Primary convergence node. All four types documented. Highest frequency of multi-type co-occurrence events.' },
   // Wave 3
-  { id: 's1', wave: 3, releaseDay: 0, location: 'Taipei Arena', left: '52.5%', top: '68.0%', description: 'Type 3 rhythmic event during concert egress. Sway synchronized with the crowd noise. Duration 40 sec.' },
-  { id: 's2', wave: 3, releaseDay: 1, location: 'Songshan Cultural and Creative Park', left: '57.0%', top: '76%', description: 'Type 2 theatrical display on the plaza. Duration 45 sec. Three witnesses, all laughing.' },
-  { id: 's3', wave: 3, releaseDay: 2, location: 'Longshan Temple', left: '27.1%', top: '83.2%', description: 'Type 4 stationary in the incense court through evening prayer. Ambient tension reading dropped steadily.' },
-  { id: 's4', wave: 3, releaseDay: 3, location: 'Chiang Kai-shek Memorial Hall — Liberty Square', left: '37.1%', top: '84.2%', description: 'Type 1 sprint circuits across the plaza between guard changes. Tender pause at the flower beds. Route consistent.' },
-  { id: 's11', wave: 3, releaseDay: 4, location: 'Shilin — Official Residence Gardens', left: '48.0%', top: '22.5%', description: 'Type 1 tender pause at the rose beds. Duration 2 min 10 sec. No other activity recorded.' },
-  { id: 's5', wave: 3, releaseDay: 5, location: 'Daan Forest Park', left: '45%', top: '88.7%', description: 'Type 3 rhythmic events near the pond. Tail displacement damaged two park benches. Groundskeeper unaware of cause.' },
-  { id: 's6', wave: 3, releaseDay: 6, location: 'Taipei 101 — Tower Base', left: '59.6%', top: '86.4%', description: 'Multi-specimen event #4. All types. Duration 8 min 22 sec. All oriented toward the same bearing before dispersal.' },
+  { id: 's1', wave: 3, releaseDay: 0, date: '2025-01-02', time: '15:40:00', location: 'Taipei Arena', left: '52.5%', top: '68.0%', description: 'Type 3 rhythmic event during concert egress. Sway synchronized with the crowd noise. Duration 40 sec.' },
+  { id: 's2', wave: 3, releaseDay: 1, date: '2025-01-04', time: '08:20:00', location: 'Songshan Cultural and Creative Park', left: '57.0%', top: '76%', description: 'Type 2 theatrical display on the plaza. Duration 45 sec. Three witnesses, all laughing.' },
+  { id: 's3', wave: 3, releaseDay: 2, date: '2025-01-06', time: '11:30:00', location: 'Longshan Temple', left: '27.1%', top: '83.2%', description: 'Type 4 stationary in the incense court through evening prayer. Ambient tension reading dropped steadily.' },
+  { id: 's4', wave: 3, releaseDay: 3, date: '2025-01-07', time: '02:10:00', location: 'Chiang Kai-shek Memorial Hall — Liberty Square', left: '37.1%', top: '84.2%', description: 'Type 1 sprint circuits across the plaza between guard changes. Tender pause at the flower beds. Route consistent.' },
+  { id: 's11', wave: 3, releaseDay: 4, date: '2025-01-10', time: '01:50:00', location: 'Shilin — Official Residence Gardens', left: '48.0%', top: '22.5%', description: 'Type 1 tender pause at the rose beds. Duration 2 min 10 sec. No other activity recorded.' },
+  { id: 's5', wave: 3, releaseDay: 5, date: '2025-01-11', time: '04:25:00', location: 'Daan Forest Park', left: '45%', top: '88.7%', description: 'Type 3 rhythmic events near the pond. Tail displacement damaged two park benches. Groundskeeper unaware of cause.' },
+  { id: 's6', wave: 3, releaseDay: 6, date: '2025-01-13', time: '14:05:00', location: 'Taipei 101 — Tower Base', left: '59.6%', top: '86.4%', description: 'Multi-specimen event #4. All types. Duration 8 min 22 sec. All oriented toward the same point before dispersal.' },
   // Wave 4
-  { id: 's7', wave: 4, releaseDay: 0, location: 'Dadaocheng', left: '33.2%', top: '62.9%', description: 'Source proximity readings rise along the old riverside streets. UV residue on the pavement. Not a sighting location — an orientation point.' },
-  { id: 's8', wave: 4, releaseDay: 1, location: 'Taipei Expo Park', left: '47.2%', top: '41.8%', description: 'Type 4 stationary for 22 min facing north across the river. No absorption activity. Ambient hum detected on audio.' },
-  { id: 's9', wave: 4, releaseDay: 3, location: 'Xiangshan Trail — Viewing Platform', left: '67.1%', top: '92.9%', description: 'All types on the viewing platform at 03:00. Motionless. Every specimen oriented NW toward Shilin. Departed in unison.' },
-  { id: 's10', wave: 4, releaseDay: 4, location: 'National Palace Museum — Hillside', left: '51.4%', top: '13.7%', description: 'Specimens skirt the museum hillside after closing. None enter. Movement paths bend downhill toward the district — circling, not visiting.' },
-  { id: 'source', wave: 4, releaseDay: 2, replacedByWave: 5, location: '[SOURCE LOCATION — COORDINATES WITHHELD]', left: '44.7%', top: '24.9%', description: 'Camera shakes. Timestamp anomaly. No visible specimen. Audio contains low, warm hum. Duration: longer than standard clip.', isSource: true },
+  { id: 's0', wave: 4, releaseDay: 0, date: '2025-01-15', time: '14:20:00', location: 'Shilin Night Market — Main Gate', left: '39.6%', top: '24.6%', description: 'Primary convergence node. All four types documented. Highest frequency of multi-type co-occurrence events.' },
+  { id: 's7', wave: 4, releaseDay: 0, date: '2025-01-15', time: '15:45:00', location: 'Dadaocheng', left: '33.2%', top: '62.9%', description: 'Source proximity readings rise along the old riverside streets. UV residue on the pavement. Not a sighting location — an orientation point.' },
+  { id: 's8', wave: 4, releaseDay: 1, date: '2025-01-16', time: '13:05:00', location: 'Taipei Expo Park', left: '47.2%', top: '41.8%', description: 'Type 4 stationary for 22 min facing across the river, toward Shilin. No absorption activity. Ambient hum detected on audio.' },
+  { id: 'source', wave: 4, releaseDay: 2, date: '????-??-??', time: '??:??:??', replacedByWave: 5, location: '[SOURCE LOCATION — COORDINATES WITHHELD]', left: '44.7%', top: '24.9%', description: 'Camera shakes. Timestamp anomaly. No visible specimen. Audio contains low, warm hum. Duration: longer than standard clip.', isSource: true },
+  { id: 's9', wave: 4, releaseDay: 3, date: '2025-01-19', time: '19:00:00', location: 'Xiangshan Trail — Viewing Platform', left: '67.1%', top: '92.9%', description: 'All types on the viewing platform before dawn. Motionless. Every specimen oriented toward Shilin. Departed in unison.' },
+  { id: 's10', wave: 4, releaseDay: 4, date: '2025-01-24', time: '15:10:00', location: 'National Palace Museum — Hillside', left: '51.4%', top: '13.7%', description: 'Specimens skirt the museum hillside after closing. None enter. Movement paths bend downhill toward the district — circling, not visiting.' },
   // Wave 5
-  { id: 'source-revealed', wave: 5, releaseDay: 0, location: 'SRC-01 — Aether Art Gallery — No. 72, Wenlin Rd, Shilin', left: '40.4%', top: '28.2%', description: 'Coordinates resolved. The signal was stationary all along. Street-level exhibition space. The door is open during gallery hours.', isSource: true },
+  { id: 'source-revealed', wave: 5, releaseDay: 0, date: '2025-02-03', time: '03:00:00', location: 'SRC-01 — Aether Art Gallery — No. 72, Wenlin Rd, Shilin', left: '40.4%', top: '28.2%', description: 'Coordinates resolved. The signal was stationary all along. Street-level exhibition space. The door is open during gallery hours.', isSource: true },
 ];
 
 // ===== JOURNAL PAGES (10 pages, waves 1–4) =====
@@ -163,7 +162,8 @@ const PINBOARD_ITEMS = [
   { wave: 1, releaseDay: 0, type: 'postit', asset: 'postit-6.webp', text: 'Fugu was not looking at the flower. He was listening to it.', color: '#f5b7b1', rotation: 5, position: { top: '14%', left: '74%' }, author: 'm' },
   { wave: 1, releaseDay: 6, type: 'postit', asset: 'postit-7.webp', id: 'everywhere', text: 'Berlin, NYC, Paris, Bangkok — they are EVERYWHERE.', color: '#f7dc6f', rotation: 2, position: { top: '24%', left: '48%' }, author: 'researcher' },
   { wave: 1, releaseDay: 4, type: 'postit', asset: 'postit-8.webp', text: 'Their names: Muncha — the mouth. Fugu — the puff. Mr Q — the tilt. Groovix — the sway.', color: '#82e0aa', rotation: -3, position: { top: '38%', left: '68%' }, author: 'researcher' },
-  { wave: 1, releaseDay: 10, type: 'postit', asset: 'postit-12.webp', text: 'She keeps pinning things to my board. I did not ask her to.', color: '#f7dc6f', rotation: 2, position: { top: '70%', left: '14%' }, author: 'researcher' },
+  // Wave 2
+  { wave: 2, releaseDay: 4, type: 'postit', asset: 'postit-12.webp', text: 'M.’s notes arrive in my mailbox. No stamp. I pin them up. I don’t know why.', color: '#f7dc6f', rotation: 2, position: { top: '70%', left: '14%' }, author: 'researcher' },
   // Wave 3
   { wave: 3, releaseDay: 0, type: 'postit', asset: 'postit-22.webp', id: 'why-taipei', text: 'They keep coming back to Taipei. Why Taipei?', color: '#f7dc6f', rotation: 2, position: { top: '42%', left: '12%' }, author: 'researcher' },
   // Wave 2
@@ -184,26 +184,26 @@ const PINBOARD_ITEMS = [
   { wave: 4, releaseDay: 0, type: 'postit', asset: 'postit-11.webp', id: 'feed-hint', text: 'the feed hides what the feed cannot say.', color: '#f1948a', rotation: -3, position: { top: '2%', left: '52%' }, author: 'researcher' },
   { wave: 4, releaseDay: 0, type: 'postit', asset: 'postit-16.webp', id: 'convergence-all', text: 'All observed specimens moving in the same direction. Every type. Every continent.', color: '#85c1e9', rotation: -2, position: { top: '68%', left: '28%' }, author: 'researcher' },
   { wave: 4, releaseDay: 2, type: 'photo', image: 'MrQ polaroid.webp', position: { top: '10%', left: '52%' }, rotation: 2, label: 'Shilin — 04:10', caption: 'He stood with his arms down.' },
-  { wave: 4, releaseDay: 4, type: 'postit', asset: 'postit-5.webp', id: 'safety-valve', text: 'Three numbers. I keep repeating them on the tape.', color: '#f7dc6f', rotation: 3, position: { top: '44%', left: '64%' }, author: 'researcher' },
+  { wave: 4, releaseDay: 4, type: 'postit', asset: 'postit-5.webp', id: 'safety-valve', text: 'Three numbers. I keep writing them down.', color: '#f7dc6f', rotation: 3, position: { top: '44%', left: '64%' }, author: 'researcher' },
   // Wave 5
   { wave: 5, releaseDay: 0, type: 'postit', asset: 'postit-21.webp', text: 'I sat with them. Eleven minutes. It remembers. Look around you. They are closer than you think.', color: '#f5b7b1', rotation: -3, position: { top: '68%', left: '4%' }, author: 'm' },
+  // Wave 4
+  { wave: 4, releaseDay: 3, type: 'postit', asset: 'postit-18.webp', text: 'Do not go alone.', color: '#f5b7b1', rotation: -2, position: { top: '80%', left: '58%' }, author: 'm' },
 ];
 
 // UV layer content: annotations from Wave 3, safe hint from Wave 4 (brief v12).
 const PINBOARD_UV = [
   // Wave 3
   { type: 'note', text: 'PULL → they keep pulling toward one point', postitId: 'why-taipei', wave: 3 },
-  { type: 'note', text: 'All paths converge → SE bearing 127°', postitId: 'fugu-direction', wave: 3 },
+  { type: 'note', text: 'All paths converge → one point, inside the city.', postitId: 'fugu-direction', wave: 3 },
   { type: 'note', text: 'NON-TAIPEI LOCATIONS = transit only?', postitId: 'everywhere', wave: 3 },
   // Wave 4
   { type: 'note', text: 'Source dot matches. Confirm with M.', postitId: 'convergence-all', wave: 4 },
   { type: 'note', text: 'check the terminal feed if you forgot it', postitId: 'feed-hint', wave: 4 },
   // Wave 3
   { type: 'note', text: 'M. knows more than she says.', postitId: 'm-not-from-here', wave: 3 },
-  // Wave 4
-  { type: 'note', text: 'do not go alone. — M.', position: { top: '80%', left: '58%' }, rotation: -2, wave: 4 },
   // Wave 5
-  { type: 'note', text: 'Still reading? Good. What comes next is not on this board. — M.', position: { top: '86%', left: '30%' }, rotation: 1, wave: 5 },
+  { type: 'note', text: 'Still reading? Good. What comes next is not on this board.', position: { top: '86%', left: '30%' }, rotation: 1, wave: 5 },
 ];
 
 // ===== CASSETTE TAPES (v12 lineup — dictaphone logic) =====
@@ -220,7 +220,7 @@ const CASSETTE_TAPES = [
   // Wave 3
   { id: 'T-04', wave: 3, releaseDay: 0, requiresSafe: false, label: 'T-04: Vectors', description: 'Dictated at the desk, papers shuffling. "Every type, every sighting, same direction. Two hundred and eleven vectors." He hesitates before the word: "I have started calling the endpoint... the Source. I don\'t know what it is. I intend to find out."', audioUrl: null },
   // Wave 4
-  { id: 'T-05', wave: 4, releaseDay: 0, requiresSafe: false, label: 'T-05: The Site', description: 'At the Shilin location, with M. present. Almost no narration — night insects, distant market, and underneath, a low warm hum the recorder half-catches. A whispered exchange: "Do you feel that?" — "It feels you." Long silence. Then, murmured to himself: "Three seventeen. ...Fifty-eight seconds."', audioUrl: null },
+  { id: 'T-05', wave: 4, releaseDay: 0, requiresSafe: false, label: 'T-05: The Site', description: 'At the Shilin location, with M. present. Almost no narration — night insects, distant market, and underneath, a low warm hum the recorder half-catches. A whispered exchange: "Do you feel that?" — "It feels you." Long silence. Then the hum stops, and the night insects are suddenly loud. "...It\'s gone."', audioUrl: null },
   // Wave 5
   { id: 'T-06', wave: 5, releaseDay: 0, requiresSafe: true, label: 'T-06: The Interview', description: 'The formal sit-down. M. in full for the first time: "Groovix does not dance because he wants to. The rhythm is in him." Inter-dimensional visitors. Joy fragments. "The crystal is the door. Or what\'s left of it." "They need the Source the way we need air." Then: "When people gather with the right intention—" Mid-word, the tape cuts. Bulk erasure. When it resumes, quieter: "Let\'s leave that part out."', audioUrl: null },
 ];
@@ -235,7 +235,7 @@ const SAFE_DOSSIER = {
       { type: 'Type 4 — Muncha', classification: 'Tension Ingester / Inflation-Deflation Cycle', text: 'Attempts to help by "eating" emotional heaviness. Mouth comprises 70% of body. Two antennae vibrate when detecting ingestible energy. Can inflate to 4x resting volume. Deflation rapid, accompanied by squeaking. Tiny limbs create characteristic waddle. Flagship: tension devouring + visible inflation cycle.', footnote: 'Journal designation "Muncha" — the first he named.' }
     ]},
     { title: 'Section 2 — Energy Depletion Analysis', content: 'Specimens that absorb emotional heaviness lose coherence. The more they absorb, the dimmer they become. Prolonged exposure to high-tension environments produces measurable decline in sprint speed (Type 1), display intensity (Type 2), rhythm stability (Type 3), and deflation rate (Type 4).\n\nThey instinctively seek something to restore themselves. Three hypotheses:\n\nHypothesis A (Researcher): Inter-dimensional organisms displaced by energy imbalance. Behaviors are instinctive responses to emotional frequency differentials. They do not intend to help. They react. The energy cost is physical.\n\nHypothesis B (M.): Concentrations of joy — condensed from a world where joy is the baseline. Absorbing our heaviness depletes what they are made of. They need the Source the way we need air.\n\nHypothesis C (Integrated): Both perspectives describe the same phenomenon at different scales. Physically real AND energetically coherent. The distinction may not apply.' },
-    { title: 'Section 3 — Convergence Report', content: 'Directional analysis of all documented sighting trajectories.\n\nEvery type. Every location. Every continent. When not engaged in immediate behavioral response, all specimens orient in the same direction. Sprint paths, dance routes, waddle trajectories — bearing 127° SE from European observations, adjusted for curvature.\n\nAll roads lead to Shilin. Within Shilin, to one specific location.\n\n██████████████████ coordinates confirmed ██████████████████\n\nThe convergence is accelerating. Frequency of multi-type co-occurrence events has increased 340% since January.' },
+    { title: 'Section 3 — Convergence Report', content: 'Directional analysis of all documented sighting trajectories.\n\nEvery type. Every location. Every continent. When not engaged in immediate behavioral response, all specimens orient in the same direction. Sprint paths, dance routes, waddle trajectories — all pointing toward Taipei.\n\nAll roads lead to Shilin. Within Shilin, to one specific location.\n\n██████████████████ coordinates confirmed ██████████████████\n\nThe convergence is accelerating. Frequency of multi-type co-occurrence events has increased 340% since January.' },
     { title: 'Section 4 — The Source', content: '██████████████████████████████████████████████████████████████████████\n\n...an anchor between their origin and this world...\n\n██████████████████████████████████████████████████████████████████████\n\n...the crystal stabilises them...\n\n█████████████████████████████████████████████████████████████████████████████████\n\nAll observed specimens appear to be moving in the same direction.\n\n████████████████████████████████████████', isRedacted: true },
     { title: 'Section 5 — Incident Report', content: 'CLASSIFIED — Proximity Event\nShilin District — 03:17\n\n████████████ approached ████████████ at coordinates ██████████. Duration: ██ minutes. All four types present. ████████████████████████ readings exceeded ████████████.\n\nObserver: "███████████████████ something I cannot ████████████."\n\nConclusion: Observation concluded. Not approached.\n\n[Torn section — bottom third missing]', isRedacted: true }
   ],
@@ -246,7 +246,7 @@ const SAFE_DOSSIER = {
 // `pre` = installation footage (Wave 5 drop, before gallery opening day);
 // `live` = live crystal feed (from gallery opening day — WaveSystem.isGalleryLive()).
 const SOURCE_MONITOR = {
-  pre: { coherence: 73, status: 'ACTIVE — CALIBRATING', feed: 'Crystal installation in progress. Coherence baseline establishing. Specimens orienting toward Source bearing.', readings: ['CRYSTAL STATE: RESPONSIVE', 'AMBIENT FREQ: 432.7 Hz', 'CONVERGENCE EVENTS: 7 (last 48h)', 'SPECIMEN PROXIMITY: DETECTED', 'MEMBRANE STABILITY: 67%'] },
+  pre: { coherence: 73, status: 'ACTIVE — CALIBRATING', feed: 'Crystal installation in progress. Coherence baseline establishing. Specimens orienting toward the Source.', readings: ['CRYSTAL STATE: RESPONSIVE', 'AMBIENT FREQ: 432.7 Hz', 'CONVERGENCE EVENTS: 7 (last 48h)', 'SPECIMEN PROXIMITY: DETECTED', 'MEMBRANE STABILITY: 67%'] },
   live: { coherence: 89, status: 'LIVE — GALLERY FEED', feed: 'Physical convergence confirmed. Crystal luminescence visible without instruments. Live feed: Shilin gallery floor.', readings: ['CRYSTAL STATE: SELF-SUSTAINING', 'AMBIENT FREQ: 528.0 Hz (LOCKED)', 'CONVERGENCE EVENTS: CONTINUOUS', 'SPECIMEN COUNT: EXCEEDS SENSOR RANGE', 'MEMBRANE STABILITY: 94%', 'NOTE: The Source remembers.'] }
 };
 
