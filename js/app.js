@@ -884,7 +884,7 @@
     if (pagesPerSpread === 2) {
       const left = startIndex + 1;
       const right = Math.min(startIndex + 2, pages.length);
-      countEl.textContent = `${left}–${right} / ${pages.length}`;
+      countEl.textContent = left === right ? `${left} / ${pages.length}` : `${left}–${right} / ${pages.length}`;
     } else {
       countEl.textContent = `${startIndex + 1} / ${pages.length}`;
     }
@@ -1270,21 +1270,79 @@
 
     // Installation footage until gallery opening day, then the live feed
     const data = WaveSystem.isGalleryLive() ? SOURCE_MONITOR.live : SOURCE_MONITOR.pre;
+    // Symbolic for now: the visitor's own calm minutes nudge the reading (a shared count needs a server)
+    const myMinutes = data.inputs ? getCalmMinutes() : 0;
+    const coherence = Math.min(99, data.coherence + Math.min(myMinutes, 9));
+
+    let inputsHtml = '';
+    if (data.inputs) {
+      inputsHtml = `<div class="source-inputs">${data.inputs.map(i => `
+        <div class="source-input">
+          <span class="source-input-label">${i.label}</span>
+          <span class="source-input-name">${i.name}</span>
+          <span class="source-input-arrow">${i.arrow}</span>
+          <span class="source-input-value">${typeof i.value === 'number'
+            ? `${(i.value + myMinutes).toLocaleString('en-US')} ${i.unit}` : i.value}</span>
+          <span class="source-input-note">(${i.note})</span>
+        </div>`).join('')}</div>
+        <div class="source-calm" id="source-calm">
+          <button class="source-calm-btn" id="source-calm-btn">[ ${data.action} ]</button>
+        </div>`;
+    }
 
     coherenceEl.innerHTML = `
       <div class="source-coherence-label">SOURCE COHERENCE</div>
       <div class="source-coherence-bar">
-        <div class="source-coherence-fill" style="width: ${data.coherence}%"></div>
+        <div class="source-coherence-fill" style="width: ${coherence}%"></div>
       </div>
-      <div class="source-coherence-value">${data.coherence}%</div>
+      <div class="source-coherence-value">${coherence}%</div>
       <div class="source-status">${data.status}</div>
+      ${inputsHtml}
     `;
+
+    const calmBtn = document.getElementById('source-calm-btn');
+    if (calmBtn) calmBtn.addEventListener('click', startCalmMinute);
 
     feedEl.innerHTML = `<div class="source-feed-text">${data.feed}</div>`;
 
     readingsEl.innerHTML = data.readings.map(r =>
       `<div class="source-reading">${r}</div>`
     ).join('');
+  }
+
+  const CALM_KEY = 'kanaputz_calm_minutes';
+  let calmTimer = null;
+
+  function getCalmMinutes() {
+    try { return parseInt(localStorage.getItem(CALM_KEY) || '0', 10) || 0; } catch (e) { return 0; }
+  }
+
+  // One guided minute: breathe in 4 s, out 6 s, six times
+  function startCalmMinute() {
+    const box = document.getElementById('source-calm');
+    if (!box || calmTimer) return;
+    box.innerHTML = `
+      <div class="calm-guide">
+        <div class="calm-circle"></div>
+        <div class="calm-word" id="calm-word">BREATHE IN</div>
+        <div class="calm-count" id="calm-count">60</div>
+      </div>`;
+    let left = 60;
+    calmTimer = setInterval(() => {
+      left--;
+      const word = document.getElementById('calm-word');
+      const count = document.getElementById('calm-count');
+      if (word) word.textContent = ((60 - left) % 10) < 4 ? 'BREATHE IN' : 'BREATHE OUT';
+      if (count) count.textContent = left;
+      if (left <= 0) {
+        clearInterval(calmTimer);
+        calmTimer = null;
+        try { localStorage.setItem(CALM_KEY, String(getCalmMinutes() + 1)); } catch (e) { /* storage blocked */ }
+        populateSource();
+        const done = document.getElementById('source-calm');
+        if (done) done.insertAdjacentHTML('afterbegin', '<div class="calm-done">ONE MINUTE ADDED.</div>');
+      }
+    }, 1000);
   }
 
   // ===== UV LAMP =====
