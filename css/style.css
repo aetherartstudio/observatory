@@ -1919,20 +1919,23 @@ body {
 }
 
 /* ===== NOTEBOOK MARGIN NOTES ===== */
+/* Margin notes: his own later afterthoughts — same hand, but a different pen,
+   smaller and cramped, scribbled at an angle beside the entry */
 .notebook-margin-note {
-  font-family: inherit; /* same hand as the entry — these are the researcher's own afterthoughts */
-  font-size: 2.3cqw;
-  color: #2c3e6b;
-  font-style: italic;
-  margin-top: 1.5cqh;
-  padding-top: 2.2cqh;
-  border-top: 1px dashed rgba(139, 74, 74, 0.2);
-  line-height: 4.6cqh;
+  font-family: inherit;
+  font-size: 1.9cqw;
+  color: #8b2e2a;
+  line-height: 1.2;
+  width: 82%;
+  margin: 2.5cqh 0 0 18%;
+  padding-left: 1.2cqw;
+  border-left: 2px solid rgba(139, 46, 42, 0.45);
+  transform: rotate(-3.5deg);
+  transform-origin: left top;
 }
 .single-page .notebook-margin-note {
   font-size: 18px;
-  margin-top: 12px;
-  padding-top: 8px;
+  margin-top: 16px;
 }
 
 /* ===== PINBOARD SKETCHES (merged onto cork board) ===== */
