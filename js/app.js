@@ -843,6 +843,11 @@
     }
   }
 
+  // Journal ink markers from notepad-content-map.docx: [black] [later] [u] [x]
+  function inkMarkup(text) {
+    return text.replace(/\[(black|later|u|x)\]([\s\S]*?)\[\/\1\]/g, '<span class="ink-$1">$2</span>');
+  }
+
   function renderSpread() {
     const book = document.getElementById('journal-book');
     if (!book) return;
@@ -860,9 +865,9 @@
         const entry = pages[entryIndex];
 
         let contentHtml = `<div class="notebook-date">${entry.date}</div>`;
-        contentHtml += `<div class="notebook-text">${entry.text}</div>`;
+        contentHtml += `<div class="notebook-text">${inkMarkup(entry.text)}</div>`;
         if (entry.marginNote) {
-          contentHtml += `<div class="notebook-margin-note">${entry.marginNote}</div>`;
+          contentHtml += `<div class="notebook-margin-note">${inkMarkup(entry.marginNote)}</div>`;
         }
 
         html += `

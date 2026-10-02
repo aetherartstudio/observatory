@@ -1919,6 +1919,16 @@ body {
 }
 
 /* ===== NOTEBOOK MARGIN NOTES ===== */
+/* Journal ink markers: a different pen per writing session, underlines, crossings-out */
+.ink-black { color: #1f1c1a; }
+.ink-later { color: #6b4423; }
+.ink-u {
+  text-decoration: underline;
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 0.18em;
+}
+.ink-x { text-decoration: line-through; text-decoration-thickness: 0.1em; }
+
 /* Margin notes: his own later afterthoughts — same hand, but a different pen,
    smaller and cramped, scribbled at an angle beside the entry */
 .notebook-margin-note {
